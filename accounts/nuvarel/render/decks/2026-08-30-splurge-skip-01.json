@@ -1,0 +1,69 @@
+{
+  "slug": "2026-08-30-splurge-skip-01",
+  "series": "Splurge or Skip · No. 01",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "Where money shows. Where it vanishes.",
+      "dek": "Five calls for furnishing a room, ranked by how visible the spend is."
+    },
+    {
+      "role": "verdict",
+      "kind": "splurge",
+      "h": "The light fixture",
+      "body": [
+        "The first thing eyes land on, and the only thing every guest looks up at.",
+        "A good fixture carries a plain room. A plastic one gives the game away from the doorway."
+      ]
+    },
+    {
+      "role": "verdict",
+      "kind": "skip",
+      "h": "Cushion covers",
+      "body": [
+        "At arm's length nobody can tell the price of a cushion cover.",
+        "Buy inexpensive ones in the right colours and swap them each season instead."
+      ]
+    },
+    {
+      "role": "verdict",
+      "kind": "splurge",
+      "h": "Full-height curtains",
+      "body": [
+        "Hang them at the ceiling, let them touch the floor. Heavy fabric moves like money.",
+        "Short curtains on a tall window are the most common giveaway in the country."
+      ]
+    },
+    {
+      "role": "verdict",
+      "kind": "skip",
+      "h": "Decor objects",
+      "body": [
+        "Trays, vases, bookends, the sculptural bowl. Thrift them, inherit them, find them.",
+        "An old object with some wear looks better on a shelf than anything from this month's catalogue."
+      ]
+    },
+    {
+      "role": "verdict",
+      "kind": "splurge",
+      "h": "One oversized mirror",
+      "body": [
+        "The biggest mirror the wall can take. It doubles the light and the apparent size of the room.",
+        "One large piece beats five small ones every time."
+      ]
+    },
+    {
+      "role": "principle",
+      "klabel": "The pattern",
+      "h": "Spend on what catches light.",
+      "body": [
+        "Fixtures, mirrors, fabric with weight. Light finds them all day and shows their quality.",
+        "Save on what hands touch and eyes skim. That is where budgets disappear."
+      ]
+    },
+    {
+      "role": "closer",
+      "h": "Send this to whoever is furnishing."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "2026-08-30-palette-study-01",
+  "series": "Palette Study · No. 01",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "The greige that reads expensive.",
+      "dek": "Four colours, one strict split. Every hex code inside."
+    },
+    {
+      "role": "swatch",
+      "hex": "#EDE7DC",
+      "name": "Warm Alabaster",
+      "role_line": "Walls · The 60",
+      "body": "Every wall, plus the ceiling. Warmer than builder white, so lamplight lands soft instead of clinical."
+    },
+    {
+      "role": "swatch",
+      "hex": "#B3A897",
+      "name": "Greige",
+      "role_line": "Large pieces · The 30",
+      "body": "Sofa, curtains, the rug field. Grey brings the restraint, beige brings the warmth, and the room stops fighting itself."
+    },
+    {
+      "role": "swatch",
+      "hex": "#4A3B2E",
+      "name": "Umber",
+      "role_line": "Wood and frames",
+      "body": "Coffee table, picture frames, shelf edges. Dark wood anchors the scheme. Skip it and the palette floats away."
+    },
+    {
+      "role": "swatch",
+      "hex": "#A67C48",
+      "name": "Aged Brass",
+      "role_line": "Accents · The 10",
+      "body": "Lamp stems, cabinet handles, one tray. Ten percent is the ceiling. Brass past that point tips from warm into loud."
+    },
+    {
+      "role": "principle",
+      "klabel": "The rule",
+      "h": "60 · 30 · 10",
+      "body": [
+        "Sixty percent walls, thirty percent large pieces, ten percent accent. Rooms that read expensive keep the split strict.",
+        "One thing to keep out: chrome. It argues with brass and wins nothing."
+      ]
+    },
+    {
+      "role": "closer",
+      "h": "Save this for the repaint."
+    }
+  ]
+}

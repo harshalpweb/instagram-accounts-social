@@ -1,0 +1,190 @@
+/* Nuvarel visual system — quiet-luxury editorial.
+   Locked palette (docs/nuvarel-strategy.md §8):
+   alabaster #F2EEE6 ground / espresso #2A241E ink / taupe #6E6257
+   secondary / bronze #9C7A4F graphic accent / #8A6A42 bronze for text.
+   Type: Cormorant Garamond (display), Archivo (body + meta caps).
+   All text pairs >= 3:1 large / >= 4.5:1 body WCAG on their grounds. */
+
+:root {
+  --alabaster: #F2EEE6;
+  --espresso: #2A241E;
+  --taupe: #6E6257;
+  --bronze: #9C7A4F;
+  --bronze-text: #8A6A42;
+  --bronze-dark-bg: #B08D5F;   /* bronze for labels on espresso ground */
+  --hairline: #D8CFC0;
+  --hairline-dark: #4A4036;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 1080px; height: 1350px; }
+
+body {
+  font-family: 'Archivo', 'Segoe UI', sans-serif;
+  background: var(--alabaster);
+  color: var(--espresso);
+  display: flex;
+  flex-direction: column;
+  padding: 88px 92px 72px;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.dark {
+  background: var(--espresso);
+  color: var(--alabaster);
+}
+
+/* ---- chrome: top meta row + bottom footer, every slide ---- */
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--bronze-text);
+  flex: 0 0 auto;
+}
+.dark .meta-row { color: var(--bronze-dark-bg); }
+.meta-row .wordmark { color: var(--espresso); letter-spacing: 0.34em; }
+.dark .meta-row .wordmark { color: var(--alabaster); }
+
+.footer {
+  flex: 0 0 auto;
+  border-top: 2px solid var(--hairline);
+  padding-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 26px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--taupe);
+  font-weight: 500;
+}
+.dark .footer { border-top-color: var(--hairline-dark); color: #B9AFA2; }
+
+main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
+/* ---- type roles ---- */
+.display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  font-size: 118px;
+  line-height: 1.06;
+  letter-spacing: -0.005em;
+}
+.headline {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  font-size: 86px;
+  line-height: 1.1;
+}
+.dek {
+  font-size: 40px;
+  line-height: 1.45;
+  color: var(--taupe);
+  font-weight: 400;
+  max-width: 820px;
+}
+.dark .dek { color: #C7BDAF; }
+.body {
+  font-size: 42px;
+  line-height: 1.48;
+  font-weight: 400;
+  max-width: 860px;
+}
+.body + .body { margin-top: 30px; }
+.klabel {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--bronze-text);
+  margin-bottom: 34px;
+}
+.dark .klabel { color: var(--bronze-dark-bg); }
+
+.rule {
+  width: 132px;
+  height: 3px;
+  background: var(--bronze);
+  border: none;
+  margin: 44px 0;
+}
+
+em { font-style: italic; }
+strong { font-weight: 600; }
+
+/* ---- hook slide ---- */
+.hook .display { margin-bottom: 0; }
+.hook .dek { margin-top: 0; }
+
+/* ---- swatch slide (palette study) ---- */
+.swatch-block {
+  flex: 0 0 620px;
+  border: 2px solid rgba(42, 36, 30, 0.16);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 44px 48px;
+  margin-bottom: 56px;
+}
+.swatch-block .hex {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+.swatch-name { margin-bottom: 10px; }
+.swatch-role {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bronze-text);
+  margin-bottom: 30px;
+}
+.swatch .body { font-size: 39px; }
+
+/* ---- principle / fix slide ---- */
+.principle .headline { margin-bottom: 0; }
+
+/* ---- verdict slide (splurge / skip) ---- */
+.verdict-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding: 18px 34px 16px;
+  margin-bottom: 52px;
+}
+.verdict-tag.splurge { background: var(--espresso); color: var(--alabaster); }
+.verdict-tag.skip {
+  color: var(--espresso);
+  border: 3px solid var(--bronze);
+  background: transparent;
+}
+.dark .verdict-tag.splurge { background: var(--alabaster); color: var(--espresso); }
+
+/* ---- closer ---- */
+.closer main { align-items: flex-start; }
+.closer .handle {
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--bronze-dark-bg);
+}
