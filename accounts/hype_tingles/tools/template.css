@@ -1,0 +1,254 @@
+/* Hype Tingle — "Neon Panel" slide system.
+   Palette: ink #111015 bg, volt #D8FF3A (payoff/accent), pink #FF4D9D
+   (secondary accent), paper #F4F2EC (text on dark), soft #9A96A3 (meta).
+   Type: Archivo Black (display) + Space Grotesk (body/meta).
+   Distinct by design from TrendGiri's Bazaar Receipt system. */
+
+@font-face {
+  font-family: "Archivo Black";
+  src: url("__FONTDIR__/archivo-black-400.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("__FONTDIR__/space-grotesk-400.woff2") format("woff2");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("__FONTDIR__/space-grotesk-500.woff2") format("woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("__FONTDIR__/space-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+}
+
+:root {
+  --ink: #111015;
+  --volt: #D8FF3A;
+  --pink: #FF4D9D;
+  --paper: #F4F2EC;
+  --soft: #9A96A3;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { width: 1080px; height: 1350px; }
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: "Space Grotesk", Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 72px 84px 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle corner glow so the ink field isn't flat */
+body::before {
+  content: "";
+  position: absolute;
+  width: 900px; height: 900px;
+  right: -420px; top: -420px;
+  background: radial-gradient(circle, rgba(255,77,157,0.16) 0%, rgba(255,77,157,0) 62%);
+  pointer-events: none;
+}
+body.volt::before {
+  background: radial-gradient(circle, rgba(17,16,21,0.10) 0%, rgba(17,16,21,0) 62%);
+}
+
+body.volt { background: var(--volt); color: var(--ink); }
+
+/* ---------- chrome ---------- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  z-index: 2;
+}
+.wordmark {
+  font-family: "Archivo Black", Arial, sans-serif;
+  font-size: 34px;
+  letter-spacing: 0.04em;
+  color: var(--volt);
+}
+body.volt .wordmark { color: var(--ink); }
+.wordmark .tingle { color: var(--pink); }
+body.volt .wordmark .tingle { color: var(--ink); }
+.eptag {
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--soft);
+  text-transform: uppercase;
+}
+body.volt .eptag { color: #4A4A22; }
+
+.botbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+.cue {
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+body.volt .cue { color: var(--ink); }
+.counter {
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--soft);
+}
+body.volt .counter { color: #4A4A22; }
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* ---------- shared type ---------- */
+.display {
+  font-family: "Archivo Black", Arial, sans-serif;
+  font-size: 92px;
+  line-height: 1.06;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+.display .hl { color: var(--volt); }
+body.volt .display .hl { color: var(--ink); }
+.display .hp { color: var(--pink); }
+.dek {
+  font-size: 40px;
+  line-height: 1.42;
+  font-weight: 400;
+  color: var(--paper);
+  margin-top: 44px;
+}
+body.volt .dek { color: var(--ink); }
+
+/* ---------- hook ---------- */
+.hook-kicker {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--volt);
+  padding: 14px 26px;
+  margin-bottom: 52px;
+  align-self: flex-start;
+}
+.tease {
+  margin-top: 56px;
+  border-left: 10px solid var(--pink);
+  padding-left: 32px;
+  font-size: 38px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--soft);
+}
+.tease strong { color: var(--paper); font-weight: 700; }
+
+/* ---------- speaker ---------- */
+.avatar {
+  font-size: 210px;
+  line-height: 1;
+  margin-bottom: 48px;
+}
+.namechip {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  padding: 12px 24px;
+  margin-bottom: 46px;
+}
+body.volt .namechip { background: var(--ink); color: var(--volt); }
+.quote {
+  font-family: "Archivo Black", Arial, sans-serif;
+  font-size: 74px;
+  line-height: 1.14;
+  text-transform: none;
+}
+.quote.big { font-size: 96px; line-height: 1.08; }
+.sub {
+  margin-top: 44px;
+  font-size: 36px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--soft);
+}
+body.volt .sub { color: #3D3D1C; }
+
+/* ---------- review ---------- */
+.card {
+  background: #1C1B23;
+  border: 3px solid #2E2C38;
+  border-radius: 28px;
+  padding: 64px 60px;
+  color: var(--paper);
+}
+.rev-head { display: flex; align-items: center; gap: 36px; margin-bottom: 40px; }
+.rev-avatar { font-size: 120px; line-height: 1; }
+.rev-name {
+  font-size: 30px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--paper);
+}
+.rev-verified { font-size: 25px; font-weight: 500; color: var(--soft); margin-top: 10px; }
+.stars { font-size: 54px; letter-spacing: 0.1em; color: var(--volt); margin-bottom: 36px; }
+.stars .off { color: #3A3844; }
+.rev-title {
+  font-family: "Archivo Black", Arial, sans-serif;
+  font-size: 58px; line-height: 1.14; margin-bottom: 30px;
+  color: var(--paper);
+}
+.rev-body { font-size: 40px; line-height: 1.44; font-weight: 400; color: #CFCBD6; }
+
+/* ---------- guide ---------- */
+.stepnum {
+  font-family: "Archivo Black", Arial, sans-serif;
+  font-size: 150px;
+  line-height: 1;
+  color: var(--pink);
+  margin-bottom: 36px;
+}
+.guide-h {
+  font-family: "Archivo Black", Arial, sans-serif;
+  font-size: 76px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.guide-body { font-size: 42px; line-height: 1.46; font-weight: 400; color: #CFCBD6; }
+body.volt .guide-body { color: #33331A; }
+body.volt .stepnum { color: var(--ink); }
+
+/* ---------- closer ---------- */
+.handle {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--pink);
+  padding: 20px 36px;
+  margin-top: 64px;
+}
+body.volt .handle { background: var(--ink); color: var(--volt); }

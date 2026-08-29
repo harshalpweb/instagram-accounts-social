@@ -1,0 +1,65 @@
+{
+  "slug": "2026-08-30-animal-reviews-01",
+  "episode": "ONE-STAR FILES · 01",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "WELCOME TO HYPE TINGLE",
+      "h": "ANIMALS REVIEWED [[HUMANS]].",
+      "dek": "We gave five animals a review form. They did not hold back.",
+      "tease": "**The cat's review is last.** Brace."
+    },
+    {
+      "role": "review",
+      "animal": "🐕",
+      "name": "The Dog",
+      "meta": "Has never had a bad day",
+      "stars": 5,
+      "title": "10/10 would recommend",
+      "body": "You leave. Then you come back. Every single time. Best plot twist ever written. Also sometimes you drop cheese."
+    },
+    {
+      "role": "review",
+      "animal": "🐦",
+      "name": "The Pigeon",
+      "meta": "City resident, extremely confident",
+      "stars": 5,
+      "title": "Great infrastructure",
+      "body": "You built an entire statue for me to sit on. You didn't have to do that. The fries on the ground are also free. City of legends."
+    },
+    {
+      "role": "review",
+      "animal": "🐠",
+      "name": "The Goldfish",
+      "meta": "Reviewing from memory",
+      "stars": 4,
+      "title": "Wait, what was I reviewing",
+      "body": "The big face appears and food falls from the sky. Four stars. Docking one because I no longer remember why I'm here."
+    },
+    {
+      "role": "review",
+      "animal": "🦝",
+      "name": "The Raccoon",
+      "meta": "Unpaid waste management",
+      "stars": 5,
+      "title": "You throw away FEASTS",
+      "body": "An entire pizza. In the bin. Untouched. Either you are all rich or you are all fools. Five stars. Keep it coming."
+    },
+    {
+      "role": "review",
+      "payoff": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "meta": "Owns your house",
+      "stars": 1,
+      "title": "The staff is needy",
+      "body": "The lap kept moving. I asked for silence and received baby talk. One star. I will be back tonight."
+    },
+    {
+      "role": "closer",
+      "h": "NEW REVIEWS [[DAILY]].",
+      "body": "Follow before the cat reviews you personally.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}

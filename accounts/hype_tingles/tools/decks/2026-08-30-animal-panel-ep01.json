@@ -1,0 +1,54 @@
+{
+  "slug": "2026-08-30-animal-panel-ep01",
+  "episode": "THE PANEL · EP 01",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "WELCOME TO HYPE TINGLE",
+      "h": "WE ASKED ANIMALS: WHAT ADVICE WOULD YOU GIVE [[HUMANS]]?",
+      "tease": "**Five answers.** The cat goes last. It knows it's the closer."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐕",
+      "name": "The Dog",
+      "quote": "Greet everyone like they survived a war to reach you.",
+      "sub": "Statistically, someone did."
+    },
+    {
+      "role": "speaker",
+      "animal": "🦉",
+      "name": "The Owl",
+      "quote": "Sleeping at night is a social construct.",
+      "sub": "Peer-reviewed by no one. The owl cites itself."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐠",
+      "name": "The Goldfish",
+      "quote": "Let it go. I forgot what. Doesn't matter. Let it go.",
+      "sub": "Nine seconds of memory. Zero grudges. Undefeated."
+    },
+    {
+      "role": "speaker",
+      "animal": "🦝",
+      "name": "The Raccoon",
+      "quote": "If the door is locked, there is a second door.",
+      "sub": "Legally, this is a metaphor."
+    },
+    {
+      "role": "speaker",
+      "payoff": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "quote": "Stop performing. Nobody's watching. I checked.",
+      "sub": "The cat has spoken."
+    },
+    {
+      "role": "closer",
+      "h": "EP 02 DROPS [[TOMORROW]].",
+      "body": "Follow, or the raccoon finds your second door.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}
