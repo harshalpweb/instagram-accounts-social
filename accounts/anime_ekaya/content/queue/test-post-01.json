@@ -6,9 +6,8 @@
     "accounts/anime_ekaya/content/queue/slides/test-1.jpg",
     "accounts/anime_ekaya/content/queue/slides/test-2.jpg"
   ],
-  "scheduled_time_ist": "2026-08-30T01:18:22+05:30",
-  "status": "failed",
-  "attempts": 3,
-  "needs_review": false,
-  "last_error": "OAuthException code=9007: Media ID is not available"
+  "scheduled_time_ist": "2026-08-30T01:39:10+05:30",
+  "status": "pending",
+  "attempts": 0,
+  "needs_review": false
 }
