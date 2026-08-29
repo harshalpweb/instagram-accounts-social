@@ -1,0 +1,56 @@
+name: Publish due posts (hype_tingles)
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+env:
+  ACCOUNT_DIR: accounts/hype_tingles
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r scripts/requirements.txt
+
+      # See trend-signals-social's publish.yml for the full reasoning behind
+      # this pre-flight health check + incident throttle — copied verbatim,
+      # only the secret names and ACCOUNT_DIR differ per account.
+      - name: Check Instagram token health
+        run: |
+          DUE=$(python scripts/publish_due_posts.py --count-due)
+          echo "Due posts right now: $DUE"
+          python scripts/check_token.py \
+            --incident-file "$ACCOUNT_DIR/content/INCIDENT.json" \
+            --due-count "$DUE"
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN_HYPE_TINGLES }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID_HYPE_TINGLES }}
+          IG_AUTH_MODE: ${{ vars.IG_AUTH_MODE || 'instagram_login' }}
+
+      - name: Publish due posts
+        run: python scripts/publish_due_posts.py
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN_HYPE_TINGLES }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID_HYPE_TINGLES }}
+          IG_AUTH_MODE: ${{ vars.IG_AUTH_MODE || 'instagram_login' }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Commit queue/status changes
+        if: always()
+        run: |
+          git config user.name "ig-accounts-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A "$ACCOUNT_DIR/content/"
+          git diff --cached --quiet || git commit -m "chore: publish run (hype_tingles) $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
