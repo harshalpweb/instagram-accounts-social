@@ -1,0 +1,13 @@
+{
+  "id": "test-post-01",
+  "type": "test",
+  "caption": "Test post -- verifying the publishing pipeline. Deleting shortly.",
+  "slides": [
+    "accounts/nuvarel/content/queue/slides/test-1.jpg",
+    "accounts/nuvarel/content/queue/slides/test-2.jpg"
+  ],
+  "scheduled_time_ist": "2026-08-30T01:18:22+05:30",
+  "status": "pending",
+  "attempts": 0,
+  "needs_review": false
+}
