@@ -1,0 +1,52 @@
+{
+  "slug": "2026-08-30-gateway-01",
+  "kicker": "Gateway Guide · No. 001",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "Think you don't like anime? [[Wrong first show]], that's all.",
+      "dek": "5 starters chosen for people who bounced off it. Send this to that friend."
+    },
+    {
+      "role": "pick",
+      "n": "01",
+      "title": "Fullmetal Alchemist: Brotherhood",
+      "why": "The consensus starter. One complete story, no filler, and it sticks the landing.",
+      "meta": "Adventure · 64 eps · complete"
+    },
+    {
+      "role": "pick",
+      "n": "02",
+      "title": "Death Note",
+      "why": "A cat-and-mouse thriller played like a chess match. For the Breaking Bad friend.",
+      "meta": "Thriller · 37 eps · complete"
+    },
+    {
+      "role": "pick",
+      "n": "03",
+      "title": "Frieren: Beyond Journey's End",
+      "why": "A quiet fantasy about outliving your friends, told with prestige-TV patience. For the reader.",
+      "meta": "Fantasy · 28-ep first season"
+    },
+    {
+      "role": "pick",
+      "n": "04",
+      "title": "Vinland Saga",
+      "why": "Vikings, revenge, and one of the best character arcs in modern television, animated or not.",
+      "meta": "Historical drama · 2 seasons"
+    },
+    {
+      "role": "pick",
+      "n": "05",
+      "title": "Spy x Family",
+      "why": "A fake family sitcom with spy-movie polish. The easiest yes in the entire medium.",
+      "meta": "Comedy · easy episodic watch"
+    },
+    {
+      "role": "closer",
+      "h": "Know someone who [[almost]] likes anime?",
+      "body": "Send them this. Then tell us which show made anime click for you.",
+      "handle": "@anime_ekaya"
+    }
+  ]
+}

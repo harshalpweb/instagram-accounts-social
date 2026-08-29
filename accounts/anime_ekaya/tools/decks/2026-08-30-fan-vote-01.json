@@ -1,0 +1,43 @@
+{
+  "slug": "2026-08-30-fan-vote-01",
+  "kicker": "The Fan Vote · Wk of Aug 19–25",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "The fans voted. Here's what's [[good]] this season.",
+      "dek": "Summer 2026, ranked by weekly fan episode scores. Swipe for the top 8 airing right now."
+    },
+    {
+      "role": "rank",
+      "h": "This week's top 4",
+      "items": [
+        {"n": "01", "title": "The Ghost in the Shell", "note": "Took the top weekly spot, up from #2 overall."},
+        {"n": "02", "title": "Jaadugar: A Witch in Mongolia", "note": "Still the season's overall leader."},
+        {"n": "03", "title": "Saga of Tanya the Evil II", "note": "Held #1 in mid-August. Not fading."},
+        {"n": "04", "title": "Goodbye, Lara", "note": "A week-7 chart-topper, still in the hunt."}
+      ]
+    },
+    {
+      "role": "rank",
+      "h": "Ranks 5 to 8",
+      "items": [
+        {"n": "05", "title": "The World Is Dancing"},
+        {"n": "06", "title": "Though I Am an Inept Villainess", "note": "An early-season #1."},
+        {"n": "07", "title": "I Want to Love You Till Your Dying Day"},
+        {"n": "08", "title": "Young Ladies Don't Play Fighting Games"}
+      ]
+    },
+    {
+      "role": "principle",
+      "label": "How to read this",
+      "h": "Weekly rank is [[last episode's heat]]. Season rank is the marathon.",
+      "body": ["The Ghost in the Shell won the week. Jaadugar leads the season. Both readings are true, and the gap between them is where the arguments live."]
+    },
+    {
+      "role": "closer",
+      "h": "New rankings [[every week]].",
+      "body": "Save this for your watchlist, then tell us your #1 in the comments.",
+      "handle": "@anime_ekaya"
+    }
+  ]
+}
