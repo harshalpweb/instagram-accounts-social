@@ -53,9 +53,14 @@ IG_USER_ID = os.environ.get("IG_USER_ID", "")
 ACCESS_TOKEN = os.environ.get("IG_ACCESS_TOKEN", "")
 ig_common.register_secret(ACCESS_TOKEN)
 BASE = graph_base()  # host follows IG_AUTH_MODE (instagram_login | facebook_login)
+# GITHUB_REF_NAME is the branch actually running (set by GitHub Actions) --
+# using it instead of a hardcoded "main" avoids depending on this repo's
+# default-branch name, which git itself may pick as "master" or "main"
+# depending on version/config with no warning either way.
 RAW_BASE = (
     f"https://raw.githubusercontent.com/"
-    f"{os.environ.get('GITHUB_REPOSITORY', '')}/main"
+    f"{os.environ.get('GITHUB_REPOSITORY', '')}/"
+    f"{os.environ.get('GITHUB_REF_NAME', 'main')}"
 )
 
 REQUIRED_FIELDS = ["id", "type", "caption", "slides", "scheduled_time_ist", "status"]
