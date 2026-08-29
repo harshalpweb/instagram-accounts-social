@@ -7,8 +7,10 @@
     "accounts/nuvarel/content/queue/slides/test-2.jpg"
   ],
   "scheduled_time_ist": "2026-08-30T01:18:22+05:30",
-  "status": "pending",
+  "status": "posted",
   "attempts": 1,
   "needs_review": false,
-  "last_error": "IGApiException code=100: Unsupported post request. Object with ID 'nuvarel_' does not exist, cannot be loaded due to missing permissions, or does not support this operation"
+  "last_error": "IGApiException code=100: Unsupported post request. Object with ID 'nuvarel_' does not exist, cannot be loaded due to missing permissions, or does not support this operation",
+  "ig_post_id": "18089503244169071",
+  "posted_at": "2026-08-29T20:09:48.783166+00:00"
 }
