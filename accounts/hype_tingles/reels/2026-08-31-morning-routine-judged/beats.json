@@ -1,0 +1,16 @@
+{
+ "fps": 30,
+ "frames": 630,
+ "beats": {
+  "hook": 0.0,
+  "rewind": 3.0,
+  "wake_roll": 4.5,
+  "idle_scored": 5.5,
+  "plunge": 7.0,
+  "meditate": 10.5,
+  "sprint": 13.5,
+  "collapse": 14.5,
+  "payoff": 16.0,
+  "endcard": 19.0
+ }
+}

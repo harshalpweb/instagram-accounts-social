@@ -1,0 +1,18 @@
+{
+  "tracks": [
+    {"file": "assets/audio/bgm/g-eazy-nba-type.mp3", "at": 0.0, "trim": [0.0, 15.9], "gain_db": -13, "fade_in": 0.2, "fade_out": 0.35},
+    {"file": "assets/audio/bgm/g-eazy-nba-type.mp3", "at": 19.0, "trim": [19.0, 21.0], "gain_db": -15, "fade_in": 0.25, "fade_out": 1.2},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 0.06, "gain_db": -6},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 2.9, "gain_db": -7},
+    {"file": "assets/audio/sfx/clock-tick-single.mp3", "at": 3.05, "gain_db": -6},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 5.5, "gain_db": -6},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 7.05, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 8.0, "gain_db": -6},
+    {"file": "assets/audio/sfx/light-aura.mp3", "at": 10.55, "gain_db": -11},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 11.3, "gain_db": -6},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 13.55, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.6, "gain_db": -6},
+    {"file": "assets/audio/sfx/vinyl-needle-drop.mp3", "at": 15.9, "gain_db": -4},
+    {"file": "assets/audio/sfx/pop-electric.mp3", "at": 19.1, "gain_db": -8}
+  ]
+}
