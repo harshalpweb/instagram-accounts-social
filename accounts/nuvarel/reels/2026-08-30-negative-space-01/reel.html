@@ -1,0 +1,155 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+:root { --alabaster:#F2EEE6; --espresso:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; --bronze-text:#8A6A42; --hair:#D8CFC0; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--alabaster); color:var(--espresso); font-family:'Archivo',sans-serif; position:relative;
+  font-kerning:normal; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
+
+#meta { position:absolute; top:150px; left:96px; right:96px; display:flex; justify-content:space-between;
+  font-size:27px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--bronze-text); z-index:10; }
+#meta .wm { color:var(--espresso); letter-spacing:.34em; }
+#foot { position:absolute; bottom:290px; left:96px; right:96px; border-top:2px solid var(--hair); padding-top:26px;
+  display:flex; justify-content:space-between; font-size:25px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--taupe); font-weight:500; z-index:10; }
+
+/* room composition */
+#room { position:absolute; left:96px; right:96px; top:430px; height:760px; z-index:4; }
+.blk { position:absolute; }
+#b-sofa   { left:60px;  bottom:0;    width:420px; height:220px; background:var(--espresso); }
+#b-rug    { left:20px;  bottom:-40px; width:560px; height:26px;  background:var(--bronze); opacity:.85; }
+#b-shelf  { right:40px; bottom:0;    width:190px; height:420px; background:var(--taupe); }
+#b-art    { left:110px; top:60px;    width:200px; height:150px; background:var(--bronze); }
+#b-art2   { left:340px; top:20px;    width:150px; height:110px; background:var(--taupe); }
+#b-lamp   { right:280px; bottom:0;   width:34px;  height:330px; background:var(--espresso); }
+#b-lamp2  { right:238px; bottom:310px; width:120px; height:70px; background:var(--espresso); }
+#b-plant  { left:520px; bottom:0;    width:90px;  height:160px; background:var(--taupe); }
+#b-stack  { left:640px; bottom:0;    width:130px; height:90px;  background:var(--bronze); }
+#b-mirror { left:660px; top:70px;    width:130px; height:200px; background:var(--hair); }
+
+/* copy lines */
+.line { position:absolute; left:96px; right:96px; z-index:8; opacity:0; }
+#l1 { top:255px; font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:96px; line-height:1.05; }
+#l2 { top:1270px; font-size:38px; font-weight:500; color:var(--taupe); letter-spacing:.02em; }
+#l2 b { color:var(--espresso); font-weight:600; }
+
+/* thesis */
+#thesis { position:absolute; inset:0; z-index:14; background:var(--alabaster); display:flex; flex-direction:column;
+  justify-content:center; padding:0 110px; opacity:0; }
+#thesis .k { font-size:27px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--bronze-text); }
+#thesis h2 { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:110px; line-height:1.14; margin-top:56px; }
+#thesis h2 em { font-style:italic; color:var(--bronze-text); }
+
+/* closer */
+#closer { position:absolute; inset:0; z-index:18; background:var(--espresso); color:var(--alabaster);
+  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; opacity:0; }
+#closer .wm { font-size:44px; font-weight:600; letter-spacing:.4em; text-transform:uppercase; }
+#closer .tag { font-family:'Cormorant Garamond',Georgia,serif; font-size:66px; font-style:italic; color:#CBB697; margin-top:54px; }
+#closer .cta { font-size:27px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:#B9AFA2; margin-top:70px; }
+</style></head>
+<body>
+
+<div id="meta"><span class="wm">NUVAREL</span><span>The Rule</span></div>
+<div id="foot"><span>Quiet luxury, explained</span><span>Nuvarel</span></div>
+
+<h1 class="line" id="l1">Negative<br>space.</h1>
+
+<div id="room">
+  <div class="blk" id="b-rug"></div>
+  <div class="blk" id="b-sofa"></div>
+  <div class="blk" id="b-shelf"></div>
+  <div class="blk" id="b-art"></div>
+  <div class="blk" id="b-art2"></div>
+  <div class="blk" id="b-lamp"></div>
+  <div class="blk" id="b-lamp2"></div>
+  <div class="blk" id="b-plant"></div>
+  <div class="blk" id="b-stack"></div>
+  <div class="blk" id="b-mirror"></div>
+</div>
+
+<p class="line" id="l2">A full room says <b>effort</b>. An empty corner says <b>confidence</b>.</p>
+
+<div id="thesis">
+  <div class="k">The rule</div>
+  <h2>The most expensive thing in a room is <em>the space you leave in it.</em></h2>
+</div>
+
+<div id="closer">
+  <div class="wm">Nuvarel</div>
+  <div class="tag">Rooms that whisper.</div>
+  <div class="cta">Save this for the next declutter</div>
+</div>
+
+<script>
+window.REEL = { duration: 22.0, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+// blocks leave in this order, one per beat
+const LEAVE = [
+  { id: 'b-art2',  t: 8.2 },
+  { id: 'b-stack', t: 9.4 },
+  { id: 'b-plant', t: 10.6 },
+  { id: 'b-mirror',t: 11.8 },
+  { id: 'b-shelf', t: 13.0 },
+];
+const ENTER = ['b-rug','b-sofa','b-shelf','b-art','b-art2','b-lamp','b-lamp2','b-plant','b-stack','b-mirror'];
+
+window.seek = function (t) {
+  // title line
+  $('l1').style.opacity = String(Math.min(P(t, 0.4, 0.9, easeIO), 1));
+  $('l1').style.transform = `translateY(${(1 - P(t, 0.4, 1.0, easeOut)) * 40}px)`;
+
+  // room assembles 2.2 - 6.4 (stagger)
+  ENTER.forEach((id, i) => {
+    const el = $(id);
+    const t0 = 2.2 + i * 0.38;
+    const p = P(t, t0, 0.7, easeOut);
+    let base = `translateY(${(1 - p) * 60}px)`;
+    let op = P(t, t0, 0.45);
+    // leaving?
+    const lv = LEAVE.find(l => l.id === id);
+    if (lv) {
+      const q = P(t, lv.t, 0.9, easeIO);
+      op = op * (1 - q);
+    }
+    el.style.opacity = String(op);
+    el.style.transform = base;
+  });
+
+  // l2 line appears 6.6, swaps emphasis after declutter
+  $('l2').style.opacity = String(Math.min(P(t, 6.6, 0.7), 1 - P(t, 15.2, 0.5, easeIO)));
+
+  // room fades as thesis arrives
+  $('room').style.opacity = String(1 - P(t, 15.4, 0.6, easeIO));
+  $('l1').style.opacity = String(Math.min(P(t, 0.4, 0.9, easeIO), 1 - P(t, 15.2, 0.5, easeIO)));
+
+  // thesis 16.0 - 19.2
+  const th = $('thesis');
+  if (t >= 15.8 && t < 19.4) {
+    th.style.opacity = String(Math.min(P(t, 15.8, 0.7), 1 - P(t, 19.1, 0.3, easeIO)));
+    th.querySelector('h2').style.transform = `translateY(${(1 - P(t, 15.9, 0.9, easeOut)) * 36}px)`;
+  } else th.style.opacity = '0';
+
+  // closer 19.4 - 22
+  const cl = $('closer');
+  if (t >= 19.4) {
+    cl.style.opacity = String(P(t, 19.4, 0.6));
+    cl.querySelector('.tag').style.opacity = String(P(t, 19.9, 0.5));
+    cl.querySelector('.cta').style.opacity = String(P(t, 20.5, 0.5));
+  } else cl.style.opacity = '0';
+
+  // chrome hidden over closer
+  const chrome = 1 - P(t, 19.3, 0.4);
+  $('meta').style.opacity = String(chrome);
+  $('foot').style.opacity = String(chrome);
+};
+window.seek(0);
+</script>
+</body></html>

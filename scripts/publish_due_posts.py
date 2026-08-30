@@ -35,6 +35,12 @@ from ig_common import api_get, api_post, graph_base, redact
 MAX_ATTEMPTS = 3
 POLL_INTERVAL_S = 3
 POLL_TIMEOUT_S = 60
+# Video containers process server-side far longer than image containers —
+# 30-90s observed for short Reels (trend-signals-social
+# docs/2026-08-18-reels-handoff.md), and a 2-minute video can exceed the
+# image timeout several times over. Applies to the REELS path only; the
+# carousel path keeps the tighter 60s bound.
+REEL_POLL_TIMEOUT_S = 300
 
 # ACCOUNT_DIR selects which account's content/ tree this run publishes from,
 # e.g. "accounts/hype_tingles" — this repo holds multiple Instagram accounts
@@ -63,7 +69,7 @@ RAW_BASE = (
     f"{os.environ.get('GITHUB_REF_NAME', 'main')}"
 )
 
-REQUIRED_FIELDS = ["id", "type", "caption", "slides", "scheduled_time_ist", "status"]
+REQUIRED_FIELDS = ["id", "type", "caption", "scheduled_time_ist", "status"]
 
 
 class PostError(Exception):
@@ -100,6 +106,9 @@ def load_due_posts(verbose: bool = True):
         if missing:
             due.append((path, post, PostError(f"missing fields: {missing}")))
             continue
+        if not post.get("slides") and not post.get("video"):
+            due.append((path, post, PostError("missing media: provide slides or video")))
+            continue
         if post["status"] != "pending":
             continue
         if post.get("needs_review"):
@@ -126,8 +135,8 @@ def create_item_container(slide_path: str) -> str:
     return payload["id"]
 
 
-def wait_until_finished(container_id: str) -> None:
-    deadline = time.time() + POLL_TIMEOUT_S
+def wait_until_finished(container_id: str, timeout_s: float = POLL_TIMEOUT_S) -> None:
+    deadline = time.time() + timeout_s
     while time.time() < deadline:
         payload = api_get(
             container_id, ACCESS_TOKEN, params={"fields": "status_code"}, base=BASE
@@ -165,7 +174,30 @@ def publish_container(container_id: str) -> str:
     return payload["id"]
 
 
+def publish_reel(video_path: str, caption: str) -> str:
+    """Create, process and publish one Reel from a public repository video."""
+    video_url = f"{RAW_BASE}/{video_path}"
+    payload = api_post(
+        f"{IG_USER_ID}/media",
+        ACCESS_TOKEN,
+        data={
+            "media_type": "REELS",
+            "video_url": video_url,
+            "caption": caption,
+            "share_to_feed": "true",
+        },
+        base=BASE,
+    )
+    container_id = payload.get("id")
+    if not container_id:
+        raise PostError("reel container response had no id")
+    wait_until_finished(container_id, timeout_s=REEL_POLL_TIMEOUT_S)
+    return publish_container(container_id)
+
+
 def publish_post(post: dict) -> str:
+    if post.get("video"):
+        return publish_reel(post["video"], post["caption"])
     if not post.get("slides"):
         raise PostError("no slides listed")
     item_ids = [create_item_container(slide) for slide in post["slides"]]
@@ -179,10 +211,25 @@ def publish_post(post: dict) -> str:
 def move_post(path: Path, post: dict, dest_dir: Path) -> None:
     post_dir = dest_dir / post["id"]
     post_dir.mkdir(parents=True, exist_ok=True)
+    # Media paths in queue JSONs are REPO-relative (that's what RAW_BASE needs
+    # for the raw.githubusercontent fetch), so resolve them against the repo
+    # root, not ROOT (= repo/ACCOUNT_DIR). Resolving against ROOT silently
+    # orphaned every published slide in queue/ (verified against publish-run
+    # commit f85e4cb: only the JSON moved). ROOT kept as a fallback for any
+    # legacy account-relative path.
     for slide in post.get("slides", []):
-        slide_path = ROOT / slide
+        slide_path = _REPO_ROOT / slide
+        if not slide_path.exists():
+            slide_path = ROOT / slide
         if slide_path.exists():
             shutil.move(str(slide_path), str(post_dir / Path(slide).name))
+    video_path = post.get("video")
+    if video_path:
+        source = _REPO_ROOT / video_path
+        if not source.exists():
+            source = ROOT / video_path
+        if source.exists():
+            shutil.move(str(source), str(post_dir / Path(video_path).name))
     (post_dir / f"{post['id']}.json").write_text(json.dumps(post, indent=2), encoding="utf-8")
     path.unlink(missing_ok=True)
 

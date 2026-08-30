@@ -1,0 +1,199 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family:'Archivo Black'; src:url('../../brand/fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
+
+:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--ink); color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
+
+/* corner glow, brand motif */
+body::before { content:""; position:absolute; width:1100px; height:1100px; right:-480px; top:-480px;
+  background:radial-gradient(circle, rgba(255,77,157,0.18) 0%, rgba(255,77,157,0) 62%); pointer-events:none; z-index:0; }
+
+.scene { position:absolute; inset:0; padding:150px 90px 300px; display:flex; flex-direction:column; z-index:1; }
+
+/* ---------- scene 1: cold open ---------- */
+#wordmark { font-family:'Archivo Black'; font-size:88px; letter-spacing:.02em; color:var(--volt); text-align:center; margin-top:340px; }
+#wordmark .tingle { color:var(--pink); }
+#badge { margin:70px auto 0; width:fit-content; background:var(--pink); color:var(--ink); font-family:'Archivo Black';
+  font-size:54px; padding:26px 54px; letter-spacing:.1em; }
+#newsdesk { text-align:center; color:var(--soft); font-size:34px; font-weight:500; letter-spacing:.3em; margin-top:56px; }
+
+/* ---------- scene 2: headline ---------- */
+#s2 .kick { color:var(--pink); font-family:'Archivo Black'; font-size:44px; letter-spacing:.12em; }
+#headline { font-family:'Archivo Black'; font-size:118px; line-height:1.04; margin-top:60px; text-transform:uppercase; }
+#headline .hl { color:var(--volt); }
+#headline span.w { display:inline-block; }
+
+/* ---------- quote cards ---------- */
+.qcard { position:absolute; left:90px; right:90px; top:420px; background:#1B1922; border:3px solid #2A2733;
+  border-radius:36px; padding:70px 64px 64px; }
+.qcard .who { display:flex; align-items:center; gap:34px; }
+.qcard .em { font-size:120px; line-height:1; font-family:'Segoe UI Emoji'; }
+.qcard .name { font-family:'Archivo Black'; font-size:46px; letter-spacing:.06em; color:var(--volt); }
+.qcard .role { font-size:29px; color:var(--soft); font-weight:500; letter-spacing:.14em; margin-top:10px; text-transform:uppercase; }
+.qcard .line { font-family:'Space Grotesk'; font-weight:700; font-size:66px; line-height:1.18; margin-top:56px; }
+.qcard .line .accent { color:var(--pink); }
+#panelkick { position:absolute; top:270px; left:90px; font-family:'Archivo Black'; font-size:42px;
+  letter-spacing:.14em; color:var(--soft); }
+#panelkick .n { color:var(--pink); }
+
+/* cat scene: darker, no glow */
+#catshade { position:absolute; inset:0; background:#0A090D; z-index:0; }
+#catcard { background:#0F0E13; border-color:#232029; }
+#catcard .name { color:var(--paper); }
+#catcard .line { font-size:84px; }
+#catcard .line .accent { color:var(--volt); }
+
+/* ---------- endcard ---------- */
+#end { text-align:center; }
+#endline { font-family:'Archivo Black'; font-size:96px; line-height:1.1; color:var(--paper); margin-top:430px; }
+#endline .accent { color:var(--pink); }
+#handle { display:inline-block; margin:80px auto 0; background:var(--volt); color:var(--ink);
+  font-family:'Archivo Black'; font-size:52px; padding:30px 56px; border-radius:20px; }
+#endsub { margin-top:54px; color:var(--soft); font-size:36px; font-weight:500; letter-spacing:.2em; }
+
+/* ---------- ticker ---------- */
+#ticker { position:absolute; left:0; right:0; bottom:196px; background:var(--volt); color:var(--ink);
+  font-family:'Space Grotesk'; font-weight:700; font-size:36px; padding:22px 0; white-space:nowrap; overflow:hidden; z-index:5; }
+#ticker .in { display:inline-block; }
+</style></head>
+<body>
+  <div class="scene" id="s1">
+    <div id="wordmark">HYPE <span class="tingle">TINGLE</span></div>
+    <div id="badge">BREAKING NEWS</div>
+    <div id="newsdesk">THE ANIMAL DESK</div>
+  </div>
+
+  <div class="scene" id="s2" style="opacity:0">
+    <div class="kick">BREAKING</div>
+    <h1 id="headline">
+      <span class="w">ALARM</span> <span class="w">CLOCK</span> <span class="w">FILES</span>
+      <span class="w">FOR</span> <span class="w hl">HAZARD</span> <span class="w hl">PAY</span>
+      <span class="w">AFTER</span> <span class="w">9TH</span> <span class="w hl">SNOOZE</span>
+    </h1>
+  </div>
+
+  <div id="panelkick" style="opacity:0">THE PANEL RESPONDS <span class="n">1/3</span></div>
+
+  <div class="qcard" id="q-dog" style="opacity:0">
+    <div class="who"><span class="em">&#128054;</span><div><div class="name">THE DOG</div><div class="role">Believes in you</div></div></div>
+    <div class="line">&#8220;Five more minutes is a <span class="accent">promise</span>. I believe him every time.&#8221;</div>
+  </div>
+
+  <div class="qcard" id="q-owl" style="opacity:0">
+    <div class="who"><span class="em">&#129417;</span><div><div class="name">THE OWL</div><div class="role">Cites nothing</div></div></div>
+    <div class="line">&#8220;Snoozing is a <span class="accent">research method</span>. Studies agree. I will not name them.&#8221;</div>
+  </div>
+
+  <div class="qcard" id="q-rac" style="opacity:0">
+    <div class="who"><span class="em">&#129437;</span><div><div class="name">THE RACCOON</div><div class="role">Chaotic hustler</div></div></div>
+    <div class="line">&#8220;Eight unused mornings. I can <span class="accent">move those</span>. No questions.&#8221;</div>
+  </div>
+
+  <div id="catshade" style="opacity:0"></div>
+  <div class="qcard" id="catcard" style="opacity:0">
+    <div class="who"><span class="em">&#128574;</span><div><div class="name" style="color:#F4F2EC">THE CAT</div><div class="role">Final word</div></div></div>
+    <div class="line">&#8220;The alarm works. <span class="accent">You don't.</span>&#8221;</div>
+  </div>
+
+  <div class="scene" id="end" style="opacity:0">
+    <div id="endline">THE CAT HAS <span class="accent">SPOKEN.</span></div>
+    <div><span id="handle">@hype_tingles</span></div>
+    <div id="endsub">NEW EPISODE DAILY</div>
+  </div>
+
+  <div id="ticker"><span class="in" id="tickin">PIGEON DECLARES ITSELF CEO OF THE BALCONY +++ GOLDFISH FORGETS SCANDAL MID-SCANDAL +++ SLOTH STILL TYPING ITS STATEMENT +++ DOG APPROVES OF EVERYTHING, AGAIN +++ PIGEON DECLARES ITSELF CEO OF THE BALCONY +++ GOLDFISH FORGETS SCANDAL MID-SCANDAL +++ SLOTH STILL TYPING ITS STATEMENT +++</span></div>
+
+<script>
+window.REEL = { duration: 22.0, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+const words = Array.from(document.querySelectorAll('#headline .w'));
+
+function card(el, t, t0, t1, holdSlideFrom) {
+  // enter: rise+fade over 0.45s; exit: drop+fade over 0.35s
+  const ein = P(t, t0, 0.45, easeOut);
+  const eout = P(t, t1 - 0.35, 0.35, easeIO);
+  const y = (1 - ein) * (holdSlideFrom || 90) + eout * -60;
+  el.style.opacity = (t >= t0 && t < t1) ? String(Math.min(ein, 1 - eout)) : '0';
+  el.style.transform = `translateY(${y}px)`;
+}
+
+window.seek = function (t) {
+  // scene 1: 0 - 1.9 (glitch cold open)
+  const s1 = $('s1');
+  if (t < 1.9) {
+    s1.style.opacity = '1';
+    const slam = P(t, 0.0, 0.4, back);
+    $('wordmark').style.transform = `scale(${0.6 + 0.4 * slam})`;
+    $('wordmark').style.opacity = String(P(t, 0, 0.2));
+    // glitch jitter on badge, deterministic pseudo-random from frame index
+    const bi = P(t, 0.45, 0.35, back);
+    const f = Math.floor(t * 30);
+    const jx = (t < 0.9) ? ((f * 7919) % 11) - 5 : 0;
+    $('badge').style.opacity = String(P(t, 0.45, 0.15));
+    $('badge').style.transform = `translateX(${jx}px) scale(${0.7 + 0.3 * bi})`;
+    $('newsdesk').style.opacity = String(P(t, 0.9, 0.3));
+    s1.style.opacity = String(1 - P(t, 1.62, 0.28, easeIO));
+  } else s1.style.opacity = '0';
+
+  // scene 2: headline 1.9 - 5.4
+  const s2 = $('s2');
+  if (t >= 1.75 && t < 5.4) {
+    s2.style.opacity = String(Math.min(P(t, 1.75, 0.2), 1 - P(t, 5.1, 0.3, easeIO)));
+    words.forEach((w, i) => {
+      const w0 = 1.9 + i * 0.16;
+      const p = P(t, w0, 0.3, back);
+      w.style.opacity = String(P(t, w0, 0.12));
+      w.style.transform = `translateY(${(1 - p) * 60}px) scale(${0.9 + 0.1 * p})`;
+    });
+  } else s2.style.opacity = '0';
+
+  // panel kicker 5.4 - 15.9, with counter
+  const pk = $('panelkick');
+  if (t >= 5.4 && t < 15.9) {
+    pk.style.opacity = String(Math.min(P(t, 5.4, 0.3), 1 - P(t, 15.65, 0.25)));
+    const n = t < 8.9 ? 1 : (t < 12.4 ? 2 : 3);
+    pk.querySelector('.n').textContent = n + '/3';
+  } else pk.style.opacity = '0';
+
+  // quote cards
+  card($('q-dog'), t, 5.5, 9.0);
+  card($('q-owl'), t, 9.0, 12.5);
+  card($('q-rac'), t, 12.5, 15.9);
+
+  // cat scene 16.0 - 19.3 (music dead, room darkens)
+  $('catshade').style.opacity = String(Math.min(P(t, 15.9, 0.3), 1 - P(t, 19.05, 0.25)) * ((t>=15.9 && t<19.3)?1:0));
+  card($('catcard'), t, 16.15, 19.3, 40);
+
+  // endcard 19.3 - 22
+  const end = $('end');
+  if (t >= 19.3) {
+    end.style.opacity = '1';
+    const p = P(t, 19.35, 0.4, back);
+    $('endline').style.opacity = String(P(t, 19.35, 0.2));
+    $('endline').style.transform = `scale(${0.85 + 0.15 * p})`;
+    $('handle').style.opacity = String(P(t, 19.85, 0.3));
+    $('handle').style.transform = `translateY(${(1 - P(t, 19.85, 0.4, back)) * 40}px)`;
+    $('endsub').style.opacity = String(P(t, 20.3, 0.3));
+    end.style.opacity = String(1 - P(t, 21.5, 0.5, easeIO) * 0.0); // hold to end
+  } else end.style.opacity = '0';
+
+  // ticker: constant scroll, hidden during cat scene + endcard
+  const tick = $('ticker');
+  const half = $('tickin').offsetWidth / 2;
+  tick.style.opacity = String((t < 15.9) ? Math.min(1, P(t, 0.8, 0.4)) : 1 - P(t, 15.9, 0.3));
+  $('tickin').style.transform = `translateX(${-((t * 220) % half)}px)`;
+};
+window.seek(0);
+</script>
+</body></html>

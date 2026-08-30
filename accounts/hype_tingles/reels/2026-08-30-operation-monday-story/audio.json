@@ -1,0 +1,251 @@
+{
+ "tracks": [
+  {
+   "file": "assets/audio/bgm/g-eazy-nba-type.mp3",
+   "at": 0.0,
+   "trim": [
+    0.0,
+    103.0
+   ],
+   "gain_db": -6,
+   "fade_in": 0.4,
+   "fade_out": 1.2
+  },
+  {
+   "file": "assets/audio/bgm/g-eazy-nba-type.mp3",
+   "at": 113.8,
+   "trim": [
+    30.0,
+    37.2
+   ],
+   "gain_db": -7,
+   "fade_in": 0.6,
+   "fade_out": 1.5
+  },
+  {
+   "file": "assets/audio/sfx/bass-hit-futuristic.mp3",
+   "at": 0.85,
+   "gain_db": -8
+  },
+  {
+   "file": "assets/audio/sfx/air-woosh-quick.mp3",
+   "at": 5.7,
+   "gain_db": -10
+  },
+  {
+   "file": "assets/audio/sfx/pop-electric.mp3",
+   "at": 116.55,
+   "gain_db": -8
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 6.2,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 7.8,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 10.4,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 13.3,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 15.6,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 18,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 21.1,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 24.2,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 26.2,
+   "gain_db": -12
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 28.8,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 32.0,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 35.0,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 37.3,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 40.3,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 43.2,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 45.8,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 48.4,
+   "gain_db": -12
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 50.6,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 53.0,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 55.6,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 58.5,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 61.5,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 64.1,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 66.7,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 69.4,
+   "gain_db": -12
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 71.6,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 73.3,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 75.0,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 77.8,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 80.5,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 83.5,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 86.5,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 88.9,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 91.1,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 93.0,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 95.5,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 98.2,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 100.7,
+   "gain_db": -13
+  },
+  {
+   "file": "assets/audio/sfx/vinyl-needle-drop.mp3",
+   "at": 103.3,
+   "gain_db": -5
+  },
+  {
+   "file": "assets/audio/sfx/clock-tick-single.mp3",
+   "at": 107.5,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 111.3,
+   "gain_db": -12
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 114.3,
+   "gain_db": -13
+  }
+ ]
+}

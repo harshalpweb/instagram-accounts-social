@@ -1,0 +1,19 @@
+{
+  "tracks": [
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 0.3, "gain_db": -14},
+    {"file": "assets/audio/sfx/light-aura.mp3", "at": 2.0, "gain_db": -16},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 5.2, "gain_db": -16},
+    {"file": "assets/audio/sfx/light-aura.mp3", "at": 7.0, "gain_db": -18},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 8.2, "gain_db": -14},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 9.4, "gain_db": -14},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 10.6, "gain_db": -14},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 11.8, "gain_db": -14},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 13.0, "gain_db": -14},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 12.0, "gain_db": -17},
+    {"file": "assets/audio/sfx/light-aura.mp3", "at": 14.5, "gain_db": -17},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 16.0, "gain_db": -12},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 16.5, "gain_db": -17},
+    {"file": "assets/audio/sfx/sparkle-touch.mp3", "at": 19.6, "gain_db": -14},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 19.8, "gain_db": -16}
+  ]
+}

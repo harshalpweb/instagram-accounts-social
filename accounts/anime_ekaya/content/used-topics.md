@@ -9,3 +9,4 @@ repeat. Append one line per queued post.
 | 2026-08-30 | fan-vote-01 | FAN VOTE | Summer 2026 wk Aug 19-25 | The Ghost in the Shell, Jaadugar: A Witch in Mongolia, Saga of Tanya the Evil II, Goodbye Lara, The World Is Dancing, Though I Am an Inept Villainess, I Want to Love You Till Your Dying Day, Young Ladies Don't Play Fighting Games |
 | 2026-08-30 | mood-match-01 | MOOD MATCH | bad week / comfort | Laid-Back Camp, Natsume's Book of Friends, Barakamon, K-On!, Aria the Animation (+Flying Witch in caption) |
 | 2026-08-30 | gateway-01 | GATEWAY | first-anime starters | Fullmetal Alchemist: Brotherhood, Death Note, Frieren, Vinland Saga, Spy x Family |
+| 2026-08-30 | signs-diagnostic-01 (REEL) | DIAGNOSTIC (new, relatable-humor) | too-much-anime symptoms | none (no shows named) |

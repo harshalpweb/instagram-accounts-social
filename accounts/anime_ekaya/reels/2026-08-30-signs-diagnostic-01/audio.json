@@ -1,0 +1,13 @@
+{
+  "tracks": [
+    {"file": "assets/audio/bgm/cat-walk.mp3", "at": 0.0, "trim": [0.0, 20.0], "gain_db": -11, "fade_in": 0.3, "fade_out": 1.5},
+    {"file": "assets/audio/sfx/data-load-os.mp3", "at": 0.05, "gain_db": -12},
+    {"file": "assets/audio/sfx/hitech-bleep.mp3", "at": 2.6, "gain_db": -10},
+    {"file": "assets/audio/sfx/hitech-bleep.mp3", "at": 5.3, "gain_db": -10},
+    {"file": "assets/audio/sfx/hitech-bleep.mp3", "at": 8.0, "gain_db": -10},
+    {"file": "assets/audio/sfx/hitech-bleep.mp3", "at": 10.7, "gain_db": -10},
+    {"file": "assets/audio/sfx/hitech-bleep.mp3", "at": 13.4, "gain_db": -10},
+    {"file": "assets/audio/sfx/break-glitch-digital.mp3", "at": 16.05, "gain_db": -9},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 17.95, "gain_db": -9}
+  ]
+}

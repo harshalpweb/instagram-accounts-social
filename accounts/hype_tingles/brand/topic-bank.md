@@ -26,6 +26,8 @@ resolutions, "seen" messages, salary day
 | 2026-08-30 | 2026-08-30-animal-reviews-01 | F2 one-star-files | being a human | dog, pigeon, goldfish, raccoon, cat |
 | 2026-08-30 | 2026-08-30-pigeon-confidence-01 | F3 masterclass | confidence/overthinking | pigeon |
 | 2026-08-30 | 2026-08-30-animal-panel-ep01 | F1 panel (EP 01) | life advice | dog, owl, goldfish, raccoon, cat |
+| 2026-08-30 | 2026-08-30-breaking-snooze-01 | F5 breaking news (REEL) | alarms/snooze | dog, owl, raccoon, cat |
+| 2026-08-31 | 2026-08-31-operation-monday-story | F4 group chat (REEL, 2min story) | "I'll start Monday" / gym | full cast |
 
 ## Queued promises to keep
 - Panel closer of EP 01 says "EP 02 drops tomorrow" — queue Panel EP 02
