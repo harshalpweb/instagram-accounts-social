@@ -12,7 +12,9 @@
     "accounts/anime_ekaya/content/queue/slides/2026-08-30-gateway-01-7.png"
   ],
   "scheduled_time_ist": "2026-08-30T22:30:00+05:30",
-  "status": "pending",
+  "status": "posted",
   "attempts": 0,
-  "needs_review": false
+  "needs_review": false,
+  "ig_post_id": "17964661634965818",
+  "posted_at": "2026-08-30T18:31:23.085569+00:00"
 }
