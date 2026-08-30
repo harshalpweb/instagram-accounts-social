@@ -1,0 +1,126 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+:root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,sans-serif; position:relative; }
+#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:44px; letter-spacing:.30em; color:var(--esp); }
+.kicker { font-size:24px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--taupe); }
+#toprule { position:absolute; top:190px; left:80px; right:80px; height:2px; background:var(--bronze); opacity:.7; z-index:10; }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .line { font-family:'Cormorant Garamond',Georgia,serif; font-size:88px; line-height:1.12; color:var(--esp); }
+#promise { position:absolute; top:520px; left:80px; opacity:0; z-index:12;
+  font-size:30px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); }
+
+/* eye-level diagram */
+#eyeline { position:absolute; left:0; right:0; top:1210px; opacity:0; z-index:11; }
+#eyeline .rule { height:2px; background:var(--bronze); }
+#eyeline .lab { margin:16px 0 0 80px; display:inline-block; background:var(--alab); border:2px solid var(--bronze);
+  color:var(--esp); font-size:30px; letter-spacing:.14em; padding:12px 24px; }
+#eyeline .num { font-family:'Cormorant Garamond',Georgia,serif; font-size:44px; color:var(--esp); }
+
+/* before/after chips */
+#ba { position:absolute; top:250px; right:80px; opacity:0; z-index:12; text-align:right; }
+#ba .chip { display:inline-block; background:rgba(242,238,230,.92); border:2px solid var(--taupe);
+  padding:14px 24px; font-size:28px; letter-spacing:.18em; text-transform:uppercase; color:var(--taupe); margin-left:12px; }
+#ba .chip.strike span { text-decoration:line-through; }
+
+/* rule card */
+#rulecard { position:absolute; inset:0; background:var(--alab); opacity:0; z-index:14; }
+#rulecard .no { position:absolute; top:520px; left:0; right:0; text-align:center; font-size:26px; font-weight:500;
+  letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); }
+#rulecard h2 { position:absolute; top:580px; left:100px; right:100px; text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; line-height:1.18; color:var(--esp); }
+#rulecard .sub { position:absolute; top:960px; left:120px; right:120px; text-align:center; font-size:34px;
+  line-height:1.5; color:var(--taupe); }
+#savecta { position:absolute; top:1180px; left:0; right:0; text-align:center; opacity:0; }
+#savecta span { display:inline-block; border:2px solid var(--esp); padding:16px 36px; font-size:30px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--esp); }
+
+/* endcard */
+#end { position:absolute; inset:0; background:var(--esp); opacity:0; z-index:15; }
+#endword { position:absolute; top:840px; left:0; right:0; text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; letter-spacing:.34em; color:var(--alab); }
+#endsub { position:absolute; top:1010px; left:0; right:0; text-align:center; color:#B8AFA2;
+  font-size:30px; letter-spacing:.2em; text-transform:uppercase; opacity:0; }
+</style></head><body>
+<img id="char" alt="">
+<div id="brandrow"><div class="wordmark">NUVAREL</div><div class="kicker">The rule</div></div>
+<div id="toprule"></div>
+
+<div id="hook"><div class="line">The art is fine.<br>The height is wrong.</div></div>
+<div id="promise">One number fixes it</div>
+
+<div id="ba"><span class="chip strike"><span>Gallery of the ceiling</span></span><span class="chip">Eye level</span></div>
+
+<div id="eyeline"><div class="rule"></div><div class="lab"><span class="num">145 cm</span>&nbsp;&nbsp;to the centre of the piece</div></div>
+
+<div id="rulecard">
+  <div class="no">Rule No. 04</div>
+  <h2>Hang to 145.<br>Eye level makes a room hold still.</h2>
+  <div class="sub">Centre of the artwork at 145 centimetres. Seated, standing, every wall, every time.</div>
+  <div id="savecta"><span>Save this before the next nail</span></div>
+</div>
+
+<div id="end"><div id="endword">NUVAREL</div><div id="endsub">The expensive look, explained</div></div>
+
+<script>
+window.REEL = { duration: 19.0, fps: 30 };
+const NF = 570;
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const img = $('char');
+
+window.seek = async function (t) {
+  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
+  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
+  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+
+  const h = $('hook');
+  if (t < 3.4) {
+    h.style.opacity = String(Math.min(P(t, 0.2, 0.5, easeOut), 1 - P(t, 3.1, 0.3, easeIO)));
+  } else h.style.opacity = '0';
+  const pr = $('promise');
+  if (t >= 1.6 && t < 3.4) {
+    pr.style.opacity = String(Math.min(P(t, 1.6, 0.4), 1 - P(t, 3.1, 0.3)));
+  } else pr.style.opacity = '0';
+
+  // before/after chips during the glide + settle
+  const ba = $('ba');
+  if (t >= 5.6 && t < 12.6) {
+    ba.style.opacity = String(Math.min(P(t, 5.6, 0.4), 1 - P(t, 12.3, 0.3)));
+  } else ba.style.opacity = '0';
+
+  // eye-level diagram
+  const el = $('eyeline');
+  if (t >= 8.0 && t < 12.8) {
+    el.style.opacity = String(Math.min(P(t, 8.0, 0.45, easeOut), 1 - P(t, 12.5, 0.3)));
+  } else el.style.opacity = '0';
+
+  // rule card 13.0 - 16.5
+  const rc_ = $('rulecard');
+  if (t >= 13.0 && t < 16.5) {
+    rc_.style.opacity = String(Math.min(P(t, 13.0, 0.4), 1 - P(t, 16.2, 0.3)));
+    $('savecta').style.opacity = String(P(t, 14.4, 0.4));
+  } else rc_.style.opacity = '0';
+
+  // endcard
+  const end = $('end');
+  if (t >= 16.5) {
+    end.style.opacity = String(P(t, 16.5, 0.35));
+    $('endsub').style.opacity = String(P(t, 17.2, 0.4));
+  } else end.style.opacity = '0';
+};
+window.seek(0);
+</script>
+</body></html>
