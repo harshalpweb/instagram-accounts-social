@@ -10,3 +10,4 @@ repeat. Append one line per queued post.
 | 2026-08-30 | mood-match-01 | MOOD MATCH | bad week / comfort | Laid-Back Camp, Natsume's Book of Friends, Barakamon, K-On!, Aria the Animation (+Flying Witch in caption) |
 | 2026-08-30 | gateway-01 | GATEWAY | first-anime starters | Fullmetal Alchemist: Brotherhood, Death Note, Frieren, Vinland Saga, Spy x Family |
 | 2026-08-30 | signs-diagnostic-01 (REEL) | DIAGNOSTIC (new, relatable-humor) | too-much-anime symptoms | none (no shows named) |
+| 2026-08-31 | cant-pick-at-1am (REEL, 3D mascot) | MOOD MATCH (acted) | 1am decision paralysis | Bocchi the Rock!, Mob Psycho 100, Mushishi |

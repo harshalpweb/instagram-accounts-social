@@ -1,0 +1,18 @@
+{
+  "tracks": [
+    {"file": "assets/audio/bgm/cat-walk.mp3", "at": 0.0, "trim": [0.0, 12.4], "gain_db": -15, "fade_in": 0.25, "fade_out": 0.4},
+    {"file": "assets/audio/bgm/cat-walk.mp3", "at": 12.5, "trim": [30.0, 37.5], "gain_db": -13, "fade_in": 0.3, "fade_out": 1.4},
+    {"file": "assets/audio/sfx/ui-message-pop.mp3", "at": 0.08, "gain_db": -5},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 3.1, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 4.5, "gain_db": -9},
+    {"file": "assets/audio/sfx/ui-message-pop.mp3", "at": 4.25, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 6.3, "gain_db": -9},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 8.0, "gain_db": -8},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 9.55, "gain_db": -7},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 12.55, "gain_db": -6},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 13.0, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 13.5, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.0, "gain_db": -8},
+    {"file": "assets/audio/sfx/sparkle-touch.mp3", "at": 17.6, "gain_db": -8}
+  ]
+}

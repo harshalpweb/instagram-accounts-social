@@ -1,0 +1,13 @@
+{
+ "fps": 30,
+ "frames": 600,
+ "beats": {
+  "hook": 0.0,
+  "promise": 1.5,
+  "scroll1": 3.0,
+  "slump": 6.0,
+  "flop": 9.5,
+  "payoff": 12.5,
+  "endcard": 17.5
+ }
+}

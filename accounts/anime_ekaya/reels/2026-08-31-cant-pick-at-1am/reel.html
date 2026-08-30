@@ -1,0 +1,171 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
+#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+/* hook + promise */
+#hook { position:absolute; top:230px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .clock { font-family:'Archivo Black'; font-size:120px; color:var(--coral); text-shadow:0 4px 30px rgba(0,0,0,.7); }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:72px; line-height:1.1; margin-top:18px; }
+#promise { position:absolute; top:640px; left:80px; opacity:0; background:var(--lav); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:42px; padding:16px 32px; letter-spacing:.04em; z-index:12; }
+
+/* scrolling watchlist rail (right side, over the glowing 3D screen) */
+#rail { position:absolute; top:420px; right:60px; width:360px; height:900px; overflow:hidden; opacity:0; z-index:11; }
+#railin { position:absolute; left:0; right:0; }
+.row { background:rgba(28,24,52,.92); border:2px solid var(--hair); border-radius:18px; padding:22px 24px; margin-bottom:16px; }
+.row .t { font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:var(--paper); }
+.row .m { font-size:22px; color:var(--muted); margin-top:6px; letter-spacing:.06em; }
+
+/* speech bubble */
+#bubble { position:absolute; top:700px; left:80px; max-width:560px; opacity:0; background:var(--paper); color:var(--bg);
+  border-radius:26px; padding:30px 38px; font-family:'Space Grotesk'; font-weight:700; font-size:42px; line-height:1.22; z-index:12; }
+#bubble:after { content:""; position:absolute; bottom:-22px; left:80px; border:24px solid transparent; border-top-color:var(--paper); border-bottom:0; }
+
+/* clock chip during body */
+#clock { position:absolute; top:230px; left:80px; opacity:0; z-index:12;
+  font-family:'Archivo Black'; font-size:64px; color:var(--coral); text-shadow:0 4px 24px rgba(0,0,0,.7); }
+
+/* MOOD MATCH payoff */
+#payoff { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:14; padding:0 90px; }
+#payoff .pre { position:absolute; top:300px; left:90px; font-size:30px; font-weight:500; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--lav); }
+#payoff h2 { position:absolute; top:360px; left:90px; right:90px; font-family:'Space Grotesk'; font-weight:700;
+  font-size:88px; line-height:1.08; }
+.pick { position:absolute; left:90px; right:90px; background:var(--panel); border:2px solid var(--hair);
+  border-radius:22px; padding:34px 40px; opacity:0; }
+.pick .mood { font-size:26px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--coral); }
+.pick .title { font-family:'Space Grotesk'; font-weight:700; font-size:52px; margin-top:10px; }
+.pick .why { font-size:28px; color:var(--muted); margin-top:8px; line-height:1.35; }
+#p1 { top:620px; } #p2 { top:880px; } #p3 { top:1140px; }
+#savecta { position:absolute; top:1430px; left:90px; opacity:0; background:var(--coral); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:40px; padding:16px 34px; border-radius:14px; }
+
+/* endcard */
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
+#endword { position:absolute; top:800px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:92px; color:var(--coral); }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:56px; color:var(--lav); display:block; margin-top:16px; }
+#endsub { position:absolute; top:1060px; left:0; right:0; text-align:center; color:var(--muted);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<img id="char" alt="">
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">what to watch</div></div>
+
+<div id="hook"><div class="clock">1:07 AM</div><div class="line">Episode picked: none.</div></div>
+<div id="promise">There is a faster way.</div>
+
+<div id="rail"><div id="railin"></div></div>
+<div id="bubble">I will just rewatch something.</div>
+<div id="clock">1:58 AM</div>
+
+<div id="payoff">
+  <div class="pre">Mood match</div>
+  <h2>Match your mood, then press play.</h2>
+  <div class="pick" id="p1"><div class="mood">No brain left</div><div class="title">Bocchi the Rock!</div><div class="why">Loud, funny, zero homework. The exact opposite of a decision.</div></div>
+  <div class="pick" id="p2"><div class="mood">Need momentum</div><div class="title">Mob Psycho 100</div><div class="why">Twelve episodes and every one earns its runtime.</div></div>
+  <div class="pick" id="p3"><div class="mood">Ready to sleep well</div><div class="title">Mushishi</div><div class="why">Slow, kind, and better than any sleep app.</div></div>
+  <div id="savecta">Save this for 1 AM.</div>
+</div>
+
+<div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
+<div id="endsub">Your next anime, sorted. New picks daily.</div></div>
+
+<script>
+window.REEL = { duration: 20.0, fps: 30 };
+const NF = 600;
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const img = $('char');
+
+// deterministic fake watchlist rows
+const TITLES = ['Season 2 of the one you dropped','That 90s one everyone cites','The 62-episode commitment','Movie: 2h11m','The one with the sad dog','Sequel to the prequel','The 24-min "short" one','The one your group chat spoiled','Another isekai probably','The critically acclaimed slow one','The one with 3 timelines','Rewatch: comfort classic'];
+const rail = $('railin');
+rail.innerHTML = TITLES.concat(TITLES).map((t,i) => `<div class="row"><div class="t">${t}</div><div class="m">EP ${1+(i*7)%24} / ${12+(i*13)%52} &#183; ${70+(i*9)%29}% match</div></div>`).join('');
+
+window.seek = async function (t) {
+  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
+  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
+  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+
+  // hook 0.1 - 2.9
+  const h = $('hook');
+  if (t < 2.9) {
+    const p = P(t, 0.1, 0.4, back);
+    h.style.opacity = String(Math.min(P(t, 0.1, 0.15), 1 - P(t, 2.65, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - p) * 50}px)`;
+  } else h.style.opacity = '0';
+  const pr = $('promise');
+  if (t >= 1.5 && t < 2.9) {
+    pr.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.65, 0.25)));
+    pr.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
+  } else pr.style.opacity = '0';
+
+  // scrolling rail 3.0 - 12.4, accelerating
+  const rl = $('rail');
+  if (t >= 3.0 && t < 12.4) {
+    rl.style.opacity = String(Math.min(P(t, 3.0, 0.35), 1 - P(t, 12.15, 0.25)));
+    const u = (t - 3.0);
+    const dist = 40 * u + 14 * u * u;  // accelerating scroll
+    const half = rail.offsetHeight / 2 || 1;
+    rl.querySelector('#railin').style.transform = `translateY(${-(dist % half)}px)`;
+  } else rl.style.opacity = '0';
+
+  // clock chip: 1:58 at 4.5, 2:41 at 8.0
+  const ck = $('clock');
+  if (t >= 4.5 && t < 12.2) {
+    ck.textContent = t >= 8.0 ? '2:41 AM' : '1:58 AM';
+    ck.style.opacity = String(Math.min(P(t, 4.5, 0.25), 1 - P(t, 11.95, 0.25)));
+  } else ck.style.opacity = '0';
+
+  // bubble during argue beat
+  const bub = $('bubble');
+  if (t >= 4.2 && t < 6.0) {
+    bub.style.opacity = String(Math.min(P(t, 4.2, 0.15), 1 - P(t, 5.75, 0.25)));
+    bub.style.transform = `scale(${0.85 + 0.15 * P(t, 4.2, 0.35, back)})`;
+  } else bub.style.opacity = '0';
+
+  // payoff 12.5 - 17.5
+  const po = $('payoff');
+  if (t >= 12.5 && t < 17.5) {
+    po.style.opacity = String(Math.min(P(t, 12.5, 0.3), 1 - P(t, 17.25, 0.25)));
+    for (const [id, t0] of [['p1', 13.0], ['p2', 13.5], ['p3', 14.0]]) {
+      const el = $(id);
+      const p = P(t, t0, 0.4, back);
+      el.style.opacity = String(P(t, t0, 0.15));
+      el.style.transform = `translateY(${(1 - p) * 60}px)`;
+    }
+    $('savecta').style.opacity = String(P(t, 14.8, 0.3));
+  } else po.style.opacity = '0';
+
+  // endcard 17.5 - 20
+  const end = $('end');
+  if (t >= 17.5) {
+    end.style.opacity = String(P(t, 17.5, 0.25));
+    $('endword').style.transform = `scale(${0.88 + 0.12 * P(t, 17.6, 0.4, back)})`;
+    $('endsub').style.opacity = String(P(t, 18.2, 0.3));
+  } else end.style.opacity = '0';
+};
+window.seek(0);
+</script>
+</body></html>
