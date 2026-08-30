@@ -1,0 +1,169 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
+#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .pre { font-size:28px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--coral); }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:82px; line-height:1.08; margin-top:16px; }
+#question { position:absolute; top:600px; left:80px; opacity:0; background:var(--coral); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:44px; padding:16px 32px; z-index:12; }
+
+/* flying spoiler slabs */
+.slab { position:absolute; white-space:nowrap; background:var(--paper); color:var(--bg);
+  font-family:'Archivo Black'; font-size:54px; padding:26px 40px; border:6px solid var(--coral);
+  opacity:0; z-index:11; transform-origin:center; }
+.slab .tag { display:block; font-family:'Inter'; font-weight:500; font-size:22px; letter-spacing:.22em;
+  color:var(--coral); margin-bottom:8px; }
+#slab1 { top:520px; } #slab2 { top:560px; } #slab3 { top:1180px; }
+#notif { position:absolute; top:640px; left:0; right:0; text-align:center; opacity:0; z-index:12; }
+#notif .card { display:inline-block; text-align:left; background:var(--paper); color:var(--bg); border-radius:26px;
+  padding:30px 44px; font-family:'Space Grotesk'; font-weight:700; font-size:46px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+#notif .from { font-family:'Inter'; font-weight:500; font-size:26px; letter-spacing:.14em; color:#6B657F; }
+
+/* score chips */
+#dodge { position:absolute; top:1440px; left:80px; opacity:0; z-index:12;
+  font-family:'Archivo Black'; font-size:46px; color:var(--lav); text-shadow:0 3px 18px rgba(0,0,0,.7); }
+
+/* payoff tip */
+#payoff { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:14; }
+#payoff .pre { position:absolute; top:340px; left:90px; font-size:30px; font-weight:500; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--lav); }
+#payoff h2 { position:absolute; top:400px; left:90px; right:90px; font-family:'Space Grotesk'; font-weight:700;
+  font-size:84px; line-height:1.1; }
+#steps { position:absolute; top:760px; left:90px; right:90px; }
+.step { background:var(--panel); border:2px solid var(--hair); border-radius:20px; padding:30px 36px;
+  margin-bottom:18px; opacity:0; font-size:34px; line-height:1.4; color:var(--paper); }
+.step b { color:var(--coral); font-family:'Space Grotesk'; }
+#sendcta { position:absolute; top:1420px; left:90px; opacity:0; background:var(--coral); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:40px; padding:16px 34px; border-radius:14px; }
+
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
+#endword { position:absolute; top:800px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:92px; color:var(--coral); }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:56px; color:var(--lav); display:block; margin-top:16px; }
+#endsub { position:absolute; top:1060px; left:0; right:0; text-align:center; color:var(--muted);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<img id="char" alt="">
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">spoiler season</div></div>
+
+<div id="hook"><div class="pre">Spoiler season is open</div><div class="line">Can you dodge them all?</div></div>
+<div id="question">Three incoming. Watch him.</div>
+
+<div class="slab" id="slab1"><span class="tag">SPOILER</span>HE DIES IN EPISODE 9</div>
+<div class="slab" id="slab2"><span class="tag">SPOILER</span>THE WEDDING IS A TRAP</div>
+<div class="slab" id="slab3"><span class="tag">SPOILER</span>IT WAS HIS BROTHER</div>
+<div id="notif"><div class="card"><span class="from">GROUP CHAT &#183; 47 new messages</span><br>bro the finale. BRO.</div></div>
+<div id="dodge">DODGED: 0</div>
+
+<div id="payoff">
+  <div class="pre">The tip</div>
+  <h2>You cannot dodge the group chat. You can mute the words.</h2>
+  <div id="steps">
+    <div class="step" id="st1"><b>1.</b> Instagram: Settings, Hidden Words, add the show title.</div>
+    <div class="step" id="st2"><b>2.</b> X and Reddit: mute the title and character names.</div>
+    <div class="step" id="st3"><b>3.</b> Group chat: announce your episode number. Loudly.</div>
+  </div>
+  <div id="sendcta">Send this to the friend who spoils.</div>
+</div>
+
+<div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
+<div id="endsub">Your next anime, sorted. New picks daily.</div></div>
+
+<script>
+window.REEL = { duration: 20.0, fps: 30 };
+const NF = 600;
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const img = $('char');
+
+// slab flights: [el, t0, t1] -- crosses right -> left with spin
+const FLIGHTS = [['slab1', 0.15, 1.35], ['slab2', 5.35, 6.7], ['slab3', 8.1, 9.6]];
+
+window.seek = async function (t) {
+  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
+  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
+  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+
+  const h = $('hook');
+  if (t < 2.9) {
+    h.style.opacity = String(Math.min(P(t, 0.1, 0.15), 1 - P(t, 2.65, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - P(t, 0.1, 0.4, back)) * 50}px)`;
+  } else h.style.opacity = '0';
+  const q = $('question');
+  if (t >= 1.5 && t < 2.9) {
+    q.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.65, 0.25)));
+    q.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
+  } else q.style.opacity = '0';
+
+  for (const [id, t0, t1] of FLIGHTS) {
+    const el = $(id);
+    if (t >= t0 && t < t1) {
+      const p = (t - t0) / (t1 - t0);
+      const x = 1180 - p * 1750;
+      el.style.opacity = '1';
+      el.style.transform = `translateX(${x}px) rotate(${-6 + p * 10}deg)`;
+    } else el.style.opacity = '0';
+  }
+
+  // notification: slides up, hangs, hits at 11.0
+  const n = $('notif');
+  if (t >= 10.4 && t < 12.6) {
+    const ein = P(t, 10.4, 0.4, back);
+    n.style.opacity = String(Math.min(P(t, 10.4, 0.15), 1 - P(t, 12.3, 0.3)));
+    const shake = (t >= 11.0 && t < 11.4) ? Math.sin(t * 90) * 8 : 0;
+    n.style.transform = `translateY(${(1 - ein) * 120 + shake}px)`;
+  } else n.style.opacity = '0';
+
+  // dodge counter
+  const d = $('dodge');
+  if (t >= 1.35 && t < 12.6) {
+    const nD = t >= 11.0 ? 'HIT.' : (t >= 9.6 ? 'DODGED: 3' : (t >= 6.7 ? 'DODGED: 2' : 'DODGED: 1'));
+    d.textContent = nD;
+    d.style.color = t >= 11.0 ? '#FF5D73' : '';
+    d.style.opacity = String(Math.min(P(t, 1.35, 0.25), 1 - P(t, 12.35, 0.25)));
+  } else d.style.opacity = '0';
+
+  // payoff 13.2 - 17.5
+  const po = $('payoff');
+  if (t >= 13.2 && t < 17.5) {
+    po.style.opacity = String(Math.min(P(t, 13.2, 0.3), 1 - P(t, 17.25, 0.25)));
+    for (const [id, t0] of [['st1', 14.1], ['st2', 14.55], ['st3', 15.0]]) {
+      const el = $(id);
+      el.style.opacity = String(P(t, t0, 0.2));
+      el.style.transform = `translateY(${(1 - P(t, t0, 0.4, back)) * 50}px)`;
+    }
+    $('sendcta').style.opacity = String(P(t, 15.7, 0.3));
+  } else po.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= 17.5) {
+    end.style.opacity = String(P(t, 17.5, 0.25));
+    $('endword').style.transform = `scale(${0.88 + 0.12 * P(t, 17.6, 0.4, back)})`;
+    $('endsub').style.opacity = String(P(t, 18.2, 0.3));
+  } else end.style.opacity = '0';
+};
+window.seek(0);
+</script>
+</body></html>
