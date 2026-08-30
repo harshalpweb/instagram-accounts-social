@@ -1,0 +1,166 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family:'Archivo Black'; src:url('../../brand/fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
+
+:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; background:var(--ink); }
+body { color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
+#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+
+/* breaking chyron */
+#chyron { position:absolute; top:150px; left:70px; right:70px; opacity:0; }
+#chyron .badge { display:inline-block; background:var(--pink); color:var(--ink); font-family:'Archivo Black';
+  font-size:40px; padding:12px 26px; letter-spacing:.12em; }
+#chyron .head { font-family:'Archivo Black'; font-size:78px; line-height:1.06; text-transform:uppercase;
+  margin-top:22px; text-shadow:0 4px 24px rgba(0,0,0,.85); }
+#chyron .head .hl { color:var(--volt); }
+#promise { position:absolute; top:590px; left:70px; opacity:0; background:var(--volt); color:var(--ink);
+  font-family:'Archivo Black'; font-size:42px; padding:16px 32px; letter-spacing:.05em; }
+
+/* live bug */
+#livebug { position:absolute; top:150px; right:70px; opacity:0; background:rgba(17,16,21,.85); border:3px solid var(--pink);
+  color:var(--pink); font-family:'Archivo Black'; font-size:36px; padding:12px 24px; letter-spacing:.14em; }
+
+/* field report cards */
+.jcard { position:absolute; left:70px; right:70px; top:250px; background:#1B1922; border:3px solid #2A2733;
+  border-radius:30px; padding:44px 48px; opacity:0; }
+.jcard .who { display:flex; align-items:center; gap:26px; }
+.jcard .em { font-size:92px; line-height:1; font-family:'Segoe UI Emoji'; }
+.jcard .name { font-family:'Archivo Black'; font-size:40px; letter-spacing:.05em; color:var(--volt); }
+.jcard .role { font-size:25px; color:var(--soft); font-weight:500; letter-spacing:.14em; margin-top:8px; text-transform:uppercase; }
+.jcard .line { font-weight:700; font-size:54px; line-height:1.18; margin-top:36px; }
+
+/* no signal chip */
+#nosignal { position:absolute; top:1000px; left:0; right:0; text-align:center; opacity:0; }
+#nosignal .box { display:inline-block; background:rgba(17,16,21,.9); border:3px solid var(--volt); color:var(--volt);
+  font-family:'Archivo Black'; font-size:52px; padding:20px 40px; letter-spacing:.14em; }
+#nosignal .sub { margin-top:14px; color:var(--soft); font-size:30px; font-weight:500; letter-spacing:.2em; }
+
+/* ticker */
+#ticker { position:absolute; bottom:440px; left:0; right:0; height:86px; background:var(--pink); overflow:hidden; opacity:0; }
+#tickin { position:absolute; white-space:nowrap; font-family:'Archivo Black'; color:var(--ink); font-size:46px;
+  line-height:86px; letter-spacing:.04em; }
+
+#catshade { position:absolute; inset:0; background:var(--volt); opacity:0; }
+#catcard { position:absolute; left:80px; right:80px; top:580px; opacity:0; color:var(--ink); }
+#catcard .who { display:flex; align-items:center; gap:30px; }
+#catcard .em { font-size:120px; font-family:'Segoe UI Emoji'; }
+#catcard .name { font-family:'Archivo Black'; font-size:52px; }
+#catcard .role { font-size:28px; font-weight:700; letter-spacing:.16em; margin-top:8px; }
+#catcard .line { font-family:'Archivo Black'; font-size:76px; line-height:1.16; margin-top:56px; }
+
+#end { position:absolute; inset:0; background:var(--ink); opacity:0; }
+#endline { position:absolute; top:740px; left:80px; right:80px; text-align:center;
+  font-family:'Archivo Black'; font-size:82px; line-height:1.1; }
+#endline .hl { color:var(--volt); }
+#handle { position:absolute; top:1010px; left:0; right:0; text-align:center; color:var(--pink);
+  font-family:'Archivo Black'; font-size:52px; opacity:0; }
+#endsub { position:absolute; top:1110px; left:0; right:0; text-align:center; color:var(--soft);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<img id="char" alt="">
+
+<div id="chyron"><span class="badge">BREAKING</span>
+<div class="head">9AM meeting contains <span class="hl">no information.</span></div></div>
+<div id="promise">The animals sent correspondents.</div>
+<div id="livebug">LIVE</div>
+
+<div class="jcard" id="j-dog"><div class="who"><div class="em">&#128021;</div><div><div class="name">THE DOG</div><div class="role">Field morale desk</div></div></div><div class="line">Great energy!! No content!!</div></div>
+<div class="jcard" id="j-owl"><div class="who"><div class="em">&#129417;</div><div><div class="name">THE OWL</div><div class="role">Slide analysis unit</div></div></div><div class="line">Slide 2 restates slide 1. Academically bold.</div></div>
+<div class="jcard" id="j-rac"><div class="who"><div class="em">&#129437;</div><div><div class="name">THE RACCOON</div><div class="role">Equipment desk</div></div></div><div class="line">Projector missing. Unrelated: projector for sale.</div></div>
+
+<div id="nosignal"><div class="box">NO SIGNAL</div><div class="sub">IT HAS BEEN CALLED. IT IS NOT COMING.</div></div>
+
+<div id="ticker"><div id="tickin">COULD HAVE BEEN AN EMAIL &#8226; SLIDE 2 IS SLIDE 1 &#8226; SYNERGY MENTIONED 11 TIMES &#8226; NOBODY KNOWS WHO CALLED THIS &#8226; COULD HAVE BEEN AN EMAIL &#8226; SLIDE 2 IS SLIDE 1 &#8226; SYNERGY MENTIONED 11 TIMES &#8226; NOBODY KNOWS WHO CALLED THIS &#8226; </div></div>
+
+<div id="catshade"></div>
+<div id="catcard"><div class="who"><div class="em">&#128008;</div><div><div class="name">THE CAT</div><div class="role">FINAL VERDICT</div></div></div>
+<div class="line">It could have been an email. It will become a follow-up meeting.</div></div>
+
+<div id="end"><div id="endline">The cat has <span class="hl">spoken.</span></div>
+<div id="handle">@hype_tingles</div><div id="endsub">Hype Tingle News. New verdicts every day.</div></div>
+
+<script>
+window.REEL = { duration: 22.0, fps: 30 };
+const NF = 660;
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const img = $('char');
+
+function card(el, t, t0, t1) {
+  const ein = P(t, t0, 0.4, easeOut);
+  const eout = P(t, t1 - 0.3, 0.3, easeIO);
+  el.style.opacity = (t >= t0 && t < t1) ? String(Math.min(ein, 1 - eout)) : '0';
+  el.style.transform = `translateY(${(1 - ein) * 70 + eout * -50}px)`;
+}
+
+window.seek = async function (t) {
+  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
+  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
+  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+
+  // chyron 0.1 - 4.6 with glitch-in
+  const ch = $('chyron');
+  if (t < 4.6) {
+    const f = Math.floor(t * 30);
+    const jx = (t < 0.7) ? ((f * 7919) % 13) - 6 : 0;
+    ch.style.opacity = String(Math.min(P(t, 0.1, 0.15), 1 - P(t, 4.35, 0.25, easeIO)));
+    ch.style.transform = `translateX(${jx}px)`;
+  } else ch.style.opacity = '0';
+  const pr = $('promise');
+  if (t >= 1.5 && t < 3.0) {
+    pr.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.75, 0.25)));
+    pr.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
+  } else pr.style.opacity = '0';
+
+  // live bug 4.6 - 17.3
+  $('livebug').style.opacity = String(t >= 4.6 && t < 17.3 ? Math.min(P(t, 4.6, 0.3), 1 - P(t, 17.05, 0.25)) : 0);
+
+  // field reports
+  card($('j-dog'), t, 4.8, 7.0);
+  card($('j-owl'), t, 8.6, 10.9);
+  card($('j-rac'), t, 12.6, 14.9);
+
+  // NO SIGNAL 11.0 - 12.6
+  const ns = $('nosignal');
+  if (t >= 11.0 && t < 12.6) {
+    ns.style.opacity = String(Math.min(P(t, 11.0, 0.12), 1 - P(t, 12.35, 0.25)));
+    ns.style.transform = `scale(${0.9 + 0.1 * P(t, 11.0, 0.3, back)})`;
+  } else ns.style.opacity = '0';
+
+  // ticker 2.0 - 17.3
+  const tick = $('ticker');
+  const half = $('tickin').offsetWidth / 2;
+  tick.style.opacity = String(t >= 2.0 && t < 17.3 ? Math.min(P(t, 2.0, 0.4), 1 - P(t, 17.05, 0.25)) : 0);
+  $('tickin').style.transform = `translateX(${-((t * 230) % half)}px)`;
+
+  // cat payoff 17.5 - 20.0
+  $('catshade').style.opacity = String(t >= 17.4 && t < 20.0 ? Math.min(P(t, 17.4, 0.3), 1 - P(t, 19.75, 0.25)) : 0);
+  const cc = $('catcard');
+  if (t >= 17.6 && t < 20.0) {
+    const ein = P(t, 17.6, 0.4, easeOut);
+    cc.style.opacity = String(Math.min(ein, 1 - P(t, 19.75, 0.25)));
+    cc.style.transform = `translateY(${(1 - ein) * 60}px)`;
+  } else cc.style.opacity = '0';
+
+  // endcard 20.0 - 22.0
+  const end = $('end');
+  if (t >= 20.0) {
+    end.style.opacity = String(P(t, 20.0, 0.25));
+    const p = P(t, 20.1, 0.4, back);
+    $('endline').style.transform = `scale(${0.85 + 0.15 * p})`;
+    $('endline').style.opacity = String(P(t, 20.1, 0.2));
+    $('handle').style.opacity = String(P(t, 20.6, 0.3));
+    $('endsub').style.opacity = String(P(t, 20.95, 0.3));
+  } else end.style.opacity = '0';
+};
+window.seek(0);
+</script>
+</body></html>

@@ -30,6 +30,7 @@ resolutions, "seen" messages, salary day
 | 2026-08-31 | 2026-08-31-operation-monday-story | F4 group chat (REEL, 2min story) | "I'll start Monday" / gym | full cast |
 | 2026-08-31 | 2026-08-31-morning-routine-judged | NEW: judged-routine (REEL, 3D character) | 5AM morning routines | dog, pigeon, owl, raccoon, cat |
 | 2026-09-01 | 2026-09-01-one-more-episode | NEW: pov-night (REEL, 3D character) | bingeing / one more episode | owl, goldfish, cat |
+| 2026-09-02 | 2026-09-02-meeting-email | F5 breaking news (REEL, 3D character) | work meetings | dog, owl, raccoon, cat |
 
 ## Queued promises to keep
 - Panel closer of EP 01 says "EP 02 drops tomorrow" — queue Panel EP 02

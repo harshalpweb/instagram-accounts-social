@@ -1,0 +1,16 @@
+{
+ "fps": 30,
+ "frames": 660,
+ "beats": {
+  "hook": 0.0,
+  "promise": 1.5,
+  "present": 3.0,
+  "chartclose": 5.2,
+  "click": 7.0,
+  "die": 11.0,
+  "fix": 11.8,
+  "pickup": 15.0,
+  "payoff": 17.5,
+  "endcard": 20.0
+ }
+}
