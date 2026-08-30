@@ -12,3 +12,5 @@ assets/audio/**/*.mp3
 # Reel render intermediates (QA frame dumps, pre-mux video)
 **/qa/
 *.silent.mp4
+# Blender character-frame intermediates (regenerable from income-engine/blender_studio/scenes/reels/)
+**/frames/
