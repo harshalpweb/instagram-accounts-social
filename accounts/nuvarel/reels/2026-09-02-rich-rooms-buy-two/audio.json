@@ -1,0 +1,15 @@
+{
+  "tracks": [
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 0.15, "gain_db": -8},
+    {"file": "assets/audio/sfx/clock-tick-single.mp3", "at": 1.7, "gain_db": -10},
+    {"file": "assets/audio/sfx/paper-move-quick.mp3", "at": 3.2, "gain_db": -11},
+    {"file": "assets/audio/sfx/paper-slide.mp3", "at": 7.1, "gain_db": -8},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 10.3, "gain_db": -8},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 10.9, "gain_db": -9},
+    {"file": "assets/audio/sfx/paper-move-quick.mp3", "at": 10.3, "gain_db": -10},
+    {"file": "assets/audio/sfx/paper-move-quick.mp3", "at": 10.7, "gain_db": -10},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 14.1, "gain_db": -9},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 15.35, "gain_db": -9},
+    {"file": "assets/audio/sfx/paper-page-turn.mp3", "at": 17.05, "gain_db": -9}
+  ]
+}

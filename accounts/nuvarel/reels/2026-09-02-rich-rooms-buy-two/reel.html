@@ -1,0 +1,110 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+:root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,sans-serif; position:relative; }
+#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:44px; letter-spacing:.30em; color:var(--esp); }
+.kicker { font-size:24px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--taupe); }
+#toprule { position:absolute; top:190px; left:80px; right:80px; height:2px; background:var(--bronze); opacity:.7; z-index:10; }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .line { font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; line-height:1.12; color:var(--esp); }
+#promise { position:absolute; top:500px; left:80px; opacity:0; z-index:12;
+  font-size:30px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); }
+
+/* symmetry hairlines */
+#sym { position:absolute; inset:0; opacity:0; z-index:11; }
+#sym .v { position:absolute; left:539px; top:760px; bottom:560px; width:2px; background:var(--bronze); }
+#sym .l, #sym .r { position:absolute; top:1005px; width:210px; height:2px; background:var(--bronze); }
+#sym .l { left:120px; } #sym .r { right:120px; }
+#sym .lab { position:absolute; top:700px; left:0; right:0; text-align:center; font-size:27px; font-weight:500;
+  letter-spacing:.24em; text-transform:uppercase; color:var(--bronze); }
+
+/* rule card */
+#rulecard { position:absolute; inset:0; background:var(--alab); opacity:0; z-index:14; }
+#rulecard .no { position:absolute; top:520px; left:0; right:0; text-align:center; font-size:26px; font-weight:500;
+  letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); }
+#rulecard h2 { position:absolute; top:580px; left:100px; right:100px; text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:92px; line-height:1.2; color:var(--esp); }
+#rulecard .sub { position:absolute; top:1000px; left:120px; right:120px; text-align:center; font-size:34px;
+  line-height:1.5; color:var(--taupe); }
+#savecta { position:absolute; top:1220px; left:0; right:0; text-align:center; opacity:0; }
+#savecta span { display:inline-block; border:2px solid var(--esp); padding:16px 36px; font-size:30px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--esp); }
+
+#end { position:absolute; inset:0; background:var(--esp); opacity:0; z-index:15; }
+#endword { position:absolute; top:840px; left:0; right:0; text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; letter-spacing:.34em; color:var(--alab); }
+#endsub { position:absolute; top:1010px; left:0; right:0; text-align:center; color:#B8AFA2;
+  font-size:30px; letter-spacing:.2em; text-transform:uppercase; opacity:0; }
+</style></head><body>
+<img id="char" alt="">
+<div id="brandrow"><div class="wordmark">NUVAREL</div><div class="kicker">Splurge wisely</div></div>
+<div id="toprule"></div>
+
+<div id="hook"><div class="line">Rich rooms<br>buy two.</div></div>
+<div id="promise">Symmetry is the cheapest luxury</div>
+
+<div id="sym"><div class="lab">Mirror the sides</div><div class="v"></div><div class="l"></div><div class="r"></div></div>
+
+<div id="rulecard">
+  <div class="no">Rule No. 05</div>
+  <h2>Pairs read intentional.<br>Intentional reads expensive.</h2>
+  <div class="sub">Two lamps, two cushions, one centre line. The room stops looking furnished and starts looking designed.</div>
+  <div id="savecta"><span>Save this for the next lamp aisle</span></div>
+</div>
+
+<div id="end"><div id="endword">NUVAREL</div><div id="endsub">The expensive look, explained</div></div>
+
+<script>
+window.REEL = { duration: 20.0, fps: 30 };
+const NF = 600;
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const img = $('char');
+
+window.seek = async function (t) {
+  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
+  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
+  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+
+  const h = $('hook');
+  if (t < 3.4) {
+    h.style.opacity = String(Math.min(P(t, 0.2, 0.5, easeOut), 1 - P(t, 3.1, 0.3, easeIO)));
+  } else h.style.opacity = '0';
+  const pr = $('promise');
+  if (t >= 1.6 && t < 3.4) {
+    pr.style.opacity = String(Math.min(P(t, 1.6, 0.4), 1 - P(t, 3.1, 0.3)));
+  } else pr.style.opacity = '0';
+
+  // symmetry hairlines during align
+  const sym = $('sym');
+  if (t >= 10.2 && t < 13.8) {
+    sym.style.opacity = String(Math.min(P(t, 10.2, 0.5, easeOut), 1 - P(t, 13.5, 0.3)));
+  } else sym.style.opacity = '0';
+
+  const rc_ = $('rulecard');
+  if (t >= 14.0 && t < 17.0) {
+    rc_.style.opacity = String(Math.min(P(t, 14.0, 0.4), 1 - P(t, 16.7, 0.3)));
+    $('savecta').style.opacity = String(P(t, 15.3, 0.4));
+  } else rc_.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= 17.0) {
+    end.style.opacity = String(P(t, 17.0, 0.35));
+    $('endsub').style.opacity = String(P(t, 17.7, 0.4));
+  } else end.style.opacity = '0';
+};
+window.seek(0);
+</script>
+</body></html>
