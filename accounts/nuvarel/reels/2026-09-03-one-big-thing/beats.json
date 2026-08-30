@@ -1,0 +1,16 @@
+{
+ "fps": 30,
+ "frames": 600,
+ "beats": {
+  "hook": 0.0,
+  "promise": 1.5,
+  "remove1": 3.0,
+  "remove2": 4.4,
+  "remove3": 5.5,
+  "sweep": 6.5,
+  "bigpush": 8.5,
+  "diagram": 12.0,
+  "rule": 14.0,
+  "endcard": 17.0
+ }
+}
