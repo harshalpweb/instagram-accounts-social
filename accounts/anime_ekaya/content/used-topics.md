@@ -12,3 +12,4 @@ repeat. Append one line per queued post.
 | 2026-08-30 | signs-diagnostic-01 (REEL) | DIAGNOSTIC (new, relatable-humor) | too-much-anime symptoms | none (no shows named) |
 | 2026-08-31 | cant-pick-at-1am (REEL, 3D mascot) | MOOD MATCH (acted) | 1am decision paralysis | Bocchi the Rock!, Mob Psycho 100, Mushishi |
 | 2026-09-01 | spoiler-gauntlet (REEL, 3D mascot) | RELATABLE-ACTION (new) | spoiler dodging / mute words tip | none (no real spoilers, fake slabs) |
+| 2026-09-02 | pick-your-door (REEL, 3D mascot) | GATEWAY (acted) | first-anime genre doors | Jujutsu Kaisen, Delicious in Dungeon, Skip and Loafer |

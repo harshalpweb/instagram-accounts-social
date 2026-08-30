@@ -1,0 +1,137 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
+#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#hook { position:absolute; top:240px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:86px; line-height:1.08; }
+#hook .line .hl { color:var(--coral); }
+#promise { position:absolute; top:560px; left:80px; opacity:0; background:var(--lav); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:44px; padding:16px 32px; z-index:12; }
+
+/* genre chips per door */
+.gchip { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
+.gchip .genre { display:inline-block; background:var(--coral); color:var(--bg); font-family:'Archivo Black';
+  font-size:38px; padding:12px 26px; letter-spacing:.1em; }
+.gchip .start { font-family:'Space Grotesk'; font-weight:700; font-size:64px; margin-top:20px;
+  text-shadow:0 4px 22px rgba(0,0,0,.7); }
+#g2 .genre { background:var(--lav); }
+#g3 .genre { background:#B7B2D9; }
+
+/* payoff */
+#payoff { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:14; }
+#payoff .pre { position:absolute; top:320px; left:90px; font-size:30px; font-weight:500; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--lav); }
+#payoff h2 { position:absolute; top:380px; left:90px; right:90px; font-family:'Space Grotesk'; font-weight:700;
+  font-size:82px; line-height:1.1; }
+.pick { position:absolute; left:90px; right:90px; background:var(--panel); border:2px solid var(--hair);
+  border-radius:22px; padding:30px 40px; opacity:0; }
+.pick .mood { font-size:26px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--coral); }
+.pick .title { font-family:'Space Grotesk'; font-weight:700; font-size:50px; margin-top:8px; }
+#p1 { top:680px; } #p2 { top:900px; } #p3 { top:1120px; }
+#sendcta { position:absolute; top:1370px; left:90px; opacity:0; background:var(--coral); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:38px; padding:16px 34px; border-radius:14px; }
+
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
+#endword { position:absolute; top:800px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:92px; color:var(--coral); }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:56px; color:var(--lav); display:block; margin-top:16px; }
+#endsub { position:absolute; top:1060px; left:0; right:0; text-align:center; color:var(--muted);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<img id="char" alt="">
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">gateway guide</div></div>
+
+<div id="hook"><div class="line">Your first anime <span class="hl">decides everything.</span></div></div>
+<div id="promise">Pick a door.</div>
+
+<div class="gchip" id="g1"><span class="genre">DOOR 1: ACTION</span><div class="start">Start here: Jujutsu Kaisen.</div></div>
+<div class="gchip" id="g2"><span class="genre">DOOR 2: FANTASY</span><div class="start">Start here: Delicious in Dungeon.</div></div>
+<div class="gchip" id="g3"><span class="genre">DOOR 3: SLICE OF LIFE</span><div class="start">Start here: Skip and Loafer.</div></div>
+
+<div id="payoff">
+  <div class="pre">Gateway guide</div>
+  <h2>Any door works. The wrong genre is the only mistake.</h2>
+  <div class="pick" id="p1"><div class="mood">Action</div><div class="title">Jujutsu Kaisen</div></div>
+  <div class="pick" id="p2"><div class="mood">Fantasy</div><div class="title">Delicious in Dungeon</div></div>
+  <div class="pick" id="p3"><div class="mood">Slice of life</div><div class="title">Skip and Loafer</div></div>
+  <div id="sendcta">Send this to the friend who says anime is not for them.</div>
+</div>
+
+<div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
+<div id="endsub">Your next anime, sorted. New picks daily.</div></div>
+
+<script>
+window.REEL = { duration: 22.0, fps: 30 };
+const NF = 660;
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const img = $('char');
+
+function chip(el, t, t0, t1) {
+  const ein = P(t, t0, 0.35, back);
+  el.style.opacity = (t >= t0 && t < t1) ? String(Math.min(P(t, t0, 0.15), 1 - P(t, t1 - 0.3, 0.3, easeIO))) : '0';
+  el.style.transform = `translateY(${(1 - ein) * 60}px)`;
+}
+
+window.seek = async function (t) {
+  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
+  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
+  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+
+  const h = $('hook');
+  if (t < 2.9) {
+    h.style.opacity = String(Math.min(P(t, 0.1, 0.15), 1 - P(t, 2.65, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - P(t, 0.1, 0.4, back)) * 50}px)`;
+  } else h.style.opacity = '0';
+  const pr = $('promise');
+  if (t >= 1.5 && t < 2.9) {
+    pr.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.65, 0.25)));
+    pr.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
+  } else pr.style.opacity = '0';
+
+  chip($('g1'), t, 3.4, 7.3);
+  chip($('g2'), t, 7.9, 11.8);
+  chip($('g3'), t, 12.4, 15.8);
+
+  const po = $('payoff');
+  if (t >= 16.0 && t < 19.5) {
+    po.style.opacity = String(Math.min(P(t, 16.0, 0.3), 1 - P(t, 19.25, 0.25)));
+    for (const [id, t0] of [['p1', 16.5], ['p2', 16.9], ['p3', 17.3]]) {
+      const el = $(id);
+      el.style.opacity = String(P(t, t0, 0.15));
+      el.style.transform = `translateY(${(1 - P(t, t0, 0.35, back)) * 50}px)`;
+    }
+    $('sendcta').style.opacity = String(P(t, 17.9, 0.3));
+  } else po.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= 19.5) {
+    end.style.opacity = String(P(t, 19.5, 0.25));
+    $('endword').style.transform = `scale(${0.88 + 0.12 * P(t, 19.6, 0.4, back)})`;
+    $('endsub').style.opacity = String(P(t, 20.2, 0.3));
+  } else end.style.opacity = '0';
+};
+window.seek(0);
+</script>
+</body></html>

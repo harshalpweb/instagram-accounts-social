@@ -1,0 +1,13 @@
+{
+ "fps": 30,
+ "frames": 660,
+ "beats": {
+  "hook": 0.0,
+  "promise": 1.5,
+  "door1": 3.0,
+  "door2": 7.5,
+  "door3": 12.0,
+  "payoff": 16.0,
+  "endcard": 19.5
+ }
+}
