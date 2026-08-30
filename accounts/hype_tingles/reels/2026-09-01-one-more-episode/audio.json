@@ -1,0 +1,18 @@
+{
+  "tracks": [
+    {"file": "assets/audio/bgm/house-vibez.mp3", "at": 0.0, "trim": [0.0, 16.4], "gain_db": -14, "fade_in": 0.2, "fade_out": 0.35},
+    {"file": "assets/audio/bgm/house-vibez.mp3", "at": 19.0, "trim": [19.0, 21.0], "gain_db": -16, "fade_in": 0.25, "fade_out": 1.2},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 0.05, "gain_db": -5},
+    {"file": "assets/audio/sfx/bass-hit-futuristic.mp3", "at": 0.4, "gain_db": -8},
+    {"file": "assets/audio/sfx/clock-tick-single.mp3", "at": 3.0, "gain_db": -6},
+    {"file": "assets/audio/sfx/clock-tick-single.mp3", "at": 5.5, "gain_db": -5},
+    {"file": "assets/audio/sfx/ui-message-pop.mp3", "at": 5.9, "gain_db": -7},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 6.6, "gain_db": -6},
+    {"file": "assets/audio/sfx/clock-tick-single.mp3", "at": 8.2, "gain_db": -5},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 8.6, "gain_db": -6},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 10.8, "gain_db": -6},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 13.5, "gain_db": -8},
+    {"file": "assets/audio/sfx/vinyl-needle-drop.mp3", "at": 16.4, "gain_db": -4},
+    {"file": "assets/audio/sfx/pop-electric.mp3", "at": 19.1, "gain_db": -8}
+  ]
+}

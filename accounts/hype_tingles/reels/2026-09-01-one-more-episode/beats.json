@@ -1,0 +1,15 @@
+{
+ "fps": 30,
+ "frames": 630,
+ "beats": {
+  "hook": 0.0,
+  "promise": 1.5,
+  "stage1": 3.0,
+  "stage2": 5.5,
+  "stage3": 8.2,
+  "sunrise": 10.8,
+  "walk": 13.5,
+  "payoff": 16.5,
+  "endcard": 19.0
+ }
+}

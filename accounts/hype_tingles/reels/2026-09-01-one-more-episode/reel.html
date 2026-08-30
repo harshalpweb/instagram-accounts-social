@@ -1,0 +1,168 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family:'Archivo Black'; src:url('../../brand/fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
+
+:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; background:var(--ink); }
+body { color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
+#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+
+#hook { position:absolute; top:180px; left:70px; right:70px; opacity:0; }
+#hook .big { font-family:'Archivo Black'; font-size:96px; line-height:1.05; text-transform:uppercase; text-shadow:0 4px 24px rgba(0,0,0,.8); }
+#hook .big .hl { color:var(--pink); }
+#promise { position:absolute; top:480px; left:70px; opacity:0; background:var(--volt); color:var(--ink);
+  font-family:'Archivo Black'; font-size:44px; padding:18px 34px; letter-spacing:.06em; }
+
+/* big clock (top center) */
+#clock { position:absolute; top:150px; left:0; right:0; text-align:center; opacity:0; }
+#clock .t { display:inline-block; background:rgba(17,16,21,.85); border:3px solid var(--pink); color:var(--pink);
+  font-family:'Archivo Black'; font-size:72px; padding:20px 44px; letter-spacing:.08em; }
+#clock .lab { margin-top:14px; color:var(--soft); font-size:30px; font-weight:500; letter-spacing:.28em; text-transform:uppercase; }
+
+/* speech bubble (character's own line) */
+#bubble { position:absolute; top:560px; left:70px; max-width:640px; opacity:0; background:var(--paper); color:var(--ink);
+  border-radius:28px; padding:34px 42px; font-weight:700; font-size:46px; line-height:1.2; }
+#bubble:after { content:""; position:absolute; bottom:-24px; left:90px; border:26px solid transparent; border-top-color:var(--paper); border-bottom:0; }
+
+/* judge cards */
+.jcard { position:absolute; left:70px; right:70px; top:250px; background:#1B1922; border:3px solid #2A2733;
+  border-radius:30px; padding:44px 48px; opacity:0; }
+.jcard .who { display:flex; align-items:center; gap:26px; }
+.jcard .em { font-size:92px; line-height:1; font-family:'Segoe UI Emoji'; }
+.jcard .name { font-family:'Archivo Black'; font-size:40px; letter-spacing:.05em; color:var(--volt); }
+.jcard .role { font-size:25px; color:var(--soft); font-weight:500; letter-spacing:.14em; margin-top:8px; text-transform:uppercase; }
+.jcard .line { font-weight:700; font-size:54px; line-height:1.18; margin-top:36px; }
+
+#morning { position:absolute; top:1440px; left:70px; opacity:0; background:rgba(17,16,21,.85);
+  border:3px solid var(--volt); padding:18px 30px; font-family:'Archivo Black'; font-size:44px; color:var(--volt); }
+
+#catshade { position:absolute; inset:0; background:var(--volt); opacity:0; }
+#catcard { position:absolute; left:80px; right:80px; top:600px; opacity:0; color:var(--ink); }
+#catcard .who { display:flex; align-items:center; gap:30px; }
+#catcard .em { font-size:120px; font-family:'Segoe UI Emoji'; }
+#catcard .name { font-family:'Archivo Black'; font-size:52px; }
+#catcard .role { font-size:28px; font-weight:700; letter-spacing:.16em; margin-top:8px; }
+#catcard .line { font-family:'Archivo Black'; font-size:82px; line-height:1.14; margin-top:56px; }
+
+#end { position:absolute; inset:0; background:var(--ink); opacity:0; }
+#endline { position:absolute; top:740px; left:80px; right:80px; text-align:center;
+  font-family:'Archivo Black'; font-size:76px; line-height:1.12; }
+#endline .hl { color:var(--pink); }
+#handle { position:absolute; top:1020px; left:0; right:0; text-align:center; color:var(--volt);
+  font-family:'Archivo Black'; font-size:52px; opacity:0; }
+#endsub { position:absolute; top:1120px; left:0; right:0; text-align:center; color:var(--soft);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<img id="char" alt="">
+
+<div id="hook"><div class="big">POV: <span class="hl">one more episode.</span></div></div>
+<div id="promise">Watch the clock.</div>
+<div id="clock"><div class="t">11:47 PM</div><div class="lab">Episode 4 of 1</div></div>
+<div id="bubble">The plot is mid. One more.</div>
+
+<div class="jcard" id="j-owl"><div class="who"><div class="em">&#129417;</div><div><div class="name">THE OWL</div><div class="role">Sleep researcher</div></div></div><div class="line">Sleep is a construct. Citation: none.</div></div>
+<div class="jcard" id="j-gf"><div class="who"><div class="em">&#128031;</div><div><div class="name">THE GOLDFISH</div><div class="role">Continuity department</div></div></div><div class="line">What are we watching?</div></div>
+
+<div id="morning">9:00 AM</div>
+
+<div id="catshade"></div>
+<div id="catcard"><div class="who"><div class="em">&#128008;</div><div><div class="name">THE CAT</div><div class="role">FINAL VERDICT</div></div></div>
+<div class="line">You did this yesterday. You will do it tomorrow.</div></div>
+
+<div id="end"><div id="endline">The animals watch you <span class="hl">every night.</span></div>
+<div id="handle">@hype_tingles</div><div id="endsub">New verdicts every day. The cat is never impressed.</div></div>
+
+<script>
+window.REEL = { duration: 21.0, fps: 30 };
+const NF = 630;
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const img = $('char');
+
+function card(el, t, t0, t1) {
+  const ein = P(t, t0, 0.4, easeOut);
+  const eout = P(t, t1 - 0.3, 0.3, easeIO);
+  el.style.opacity = (t >= t0 && t < t1) ? String(Math.min(ein, 1 - eout)) : '0';
+  el.style.transform = `translateY(${(1 - ein) * 70 + eout * -50}px)`;
+}
+
+// clock jumps with the light stages (beats.json mirror)
+const CLOCKS = [[0.0,'11:47 PM','Episode 4 of 1'],[5.5,'1:13 AM','Episode 7 of 1'],[8.2,'3:26 AM','Episode 11 of 1'],[10.8,'5:58 AM','The sun is a jump scare']];
+
+window.seek = async function (t) {
+  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
+  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
+  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+
+  const h = $('hook');
+  if (t < 2.95) {
+    const p = P(t, 0.12, 0.4, back);
+    h.style.opacity = String(Math.min(P(t, 0.12, 0.15), 1 - P(t, 2.7, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - p) * 60}px)`;
+  } else h.style.opacity = '0';
+  const pr = $('promise');
+  if (t >= 1.5 && t < 2.95) {
+    pr.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.7, 0.25)));
+    pr.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
+  } else pr.style.opacity = '0';
+
+  // clock: persistent 3.0 - 13.3, content jumps
+  const ck = $('clock');
+  if (t >= 2.95 && t < 13.3) {
+    let c = CLOCKS[0];
+    for (const row of CLOCKS) if (t >= row[0]) c = row;
+    ck.querySelector('.t').textContent = c[1];
+    ck.querySelector('.lab').textContent = c[2];
+    // pop on each jump
+    let pop = 1;
+    for (const row of CLOCKS) { const pj = P(t, row[0], 0.35, back); if (t >= row[0] && t < row[0] + 0.35) pop = 0.85 + 0.15 * pj; }
+    ck.querySelector('.t').style.transform = `scale(${pop})`;
+    ck.style.transform = t >= 10.8 ? 'translateX(-300px)' : 'none';
+    ck.style.opacity = String(Math.min(P(t, 2.95, 0.3), 1 - P(t, 13.05, 0.25)));
+  } else ck.style.opacity = '0';
+
+  // speech bubble during stage2 (arguing)
+  const bub = $('bubble');
+  if (t >= 5.9 && t < 8.0) {
+    const ein = P(t, 5.9, 0.35, back);
+    bub.style.opacity = String(Math.min(P(t, 5.9, 0.15), 1 - P(t, 7.75, 0.25)));
+    bub.style.transform = `scale(${0.85 + 0.15 * ein})`;
+  } else bub.style.opacity = '0';
+
+  card($('j-owl'), t, 6.6, 8.1);
+  card($('j-gf'), t, 8.6, 10.6);
+
+  // 9:00 AM chip during the walk
+  const mo = $('morning');
+  if (t >= 13.5 && t < 16.4) {
+    mo.style.opacity = String(Math.min(P(t, 13.5, 0.25), 1 - P(t, 16.15, 0.25)));
+  } else mo.style.opacity = '0';
+
+  $('catshade').style.opacity = String(t >= 16.4 && t < 19.0 ? Math.min(P(t, 16.4, 0.3), 1 - P(t, 18.75, 0.25)) : 0);
+  const cc = $('catcard');
+  if (t >= 16.6 && t < 19.0) {
+    const ein = P(t, 16.6, 0.4, easeOut);
+    cc.style.opacity = String(Math.min(ein, 1 - P(t, 18.75, 0.25)));
+    cc.style.transform = `translateY(${(1 - ein) * 60}px)`;
+  } else cc.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= 19.0) {
+    end.style.opacity = String(P(t, 19.0, 0.25));
+    const p = P(t, 19.1, 0.4, back);
+    $('endline').style.transform = `scale(${0.85 + 0.15 * p})`;
+    $('endline').style.opacity = String(P(t, 19.1, 0.2));
+    $('handle').style.opacity = String(P(t, 19.6, 0.3));
+    $('endsub').style.opacity = String(P(t, 19.95, 0.3));
+  } else end.style.opacity = '0';
+};
+window.seek(0);
+</script>
+</body></html>
