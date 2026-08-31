@@ -160,24 +160,43 @@ lunch browse ([WsCube](https://www.wscubetech.com/blog/instagram-post-time/),
 [Brand Update](https://brand-update.com/resources/best-time-to-post-instagram-india),
 [CreatorFlow niche schedule](https://creatorflow.so/blog/best-times-post-instagram/)).
 
-Standing schedule (1-3 posts/day): **10:00** (decor-specific
-morning-at-home window; 9-11 weekend peak), **13:30** (lunch browse),
-**19:30** (all-India evening peak, aspirational browsing hours). After
-2-3 weeks, recalibrate from the account's own Insights, which beat any
-generic study.
+Standing schedule (3 posts/day, confirmed as this account's standing
+slots by Group CTO 2026-08-31 per the 3x-daily cadence spec): **10:00**
+(decor-specific morning-at-home window; 9-11 weekend peak — carousel,
+save-magnet formats like Palette Study go here), **13:30** (lunch browse
+— carousel), **19:30** (all-India evening peak, aspirational browsing
+hours — the day's Reel, since Reels carry the non-follower-reach load).
+After 2-3 weeks, recalibrate from the account's own Insights, which beat
+any generic study.
 
-## 7. Cadence plan
+## 7. Cadence plan (standing: 3 posts/day — founder decision 2026-08-31)
 
-- Daily: 1 carousel minimum, pillar-rotated (PS → RE → SS → PS → RE →
-  TR → SS ...). Day-1 exception: 3 posts to seed the grid.
+Superseded "1 carousel/day minimum" 2026-08-31 per
+`income-engine/docs/superpowers/specs/2026-08-31-instagram-3x-daily-cadence-design.md`
+(founder-approved). Standing plan:
+
+- **Daily: 3 posts — 2 carousels + 1 Reel**, each on a different
+  trending + niche-relevant topic, sourced by a daily trend search
+  (query templates and full run procedure:
+  `accounts/nuvarel/docs/daily-build-agent-prompt.md`). Reel via the
+  `meme-worthy-character-reels` skill + `scripts/render_reel.py`, calm
+  Curator pacing per this account's tone ruling.
+- **Trend-first, pillar fallback:** candidate topics come from the daily
+  trend search, then get expressed through this account's own pillars
+  (§3). If the search yields nothing usable, fall back to straight
+  pillar rotation (PS → RE → SS → TR ...) — the run never blocks on an
+  empty trend day.
+- **Anti-repetition:** every queued post is checked against and appended
+  to `accounts/nuvarel/content/used-topics.md`. A principle, palette, or
+  rule never re-runs within 60 days; a named palette is never reissued
+  under the same name.
 - Every post: gate-checked render (contrast + ink coverage + eyeballed
   350px feed preview), copydesk-clean caption, `needs_review: true` for
-  CoS clearance.
+  founder clearance.
 - Weekly: review saves-per-reach per pillar in Insights; double down on
   the top pillar, fix or retire the bottom one.
-- Later (not blocking): Reels via video_lab's proven local pipeline once
-  the carousel base is established; quiet-luxury room renders via AI
-  imagery as a 5th pillar if quality clears the account's visual bar.
+- Later (not blocking): quiet-luxury room renders via AI imagery as a
+  5th pillar if quality clears the account's visual bar.
 
 ## 8. Visual identity (locked for the account)
 
