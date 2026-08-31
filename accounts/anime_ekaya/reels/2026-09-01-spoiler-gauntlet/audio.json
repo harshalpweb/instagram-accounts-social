@@ -1,18 +1,17 @@
 {
+  "_license": "All files Mixkit Free License, vendored + logged in assets/audio/ATTRIBUTION.md. Beats match reel.html (2D stickman redo, 20.0s).",
   "tracks": [
-    {"file": "assets/audio/bgm/g-eazy-nba-type.mp3", "at": 0.0, "trim": [0.0, 13.1], "gain_db": -14, "fade_in": 0.2, "fade_out": 0.3},
-    {"file": "assets/audio/bgm/cat-walk.mp3", "at": 13.25, "trim": [10.0, 16.75], "gain_db": -15, "fade_in": 0.35, "fade_out": 1.3},
-    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 0.15, "gain_db": -5},
-    {"file": "assets/audio/sfx/bass-hit-futuristic.mp3", "at": 0.6, "gain_db": -8},
-    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 5.4, "gain_db": -5},
-    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 6.1, "gain_db": -8},
-    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 8.15, "gain_db": -5},
-    {"file": "assets/audio/sfx/ui-message-pop.mp3", "at": 10.45, "gain_db": -4},
-    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 11.0, "gain_db": -5},
-    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 13.3, "gain_db": -6},
-    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.1, "gain_db": -8},
-    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.55, "gain_db": -8},
-    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 15.0, "gain_db": -8},
-    {"file": "assets/audio/sfx/sparkle-touch.mp3", "at": 17.6, "gain_db": -8}
+    {"file": "assets/audio/bgm/g-eazy-nba-type.mp3", "at": 0.0, "gain_db": -15, "trim": [0, 20.0], "fade_in": 0.25, "fade_out": 1.3},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 0.55, "gain_db": -7},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 5.80, "gain_db": -7},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 8.55, "gain_db": -7},
+    {"file": "assets/audio/sfx/ui-message-pop.mp3", "at": 10.45, "gain_db": -5},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 11.00, "gain_db": -10},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 13.40, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.10, "gain_db": -6},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.55, "gain_db": -6},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 15.00, "gain_db": -6},
+    {"file": "assets/audio/sfx/sparkle-touch.mp3", "at": 15.70, "gain_db": -8},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 17.60, "gain_db": -8}
   ]
 }

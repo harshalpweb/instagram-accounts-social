@@ -1,4 +1,10 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
+/* anime_ekaya A2 "spoiler gauntlet" -- 2D stickman EKAYA redo (20s).
+   Overlay system (slabs, notif, tip card) kept from the reviewed original;
+   slab lanes lowered into the character's height band so the dodges are
+   real. Tone: action-y but not broad slapstick. Principle map:
+   ANTICIPATION = pre-roll crouch + pre-dive windup; SQUASH&STRETCH =
+   roll ball + stagger settle; HOLDS = defeated sit after the hit. */
 @font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
 @font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
 @font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
@@ -8,7 +14,8 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1080px; height:1920px; overflow:hidden; }
 body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
-#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
 
 #band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
   background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
@@ -24,23 +31,21 @@ body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif;
 #question { position:absolute; top:600px; left:80px; opacity:0; background:var(--coral); color:var(--bg);
   font-family:'Space Grotesk'; font-weight:700; font-size:44px; padding:16px 32px; z-index:12; }
 
-/* flying spoiler slabs */
+/* flying spoiler slabs -- lanes sit in the character's height band */
 .slab { position:absolute; white-space:nowrap; background:var(--paper); color:var(--bg);
   font-family:'Archivo Black'; font-size:54px; padding:26px 40px; border:6px solid var(--coral);
   opacity:0; z-index:11; transform-origin:center; }
 .slab .tag { display:block; font-family:'Inter'; font-weight:500; font-size:22px; letter-spacing:.22em;
   color:var(--coral); margin-bottom:8px; }
-#slab1 { top:520px; } #slab2 { top:560px; } #slab3 { top:1180px; }
+#slab1 { top:900px; } #slab2 { top:930px; } #slab3 { top:1200px; }
 #notif { position:absolute; top:640px; left:0; right:0; text-align:center; opacity:0; z-index:12; }
 #notif .card { display:inline-block; text-align:left; background:var(--paper); color:var(--bg); border-radius:26px;
   padding:30px 44px; font-family:'Space Grotesk'; font-weight:700; font-size:46px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
 #notif .from { font-family:'Inter'; font-weight:500; font-size:26px; letter-spacing:.14em; color:#6B657F; }
 
-/* score chips */
-#dodge { position:absolute; top:1440px; left:80px; opacity:0; z-index:12;
+#dodge { position:absolute; top:1600px; left:80px; opacity:0; z-index:12;
   font-family:'Archivo Black'; font-size:46px; color:var(--lav); text-shadow:0 3px 18px rgba(0,0,0,.7); }
 
-/* payoff tip */
 #payoff { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:14; }
 #payoff .pre { position:absolute; top:340px; left:90px; font-size:30px; font-weight:500; letter-spacing:.26em;
   text-transform:uppercase; color:var(--lav); }
@@ -60,7 +65,7 @@ body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif;
 #endsub { position:absolute; top:1060px; left:0; right:0; text-align:center; color:var(--muted);
   font-size:34px; font-weight:500; opacity:0; }
 </style></head><body>
-<img id="char" alt="">
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
 <div id="band"></div>
 <div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">spoiler season</div></div>
 
@@ -87,82 +92,190 @@ body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif;
 <div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
 <div id="endsub">Your next anime, sorted. New picks daily.</div></div>
 
+<script src="../../../../assets/rig2d.js"></script>
 <script>
+"use strict";
 window.REEL = { duration: 20.0, fps: 30 };
-const NF = 600;
 const $ = id => document.getElementById(id);
 const c01 = p => Math.max(0, Math.min(1, p));
-const easeOut = p => 1 - Math.pow(1 - p, 3);
 const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
 const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
-const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
-const img = $('char');
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
 
-// slab flights: [el, t0, t1] -- crosses right -> left with spin
+/* slab flights (unchanged): cross the character band at
+   slab1 t ~0.55-1.23, slab2 ~5.80-6.57, slab3 ~8.60-9.45 */
 const FLIGHTS = [['slab1', 0.15, 1.35], ['slab2', 5.35, 6.7], ['slab3', 8.1, 9.6]];
 
+/* character beat table */
+const B = {
+  roll1: [0.40, 0.55, 1.10, 1.35],   // [crouch, rollStart, rollEnd, up]
+  roll2: [5.55, 5.78, 6.45, 6.75],
+  duck3: [8.35, 8.55, 9.45, 9.80],   // [drop, hold, riseStart, up]
+  hit: 11.0,
+  sit: 11.55,
+  blink: 12.35
+};
+window.BEATS = B;
+
+/* ---------------- stage: corridor + EKAYA ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const AC = { paper:"#F3F0FF", coral:"#FF5D73", lav:"#9D8DF1", panel:"#1C1834", bg:"#131022", hair:"#37315A" };
+const sceneG = el(stage, "g", {});
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:"#0E0C1B" });
+el(sceneG, "line", { x1:0, y1:1560, x2:1080, y2:1560, stroke:AC.hair, "stroke-width":5 });
+// corridor: scrolling wall strips (motion when he "advances")
+const strips = [];
+for (let i=0;i<5;i++) strips.push(el(sceneG, "rect", { y:640, width:26, height:920, fill:AC.lav, opacity:.10 }));
+el(sceneG, "polygon", { points:"0,1560 1080,1560 1080,1610 0,1680", fill:AC.panel, opacity:.5 }); // floor sheen
+const eka = makeStick(sceneG, { stroke:AC.paper, fill:AC.bg, tuft:AC.coral });
+
+const EX = 420, GROUND = 1560, STAND_H = 208;
+function ekaPose(t) {
+  let p = null;
+  const inWin = (a, b) => t >= a && t < b;
+  // corridor scroll speed: fast while "running", slow otherwise
+  const running = (t >= 1.35 && t < 5.55) || (t >= 6.75 && t < 8.35);
+  const spd = running ? 620 : 140;
+  strips.forEach((s, i) => s.setAttribute("x", (((i * 260 - t * spd) % 1300) + 1300) % 1300 - 110));
+
+  if (t < B.roll1[0]) {                       // ready stance, watching the incoming slab
+    p = { ...P.stand, tx:EX, ty:GROUND - STAND_H, face:1, eyes:"wide",
+          torso:176, headTilt:8, laU:30, laL:20, raU:-30, raL:-20 };
+  } else if (inWin(B.roll1[0], B.roll1[1]) ) {  // ANTICIPATION: crouch before the roll
+    const k = easeIO(ramp(t, B.roll1[0], B.roll1[1]));
+    p = { ...P.landCrouch, tx:EX, ty:GROUND - STAND_H + 70*k, face:1, eyes:"wide",
+          sy:1-0.10*k, sx:1+0.06*k, px:0, py:STAND_H };
+  } else if (inWin(B.roll1[1], B.roll1[2])) {   // ROLL under slab 1 (full spin, SQUASH ball)
+    const k = ramp(t, B.roll1[1], B.roll1[2]);
+    p = { ...P.ball, tx:EX - 40 + 110*k, ty:GROUND - 150, face:1,
+          rot:360*easeIO(k), rx:0, ry:0, eyes:"closed" };
+  } else if (inWin(B.roll1[2], B.roll1[3])) {   // rise with overshoot
+    const k = easeOutBack(ramp(t, B.roll1[2], B.roll1[3]));
+    p = mixPose({ ...P.landCrouch }, { ...P.sprint, face:1, torso:162 }, k);
+    p.tx = EX + 70 - 70*Math.min(1,k); p.ty = GROUND - STAND_H + 60*(1-Math.min(1,k)); p.eyes = "open";
+  } else if (t < B.roll2[0]) {                  // corridor run (in place, strips scroll)
+    const c = Math.sin(t * 20) * 34;
+    p = { ...P.sprint, face:1, torso:164,
+          llU:70+c, llL:15+c*0.5, rlU:-55-c, rlL:-25-c*0.5,
+          laU:30+c*0.7, laL:100, raU:-30-c*0.7, raL:-100,
+          tx:EX, ty:GROUND - STAND_H + Math.abs(Math.sin(t*20))*-10, eyes:"open" };
+  } else if (inWin(B.roll2[0], B.roll2[1])) {   // ANTICIPATION: brake + windup
+    const k = easeIO(ramp(t, B.roll2[0], B.roll2[1]));
+    p = mixPose({ ...P.sprint, face:1 }, { ...P.windup, face:1, rot:0 }, k);
+    p.tx = EX; p.ty = GROUND - STAND_H + 55*k;
+    p.sy = 1-0.08*k; p.sx = 1+0.05*k; p.px = 0; p.py = STAND_H;
+  } else if (inWin(B.roll2[1], B.roll2[2])) {   // dive-roll under slab 2
+    const k = ramp(t, B.roll2[1], B.roll2[2]);
+    p = { ...P.ball, tx:EX - 30 + 140*k, ty:GROUND - 150 - Math.sin(k*Math.PI)*60,
+          rot:380*easeIO(k), rx:0, ry:0, eyes:"closed", face:1 };
+  } else if (inWin(B.roll2[2], B.roll2[3])) {
+    const k = easeOutBack(ramp(t, B.roll2[2], B.roll2[3]));
+    p = mixPose({ ...P.landCrouch }, { ...P.sprint, face:1, torso:164 }, k);
+    p.tx = EX + 110 - 110*Math.min(1,k); p.ty = GROUND - STAND_H + 55*(1-Math.min(1,k)); p.eyes = "open";
+  } else if (t < B.duck3[0]) {                  // run again
+    const c = Math.sin(t * 20) * 34;
+    p = { ...P.sprint, face:1, torso:164,
+          llU:70+c, llL:15+c*0.5, rlU:-55-c, rlL:-25-c*0.5,
+          laU:30+c*0.7, laL:100, raU:-30-c*0.7, raL:-100,
+          tx:EX, ty:GROUND - STAND_H + Math.abs(Math.sin(t*20))*-10, eyes:"open" };
+  } else if (t < B.duck3[2]) {                  // DEEP DUCK under the low slab 3
+    const k = easeIO(ramp(t, B.duck3[0], B.duck3[1]));
+    p = { torso:104, headTilt:-22, laU:100, laL:60, raU:-100, raL:-60,
+          llU:62, llL:-26, rlU:-62, rlL:26, eyes:"wide", face:1,
+          tx:EX, ty:GROUND - STAND_H + 196*k,
+          sy:1-0.12*k, sx:1+0.07*k, px:0, py:STAND_H };
+    if (t > 8.9 && t < 9.3) p.headTilt = -26 - Math.sin((t-8.9)*30)*3;  // slab graze shiver
+  } else if (t < B.duck3[3]) {                  // rise
+    const k = easeOutBack(ramp(t, B.duck3[2], B.duck3[3]));
+    p = { ...P.stand, face:1, tx:EX, ty:GROUND - STAND_H + 196*(1-Math.min(1,k)), eyes:"open" };
+  } else if (t < B.hit) {                       // sees the notification: looks UP, frozen
+    p = { ...P.stand, face:1, tx:EX, ty:GROUND - STAND_H,
+          torso:184, headTilt:26, laU:16, laL:8, raU:-16, raL:-8, eyes:"wide" };
+  } else if (t < B.sit) {                       // THE HIT: recoil + stagger back
+    const k = easeOutCubic(ramp(t, B.hit, B.hit + 0.22));
+    p = { ...P.stand, face:1, tx:EX + 60*k, ty:GROUND - STAND_H,
+          torso: 184 + 18*k, headTilt: 26 - 60*k,
+          laU: 16 + 130*k, laL: 8 + 90*k, raU: -16 - 60*k, raL: -8 - 40*k, eyes:"closed" };
+    const sq = punch(t, B.hit, 0.12, 14);
+    p.sy = 1 - sq; p.sx = 1 + sq*0.6; p.px = 0; p.py = STAND_H;
+    p.tx += shake(t, B.hit, 10, 8, 9, 0);
+  } else {                                      // defeated sit, dead eyes, HOLD
+    const k = easeOutCubic(ramp(t, B.sit, B.sit + 0.30));
+    p = { torso: lerp(200, 156, k), headTilt: lerp(-10, -38, k),
+          laU: lerp(45, 95, k), laL: lerp(25, 40, k), raU: lerp(35, 85, k), raL: lerp(18, 30, k),
+          llU: lerp(20, 110, k), llL: lerp(0, 15, k), rlU: lerp(-20, 118, k), rlL: lerp(0, 8, k),
+          eyes: k > 0.8 ? "dead" : "closed", face:1,
+          tx: EX + 60 + 30*k, ty: lerp(GROUND - STAND_H, GROUND - 74, k) };
+    const sq = punch(t, B.sit + 0.30, 0.10, 15);
+    p.sy = 1 - sq; p.sx = 1 + sq*0.5; p.px = 0; p.py = 74;
+    if (t >= B.blink && t < B.blink + 0.09) p.eyes = "closed";
+  }
+  poseStick(eka, p);
+}
+
+/* ---------------- overlays (original reviewed timings) ---------------- */
 window.seek = async function (t) {
-  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
-  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
-  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+  t = clamp(t, 0, 20.0);
+  stalePaintGuard(t, bgflip, $("stagewrap"), "rgba(19,16,34,0.004)");
+  const covered = t >= 13.2;
+  sceneG.style.visibility = covered && t >= 13.6 ? "hidden" : "visible";
+  if (!covered || t < 13.6) ekaPose(t);
 
   const h = $('hook');
   if (t < 2.9) {
-    h.style.opacity = String(Math.min(P(t, 0.1, 0.15), 1 - P(t, 2.65, 0.25, easeIO)));
-    h.style.transform = `translateY(${(1 - P(t, 0.1, 0.4, back)) * 50}px)`;
+    h.style.opacity = String(Math.min(PP(t, 0.1, 0.15), 1 - PP(t, 2.65, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - PP(t, 0.1, 0.4, back)) * 50}px)`;
   } else h.style.opacity = '0';
   const q = $('question');
   if (t >= 1.5 && t < 2.9) {
-    q.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.65, 0.25)));
-    q.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
+    q.style.opacity = String(Math.min(PP(t, 1.5, 0.2), 1 - PP(t, 2.65, 0.25)));
+    q.style.transform = `scale(${0.8 + 0.2 * PP(t, 1.5, 0.35, back)})`;
   } else q.style.opacity = '0';
 
   for (const [id, t0, t1] of FLIGHTS) {
-    const el = $(id);
+    const e = $(id);
     if (t >= t0 && t < t1) {
       const p = (t - t0) / (t1 - t0);
       const x = 1180 - p * 1750;
-      el.style.opacity = '1';
-      el.style.transform = `translateX(${x}px) rotate(${-6 + p * 10}deg)`;
-    } else el.style.opacity = '0';
+      e.style.opacity = '1';
+      e.style.transform = `translateX(${x}px) rotate(${-6 + p * 10}deg)`;
+    } else e.style.opacity = '0';
   }
 
-  // notification: slides up, hangs, hits at 11.0
   const n = $('notif');
   if (t >= 10.4 && t < 12.6) {
-    const ein = P(t, 10.4, 0.4, back);
-    n.style.opacity = String(Math.min(P(t, 10.4, 0.15), 1 - P(t, 12.3, 0.3)));
-    const shake = (t >= 11.0 && t < 11.4) ? Math.sin(t * 90) * 8 : 0;
-    n.style.transform = `translateY(${(1 - ein) * 120 + shake}px)`;
+    const ein = PP(t, 10.4, 0.4, back);
+    n.style.opacity = String(Math.min(PP(t, 10.4, 0.15), 1 - PP(t, 12.3, 0.3)));
+    const shk = (t >= 11.0 && t < 11.4) ? Math.sin(t * 90) * 8 : 0;
+    n.style.transform = `translateY(${(1 - ein) * 120 + shk}px)`;
   } else n.style.opacity = '0';
 
-  // dodge counter
   const d = $('dodge');
   if (t >= 1.35 && t < 12.6) {
-    const nD = t >= 11.0 ? 'HIT.' : (t >= 9.6 ? 'DODGED: 3' : (t >= 6.7 ? 'DODGED: 2' : 'DODGED: 1'));
-    d.textContent = nD;
+    d.textContent = t >= 11.0 ? 'HIT.' : (t >= 9.6 ? 'DODGED: 3' : (t >= 6.7 ? 'DODGED: 2' : 'DODGED: 1'));
     d.style.color = t >= 11.0 ? '#FF5D73' : '';
-    d.style.opacity = String(Math.min(P(t, 1.35, 0.25), 1 - P(t, 12.35, 0.25)));
+    d.style.opacity = String(Math.min(PP(t, 1.35, 0.25), 1 - PP(t, 12.35, 0.25)));
   } else d.style.opacity = '0';
 
-  // payoff 13.2 - 17.5
   const po = $('payoff');
   if (t >= 13.2 && t < 17.5) {
-    po.style.opacity = String(Math.min(P(t, 13.2, 0.3), 1 - P(t, 17.25, 0.25)));
+    po.style.opacity = String(Math.min(PP(t, 13.2, 0.3), 1 - PP(t, 17.25, 0.25)));
     for (const [id, t0] of [['st1', 14.1], ['st2', 14.55], ['st3', 15.0]]) {
-      const el = $(id);
-      el.style.opacity = String(P(t, t0, 0.2));
-      el.style.transform = `translateY(${(1 - P(t, t0, 0.4, back)) * 50}px)`;
+      const e = $(id);
+      e.style.opacity = String(PP(t, t0, 0.2));
+      e.style.transform = `translateY(${(1 - PP(t, t0, 0.4, back)) * 50}px)`;
     }
-    $('sendcta').style.opacity = String(P(t, 15.7, 0.3));
+    $('sendcta').style.opacity = String(PP(t, 15.7, 0.3));
   } else po.style.opacity = '0';
 
   const end = $('end');
   if (t >= 17.5) {
-    end.style.opacity = String(P(t, 17.5, 0.25));
-    $('endword').style.transform = `scale(${0.88 + 0.12 * P(t, 17.6, 0.4, back)})`;
-    $('endsub').style.opacity = String(P(t, 18.2, 0.3));
+    end.style.opacity = String(PP(t, 17.5, 0.25));
+    $('endword').style.transform = `scale(${0.88 + 0.12 * PP(t, 17.6, 0.4, back)})`;
+    $('endsub').style.opacity = String(PP(t, 18.2, 0.3));
   } else end.style.opacity = '0';
+  await compositorCommit();
 };
 window.seek(0);
 </script>

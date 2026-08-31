@@ -1,4 +1,11 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
+/* anime_ekaya A1 "can't pick at 1AM" -- 2D stickman EKAYA redo (20s).
+   Redo of the rejected 3D version; overlay layer + Midnight Channel brand
+   kept from the reviewed original, character stage rebuilt on the shared
+   rig2d. Tone: energetic but not slapstick (CoS per-account ruling) --
+   posture-decay acting + one backward flop, no cartoon camera punches.
+   Principle map: ANTICIPATION = pre-flop forward lean; SQUASH = flop
+   impact settle; HOLDS = dead-eye slump + flat-on-floor list-scroll hold. */
 @font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
 @font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
 @font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
@@ -8,7 +15,8 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1080px; height:1920px; overflow:hidden; }
 body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
-#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
 
 #band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
   background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
@@ -18,30 +26,26 @@ body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif;
 .wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
 .kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
 
-/* hook + promise */
 #hook { position:absolute; top:230px; left:80px; right:80px; opacity:0; z-index:12; }
 #hook .clock { font-family:'Archivo Black'; font-size:120px; color:var(--coral); text-shadow:0 4px 30px rgba(0,0,0,.7); }
 #hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:72px; line-height:1.1; margin-top:18px; }
 #promise { position:absolute; top:640px; left:80px; opacity:0; background:var(--lav); color:var(--bg);
   font-family:'Space Grotesk'; font-weight:700; font-size:42px; padding:16px 32px; letter-spacing:.04em; z-index:12; }
 
-/* scrolling watchlist rail (right side, over the glowing 3D screen) */
+/* scrolling watchlist rail (right side, over the glowing panel) */
 #rail { position:absolute; top:420px; right:60px; width:360px; height:900px; overflow:hidden; opacity:0; z-index:11; }
 #railin { position:absolute; left:0; right:0; }
 .row { background:rgba(28,24,52,.92); border:2px solid var(--hair); border-radius:18px; padding:22px 24px; margin-bottom:16px; }
 .row .t { font-family:'Space Grotesk'; font-weight:700; font-size:30px; color:var(--paper); }
 .row .m { font-size:22px; color:var(--muted); margin-top:6px; letter-spacing:.06em; }
 
-/* speech bubble */
 #bubble { position:absolute; top:700px; left:80px; max-width:560px; opacity:0; background:var(--paper); color:var(--bg);
   border-radius:26px; padding:30px 38px; font-family:'Space Grotesk'; font-weight:700; font-size:42px; line-height:1.22; z-index:12; }
 #bubble:after { content:""; position:absolute; bottom:-22px; left:80px; border:24px solid transparent; border-top-color:var(--paper); border-bottom:0; }
 
-/* clock chip during body */
 #clock { position:absolute; top:230px; left:80px; opacity:0; z-index:12;
   font-family:'Archivo Black'; font-size:64px; color:var(--coral); text-shadow:0 4px 24px rgba(0,0,0,.7); }
 
-/* MOOD MATCH payoff */
 #payoff { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:14; padding:0 90px; }
 #payoff .pre { position:absolute; top:300px; left:90px; font-size:30px; font-weight:500; letter-spacing:.26em;
   text-transform:uppercase; color:var(--lav); }
@@ -56,7 +60,6 @@ body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif;
 #savecta { position:absolute; top:1430px; left:90px; opacity:0; background:var(--coral); color:var(--bg);
   font-family:'Space Grotesk'; font-weight:700; font-size:40px; padding:16px 34px; border-radius:14px; }
 
-/* endcard */
 #end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
 #endword { position:absolute; top:800px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
   font-weight:700; font-size:92px; color:var(--coral); }
@@ -64,7 +67,7 @@ body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif;
 #endsub { position:absolute; top:1060px; left:0; right:0; text-align:center; color:var(--muted);
   font-size:34px; font-weight:500; opacity:0; }
 </style></head><body>
-<img id="char" alt="">
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
 <div id="band"></div>
 <div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">what to watch</div></div>
 
@@ -87,84 +90,147 @@ body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif;
 <div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
 <div id="endsub">Your next anime, sorted. New picks daily.</div></div>
 
+<script src="../../../../assets/rig2d.js"></script>
 <script>
+"use strict";
 window.REEL = { duration: 20.0, fps: 30 };
-const NF = 600;
+const B = {                        // character beat table (overlays keep original timings below)
+  slouch1: 4.5,                    // posture stage 2
+  slump: 8.0,                      // posture stage 3, dead eyes
+  preLean: [10.40, 10.58],         // ANTICIPATION: tiny lean TOWARD the list before falling away
+  flop: [10.58, 10.95],            // backward flop, rigid
+  impact: 10.95,                   // SQUASH settle on the floor
+  blink: 11.90,
+  scrollEnd: 12.4
+};
+window.BEATS = B;
 const $ = id => document.getElementById(id);
 const c01 = p => Math.max(0, Math.min(1, p));
-const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeOutO = p => 1 - Math.pow(1 - p, 3);
 const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
 const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
-const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
-const img = $('char');
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
 
-// deterministic fake watchlist rows
+/* ---------------- stage: dark room + glowing list panel + EKAYA ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const AC = { paper:"#F3F0FF", coral:"#FF5D73", lav:"#9D8DF1", panel:"#1C1834", hair:"#37315A", bg:"#131022" };
+const sceneG = el(stage, "g", {});
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:"#0E0C1B" });
+el(sceneG, "line", { x1:0, y1:1560, x2:1080, y2:1560, stroke:AC.hair, "stroke-width":5 });
+// glowing list panel (the rail overlay scrolls over this)
+const panelGlow = el(sceneG, "rect", { x:590, y:380, width:440, height:980, rx:26, fill:AC.lav, opacity:.13 });
+el(sceneG, "rect", { x:620, y:400, width:400, height:940, rx:22, fill:AC.panel, stroke:AC.lav, "stroke-width":5, opacity:.95 });
+el(sceneG, "polygon", { points:"620,1340 1020,1340 900,1560 700,1560", fill:AC.lav, opacity:.07 }); // light spill
+// floor cushion
+const cushion = el(sceneG, "ellipse", { cx:390, cy:1512, rx:150, ry:34, fill:AC.panel, stroke:AC.lav, "stroke-width":4 });
+const eka = makeStick(sceneG, { stroke:AC.paper, fill:AC.bg, tuft:AC.coral });
+
+const SIT = [390, 1448];           // seated hip on the cushion
+function ekaPose(t) {
+  let p;
+  const sway = Math.sin(t * 1.8) * 2;
+  if (t < B.slouch1) {             // upright, engaged with the list, tiny scroll-nods
+    p = { torso: 176 + sway, headTilt: 6 + Math.sin(t*3.1)*3, laU:65, laL:-30, raU:78, raL:20,
+          llU:55, llL:-125, rlU:40, rlL:-140, eyes:"open", face:1, tx:SIT[0], ty:SIT[1] };
+  } else if (t < B.slump) {        // stage 2: slouch + argue (bubble beat)
+    const k = easeIO(c01((t - B.slouch1) / 0.6));
+    p = { torso: lerp(176, 152, k) + sway, headTilt: lerp(6, -14, k),
+          laU: lerp(65, 40, k), laL: lerp(-30, 15, k), raU: lerp(78, 55, k), raL: lerp(20, 40, k),
+          llU:55, llL:-125, rlU:40, rlL:-140, eyes:"open", face:1, tx:SIT[0], ty:SIT[1] + 8*k };
+    if (t >= 4.4 && t < 6.0) p.headTilt += Math.sin((t-4.4)*10) * 4;   // argues at the list
+  } else if (t < B.preLean[0]) {   // stage 3: deep slump, dead eyes
+    const k = easeIO(c01((t - B.slump) / 0.7));
+    p = { torso: lerp(152, 132, k) + sway*0.5, headTilt: lerp(-14, -30, k),
+          laU: lerp(40, 25, k), laL: lerp(15, 8, k), raU: lerp(55, 35, k), raL: lerp(40, 18, k),
+          llU:55, llL:-125, rlU:40, rlL:-140, eyes: k > 0.6 ? "dead" : "open", face:1,
+          tx:SIT[0], ty:SIT[1] + 8 + 8*k };
+  } else if (t < B.flop[0]) {      // ANTICIPATION: last lean toward the list
+    const k = easeIO(ramp(t, B.preLean[0], B.preLean[1]));
+    p = { torso: 132 - 8*k, headTilt: -30, laU:25, laL:8, raU:35, raL:18,
+          llU:55, llL:-125, rlU:40, rlL:-140, eyes:"dead", face:1, tx:SIT[0], ty:SIT[1]+16 };
+  } else {                         // the flop: fall backward (head swings left), then flat hold
+    const k = t < B.impact ? easeInCubic(ramp(t, B.flop[0], B.flop[1])) : 1;
+    p = { torso: lerp(132, 262, k),                 // 132 -> through vertical -> lying left
+          headTilt: lerp(-30, 6, k),
+          laU: lerp(25, -35, k), laL: lerp(8, -22, k), raU: lerp(35, 55, k), raL: lerp(18, 35, k),
+          llU: lerp(55, 95, k), llL: lerp(-125, 78, k), rlU: lerp(40, 102, k), rlL: lerp(-140, 62, k),
+          eyes:"dead", face: lerp(1, -0.2, k), tx:SIT[0], ty: lerp(SIT[1]+16, 1494, easeInCubic(c01(k*1.15))) };
+    if (t >= B.impact) {
+      const sq = punch(t, B.impact, 0.10, 15);      // SQUASH into the floor
+      p.sy = 1 - sq*0.35; p.sx = 1 + sq*0.15; p.px = 0; p.py = 66;
+      if (t >= B.blink && t < B.blink + 0.09) p.eyes = "closed";
+      p.torso = 262 + Math.sin((t - B.impact)*1.6)*1.5;   // barely-alive drift
+    }
+  }
+  poseStick(eka, p);
+  panelGlow.setAttribute("opacity", (0.11 + 0.04*Math.sin(t*2.3)).toFixed(3)); // idle glow breathing
+}
+
+/* ---------------- overlays (original reviewed timings) ---------------- */
 const TITLES = ['Season 2 of the one you dropped','That 90s one everyone cites','The 62-episode commitment','Movie: 2h11m','The one with the sad dog','Sequel to the prequel','The 24-min "short" one','The one your group chat spoiled','Another isekai probably','The critically acclaimed slow one','The one with 3 timelines','Rewatch: comfort classic'];
 const rail = $('railin');
 rail.innerHTML = TITLES.concat(TITLES).map((t,i) => `<div class="row"><div class="t">${t}</div><div class="m">EP ${1+(i*7)%24} / ${12+(i*13)%52} &#183; ${70+(i*9)%29}% match</div></div>`).join('');
 
 window.seek = async function (t) {
-  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
-  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
-  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+  t = clamp(t, 0, 20.0);
+  stalePaintGuard(t, bgflip, document.getElementById("stagewrap"), "rgba(19,16,34,0.004)");
+  const covered = t >= 12.5;                   // payoff/endcard fully cover the stage
+  sceneG.style.visibility = covered && t >= 12.9 ? "hidden" : "visible";
+  if (!covered || t < 12.9) ekaPose(t);
 
-  // hook 0.1 - 2.9
   const h = $('hook');
   if (t < 2.9) {
-    const p = P(t, 0.1, 0.4, back);
-    h.style.opacity = String(Math.min(P(t, 0.1, 0.15), 1 - P(t, 2.65, 0.25, easeIO)));
+    const p = PP(t, 0.1, 0.4, back);
+    h.style.opacity = String(Math.min(PP(t, 0.1, 0.15), 1 - PP(t, 2.65, 0.25, easeIO)));
     h.style.transform = `translateY(${(1 - p) * 50}px)`;
   } else h.style.opacity = '0';
   const pr = $('promise');
   if (t >= 1.5 && t < 2.9) {
-    pr.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.65, 0.25)));
-    pr.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
+    pr.style.opacity = String(Math.min(PP(t, 1.5, 0.2), 1 - PP(t, 2.65, 0.25)));
+    pr.style.transform = `scale(${0.8 + 0.2 * PP(t, 1.5, 0.35, back)})`;
   } else pr.style.opacity = '0';
 
-  // scrolling rail 3.0 - 12.4, accelerating
   const rl = $('rail');
   if (t >= 3.0 && t < 12.4) {
-    rl.style.opacity = String(Math.min(P(t, 3.0, 0.35), 1 - P(t, 12.15, 0.25)));
+    rl.style.opacity = String(Math.min(PP(t, 3.0, 0.35), 1 - PP(t, 12.15, 0.25)));
     const u = (t - 3.0);
-    const dist = 40 * u + 14 * u * u;  // accelerating scroll
+    const dist = 40 * u + 14 * u * u;          // accelerating scroll
     const half = rail.offsetHeight / 2 || 1;
-    rl.querySelector('#railin').style.transform = `translateY(${-(dist % half)}px)`;
+    rail.style.transform = `translateY(${-(dist % half)}px)`;
   } else rl.style.opacity = '0';
 
-  // clock chip: 1:58 at 4.5, 2:41 at 8.0
   const ck = $('clock');
   if (t >= 4.5 && t < 12.2) {
     ck.textContent = t >= 8.0 ? '2:41 AM' : '1:58 AM';
-    ck.style.opacity = String(Math.min(P(t, 4.5, 0.25), 1 - P(t, 11.95, 0.25)));
+    ck.style.opacity = String(Math.min(PP(t, 4.5, 0.25), 1 - PP(t, 11.95, 0.25)));
   } else ck.style.opacity = '0';
 
-  // bubble during argue beat
   const bub = $('bubble');
   if (t >= 4.2 && t < 6.0) {
-    bub.style.opacity = String(Math.min(P(t, 4.2, 0.15), 1 - P(t, 5.75, 0.25)));
-    bub.style.transform = `scale(${0.85 + 0.15 * P(t, 4.2, 0.35, back)})`;
+    bub.style.opacity = String(Math.min(PP(t, 4.2, 0.15), 1 - PP(t, 5.75, 0.25)));
+    bub.style.transform = `scale(${0.85 + 0.15 * PP(t, 4.2, 0.35, back)})`;
   } else bub.style.opacity = '0';
 
-  // payoff 12.5 - 17.5
   const po = $('payoff');
   if (t >= 12.5 && t < 17.5) {
-    po.style.opacity = String(Math.min(P(t, 12.5, 0.3), 1 - P(t, 17.25, 0.25)));
+    po.style.opacity = String(Math.min(PP(t, 12.5, 0.3), 1 - PP(t, 17.25, 0.25)));
     for (const [id, t0] of [['p1', 13.0], ['p2', 13.5], ['p3', 14.0]]) {
-      const el = $(id);
-      const p = P(t, t0, 0.4, back);
-      el.style.opacity = String(P(t, t0, 0.15));
-      el.style.transform = `translateY(${(1 - p) * 60}px)`;
+      const e = $(id);
+      const p = PP(t, t0, 0.4, back);
+      e.style.opacity = String(PP(t, t0, 0.15));
+      e.style.transform = `translateY(${(1 - p) * 60}px)`;
     }
-    $('savecta').style.opacity = String(P(t, 14.8, 0.3));
+    $('savecta').style.opacity = String(PP(t, 14.8, 0.3));
   } else po.style.opacity = '0';
 
-  // endcard 17.5 - 20
   const end = $('end');
   if (t >= 17.5) {
-    end.style.opacity = String(P(t, 17.5, 0.25));
-    $('endword').style.transform = `scale(${0.88 + 0.12 * P(t, 17.6, 0.4, back)})`;
-    $('endsub').style.opacity = String(P(t, 18.2, 0.3));
+    end.style.opacity = String(PP(t, 17.5, 0.25));
+    $('endword').style.transform = `scale(${0.88 + 0.12 * PP(t, 17.6, 0.4, back)})`;
+    $('endsub').style.opacity = String(PP(t, 18.2, 0.3));
   } else end.style.opacity = '0';
+  await compositorCommit();
 };
 window.seek(0);
 </script>
