@@ -2,11 +2,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
 <style>
+/* nuvarel N3 "one big thing" -- 2D Curator redo (20s). Overlay layer kept
+   from the reviewed original; stage rebuilt on the shared rig2d. Calm per
+   CoS tone ruling: accelerating-but-composed removals, a proper crouch
+   ANTICIPATION before the two-hand lift, one slow carry, a 4px settle on
+   the hang. Wordless Curator; typography carries the language. */
 :root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; }
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1080px; height:1920px; overflow:hidden; }
 body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,sans-serif; position:relative; }
-#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
 
 #brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
   align-items:baseline; z-index:10; }
@@ -15,29 +21,27 @@ body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,san
 #toprule { position:absolute; top:190px; left:80px; right:80px; height:2px; background:var(--bronze); opacity:.7; z-index:10; }
 
 #hook { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
-#hook .line { font-family:'Cormorant Garamond',Georgia,serif; font-size:86px; line-height:1.14; color:var(--esp); }
-#promise { position:absolute; top:560px; left:80px; opacity:0; z-index:12;
+#hook .line { font-family:'Cormorant Garamond',Georgia,serif; font-size:84px; line-height:1.14; color:var(--esp); }
+#promise { position:absolute; top:520px; left:80px; opacity:0; z-index:12;
   font-size:30px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); }
 
-/* removal counter */
-#count { position:absolute; top:1440px; left:80px; opacity:0; z-index:12;
-  font-family:'Cormorant Garamond',Georgia,serif; font-size:56px; color:var(--alab); text-shadow:0 2px 14px rgba(0,0,0,.45); }
+#count { position:absolute; top:1640px; left:80px; opacity:0; z-index:12;
+  font-size:30px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--taupe); }
 
-/* scale diagram */
-#scale { position:absolute; left:120px; right:120px; top:1240px; opacity:0; z-index:11; }
+#scale { position:absolute; left:350px; right:350px; top:1170px; opacity:0; z-index:11; }
 #scale .rule { height:2px; background:var(--bronze); position:relative; }
 #scale .rule:before, #scale .rule:after { content:""; position:absolute; top:-8px; width:2px; height:18px; background:var(--bronze); }
 #scale .rule:before { left:0; } #scale .rule:after { right:0; }
-#scale .lab { margin-top:18px; text-align:center; font-size:29px; letter-spacing:.16em; text-transform:uppercase; color:var(--taupe); }
+#scale .lab { margin-top:18px; text-align:center; white-space:nowrap; font-size:29px; letter-spacing:.16em; text-transform:uppercase; color:var(--taupe); }
 
 #rulecard { position:absolute; inset:0; background:var(--alab); opacity:0; z-index:14; }
 #rulecard .no { position:absolute; top:520px; left:0; right:0; text-align:center; font-size:26px; font-weight:500;
   letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); }
 #rulecard h2 { position:absolute; top:580px; left:100px; right:100px; text-align:center;
-  font-family:'Cormorant Garamond',Georgia,serif; font-size:92px; line-height:1.2; color:var(--esp); }
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; line-height:1.18; color:var(--esp); }
 #rulecard .sub { position:absolute; top:1000px; left:120px; right:120px; text-align:center; font-size:34px;
   line-height:1.5; color:var(--taupe); }
-#savecta { position:absolute; top:1220px; left:0; right:0; text-align:center; opacity:0; }
+#savecta { position:absolute; top:1240px; left:0; right:0; text-align:center; opacity:0; }
 #savecta span { display:inline-block; border:2px solid var(--esp); padding:16px 36px; font-size:30px;
   letter-spacing:.18em; text-transform:uppercase; color:var(--esp); }
 
@@ -47,7 +51,7 @@ body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,san
 #endsub { position:absolute; top:1010px; left:0; right:0; text-align:center; color:#B8AFA2;
   font-size:30px; letter-spacing:.2em; text-transform:uppercase; opacity:0; }
 </style></head><body>
-<img id="char" alt="">
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
 <div id="brandrow"><div class="wordmark">NUVAREL</div><div class="kicker">Scale</div></div>
 <div id="toprule"></div>
 
@@ -67,55 +71,218 @@ body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,san
 
 <div id="end"><div id="endword">NUVAREL</div><div id="endsub">The expensive look, explained</div></div>
 
+<script src="../../../../assets/rig2d.js"></script>
 <script>
+"use strict";
 window.REEL = { duration: 20.0, fps: 30 };
-const NF = 600;
 const $ = id => document.getElementById(id);
 const c01 = p => Math.max(0, Math.min(1, p));
-const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeOutO = p => 1 - Math.pow(1 - p, 3);
 const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
-const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
-const img = $('char');
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
 
+const B = {
+  walkTo: [2.6, 3.2],
+  removes: [3.3, 4.4, 5.5],       // deliberate singles...
+  sweep: [5.9, 6.6],              // ...then the composed fast clear
+  walkBig: [6.9, 7.9],
+  crouch: [8.1, 8.5],             // ANTICIPATION before the two-hand lift
+  lift: [8.5, 9.4],
+  carry: [9.4, 10.6],
+  place: [10.6, 11.3],            // 4px settle overshoot
+  stepBack: [11.5, 12.3],
+  nod: 12.9,
+  blink1: 2.1, blink2: 13.2
+};
+window.BEATS = B;
+
+/* ---------------- stage ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const NC = { alab:"#F2EEE6", esp:"#2A241E", taupe:"#6E6257", bronze:"#9C7A4F", floor:"#E7E1D3", cush:"#DCD4C2" };
+const sceneG = el(stage, "g", {});
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:NC.floor });
+el(sceneG, "line", { x1:0, y1:1560, x2:1080, y2:1560, stroke:NC.taupe, "stroke-width":3, opacity:.5 });
+// sofa (centre, beneath the wall)
+el(sceneG, "rect", { x:300, y:1370, width:56, height:190, rx:18, fill:NC.cush, stroke:NC.esp, "stroke-width":6 });
+el(sceneG, "rect", { x:724, y:1370, width:56, height:190, rx:18, fill:NC.cush, stroke:NC.esp, "stroke-width":6 });
+el(sceneG, "rect", { x:318, y:1330, width:444, height:140, rx:14, fill:NC.cush, stroke:NC.esp, "stroke-width":6 });
+el(sceneG, "rect", { x:310, y:1460, width:460, height:100, rx:16, fill:NC.cush, stroke:NC.esp, "stroke-width":6 });
+// nine small frames, scattered grid
+const SMALL = [
+  [330, 720, -4], [540, 700, 3], [750, 730, -2],
+  [300, 930, 2],  [560, 910, -5], [790, 940, 4],
+  [370, 1130, -3],[600, 1120, 2], [820, 1150, -4]
+];
+const smallG = SMALL.map(([x, y, r]) => {
+  const g = el(sceneG, "g", { transform:`translate(${x},${y}) rotate(${r})` });
+  el(g, "rect", { x:-55, y:-70, width:110, height:140, fill:"#FBF9F4", stroke:NC.esp, "stroke-width":6 });
+  el(g, "rect", { x:-34, y:-48, width:68, height:96, fill:"none", stroke:NC.bronze, "stroke-width":2, opacity:.7 });
+  return { g, x, y, r };
+});
+// removal order: three singles, then the sweep clears the rest left-to-right
+const SINGLES = [1, 4, 7];                 // centre column first (deliberate)
+const SWEEP_ORDER = [0, 3, 6, 2, 5, 8];
+// the one big piece
+const bigG = el(sceneG, "g", {});
+el(bigG, "rect", { x:-190, y:-150, width:380, height:300, fill:"#FBF9F4", stroke:NC.esp, "stroke-width":10 });
+el(bigG, "rect", { x:-150, y:-112, width:300, height:224, fill:"none", stroke:NC.bronze, "stroke-width":3, opacity:.8 });
+el(bigG, "path", { d:"M -90 60 Q 0 -70 90 40", fill:"none", stroke:NC.taupe, "stroke-width":6 });
+const cur = makeStick(sceneG, { stroke:NC.esp, fill:NC.alab });
+const GROUND = 1560, SH = 208;
+const BIG_START = [150, 1400, -8], BIG_END = [540, 980, 0];
+
+function removalK(t, i) {
+  // returns 0..1 removal progress for small frame i
+  const si = SINGLES.indexOf(i);
+  if (si >= 0) return PP(t, B.removes[si], 0.35, easeIO);
+  const wi = SWEEP_ORDER.indexOf(i);
+  const t0 = B.sweep[0] + wi * ((B.sweep[1] - B.sweep[0]) / 6);
+  return PP(t, t0, 0.22, easeIO);
+}
+
+function bigState(t) {
+  if (t < B.lift[0]) return BIG_START;
+  if (t < B.lift[1]) {
+    const k = easeIO(ramp(t, B.lift[0], B.lift[1]));
+    return [lerp(BIG_START[0], 240 + 60, k), lerp(BIG_START[1], 1240, k), lerp(-8, 0, k)];
+  }
+  if (t < B.carry[1]) {
+    const k = easeIO(ramp(t, B.carry[0], B.carry[1]));
+    return [lerp(300, 620, k), 1240 + Math.abs(Math.sin(t*1.4*Math.PI*2))*-4, 0];
+  }
+  if (t < B.place[1]) {
+    const k = easeInOutCubic(ramp(t, B.place[0], B.place[1]));
+    return [lerp(620, BIG_END[0], k), lerp(1240, BIG_END[1] - 4, k), 0]; // 4px past
+  }
+  const s = easeIO(ramp(t, B.place[1], B.place[1] + 0.3));
+  return [BIG_END[0], lerp(BIG_END[1] - 4, BIG_END[1], s), 0];
+}
+
+function curatorPose(t) {
+  let p;
+  const breathe = Math.sin(t * 1.5) * 2;
+  if (t < B.walkTo[0]) {                      // regarding the cluttered wall from the right
+    p = { ...P.stand, face:-1, tx:930, ty:GROUND - SH + breathe*0.6,
+          torso:180 + breathe*0.5, headTilt:12 };
+  } else if (t < B.walkTo[1]) {
+    const k = easeIO(ramp(t, B.walkTo[0], B.walkTo[1]));
+    const ph = (t * 1.5) % 1;
+    p = mixPose(walkPose(ph), { ...P.stand }, 0.3);
+    p.face = -1; p.torso = 178;
+    p.tx = lerp(930, 890, k); p.ty = GROUND - SH;
+  } else if (t < B.walkBig[0]) {              // removals: reach toward each vanishing frame
+    p = { ...P.stand, face:-1, tx:890, ty:GROUND - SH, torso:179 + breathe*0.4 };
+    // singles: arm reaches up-left toward the centre column
+    for (let si = 0; si < 3; si++) {
+      const t0 = B.removes[si];
+      if (t >= t0 - 0.25 && t < t0 + 0.35) {
+        const k = Math.sin(c01((t - (t0 - 0.25)) / 0.6) * Math.PI);
+        p.raU = lerp(-10, -125, k); p.raL = lerp(-6, -118, k);
+        p.headTilt = 8 + 6*k;
+      }
+    }
+    if (t >= B.sweep[0] - 0.2 && t < B.sweep[1] + 0.2) {  // one composed broad sweep
+      const k = c01((t - (B.sweep[0] - 0.2)) / (B.sweep[1] - B.sweep[0] + 0.4));
+      p.raU = lerp(-150, -55, easeIO(k)); p.raL = lerp(-140, -50, easeIO(k));
+      p.headTilt = 10;
+    }
+  } else if (t < B.crouch[0]) {               // walk to the big piece (far left)
+    const k = easeIO(ramp(t, B.walkBig[0], B.walkBig[1]));
+    const ph = (t * 1.5) % 1;
+    p = walkPose(ph);
+    p.face = -1; p.torso = 178;
+    p.tx = lerp(890, 320, k); p.ty = GROUND - SH + Math.abs(Math.sin(t*1.5*Math.PI*2))*-4;
+  } else if (t < B.lift[0]) {                 // ANTICIPATION: crouch, both hands to the piece
+    const k = easeIO(ramp(t, B.crouch[0], B.crouch[1]));
+    p = { ...P.stand, face:-1, tx:320, ty:GROUND - SH + 60*k,
+          torso: 180 - 22*k,
+          laU: lerp(10, -95, k), laL: lerp(6, -60, k), raU: lerp(-10, -80, k), raL: lerp(-6, -50, k) };
+  } else if (t < B.carry[0]) {                // the lift: legs do the work
+    const k = easeIO(ramp(t, B.lift[0], B.lift[1]));
+    p = { face:-1, tx:320 + 40*k, ty: GROUND - SH + 60*(1-k),
+          torso: lerp(158, 176, k), headTilt: 0,
+          laU: lerp(-95, -100, k), laL: lerp(-60, -70, k), raU: lerp(-80, -88, k), raL: lerp(-50, -60, k),
+          llU: 8, llL: 2, rlU: -8, rlL: -2, eyes: "open" };
+  } else if (t < B.place[0]) {                // slow carry to centre
+    const k = easeIO(ramp(t, B.carry[0], B.carry[1]));
+    const ph = (t * 1.4) % 1;
+    p = mixPose(walkPose(ph), { ...P.stand }, 0.5);
+    p.face = -1; p.torso = 176;
+    p.laU = -100; p.laL = -70; p.raU = -88; p.raL = -60;   // hands stay on the piece
+    p.tx = lerp(360, 680, k); p.ty = GROUND - SH + Math.abs(Math.sin(t*1.4*Math.PI*2))*-4;
+  } else if (t < B.stepBack[0]) {             // place high: arms rise with the piece
+    const k = easeInOutCubic(ramp(t, B.place[0], B.place[1]));
+    p = { ...P.stand, face:-1, tx:680 + 20*k, ty:GROUND - SH,
+          torso: 182, headTilt: 10*k,
+          laU: lerp(-100, -150, k), laL: lerp(-70, -140, k), raU: lerp(-88, -135, k), raL: lerp(-60, -125, k) };
+  } else if (t < B.stepBack[1]) {             // step back, regard
+    const k = easeIO(ramp(t, B.stepBack[0], B.stepBack[1]));
+    const ph = (t * 1.4) % 1;
+    p = mixPose(walkPose(ph), { ...P.stand }, Math.min(1, k*1.4));
+    p.face = -1; p.torso = 180;
+    p.tx = lerp(700, 880, k); p.ty = GROUND - SH + (k < 0.9 ? Math.abs(Math.sin(t*1.4*Math.PI*2))*-3 : 0);
+  } else {
+    p = { ...P.stand, face:-1, tx:880, ty:GROUND - SH + breathe*0.6,
+          torso:180 + breathe*0.5, headTilt:6, laU:24, laL:12, raU:-24, raL:-12 };
+    if (t >= B.nod && t < B.nod + 0.5) {
+      const nk = Math.sin(ramp(t, B.nod, B.nod + 0.5) * Math.PI);
+      p.headTilt = 6 - 10*nk;
+    }
+  }
+  p.eyes = "open";
+  if ((t >= B.blink1 && t < B.blink1 + 0.09) || (t >= B.blink2 && t < B.blink2 + 0.09)) p.eyes = "closed";
+  poseStick(cur, p);
+
+  // small frames: drop-and-fade removal
+  smallG.forEach((f, i) => {
+    const k = removalK(t, i);
+    if (k >= 1) { f.g.setAttribute("display", "none"); return; }
+    f.g.setAttribute("display", "");
+    f.g.setAttribute("opacity", (1 - k).toFixed(2));
+    f.g.setAttribute("transform", `translate(${f.x},${f.y + 60*k}) rotate(${f.r + 8*k})`);
+  });
+  const [bx, by, br] = bigState(t);
+  bigG.setAttribute("transform", `translate(${bx.toFixed(1)},${by.toFixed(1)}) rotate(${br.toFixed(1)})`);
+}
+
+/* ---------------- overlays (original reviewed timings) ---------------- */
 window.seek = async function (t) {
-  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
-  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
-  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+  t = clamp(t, 0, 20.0);
+  stalePaintGuard(t, bgflip, $("stagewrap"), "rgba(242,238,230,0.004)");
+  const covered = t >= 14.0;
+  sceneG.style.visibility = covered && t >= 14.5 ? "hidden" : "visible";
+  if (!covered || t < 14.5) curatorPose(t);
 
   const h = $('hook');
-  if (t < 3.4) {
-    h.style.opacity = String(Math.min(P(t, 0.2, 0.5, easeOut), 1 - P(t, 3.1, 0.3, easeIO)));
-  } else h.style.opacity = '0';
+  if (t < 3.4) h.style.opacity = String(Math.min(PP(t, 0.2, 0.5, easeOutO), 1 - PP(t, 3.1, 0.3, easeIO)));
+  else h.style.opacity = '0';
   const pr = $('promise');
-  if (t >= 1.6 && t < 3.4) {
-    pr.style.opacity = String(Math.min(P(t, 1.6, 0.4), 1 - P(t, 3.1, 0.3)));
-  } else pr.style.opacity = '0';
+  if (t >= 1.6 && t < 3.4) pr.style.opacity = String(Math.min(PP(t, 1.6, 0.4), 1 - PP(t, 3.1, 0.3)));
+  else pr.style.opacity = '0';
 
-  // removal counter: counts down as pieces vanish
   const ct = $('count');
   if (t >= 3.2 && t < 8.3) {
-    const n = t >= 6.5 ? 'Zero pieces. One wall.' : (t >= 5.5 ? 'Six pieces left.' : (t >= 4.4 ? 'Seven pieces left.' : 'Eight pieces left.'));
-    ct.textContent = n;
-    ct.style.opacity = String(Math.min(P(t, 3.2, 0.3), 1 - P(t, 8.0, 0.3)));
+    ct.textContent = t >= 6.5 ? 'Zero pieces. One wall.' : (t >= 5.5 ? 'Six pieces left.' : (t >= 4.4 ? 'Seven pieces left.' : 'Eight pieces left.'));
+    ct.style.opacity = String(Math.min(PP(t, 3.2, 0.3), 1 - PP(t, 8.0, 0.3)));
   } else ct.style.opacity = '0';
 
-  // scale diagram once the big piece lands
   const sc = $('scale');
-  if (t >= 11.6 && t < 13.8) {
-    sc.style.opacity = String(Math.min(P(t, 11.6, 0.5, easeOut), 1 - P(t, 13.5, 0.3)));
-  } else sc.style.opacity = '0';
+  if (t >= 11.6 && t < 13.8) sc.style.opacity = String(Math.min(PP(t, 11.6, 0.5, easeOutO), 1 - PP(t, 13.5, 0.3)));
+  else sc.style.opacity = '0';
 
   const rc_ = $('rulecard');
   if (t >= 14.0 && t < 17.0) {
-    rc_.style.opacity = String(Math.min(P(t, 14.0, 0.4), 1 - P(t, 16.7, 0.3)));
-    $('savecta').style.opacity = String(P(t, 15.3, 0.4));
+    rc_.style.opacity = String(Math.min(PP(t, 14.0, 0.4), 1 - PP(t, 16.7, 0.3)));
+    $('savecta').style.opacity = String(PP(t, 15.3, 0.4));
   } else rc_.style.opacity = '0';
 
   const end = $('end');
   if (t >= 17.0) {
-    end.style.opacity = String(P(t, 17.0, 0.35));
-    $('endsub').style.opacity = String(P(t, 17.7, 0.4));
+    end.style.opacity = String(PP(t, 17.0, 0.35));
+    $('endsub').style.opacity = String(PP(t, 17.7, 0.4));
   } else end.style.opacity = '0';
+  await compositorCommit();
 };
 window.seek(0);
 </script>

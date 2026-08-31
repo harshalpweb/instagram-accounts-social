@@ -2,11 +2,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
 <style>
+/* nuvarel N2 "rich rooms buy two" -- 2D Curator redo (20s). Overlay layer
+   kept from the reviewed original; stage rebuilt on the shared rig2d.
+   Calm per CoS tone ruling: the craft is the carry-in walk, a gentle
+   set-down with a micro-crouch, one deliberate nudge (with its own tiny
+   anticipation lean), and mirrored cushion snaps under the hairlines. */
 :root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; }
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1080px; height:1920px; overflow:hidden; }
 body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,sans-serif; position:relative; }
-#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
 
 #brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
   align-items:baseline; z-index:10; }
@@ -19,7 +25,6 @@ body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,san
 #promise { position:absolute; top:500px; left:80px; opacity:0; z-index:12;
   font-size:30px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); }
 
-/* symmetry hairlines */
 #sym { position:absolute; inset:0; opacity:0; z-index:11; }
 #sym .v { position:absolute; left:539px; top:760px; bottom:560px; width:2px; background:var(--bronze); }
 #sym .l, #sym .r { position:absolute; top:1005px; width:210px; height:2px; background:var(--bronze); }
@@ -27,12 +32,11 @@ body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,san
 #sym .lab { position:absolute; top:700px; left:0; right:0; text-align:center; font-size:27px; font-weight:500;
   letter-spacing:.24em; text-transform:uppercase; color:var(--bronze); }
 
-/* rule card */
 #rulecard { position:absolute; inset:0; background:var(--alab); opacity:0; z-index:14; }
 #rulecard .no { position:absolute; top:520px; left:0; right:0; text-align:center; font-size:26px; font-weight:500;
   letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); }
 #rulecard h2 { position:absolute; top:580px; left:100px; right:100px; text-align:center;
-  font-family:'Cormorant Garamond',Georgia,serif; font-size:92px; line-height:1.2; color:var(--esp); }
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; line-height:1.18; color:var(--esp); }
 #rulecard .sub { position:absolute; top:1000px; left:120px; right:120px; text-align:center; font-size:34px;
   line-height:1.5; color:var(--taupe); }
 #savecta { position:absolute; top:1220px; left:0; right:0; text-align:center; opacity:0; }
@@ -45,7 +49,7 @@ body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,san
 #endsub { position:absolute; top:1010px; left:0; right:0; text-align:center; color:#B8AFA2;
   font-size:30px; letter-spacing:.2em; text-transform:uppercase; opacity:0; }
 </style></head><body>
-<img id="char" alt="">
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
 <div id="brandrow"><div class="wordmark">NUVAREL</div><div class="kicker">Splurge wisely</div></div>
 <div id="toprule"></div>
 
@@ -63,47 +67,170 @@ body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,san
 
 <div id="end"><div id="endword">NUVAREL</div><div id="endsub">The expensive look, explained</div></div>
 
+<script src="../../../../assets/rig2d.js"></script>
 <script>
+"use strict";
 window.REEL = { duration: 20.0, fps: 30 };
-const NF = 600;
 const $ = id => document.getElementById(id);
 const c01 = p => Math.max(0, Math.min(1, p));
-const easeOut = p => 1 - Math.pow(1 - p, 3);
+const easeOutO = p => 1 - Math.pow(1 - p, 3);
 const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
-const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
-const img = $('char');
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
 
+const B = {
+  walkIn: [3.2, 5.4],        // carry the second lamp in from the left
+  setSink: [5.6, 6.1],       // micro-crouch set-down
+  setDone: 6.4,
+  nudgeLean: [6.9, 7.15],    // ANTICIPATION: tiny lean before the nudge
+  nudge: [7.15, 7.45],       // lamp slides 14px into line
+  stepBack: [8.2, 9.6],
+  snap1: 10.8, snap2: 11.3,  // cushions mirror, one beat each
+  nod: 12.5,
+  blink1: 2.2, blink2: 12.9
+};
+window.BEATS = B;
+
+/* ---------------- stage ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const NC = { alab:"#F2EEE6", esp:"#2A241E", taupe:"#6E6257", bronze:"#9C7A4F", floor:"#E7E1D3", cush:"#DCD4C2" };
+const sceneG = el(stage, "g", {});
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:NC.floor });
+el(sceneG, "line", { x1:0, y1:1560, x2:1080, y2:1560, stroke:NC.taupe, "stroke-width":3, opacity:.5 });
+// sofa, centre
+el(sceneG, "rect", { x:300, y:1330, width:60, height:230, rx:20, fill:NC.cush, stroke:NC.esp, "stroke-width":6 });  // left arm
+el(sceneG, "rect", { x:720, y:1330, width:60, height:230, rx:20, fill:NC.cush, stroke:NC.esp, "stroke-width":6 });  // right arm
+el(sceneG, "rect", { x:320, y:1290, width:440, height:150, rx:14, fill:NC.cush, stroke:NC.esp, "stroke-width":6 }); // back
+el(sceneG, "rect", { x:310, y:1430, width:460, height:130, rx:16, fill:NC.cush, stroke:NC.esp, "stroke-width":6 }); // seat
+// cushions: right is neat; left starts tilted/off, snaps to mirror
+const cushR = el(sceneG, "g", {});
+el(cushR, "rect", { x:600, y:1360, width:120, height:84, rx:16, fill:"#EFEAE0", stroke:NC.esp, "stroke-width":5 });
+const cushL = el(sceneG, "g", {});
+el(cushL, "rect", { x:360, y:1360, width:120, height:84, rx:16, fill:"#EFEAE0", stroke:NC.esp, "stroke-width":5 });
+// lamp builder: group with base at (0,0) floor point
+function lamp(parent) {
+  const g = el(parent, "g", {});
+  el(g, "ellipse", { cx:0, cy:0, rx:52, ry:12, fill:NC.cush, stroke:NC.esp, "stroke-width":5 });
+  el(g, "line", { x1:0, y1:0, x2:0, y2:-300, stroke:NC.esp, "stroke-width":8 });
+  el(g, "path", { d:"M -62 -300 L 62 -300 L 40 -392 L -40 -392 Z", fill:NC.cush, stroke:NC.esp, "stroke-width":6 });
+  return g;
+}
+const lampR = lamp(sceneG); lampR.setAttribute("transform", "translate(880,1560)");
+const lampL = lamp(sceneG);   // the carried one
+const cur = makeStick(sceneG, { stroke:NC.esp, fill:NC.alab });
+const GROUND = 1560, SH = 208;
+const LAMP_SET_X = 212, LAMP_FINAL_X = 198; // nudged INTO the mirror line (880 vs 198 around centre 539)
+
+function lampLState(t) {
+  if (t < B.walkIn[0]) return [-260, GROUND, -12];
+  if (t < B.walkIn[1]) {
+    const k = easeIO(ramp(t, B.walkIn[0], B.walkIn[1]));
+    const wx = lerp(-100, 205, k);                        // rides in front of the Curator
+    return [wx - 74, GROUND - 20 + Math.abs(Math.sin(t*1.5*Math.PI*2))*-4, 7];
+  }
+  if (t < B.setSink[1]) {
+    const k = easeIO(ramp(t, B.setSink[0], B.setSink[1]));
+    return [lerp(131, LAMP_SET_X, k), lerp(GROUND - 20, GROUND, k), lerp(7, 0, k)];
+  }
+  if (t < B.nudge[0]) return [LAMP_SET_X, GROUND, 0];
+  if (t < B.nudge[1]) {
+    const k = easeIO(ramp(t, B.nudge[0], B.nudge[1]));
+    return [lerp(LAMP_SET_X, LAMP_FINAL_X, k), GROUND, 0];
+  }
+  return [LAMP_FINAL_X, GROUND, 0];
+}
+
+function curatorPose(t) {
+  let p;
+  const breathe = Math.sin(t * 1.5) * 2;
+  if (t < B.walkIn[0]) { p = null; }          // not in the room yet
+  else if (t < B.walkIn[1]) {                 // carry-in walk
+    const k = easeIO(ramp(t, B.walkIn[0], B.walkIn[1]));
+    const ph = (t * 1.5) % 1;
+    p = walkPose(ph);
+    p = mixPose(p, { ...P.stand, face:1 }, 0.45);        // calmer stride
+    p.face = 1; p.torso = 176;
+    p.laU = -52; p.laL = -26; p.raU = 30; p.raL = 14;    // near hand trails back on the pole
+    p.tx = lerp(-100, 205, k); p.ty = GROUND - SH + Math.abs(Math.sin(t*1.5*Math.PI*2))*-4;
+  } else if (t < B.setDone) {                 // set-down: micro-crouch, arms lower with the lamp
+    const k = easeIO(ramp(t, B.setSink[0], B.setSink[1]));
+    p = { ...P.carry, face:1, tx:205, ty:GROUND - SH + 26*k,
+          torso: 176 - 6*k,
+          laU: lerp(-52, 40, k), laL: lerp(-26, 25, k), raU: lerp(30, 62, k), raL: lerp(14, 34, k) };
+    if (t > B.setSink[1]) {                   // rise
+      const r = easeIO(ramp(t, B.setSink[1], B.setDone));
+      p.ty = GROUND - SH + 26*(1-r); p.torso = 170 + 10*r;
+      p.laU = lerp(72, 14, r); p.laL = lerp(40, 8, r); p.raU = lerp(62, -14, r); p.raL = lerp(34, -8, r);
+    }
+  } else if (t < B.nudge[1] + 0.3) {          // the nudge: face the lamp (to his left), lean, push
+    p = { ...P.stand, face:-1, tx:300, ty:GROUND - SH, torso:180 };
+    if (t >= B.nudgeLean[0] && t < B.nudgeLean[1]) {      // ANTICIPATION lean away
+      const k = easeIO(ramp(t, B.nudgeLean[0], B.nudgeLean[1]));
+      p.torso = 180 + 4*k; p.raU = -40*k; p.raL = -70*k;
+    } else if (t >= B.nudge[0]) {
+      const k = easeOutO(ramp(t, B.nudge[0], B.nudge[1]));
+      p.torso = 184 - 6*k; p.raU = lerp(-40, -95, k); p.raL = lerp(-70, -85, k);
+    }
+  } else if (t < B.stepBack[1]) {             // walk to centre-front, regard
+    const k = easeIO(ramp(t, B.stepBack[0], B.stepBack[1]));
+    const ph = (t * 1.4) % 1;
+    p = mixPose(walkPose(ph), { ...P.stand }, Math.min(1, k*1.3));
+    p.face = 1; p.torso = 178;
+    p.tx = lerp(300, 540, k); p.ty = GROUND - SH + (k < 0.9 ? Math.abs(Math.sin(t*1.4*Math.PI*2))*-3 : 0);
+  } else {                                    // regard the mirrored room; one slow nod
+    p = { ...P.stand, face:0, tx:540, ty:GROUND - SH + breathe*0.6, torso:180 + breathe*0.5, headTilt:2, laU:24, laL:12, raU:-24, raL:-12 };
+    if (t >= B.nod && t < B.nod + 0.5) {
+      const nk = Math.sin(ramp(t, B.nod, B.nod + 0.5) * Math.PI);
+      p.headTilt = 2 - 10*nk;
+    }
+  }
+  if (p) {
+    p.eyes = "open";
+    if ((t >= B.blink1 && t < B.blink1 + 0.09) || (t >= B.blink2 && t < B.blink2 + 0.09)) p.eyes = "closed";
+    cur.g.setAttribute("display", "");
+    poseStick(cur, p);
+  } else cur.g.setAttribute("display", "none");
+
+  const [lx, ly, lr] = lampLState(t);
+  lampL.setAttribute("transform", `translate(${lx.toFixed(1)},${ly.toFixed(1)}) rotate(${lr.toFixed(1)})`);
+  // cushion snaps (each its own beat, small settle)
+  const s1 = t < B.snap1 ? 0 : easeOutO(ramp(t, B.snap1, B.snap1 + 0.22));
+  cushL.setAttribute("transform", `rotate(${lerp(8, 0, s1)},420,1402) translate(${lerp(-16, 0, s1)},${lerp(-6, 0, s1)})`);
+  const s2 = t < B.snap2 ? 0 : easeOutO(ramp(t, B.snap2, B.snap2 + 0.22));
+  cushR.setAttribute("transform", `rotate(${lerp(-5, 0, s2)},660,1402) translate(${lerp(10, 0, s2)},0)`);
+}
+
+/* ---------------- overlays (original reviewed timings) ---------------- */
 window.seek = async function (t) {
-  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
-  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
-  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+  t = clamp(t, 0, 20.0);
+  stalePaintGuard(t, bgflip, $("stagewrap"), "rgba(242,238,230,0.004)");
+  const covered = t >= 14.0;
+  sceneG.style.visibility = covered && t >= 14.5 ? "hidden" : "visible";
+  if (!covered || t < 14.5) curatorPose(t);
 
   const h = $('hook');
-  if (t < 3.4) {
-    h.style.opacity = String(Math.min(P(t, 0.2, 0.5, easeOut), 1 - P(t, 3.1, 0.3, easeIO)));
-  } else h.style.opacity = '0';
+  if (t < 3.4) h.style.opacity = String(Math.min(PP(t, 0.2, 0.5, easeOutO), 1 - PP(t, 3.1, 0.3, easeIO)));
+  else h.style.opacity = '0';
   const pr = $('promise');
-  if (t >= 1.6 && t < 3.4) {
-    pr.style.opacity = String(Math.min(P(t, 1.6, 0.4), 1 - P(t, 3.1, 0.3)));
-  } else pr.style.opacity = '0';
+  if (t >= 1.6 && t < 3.4) pr.style.opacity = String(Math.min(PP(t, 1.6, 0.4), 1 - PP(t, 3.1, 0.3)));
+  else pr.style.opacity = '0';
 
-  // symmetry hairlines during align
   const sym = $('sym');
-  if (t >= 10.2 && t < 13.8) {
-    sym.style.opacity = String(Math.min(P(t, 10.2, 0.5, easeOut), 1 - P(t, 13.5, 0.3)));
-  } else sym.style.opacity = '0';
+  if (t >= 10.2 && t < 13.8) sym.style.opacity = String(Math.min(PP(t, 10.2, 0.5, easeOutO), 1 - PP(t, 13.5, 0.3)));
+  else sym.style.opacity = '0';
 
   const rc_ = $('rulecard');
   if (t >= 14.0 && t < 17.0) {
-    rc_.style.opacity = String(Math.min(P(t, 14.0, 0.4), 1 - P(t, 16.7, 0.3)));
-    $('savecta').style.opacity = String(P(t, 15.3, 0.4));
+    rc_.style.opacity = String(Math.min(PP(t, 14.0, 0.4), 1 - PP(t, 16.7, 0.3)));
+    $('savecta').style.opacity = String(PP(t, 15.3, 0.4));
   } else rc_.style.opacity = '0';
 
   const end = $('end');
   if (t >= 17.0) {
-    end.style.opacity = String(P(t, 17.0, 0.35));
-    $('endsub').style.opacity = String(P(t, 17.7, 0.4));
+    end.style.opacity = String(PP(t, 17.0, 0.35));
+    $('endsub').style.opacity = String(PP(t, 17.7, 0.4));
   } else end.style.opacity = '0';
+  await compositorCommit();
 };
 window.seek(0);
 </script>
