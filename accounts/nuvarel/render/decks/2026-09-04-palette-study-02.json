@@ -1,0 +1,52 @@
+{
+  "slug": "2026-09-04-palette-study-02",
+  "series": "Palette Study · No. 02",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "Chocolate is the colour of 2026.",
+      "dek": "The shade designers name most this year, broken into a four hex scheme."
+    },
+    {
+      "role": "swatch",
+      "hex": "#F1E8DA",
+      "name": "Warm Ivory",
+      "role_line": "Walls · The 60",
+      "body": "Every wall and the ceiling. Chocolate needs a light room around it, and ivory keeps the scheme from tipping into a cave."
+    },
+    {
+      "role": "swatch",
+      "hex": "#3E2C22",
+      "name": "Bitter Chocolate",
+      "role_line": "Large pieces · The 30",
+      "body": "The sofa, an armchair, the rug field. Deep brown reads richer than black and warmer than grey, and it forgives wear like nothing else."
+    },
+    {
+      "role": "swatch",
+      "hex": "#B08150",
+      "name": "Toffee",
+      "role_line": "Wood and leather",
+      "body": "Coffee table, chair frames, a leather strap or two. The bridge tone that keeps ivory and chocolate from splitting the room in half."
+    },
+    {
+      "role": "swatch",
+      "hex": "#6B6A47",
+      "name": "Dried Olive",
+      "role_line": "Accents · The 10",
+      "body": "One throw, a vase, the spines on a shelf. Muted green is the year's other favourite, and it keeps this much brown from feeling airless."
+    },
+    {
+      "role": "principle",
+      "klabel": "The rule",
+      "h": "Dark sits low.",
+      "body": [
+        "Keep chocolate at furniture height and below, with light walls rising above it. Rooms hold weight the way a landscape holds a horizon.",
+        "One thing to keep out: cool grey. Next to this much warmth it reads like a leftover from 2018."
+      ]
+    },
+    {
+      "role": "closer",
+      "h": "Save this for the sofa decision."
+    }
+  ]
+}

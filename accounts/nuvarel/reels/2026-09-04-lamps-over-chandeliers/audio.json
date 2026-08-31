@@ -1,0 +1,13 @@
+{
+  "_license": "BGM: Piano Reflections (Ahjay Stelino), Mixkit Stock Music Free License, logged in assets/audio/ATTRIBUTION.md; raw mp3 is local-only (gitignored). SFX all Mixkit Free License, same ledger. Beats match reel.html window.BEATS (19.5s). Calm mix per nuvarel tone ruling; music mandatory per daily-build prompt.",
+  "tracks": [
+    {"file": "assets/audio/bgm/piano-reflections.mp3", "at": 0.0, "gain_db": -17, "trim": [0, 19.5], "fade_in": 0.8, "fade_out": 1.6},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 0.30, "gain_db": -10},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 3.85, "gain_db": -6},
+    {"file": "assets/audio/sfx/paper-slide.mp3", "at": 7.45, "gain_db": -12},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 8.20, "gain_db": -7},
+    {"file": "assets/audio/sfx/paper-slide.mp3", "at": 11.65, "gain_db": -12},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 12.35, "gain_db": -7},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 17.40, "gain_db": -10}
+  ]
+}

@@ -17,3 +17,6 @@ backlog/no-rerun rule but no ledger file existed yet.)
 | 2026-09-01 | art-height (REEL, 2D Curator) | the-rule | art hanging height (145 cm to centre) |
 | 2026-09-02 | rich-rooms-buy-two (REEL, 2D Curator) | the-rule | symmetry / buying in pairs (two lamps) |
 | 2026-09-03 | one-big-thing (REEL, 2D Curator) | the-rule | one large piece beats many small frames |
+| 2026-09-04 | palette-study-02 | palette-study | "Chocolate" palette (Warm Ivory / Bitter Chocolate / Toffee / Dried Olive); chocolate brown as 2026's top designer colour; dark-sits-low rule |
+| 2026-09-04 | texture-reads-expensive | reads-expensive | why texture reads expensive when colour stays quiet; matte vs gloss; three-textures-to-one-colour |
+| 2026-09-04 | lamps-over-chandeliers (REEL, 2D Curator) | splurge-skip | lighting: lamps at eye level over a single overhead source |
