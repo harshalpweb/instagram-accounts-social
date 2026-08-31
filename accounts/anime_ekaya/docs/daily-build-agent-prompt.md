@@ -60,6 +60,18 @@ show can headline again after 21 days; a mood can repeat after 30 days;
 a take never repeats (sequels only). Skip any candidate that violates
 these.
 
+**Scene/prop rule (Reels, added 2026-08-31 after a real near-duplicate
+on a sibling account):** the EKAYA mascot + Midnight Channel backdrop is
+a fixed rendered environment, so two Reels can carry different lists and
+still look identical at thumbnail scale. Before building the Reel, look
+at the last **14 days'** Reel QA frames
+(`accounts/anime_ekaya/reels/<id>/qa/` where present): the same
+backdrop/scene-set + hero-prop combination (e.g. "mascot + TV set +
+remote") must not recur within 14 days. Vary the composition (different
+device/prop, different staging) even when the mascot and brand tokens
+stay constant; when in doubt, compare your hook frame against theirs at
+~350px.
+
 ### Step 3 — fallback
 
 If the trend search yields nothing usable, fall back to the evergreen
@@ -146,7 +158,11 @@ top-of-hour still lands in the target window.
 
 Append one row per queued post to
 `accounts/anime_ekaya/content/used-topics.md` (existing table format:
-date, post, format, mood/topic, shows featured).
+date, post, format, mood/topic, shows featured). The format cell MUST
+start with the exact `type` value from the queue JSON, verbatim
+(parenthetical notes after it are fine) — a ledger filed under one
+vocabulary while the queue uses another produced a real
+anti-repetition false clear on a sibling account (2026-08-31).
 
 ### Step 9 — commit (shared-repo git safety, non-negotiable)
 
