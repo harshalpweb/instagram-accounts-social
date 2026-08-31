@@ -31,9 +31,14 @@ resolutions, "seen" messages, salary day
 | 2026-08-31 | 2026-08-31-morning-routine-judged | NEW: judged-routine (REEL, 3D character) | 5AM morning routines | dog, pigeon, owl, raccoon, cat |
 | 2026-09-01 | 2026-09-01-one-more-episode | NEW: pov-night (REEL, 3D character) | bingeing / one more episode | owl, goldfish, cat |
 | 2026-09-02 | 2026-09-02-meeting-email | F5 breaking news (REEL, 3D character) | work meetings | dog, owl, raccoon, cat |
+| 2026-09-04 | 2026-09-04-animal-panel-ep02 | F1 panel (EP 02) | red flags | dog, pigeon, owl, goldfish, cat |
+| 2026-09-04 | 2026-09-04-drop-day-reviews | F2 one-star-files | drop day / limited-edition queues (trend) | dog, pigeon, raccoon, sloth, cat |
+| 2026-09-04 | 2026-09-04-pre-coffee-alert | pov-morning (REEL, 2D stickman) | talking before coffee (trend: Eeffoc) | dog, owl, cat |
 
 ## Queued promises to keep
-- Panel closer of EP 01 says "EP 02 drops tomorrow" — queue Panel EP 02
-  for 2026-08-31 (topic suggestion: "What's your red flag?" or "Money
-  advice").
+- EP 01's "EP 02 drops tomorrow" promise: fulfilled by
+  2026-09-04-animal-panel-ep02 (late vs. the on-air "tomorrow"; EP 02's
+  own closer says only "EP 03 is loading", no hard date promised).
+  Queue Panel EP 03 within a few days (topic suggestion: "Money advice"
+  or "What would you ban?").
 - Reviews closer says "new reviews daily" — keep F2 in rotation.

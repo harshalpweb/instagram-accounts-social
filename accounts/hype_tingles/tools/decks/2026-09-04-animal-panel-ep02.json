@@ -1,0 +1,54 @@
+{
+  "slug": "2026-09-04-animal-panel-ep02",
+  "episode": "THE PANEL · EP 02",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "WELCOME TO HYPE TINGLE",
+      "h": "WE ASKED ANIMALS: WHAT'S YOUR [[RED FLAG]]?",
+      "tease": "**Five confessions.** The cat's is the last slide. It is not sorry."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐕",
+      "name": "The Dog",
+      "quote": "I trust everyone instantly. Even the vacuum. We're good now.",
+      "sub": "Zero filters. Zero regrets. One bite incident (the vacuum started it)."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐦",
+      "name": "The Pigeon",
+      "quote": "I walk into traffic like I own the road. Because I do.",
+      "sub": "Confidence: unearned. Survival rate: somehow 100%."
+    },
+    {
+      "role": "speaker",
+      "animal": "🦉",
+      "name": "The Owl",
+      "quote": "I start every sentence with 'well, technically.'",
+      "sub": "Sources cited: none. Confidence: tenured."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐠",
+      "name": "The Goldfish",
+      "quote": "I forget the argument mid... wait. Were we fighting?",
+      "sub": "Nine seconds of memory. Zero grudges. Undefeated."
+    },
+    {
+      "role": "speaker",
+      "payoff": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "quote": "I don't have red flags. I am the flag.",
+      "sub": "The cat has spoken."
+    },
+    {
+      "role": "closer",
+      "h": "EP 03 IS [[LOADING]].",
+      "body": "Follow before the pigeon walks into your feed unsupervised.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}

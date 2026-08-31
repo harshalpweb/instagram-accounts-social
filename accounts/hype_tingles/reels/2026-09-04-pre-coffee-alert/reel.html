@@ -1,0 +1,346 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* hype_tingles "pre-coffee alert" -- 2D stickman POV meme cut (~14.6s).
+   Trend source: the Eeffoc / no-talking-before-coffee wave (Aug 2026).
+   Principle map: ANTICIPATION = coworker pre-leap crouch (2.45-2.60) +
+   mug-lift dip windup (8.30-8.55); SQUASH&STRETCH = coworker landing
+   (3.00), sip compress (10.40), power-up hop landing (11.35), all
+   10-16% with fast recovery; COMEDIC HOLDS = record-scratch freeze
+   mid-step (3.45-5.20, one slow blink at 4.60 inside it), the slow
+   dead-eye camera turn (5.20-5.90), cat-verdict hold (12.10-13.30). */
+@font-face { font-family:'Archivo Black'; src:url('../../brand/fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
+
+:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; --panel:#1B1922; --line:#2A2733; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--ink); color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
+body::before { content:""; position:absolute; width:1100px; height:1100px; left:-480px; top:-480px;
+  background:radial-gradient(circle, rgba(216,255,58,0.10) 0%, rgba(216,255,58,0) 62%); pointer-events:none; z-index:0; }
+
+#cam { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+#flash { position:absolute; inset:0; z-index:4; background:var(--volt); opacity:0; pointer-events:none; }
+#ui { position:absolute; inset:0; z-index:5; }
+.snap { visibility:hidden; will-change:transform; }
+
+/* POV title (top overlay) */
+#povtitle { position:absolute; top:150px; left:60px; right:60px; transform-origin:50% 50%; }
+#povtitle .tag { display:inline-block; background:var(--volt); color:var(--ink); font-family:'Archivo Black';
+  font-size:40px; padding:10px 26px; border-radius:12px; letter-spacing:.04em; }
+#povtitle .txt { margin-top:18px; background:var(--panel); border:5px solid var(--line); border-radius:22px;
+  padding:28px 34px; font-family:'Archivo Black'; font-size:56px; line-height:1.14; color:var(--paper);
+  text-shadow:0 5px 0 rgba(0,0,0,.4); }
+#povtitle .txt .hl { color:var(--pink); }
+
+/* chirpy-coworker speech bubble (pink, tail-less, sits above them) */
+#chirp { position:absolute; left:90px; top:560px; width:520px; background:var(--pink); color:var(--ink);
+  border-radius:26px; padding:26px 32px; font-weight:700; font-size:42px; line-height:1.2;
+  transform-origin:20% 100%; box-shadow:0 10px 0 rgba(0,0,0,.4); }
+
+.stamp { position:absolute; left:110px; right:110px; background:var(--panel); border:6px solid var(--volt);
+  border-radius:30px; padding:34px 40px; transform-origin:50% 50%; box-shadow:0 14px 0 rgba(0,0,0,.4); }
+.stamp .who { display:flex; align-items:center; gap:24px; }
+.stamp .em { font-size:78px; line-height:1; font-family:'Segoe UI Emoji'; }
+.stamp .name { font-family:'Archivo Black'; font-size:36px; letter-spacing:.05em; color:var(--volt); }
+.stamp .line { font-weight:700; font-size:48px; line-height:1.16; margin-top:18px; }
+.stamp .line .accent { color:var(--pink); }
+#stampDog { top:620px; border-color:var(--volt); }
+#stampOwl { top:620px; border-color:var(--pink); }
+
+#catCard { position:absolute; left:90px; right:90px; top:460px; background:var(--panel); border:3px solid var(--line);
+  border-radius:36px; padding:60px 56px; transform-origin:50% 0%; }
+#catCard .who { display:flex; align-items:center; gap:30px; }
+#catCard .em { font-size:104px; line-height:1; font-family:'Segoe UI Emoji'; }
+#catCard .name { font-family:'Archivo Black'; font-size:42px; color:var(--volt); letter-spacing:.05em; }
+#catCard .role { font-size:27px; color:var(--soft); font-weight:500; letter-spacing:.14em; text-transform:uppercase; margin-top:8px; }
+#catCard .line { font-weight:700; font-size:56px; line-height:1.22; margin-top:44px; }
+#catCard .line .accent { color:var(--pink); }
+
+#endcard { position:absolute; inset:0; background:var(--ink); z-index:8; visibility:hidden; }
+#endcard .wm { font-family:'Archivo Black'; font-size:92px; color:var(--volt); text-align:center; margin-top:600px; }
+#endcard .wm .tingle { color:var(--pink); }
+#endcard .tag2 { text-align:center; font-weight:700; font-size:46px; color:var(--paper); margin-top:56px; }
+#endcard svg { position:absolute; left:0; bottom:0; width:1080px; height:600px; inset:auto; }
+</style></head><body>
+
+<div id="cam">
+  <svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+</div>
+<div id="flash"></div>
+
+<div id="ui">
+  <div id="povtitle" class="snap"><span class="tag">POV</span>
+    <div class="txt">Someone talks to you <span class="hl">before your coffee.</span></div></div>
+
+  <div id="chirp" class="snap">MORNING!! I ran 5K. Did you sleep well??</div>
+
+  <div id="stampDog" class="stamp snap">
+    <div class="who"><div class="em">&#128021;</div><div class="name">DOG</div></div>
+    <div class="line">He said good morning!! <span class="accent">Best day ever!!</span></div>
+  </div>
+  <div id="stampOwl" class="stamp snap">
+    <div class="who"><div class="em">&#129417;</div><div class="name">OWL</div></div>
+    <div class="line">Technically, talking before caffeine <span class="accent">is a crime.</span></div>
+  </div>
+
+  <div id="catCard" class="snap">
+    <div class="who"><div class="em">&#128008;</div><div><div class="name">CAT</div><div class="role">Final verdict</div></div></div>
+    <div class="line">Now you may speak. <span class="accent">Keep it brief.</span></div>
+  </div>
+
+  <div id="endcard">
+    <div class="wm">HYPE<span class="tingle"> TINGLES</span></div>
+    <div class="tag2">The cat has spoken.</div>
+    <svg id="endsvg" viewBox="0 0 1080 600"></svg>
+  </div>
+</div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+/* ============================ beat table ============================ */
+const B = {
+  title: 0.15,
+  shuffle: [0.30, 3.40],        // zombie shuffle toward the machine
+  chirpCrouch: [2.45, 2.60],    // ANTICIPATION: coworker crouch at frame-left
+  chirpLeap: [2.60, 3.00],      // leap arc in
+  chirpLand: 3.00,              // SQUASH on landing
+  chirpText: 3.35,
+  freeze: [3.45, 5.20],         // COMEDIC HOLD #1: dead stop mid-step
+  blink: 4.60,                  // one slow blink inside the hold
+  dogStamp: 5.40,
+  camTurn: [5.20, 5.90],        // slow dead-eye turn to camera
+  resume: [5.90, 7.90],         // shuffle resumes to the machine
+  owlStamp: 7.30,
+  mugWindup: [8.30, 8.55],      // ANTICIPATION: dip before the button press
+  press: 8.60,                  // button press -> brew
+  pour: [8.60, 10.20],
+  sipUp: [10.20, 10.40],        // mug travels to the face
+  sip: 10.40,                   // SQUASH on sip
+  powerUp: 10.90,               // posture snap + volt flash
+  hop: 11.15,                   // tiny joy hop, landing squash 11.35
+  catCard: 11.75,
+  hold: [12.10, 13.30],         // COMEDIC HOLD: verdict sits
+  endcard: 13.50,
+  end: 14.60
+};
+window.BEATS = B;
+window.REEL = { duration: B.end, fps: 30 };
+
+const stage = document.getElementById("stage");
+const C = { paper:"#F4F2EC", soft:"#9A96A3", volt:"#D8FF3A", pink:"#FF4D9D", panel:"#1B1922", line:"#2A2733" };
+
+/* ============================ scenery ============================ */
+const bgflip = makeFlipRect(stage);
+const sceneG = el(stage, "g", {});
+
+// floor
+el(sceneG, "rect", { x:0, y:1500, width:1080, height:420, fill:"#161419" });
+el(sceneG, "line", { x1:0, y1:1500, x2:1080, y2:1500, stroke:C.line, "stroke-width":6 });
+
+// coffee machine: chunky body + dark dispensing bay + mug + power light.
+// (distinct silhouette on purpose -- known-pitfalls: no bare panel-shaped
+// rectangles that could read as an unpopulated UI card)
+el(sceneG, "rect", { x:790, y:1140, width:230, height:270, rx:20, fill:C.panel, stroke:C.paper, "stroke-width":9 });
+el(sceneG, "rect", { x:790, y:1140, width:230, height:54, rx:20, fill:"#26232F", stroke:C.paper, "stroke-width":9 }); // top hopper band
+const pwr = el(sceneG, "circle", { cx:985, cy:1230, r:11, fill:C.pink });
+const btn = el(sceneG, "rect", { x:820, y:1214, width:60, height:32, rx:9, fill:C.paper });
+el(sceneG, "rect", { x:830, y:1268, width:150, height:142, rx:12, fill:"#0B0A0E" }); // bay
+el(sceneG, "rect", { x:885, y:1268, width:36, height:20, fill:C.paper }); // nozzle
+const bayMugG = el(sceneG, "g", {});
+el(bayMugG, "rect", { x:865, y:1352, width:78, height:54, rx:9, fill:"#0B0A0E", stroke:C.paper, "stroke-width":7 });
+el(bayMugG, "path", { d:"M 943 1362 q 26 4 20 22 q -5 14 -20 12", fill:"none", stroke:C.paper, "stroke-width":7 });
+const fillRect = el(bayMugG, "rect", { x:872, y:1400, width:64, height:0, fill:C.volt });
+const stream = el(sceneG, "line", { x1:903, y1:1288, x2:903, y2:1350, stroke:C.volt, "stroke-width":11, "stroke-linecap":"round", display:"none" });
+// machine legs on floor line
+el(sceneG, "line", { x1:815, y1:1410, x2:815, y2:1500, stroke:C.paper, "stroke-width":10 });
+el(sceneG, "line", { x1:995, y1:1410, x2:995, y2:1500, stroke:C.paper, "stroke-width":10 });
+
+// steam after the sip (two wavy strokes above wherever the held mug is)
+const steamG = el(sceneG, "g", { stroke:C.soft, "stroke-width":7, fill:"none", "stroke-linecap":"round", display:"none" });
+const steam1 = el(steamG, "path", {});
+const steam2 = el(steamG, "path", {});
+
+const man = makeStick(sceneG, {});                    // pre-coffee protagonist
+const pal = makeStick(sceneG, { tuft: "#FF4D9D" });   // chirpy morning person
+// held mug (appears when the bay mug "travels" to the face)
+const heldG = el(sceneG, "g", { display:"none" });
+el(heldG, "rect", { x:-39, y:-27, width:78, height:54, rx:9, fill:"#0B0A0E", stroke:C.paper, "stroke-width":7 });
+el(heldG, "path", { d:"M 39 -17 q 26 4 20 22 q -5 14 -20 12", fill:"none", stroke:C.paper, "stroke-width":7 });
+
+// endcard mini: mug with volt steam
+const endsvg = document.getElementById("endsvg");
+el(endsvg, "rect", { x:470, y:400, width:140, height:100, rx:16, fill:C.panel, stroke:C.paper, "stroke-width":8 });
+el(endsvg, "path", { d:"M 610 420 q 46 8 36 44 q -8 28 -40 24", fill:"none", stroke:C.paper, "stroke-width":8 });
+const endSteam = el(endsvg, "g", { stroke:C.volt, "stroke-width":8, fill:"none", "stroke-linecap":"round" });
+el(endSteam, "path", { d:"M 510 380 q -14 -30 6 -56 q 16 -22 4 -48" });
+el(endSteam, "path", { d:"M 560 386 q 14 -28 -4 -54 q -14 -22 -2 -46" });
+
+/* ============================ ui handles ============================ */
+const ui = { title:document.getElementById("povtitle"), chirp:document.getElementById("chirp"),
+  dog:document.getElementById("stampDog"), owl:document.getElementById("stampOwl"),
+  cat:document.getElementById("catCard"), endcard:document.getElementById("endcard"),
+  flash:document.getElementById("flash") };
+
+/* ============================ protagonist ============================ */
+const GROUND = 1292;               // hip y when standing on the floor
+const SLUMP = { torso:158, headTilt:-22, laU:16, laL:6, raU:-16, raL:-6, eyes:"dead", face:1 };
+function shuffleTx(t) {
+  // distance covered across the two shuffle windows
+  const w1 = ramp(t, B.shuffle[0], B.shuffle[1]);
+  const w2 = ramp(t, B.resume[0], B.resume[1]);
+  return 160 + w1 * 380 + w2 * 80;   // 160 -> 540 -> 620
+}
+function manLogic(t) {
+  let p;
+  const inFreeze = t >= B.freeze[0] && t < B.resume[0];
+  if (t < B.freeze[0] || (t >= B.resume[0] && t < B.mugWindup[0])) {
+    // zombie shuffle: slow stride, heavy slump, dead eyes, tiny bob
+    const ph = (t * 0.9) % 1;
+    p = walkPose(ph);
+    Object.assign(p, SLUMP);
+    p.tx = shuffleTx(t); p.ty = GROUND + Math.abs(Math.sin(t * 0.9 * TAU)) * -4;
+    // arrive: settle to a slumped stand
+    if (t >= B.resume[1] - 0.15) { const k = ramp(t, B.resume[1] - 0.15, B.resume[1]);
+      p = mixPose(p, { ...P.stand, ...SLUMP, tx:620, ty:GROUND }, k); }
+  } else if (inFreeze) {
+    // COMEDIC HOLD: stone mid-step. One slow blink at B.blink.
+    p = { torso:158, headTilt:-22, laU:26, laL:14, raU:-30, raL:-16,
+          llU:30, llL:8, rlU:-26, rlL:-16, eyes:"dead", face:1, tx:540, ty:GROUND };
+    if (t >= B.blink - 0.08 && t <= B.blink + 0.12) p.eyes = "closed";
+    // slow dead-eye turn to camera (5.20-5.90 overlaps freeze exit)
+    if (t >= B.camTurn[0]) { const k = easeInOutQuad(ramp(t, B.camTurn[0], B.camTurn[1])); p.face = lerp(1, 0, k); }
+  } else if (t < B.press) {
+    // ANTICIPATION: dip + arm hauled back before the button press
+    const k = easeInOutQuad(ramp(t, B.mugWindup[0], B.mugWindup[1]));
+    p = { ...P.stand, ...SLUMP, tx:620, ty:GROUND + 14*k, torso:158 - 6*k,
+      raU: lerp(-16, -60, k), raL: lerp(-6, -80, k),
+      sy: 1 - 0.05*k, sx: 1 + 0.03*k, px:0, py:210 };
+  } else if (t < B.sipUp[0]) {
+    // press SNAP: arm shoots right onto the button, then slump-wait
+    const k = easeOutCubic(ramp(t, B.press, B.press + 0.14));
+    const rel = easeInOutQuad(ramp(t, B.press + 0.5, B.press + 0.9)); // arm back down
+    const sag = ramp(t, B.press + 0.4, B.pour[1]);
+    p = { ...P.stand, ...SLUMP, tx:620, ty:GROUND,
+      raU: lerp(lerp(-60, 96, k), -16, rel), raL: lerp(lerp(-80, 88, k), -6, rel),
+      torso: 158 - 5*sag, headTilt: -22 - 6*sag };
+    const sq = punch(t, B.press, 0.06, 16);
+    p.sy = 1 - sq; p.sx = 1 + sq*0.6; p.px = 0; p.py = 210;
+  } else if (t < B.powerUp) {
+    // mug to face + SIP squash
+    const k = easeOutCubic(ramp(t, B.sipUp[0], B.sipUp[1]));
+    p = { ...P.stand, ...SLUMP, tx:620, ty:GROUND,
+      laU: lerp(16, 120, k), laL: lerp(6, 150, k), raU:-16, raL:-6 };
+    const sq = punch(t, B.sip, 0.13, 13);
+    p.sy = 1 - sq; p.sx = 1 + sq*0.7; p.px = 0; p.py = 210;
+    if (t >= B.sip) p.eyes = "closed";
+  } else {
+    // POWER-UP: snap upright, eyes open, joy hop with landing squash
+    const k = easeOutBack(ramp(t, B.powerUp, B.powerUp + 0.22));
+    p = { ...P.stand, tx:620, ty:GROUND, face:1,
+      torso: lerp(146, 184, k), headTilt: lerp(-38, 6, k),
+      laU: lerp(120, 205, k), laL: lerp(150, 215, k),   // mug arm thrown up
+      raU: lerp(-16, -160, k), raL: lerp(-6, -170, k),
+      eyes: t < B.powerUp + 0.3 ? "wide" : "open" };
+    if (t >= B.hop) {
+      const hk = ramp(t, B.hop, B.hop + 0.4);
+      p.ty = GROUND - Math.sin(clamp(hk,0,1) * Math.PI) * 70;
+      const land = punch(t, B.hop + 0.4, 0.14, 14);
+      p.sy = 1 - land; p.sx = 1 + land*0.7; p.px = 0; p.py = 210;
+    }
+  }
+  poseStick(man, p);
+  return p;
+}
+
+/* ============================ coworker ============================ */
+function palLogic(t) {
+  if (t < B.chirpCrouch[0]) { pal.g.setAttribute("display", "none"); return; }
+  pal.g.setAttribute("display", "");
+  let p;
+  if (t < B.chirpLeap[0]) {
+    // ANTICIPATION: crouch at frame-left before the leap
+    const k = easeInOutQuad(ramp(t, B.chirpCrouch[0], B.chirpCrouch[1]));
+    p = { ...P.landCrouch, tx:60, ty:GROUND + 30*k, face:1, eyes:"wide",
+      sy: 1 - 0.10*k, sx: 1 + 0.06*k, px:0, py:210 };
+  } else if (t < B.chirpLand) {
+    // leap arc in
+    const k = ramp(t, B.chirpLeap[0], B.chirpLeap[1]);
+    p = { ...P.apex, tx: lerp(60, 300, k), ty: GROUND - Math.sin(k * Math.PI) * 210, face:1 };
+  } else {
+    // relentless happy bounce (the contrast joke: it never stops)
+    p = { ...P.stand, tx:300, ty:GROUND, face:1, eyes:"open",
+      laU: 160, laL: 175, raU: -20, raL: -10, torso: 186 };
+    const land = punch(t, B.chirpLand, 0.16, 12);
+    const bt = Math.max(0, t - B.chirpLand - 0.3);
+    p.ty = GROUND - Math.abs(Math.sin(bt * 3.4)) * 26;
+    const bsq = Math.max(0, -Math.sin(bt * 3.4 + 0.35)) * 0.05;
+    p.sy = 1 - land - bsq; p.sx = 1 + (land + bsq) * 0.7; p.px = 0; p.py = 210;
+    // waving arm pumps
+    p.laU = 160 + Math.sin(bt * 6.8) * 14; p.laL = 175 + Math.sin(bt * 6.8 + 0.5) * 12;
+  }
+  poseStick(pal, p);
+}
+
+/* ============================ machine + props ============================ */
+function propLogic(t, manPose) {
+  const brewing = t >= B.press && t < B.pour[1];
+  pwr.setAttribute("fill", brewing ? C.volt : (t >= B.pour[1] ? C.soft : C.pink));
+  btn.setAttribute("y", t >= B.press && t < B.press + 0.25 ? 1220 : 1214);
+  stream.setAttribute("display", brewing ? "" : "none");
+  const fk = ramp(t, B.pour[0], B.pour[1]);
+  const fh = 40 * fk;
+  fillRect.setAttribute("y", 1400 - fh); fillRect.setAttribute("height", fh);
+  const sipping = t >= B.sipUp[0] && t < B.powerUp;   // mug is gone at the flash
+  bayMugG.setAttribute("display", t < B.sipUp[0] ? "" : "none");
+  heldG.setAttribute("display", sipping ? "" : "none");
+  if (sipping) {
+    const k = easeOutCubic(ramp(t, B.sipUp[0], B.sipUp[1]));
+    heldG.setAttribute("transform", `translate(${lerp(904, 748, k).toFixed(1)},${lerp(1379, 1088, k).toFixed(1)}) rotate(${(k * -24).toFixed(1)})`);
+  }
+  const steaming = t >= B.pour[1] - 0.3 && t < B.powerUp;
+  steamG.setAttribute("display", steaming ? "" : "none");
+  if (steaming) {
+    const base = t < B.sipUp[0] ? [904, 1330] : [748, 1050];
+    const wob = Math.sin(t * 5) * 6;
+    steam1.setAttribute("d", `M ${base[0]-16+wob} ${base[1]} q -12 -26 4 -48 q 12 -20 2 -40`);
+    steam2.setAttribute("d", `M ${base[0]+16-wob} ${base[1]} q 12 -24 -4 -46 q -10 -20 -2 -38`);
+  }
+}
+
+/* ============================ camera + flash ============================ */
+const PUNCHES = [[B.chirpLand, 0.05, 10], [B.sip, 0.04, 10], [B.powerUp, 0.08, 9], [B.catCard, 0.05, 9]];
+const SHAKES = [[B.chirpLand, 5, 46, 0.4], [B.powerUp, 7, 52, 1.0]];
+const cam = document.getElementById("cam");
+function doCam(t) {
+  let s = 1;
+  for (const [t0, a, d] of PUNCHES) s += punch(t, t0, a, d);
+  let x = 0, y = 0;
+  for (const [t0, a, f, ph] of SHAKES) { x += shake(t, t0, a, 6.5, f, ph); y += shake(t, t0, a*0.8, 6.5, f*1.13, ph+0.7); }
+  cam.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) scale(${s.toFixed(4)})`;
+  cam.style.transformOrigin = "540px 1200px";
+}
+
+/* ============================ master seek ============================ */
+window.seek = async (t) => {
+  t = clamp(t, 0, B.end);
+  stalePaintGuard(t, bgflip, document.getElementById("ui"));
+  const endOn = t >= B.endcard;
+  ui.endcard.style.visibility = endOn ? "visible" : "hidden";
+  sceneG.style.visibility = endOn ? "hidden" : "visible";
+  if (!endOn) { const mp = manLogic(t); palLogic(t); propLogic(t, mp); }
+  doCam(endOn ? 0 : t);
+  ui.flash.style.opacity = endOn ? 0 : punch(t, B.powerUp, 0.85, 16).toFixed(3);
+
+  // overlays
+  snapIn(ui.title, t, B.title, 0.15, 0); if (t >= B.press) ui.title.style.visibility = "hidden";
+  if (t >= B.chirpText && t < B.dogStamp) snapIn(ui.chirp, t, B.chirpText, 0.12, -3); else ui.chirp.style.visibility = "hidden";
+  if (t >= B.dogStamp && t < B.owlStamp) snapIn(ui.dog, t, B.dogStamp, 0.13, -4); else ui.dog.style.visibility = "hidden";
+  if (t >= B.owlStamp && t < B.catCard) snapIn(ui.owl, t, B.owlStamp, 0.13, 4); else ui.owl.style.visibility = "hidden";
+  if (t >= B.catCard && t < B.endcard) snapIn(ui.cat, t, B.catCard, 0.16, 0); else ui.cat.style.visibility = "hidden";
+  await compositorCommit();
+};
+window.seek(0);
+</script></body></html>

@@ -1,0 +1,64 @@
+{
+  "slug": "2026-09-04-drop-day-reviews",
+  "episode": "ONE-STAR FILES",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "WELCOME TO HYPE TINGLE",
+      "h": "ANIMALS REVIEWED [[DROP DAY]]. HUMANS CAMPED OUTSIDE FOR A {{WATCH}}.",
+      "tease": "**The dog gave the queue 5 stars.** The cat's review closes the case."
+    },
+    {
+      "role": "review",
+      "animal": "🐕",
+      "name": "The Dog",
+      "meta": "Verified queue member",
+      "stars": 5,
+      "title": "BEST QUEUE EVER",
+      "body": "Waited nine hours with 400 strangers. Made 400 friends. Forgot what we were buying."
+    },
+    {
+      "role": "review",
+      "animal": "🐦",
+      "name": "The Pigeon",
+      "meta": "Standing-around professional",
+      "stars": 5,
+      "title": "Excellent standing around",
+      "body": "I do this on a ledge every day for free. Humans finally get it. Proud of you all."
+    },
+    {
+      "role": "review",
+      "animal": "🦝",
+      "name": "The Raccoon",
+      "meta": "Verified reseller",
+      "stars": 5,
+      "title": "Incredible business model",
+      "body": "Bought two. Sold one at triple price to the guy behind me. He was also in the queue. He knows what he did."
+    },
+    {
+      "role": "review",
+      "animal": "🦥",
+      "name": "The Sloth",
+      "meta": "Still en route",
+      "stars": 3,
+      "title": "Review pending",
+      "body": "Left home when the drop was announced. Arrived at the restock. Will finish this review by the next one."
+    },
+    {
+      "role": "review",
+      "payoff": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "meta": "Verified unimpressed",
+      "stars": 1,
+      "title": "It tells the time",
+      "body": "Your phone tells the time. You slept on concrete. One star, and the star is for the concrete."
+    },
+    {
+      "role": "closer",
+      "h": "NEW REVIEWS [[DAILY]].",
+      "body": "Tag the friend who camps every drop.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}
