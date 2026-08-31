@@ -1,0 +1,43 @@
+{
+  "slug": "2026-09-04-fall-radar-01",
+  "kicker": "Season Radar · Fall 2026",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "Summer is ending. The [[sequels]] are lining up.",
+      "dek": "Fall 2026 premiere dates are locking in. Five worth blocking off on your calendar, starting three weeks from now."
+    },
+    {
+      "role": "rank",
+      "h": "Dates already confirmed",
+      "items": [
+        {"n": "01", "title": "JoJo's Bizarre Adventure: Steel Ball Run", "note": "Sep 25. The part fans swore could never be animated."},
+        {"n": "02", "title": "The Apothecary Diaries S3", "note": "Oct 2. Maomao returns to the palace intrigue."},
+        {"n": "03", "title": "Blue Box Season 2", "note": "Oct 4. The gym romance keeps its slow burn."},
+        {"n": "04", "title": "Aoashi Season 2", "note": "Oct 4. Football tactics as character study."}
+      ]
+    },
+    {
+      "role": "rank",
+      "h": "October, dates pending",
+      "items": [
+        {"n": "05", "title": "Black Clover 2nd Season", "note": "The long-awaited return."},
+        {"n": "06", "title": "Cyberpunk: Edgerunners 2", "note": "Trigger goes back to Night City."},
+        {"n": "07", "title": "Ranma 1/2 Season 3", "note": "The remake rolls on."},
+        {"n": "08", "title": "Magic Knight Rayearth", "note": "A 90s classic reborn."}
+      ]
+    },
+    {
+      "role": "principle",
+      "label": "Why this matters now",
+      "h": "Clear your summer backlog [[before Sep 25]].",
+      "body": ["Steel Ball Run lands first and will eat the conversation for the rest of the year. Whatever you meant to finish this season, the window is three weeks."]
+    },
+    {
+      "role": "closer",
+      "h": "Which premiere are you [[counting down]] to?",
+      "body": "Tell us your most anticipated in the comments. Save this so October cannot sneak up on you.",
+      "handle": "@anime_ekaya"
+    }
+  ]
+}

@@ -13,3 +13,6 @@ repeat. Append one line per queued post.
 | 2026-08-31 | cant-pick-at-1am (REEL, 2D EKAYA -- 2026-08-31 redo) | MOOD MATCH (acted) | 1am decision paralysis | Bocchi the Rock!, Mob Psycho 100, Mushishi |
 | 2026-09-01 | spoiler-gauntlet (REEL, 2D EKAYA -- 2026-08-31 redo) | RELATABLE-ACTION (new) | spoiler dodging / mute words tip | none (no real spoilers, fake slabs) |
 | 2026-09-02 | pick-your-door (REEL, 2D EKAYA -- 2026-08-31 redo) | GATEWAY (acted) | first-anime genre doors | Jujutsu Kaisen, Delicious in Dungeon, Skip and Loafer |
+| 2026-09-04 | fall-radar-01 | SEASONAL PREVIEW (timely; no new ANN week available, FAN VOTE deferred) | Fall 2026 premiere dates | JoJo's Bizarre Adventure: Steel Ball Run, The Apothecary Diaries S3, Blue Box S2, Aoashi S2, Black Clover 2nd Season, Cyberpunk: Edgerunners 2, Ranma 1/2 S3, Magic Knight Rayearth (+Tokyo Revengers in caption) |
+| 2026-09-04 | backlog-weekend (REEL, 2D EKAYA) | MOOD MATCH (acted) | backlog guilt / short finishable picks | Odd Taxi, A Place Further Than the Universe, Ping Pong the Animation (+Redline in caption) |
+| 2026-09-04 | hot-take-drop-it | HOT TAKE (first take used) | dropping a show at ep 3 is healthy | none (no shows named) |

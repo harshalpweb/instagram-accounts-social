@@ -1,0 +1,303 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* anime_ekaya B "backlog weekend" (21s) -- 2D stickman EKAYA on the shared
+   rig2d. Tone: energetic but not slapstick (per-account ruling) -- one
+   startle hop, posture decay, a resolve beat, no cartoon camera punches.
+   Principle map (named per the meme-worthy-character-reels skill):
+   ANTICIPATION = tower lean 3.4-5.0 telegraphs the slide; EKAYA step-back
+   lean 4.7-5.0 before the hop; resolve dip 10.8 before the rise.
+   SQUASH = slab landings 5.45 / 7.85 / 8.45 / 9.05 (slab sy pop, pivot at
+   ground) + EKAYA hop landing 5.78 (sy 0.88 about the feet, fast recovery).
+   HOLDS = wide-eye stare 5.9-7.3 (single blink 6.70); sag hold 9.4-10.6;
+   "I can fix this" hold 11.4-12.5 (blink 12.10). */
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:78px; line-height:1.1; }
+#hook .line mark { background:none; color:var(--coral); }
+#hook .sub { font-size:40px; font-weight:500; color:var(--lav); margin-top:20px; }
+
+#bubble { position:absolute; top:640px; left:80px; max-width:520px; opacity:0; background:var(--paper); color:var(--bg);
+  border-radius:26px; padding:30px 38px; font-family:'Space Grotesk'; font-weight:700; font-size:44px; line-height:1.22; z-index:12; }
+#bubble:after { content:""; position:absolute; bottom:-22px; left:80px; border:24px solid transparent; border-top-color:var(--paper); border-bottom:0; }
+
+#payoff { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:14; }
+#payoff .pre { position:absolute; top:300px; left:90px; font-size:30px; font-weight:500; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--lav); }
+#payoff h2 { position:absolute; top:360px; left:90px; right:90px; font-family:'Space Grotesk'; font-weight:700;
+  font-size:84px; line-height:1.08; }
+.pick { position:absolute; left:90px; right:90px; background:var(--panel); border:2px solid var(--hair);
+  border-radius:22px; padding:34px 40px; opacity:0; }
+.pick .mood { font-size:26px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--coral); }
+.pick .title { font-family:'Space Grotesk'; font-weight:700; font-size:50px; margin-top:10px; }
+.pick .why { font-size:28px; color:var(--muted); margin-top:8px; line-height:1.35; }
+#p1 { top:620px; } #p2 { top:880px; } #p3 { top:1140px; }
+#savecta { position:absolute; top:1430px; left:90px; opacity:0; background:var(--coral); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:40px; padding:16px 34px; border-radius:14px; }
+
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
+#endword { position:absolute; top:800px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:92px; color:var(--coral); }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:56px; color:var(--lav); display:block; margin-top:16px; }
+#endsub { position:absolute; top:1060px; left:0; right:0; text-align:center; color:var(--muted);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">what to watch</div></div>
+
+<div id="hook"><div class="line">You opened a <mark>new</mark> show.</div><div class="sub">Your backlog noticed.</div></div>
+<div id="bubble">I can fix this.</div>
+
+<div id="payoff">
+  <div class="pre">Mood match</div>
+  <h2>Shrink the stack this weekend.</h2>
+  <div class="pick" id="p1"><div class="mood">One sitting a day</div><div class="title">Odd Taxi</div><div class="why">13 episodes. A mystery that sticks the landing.</div></div>
+  <div class="pick" id="p2"><div class="mood">Feel something good</div><div class="title">A Place Further Than the Universe</div><div class="why">13 episodes. Leaves you warmer than it found you.</div></div>
+  <div class="pick" id="p3"><div class="mood">Art in motion</div><div class="title">Ping Pong the Animation</div><div class="why">11 episodes. A sports story drawn like nothing else.</div></div>
+  <div id="savecta">Save this for the weekend.</div>
+</div>
+
+<div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
+<div id="endsub">Your next anime, sorted. New picks daily.</div></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 21.0, fps: 30 };
+const B = {
+  walk: [0.4, 2.7],                 // walk in from the left, carrying the new show
+  towerLean: [3.4, 5.0],            // ANTICIPATION: top slabs lean toward EKAYA
+  stepBack: [4.7, 5.0],             // ANTICIPATION: EKAYA leans away before the hop
+  slab1: [5.05, 5.45],              // top slab slides off, lands (SQUASH 5.45)
+  hop: [5.50, 5.78],                // startle hop back, landing SQUASH 5.78
+  stare: [5.9, 7.3],                // HOLD 1: wide-eye stare, blink 6.70
+  slabs: [7.45, 8.05, 8.65],        // three more slabs drop (SQUASH at +0.40 each)
+  sag: [9.4, 10.6],                 // HOLD 2: full sag, dead eyes
+  resolveDip: [10.8, 11.0],         // ANTICIPATION: small dip before the rise
+  resolve: [11.0, 11.4],            // straighten up, fist raised
+  bubbleHold: [11.4, 12.5],         // HOLD 3: "I can fix this", blink 12.10
+  payoff: 12.7, payoffOut: 17.8
+};
+window.BEATS = B;
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+/* ---------------- stage: floor + slab tower + EKAYA ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const AC = { paper:"#F3F0FF", coral:"#FF5D73", lav:"#9D8DF1", panel:"#1C1834", hair:"#37315A", bg:"#131022" };
+const sceneG = el(stage, "g", {});
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:"#0E0C1B" });
+el(sceneG, "line", { x1:0, y1:1560, x2:1080, y2:1560, stroke:AC.hair, "stroke-width":5 });
+
+/* tower: 7 slabs stacked at the right. Slabs are chunky rounded tiles with a
+   coral spine so they read as boxed sets, not UI cards (known-pitfalls rule). */
+const SLAB_W = 330, SLAB_H = 86, SLAB_X = 780;
+const LABELS = ["3 SEASONS BEHIND","ON HOLD · EP 4","PAUSED IN 2024","THE 62-EP ONE","EP 1 ONLY","HALF A MOVIE","THE GROUP-CHAT PICK"];
+const slabs = [];
+for (let i = 0; i < 7; i++) {
+  const g = el(sceneG, "g", {});
+  el(g, "rect", { x:-SLAB_W/2, y:-SLAB_H, width:SLAB_W, height:SLAB_H, rx:12,
+    fill:AC.panel, stroke:AC.lav, "stroke-width":4 });
+  el(g, "rect", { x:-SLAB_W/2, y:-SLAB_H, width:16, height:SLAB_H, rx:6, fill:AC.coral });
+  const tx = el(g, "text", { x:-SLAB_W/2 + 38, y:-SLAB_H/2 + 9, fill:AC.muted || "#A9A3C2",
+    "font-family":"Inter", "font-size":"24", "font-weight":"500", "letter-spacing":"2" });
+  tx.textContent = LABELS[i];
+  slabs.push(g);
+}
+/* home position of slab i in the tower (bottom of slab sits on this y) */
+const homeY = i => 1560 - i * (SLAB_H + 6);
+const homeX = SLAB_X + 0;
+
+/* EKAYA + the little "new show" card prop */
+const eka = makeStick(sceneG, { stroke:AC.paper, fill:AC.bg, tuft:AC.coral });
+const cardG = el(sceneG, "g", {});
+el(cardG, "rect", { x:-62, y:-40, width:124, height:80, rx:10, fill:AC.lav, stroke:AC.paper, "stroke-width":4 });
+const cardT = el(cardG, "text", { x:-34, y:12, fill:AC.bg, "font-family":"Space Grotesk", "font-size":"30", "font-weight":"700" });
+cardT.textContent = "EP 1";
+
+const STAND_Y = 1352;               // hip height standing on the floor line
+const lerpN = lerp;
+
+/* which slab flies when: [slabIndex, tStart, tLand, landX, landY, landRot] */
+const FLY = [
+  [6, B.slab1[0], B.slab1[1], 430, 1560, -4],
+  [5, B.slabs[0], B.slabs[0]+0.40, 350, 1560, 6],
+  [4, B.slabs[1], B.slabs[1]+0.40, 445, 1560, -7],
+  [3, B.slabs[2], B.slabs[2]+0.40, 390, 1560, 3]
+];
+
+function slabPose(t) {
+  const flyIdx = new Map(FLY.map(f => [f[0], f]));
+  for (let i = 0; i < 7; i++) {
+    const g = slabs[i];
+    const f = flyIdx.get(i);
+    let x = homeX, y = homeY(i), rot = 0, sy = 1;
+    /* tower lean: top slabs shear toward EKAYA (screen-left) before the fall */
+    if (!f || t < f[1]) {
+      if (t >= B.towerLean[0] && i >= 3) {
+        const k = easeIO(ramp(t, B.towerLean[0], B.towerLean[1]));
+        const w = (i - 2) / 4;                    // higher slabs lean more
+        x -= 46 * w * k; rot = -7 * w * k;
+      }
+    } else {
+      const [ , t0, t1, lx, ly, lrot ] = f;
+      if (t < t1) {                               // in flight: arc off the stack
+        const k = easeInCubic(ramp(t, t0, t1));
+        x = lerpN(homeX - 46 * ((i - 2) / 4), lx, k);
+        y = lerpN(homeY(i), ly, k * k * 0.9 + k * 0.1) - Math.sin(k * Math.PI) * 60;
+        rot = lerpN(-7 * ((i - 2) / 4), lrot, k);
+      } else {                                    // landed: SQUASH pop, settle
+        x = lx; y = ly; rot = lrot;
+        const sq = punch(t, t1, 0.16, 14);
+        sy = 1 - sq;
+      }
+    }
+    g.setAttribute("transform", `translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${rot.toFixed(2)}) scale(1,${sy.toFixed(3)})`);
+  }
+  /* slabs that have flown leave the tower: drop the remaining stack is static */
+}
+
+function ekaPose(t) {
+  let p;
+  const sway = Math.sin(t * 1.9) * 2;
+  const walkK = ramp(t, B.walk[0], B.walk[1]);
+  const tx0 = lerpN(-90, 240, walkK);
+  let cardX = null, cardY = null, cardRot = 0;
+
+  if (t < B.walk[1]) {              // walk in, both arms forward carrying the card
+    const ph = (t * 1.9) % 1;
+    const swing = Math.sin(ph * TAU) * 22;
+    const bob = Math.abs(Math.sin(ph * TAU)) * 9;
+    p = { torso: 178 + sway * 0.5, headTilt: 4, laU: 100 + swing*0.1, laL: 52, raU: 92, raL: 46,
+          llU: 18 + swing, llL: 6 + swing*0.4, rlU: -18 - swing, rlL: -6 - swing*0.4,
+          eyes:"open", face:1, tx: tx0, ty: STAND_Y - bob };
+    cardX = tx0 + 128; cardY = STAND_Y - bob - 148; cardRot = swing * 0.15;
+  } else if (t < B.stepBack[0]) {   // stop, admire the card; head turns to tower at 3.6
+    const look = t >= 3.6 ? 1 : 0;
+    const wide = t >= 4.0;
+    p = { torso: 180 + sway, headTilt: 4 + (look ? -2 : 0), laU: 100, laL: 52, raU: 92, raL: 46,
+          llU: 8, llL: 2, rlU: -8, rlL: -2, eyes: wide ? "wide" : "open", face: 1, tx: 240, ty: STAND_Y };
+    cardX = 240 + 128; cardY = STAND_Y - 148;
+  } else if (t < B.hop[0]) {        // ANTICIPATION: lean away from the tower
+    const k = easeIO(ramp(t, B.stepBack[0], B.stepBack[1]));
+    p = { torso: 180 + 10 * k, headTilt: 2 - 4 * k, laU: 100 - 20*k, laL: 52, raU: 92 - 16*k, raL: 46,
+          llU: 8 + 12*k, llL: 2, rlU: -8 - 8*k, rlL: -2, eyes:"wide", face:1,
+          tx: 240 - 14 * k, ty: STAND_Y + 6 * k };
+    cardX = (240 - 14*k) + 122; cardY = STAND_Y + 6*k - 146;
+  } else if (t < B.stare[1]) {      // startle hop back + landing SQUASH + HOLD 1
+    const hk = c01((t - B.hop[0]) / (B.hop[1] - B.hop[0]));
+    const jump = Math.sin(hk * Math.PI) * 64;
+    const txn = lerpN(226, 150, hk);
+    p = { torso: 186, headTilt: -4, laU: 130, laL: 80, raU: 120, raL: 70,
+          llU: 22, llL: -14, rlU: -22, rlL: 8, eyes:"wide", face:1,
+          tx: txn, ty: STAND_Y + 6 - jump };
+    if (t >= B.hop[1]) {            // landed
+      const sq = punch(t, B.hop[1], 0.12, 15);
+      p.sy = 1 - sq; p.sx = 1 + sq * 0.5; p.px = 0; p.py = 208;   // squash about the feet
+      p.tx = 150; p.ty = STAND_Y + 6;
+      p.torso = 182 + sway * 0.4; p.laU = 118; p.laL = 66; p.raU = 108; p.raL = 58;
+      if (t >= 6.70 && t < 6.79) p.eyes = "closed";               // single blink in the hold
+    }
+    cardX = p.tx + 118; cardY = p.ty - 140; cardRot = -4;
+  } else if (t < B.resolveDip[0]) { // posture decay per slab landing, then sag HOLD 2
+    const d1 = easeIO(ramp(t, B.slabs[0]+0.40, B.slabs[0]+0.75));
+    const d2 = easeIO(ramp(t, B.slabs[1]+0.40, B.slabs[1]+0.75));
+    const d3 = easeIO(ramp(t, B.slabs[2]+0.40, B.slabs[2]+0.75));
+    const sagK = (d1 + d2 + d3) / 3;
+    p = { torso: 182 - 40 * sagK + sway * 0.5, headTilt: -2 - 28 * sagK,
+          laU: 118 - 70 * sagK, laL: 66 - 40 * sagK, raU: 108 - 60 * sagK, raL: 58 - 34 * sagK,
+          llU: 8 + 6*sagK, llL: 2, rlU: -8 - 4*sagK, rlL: -2,
+          eyes: d3 > 0.5 ? "dead" : "wide", face: 1, tx: 150, ty: STAND_Y + 6 + 10 * sagK };
+    /* card droops with the arms, drops to the floor at 9.6 */
+    if (t < 9.6) { cardX = p.tx + 118 - 34 * sagK; cardY = p.ty - 140 + 74 * sagK; cardRot = -4 - 10 * sagK; }
+    else {
+      const dk = c01((t - 9.6) / 0.28);
+      cardX = p.tx + 84 - 8 * dk; cardY = lerpN(p.ty - 66, 1552, easeInCubic(dk)); cardRot = -14 - 30 * dk;
+      if (t >= 9.88) { const cs = punch(t, 9.88, 0.14, 14); cardY = 1552; cardRot = -44; }
+    }
+  } else {                          // resolve: dip (ANTICIPATION) then rise, fist up
+    const dip = easeIO(ramp(t, B.resolveDip[0], B.resolveDip[1]));
+    const rise = easeIO(ramp(t, B.resolve[0], B.resolve[1]));
+    p = { torso: lerpN(142 - 6 * dip, 184, rise), headTilt: lerpN(-30 - 3 * dip, 6, rise),
+          laU: lerpN(48, 30, rise), laL: lerpN(26, 12, rise),
+          raU: lerpN(48, 176, rise), raL: lerpN(24, 168, rise),   // right fist raised
+          llU: 8, llL: 2, rlU: -8, rlL: -2,
+          eyes: rise > 0.4 ? "open" : "dead", face: 1,
+          tx: 150, ty: STAND_Y + 16 - 10 * rise + (rise >= 1 ? Math.sin(t*2.2)*1.5 : 0) };
+    if (t >= 12.10 && t < 12.19) p.eyes = "closed";               // blink inside HOLD 3
+    const cs2 = 1;
+    cardX = 150 + 76; cardY = 1552; cardRot = -44;                // card stays dropped
+  }
+  poseStick(eka, p);
+  if (cardX === null) { cardG.setAttribute("display", "none"); }
+  else {
+    cardG.setAttribute("display", "");
+    cardG.setAttribute("transform", `translate(${cardX.toFixed(1)},${cardY.toFixed(1)}) rotate(${cardRot.toFixed(2)})`);
+  }
+}
+
+window.seek = async function (t) {
+  t = clamp(t, 0, 21.0);
+  stalePaintGuard(t, bgflip, document.getElementById("stagewrap"), "rgba(19,16,34,0.004)");
+  const covered = t >= B.payoff;
+  sceneG.style.visibility = covered && t >= B.payoff + 0.4 ? "hidden" : "visible";
+  if (!covered || t < B.payoff + 0.4) { slabPose(t); ekaPose(t); }
+
+  const h = $('hook');
+  if (t < 3.3) {
+    const p = PP(t, 0.15, 0.4, back);
+    h.style.opacity = String(Math.min(PP(t, 0.15, 0.15), 1 - PP(t, 3.05, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - p) * 50}px)`;
+  } else h.style.opacity = '0';
+
+  const bub = $('bubble');
+  if (t >= 11.2 && t < 12.7) {
+    bub.style.opacity = String(Math.min(PP(t, 11.2, 0.15), 1 - PP(t, 12.5, 0.2)));
+    bub.style.transform = `scale(${0.85 + 0.15 * PP(t, 11.2, 0.35, back)})`;
+  } else bub.style.opacity = '0';
+
+  const po = $('payoff');
+  if (t >= B.payoff && t < B.payoffOut) {
+    po.style.opacity = String(Math.min(PP(t, B.payoff, 0.3), 1 - PP(t, B.payoffOut - 0.25, 0.25)));
+    for (const [id, t0] of [['p1', 13.2], ['p2', 13.7], ['p3', 14.2]]) {
+      const e = $(id);
+      const p = PP(t, t0, 0.4, back);
+      e.style.opacity = String(PP(t, t0, 0.15));
+      e.style.transform = `translateY(${(1 - p) * 60}px)`;
+    }
+    $('savecta').style.opacity = String(PP(t, 15.2, 0.3));
+  } else po.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= B.payoffOut) {
+    end.style.opacity = String(PP(t, B.payoffOut, 0.25));
+    $('endword').style.transform = `scale(${0.88 + 0.12 * PP(t, B.payoffOut + 0.1, 0.4, back)})`;
+    $('endsub').style.opacity = String(PP(t, B.payoffOut + 0.7, 0.3));
+  } else end.style.opacity = '0';
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>
