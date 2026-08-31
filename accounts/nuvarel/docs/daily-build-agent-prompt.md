@@ -60,6 +60,23 @@ palette, or rule never re-runs within 60 days; a named palette is never
 reissued under the same name; the same pillar never posts twice in a
 row within the day's batch.
 
+**Vocabulary rule (defect fix, 2026-08-31):** the ledger's Format column
+and the queue JSON's `type` field are ONE vocabulary — the exact same
+slug (`palette-study`, `reads-expensive`, `splurge-skip`, `the-rule`;
+Reels prefixed `reel-`). Check candidates against the ledger's *topic
+keywords*, not just its Format column: a real near-duplicate shipped
+because a lamp Reel was filed under "symmetry" and a "lighting" lookup
+returned a false clear.
+
+**Scene/prop rule (Reels):** this account has a fixed rendered visual
+environment (the Curator's alabaster room). Two Reels can argue different
+points and still look identical at thumbnail scale. Before building the
+Reel, read the ledger's Scene-set column AND look at the last 14 days'
+Reel QA frames (`accounts/nuvarel/reels/<id>/qa/`): the same scene-set +
+hero-prop combination (e.g. "sofa + lamp pair") must not recur within
+**14 days**. If your topic forces the same set, change the composition
+(different props, different wall) or pick a different topic.
+
 ### Step 3 — fallback
 
 If the trend search yields nothing usable, fall back to straight pillar
@@ -147,7 +164,11 @@ top-of-hour still lands in the target window.
 
 Append one row per queued post to
 `accounts/nuvarel/content/used-topics.md` (existing table format: date,
-post, format/pillar, principle/palette/topic).
+post, format, topic keywords, scene-set + props). The Format cell is the
+exact `type` value you wrote in the queue JSON — copy it verbatim, never
+reclassify. The topic cell lists every searchable keyword; the scene
+cell names the set + props for Reels (`n/a (typography carousel)` for
+carousels).
 
 ### Step 9 — commit (shared-repo git safety, non-negotiable)
 

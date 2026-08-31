@@ -1,0 +1,291 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+/* nuvarel Splurge/Skip No. 02 "curtains, hung higher" (19.5s, 2D Curator).
+   Replaces the pulled lamps-over-chandeliers Reel (scene dup with 09-02).
+   NEW SCENE SET on purpose: window wall + curtain pair + potted plant --
+   no sofa, no lamps, distinct from every other Reel queued this week.
+   Calm per this account's tone ruling: no camera punches. Named beats --
+   ANTICIPATION crouch before the reach (5.2-5.45), rod rise with 6px
+   settle overshoot (5.7-7.35), hem drop with sway + settle (7.9-9.3),
+   panel widen (9.8-11.0), daylight bloom 11.2, deliberate holds at
+   3.4-4.7 and 13.0-14.8, nod 14.1. */
+:root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,sans-serif; position:relative; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:44px; letter-spacing:.30em; color:var(--esp); }
+.kicker { font-size:24px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--taupe); }
+#toprule { position:absolute; top:190px; left:80px; right:80px; height:2px; background:var(--bronze); opacity:.7; z-index:10; }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .line { font-family:'Cormorant Garamond',Georgia,serif; font-size:84px; line-height:1.14; color:var(--esp); }
+#promise { position:absolute; top:520px; left:80px; opacity:0; z-index:12;
+  font-size:30px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); }
+
+#note { position:absolute; top:1640px; left:80px; opacity:0; z-index:12;
+  font-size:30px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--taupe); }
+
+#rulecard { position:absolute; inset:0; background:var(--alab); opacity:0; z-index:14; }
+#rulecard .no { position:absolute; top:520px; left:0; right:0; text-align:center; font-size:26px; font-weight:500;
+  letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); }
+#rulecard h2 { position:absolute; top:580px; left:100px; right:100px; text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; line-height:1.18; color:var(--esp); }
+#rulecard .sub { position:absolute; top:860px; left:120px; right:120px; text-align:center; font-size:34px;
+  line-height:1.5; color:var(--taupe); }
+#savecta { position:absolute; top:1200px; left:0; right:0; text-align:center; opacity:0; }
+#savecta span { display:inline-block; border:2px solid var(--esp); padding:16px 36px; font-size:30px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--esp); }
+
+#end { position:absolute; inset:0; background:var(--esp); opacity:0; z-index:15; }
+#endword { position:absolute; top:840px; left:0; right:0; text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; letter-spacing:.34em; color:var(--alab); }
+#endsub { position:absolute; top:1010px; left:0; right:0; text-align:center; color:#B8AFA2;
+  font-size:30px; letter-spacing:.2em; text-transform:uppercase; opacity:0; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
+<div id="brandrow"><div class="wordmark">NUVAREL</div><div class="kicker">Curtains</div></div>
+<div id="toprule"></div>
+
+<div id="hook"><div class="line">The curtains<br>stop too soon.</div></div>
+<div id="promise">Where the fabric money goes</div>
+
+<div id="note">Hung at the frame, the window shrinks.</div>
+
+<div id="rulecard">
+  <div class="no">Splurge / Skip &middot; No. 02</div>
+  <h2>Length over<br>label.</h2>
+  <div class="sub">Skip the designer fabric. Spend on panels that start near the ceiling and end at the floor. Plain cotton hung high beats couture hung short.</div>
+  <div id="savecta"><span>Send this before the curtain order</span></div>
+</div>
+
+<div id="end"><div id="endword">NUVAREL</div><div id="endsub">The expensive look, explained</div></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 19.5, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOutO = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+const B = {
+  walkIn: [2.4, 3.3],
+  regard: [3.4, 4.7],        // deliberate hold: looking at the stubby curtains
+  step: [4.7, 5.2],          // half-step in toward the rod
+  crouch: [5.2, 5.45],       // ANTICIPATION: knees dip before the reach
+  reach: [5.45, 5.7],        // arms extend up to the rod
+  rise: [5.7, 7.0],          // rod travels up; 6px overshoot, settles by 7.35
+  lower: [7.3, 7.9],         // arms come back down
+  drop: [7.9, 9.3],          // hems fall to the floor, cloth sway + settle
+  walkBack: [9.4, 10.4],
+  widen: [9.8, 11.0],        // panels push past the frame on both sides
+  light: 11.2,               // daylight bloom through the taller window
+  nod: 14.1,
+  blink1: 2.0, blink2: 8.6, blink3: 14.3
+};
+window.BEATS = B;
+
+/* ---------------- stage ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const NC = { alab:"#F2EEE6", esp:"#2A241E", taupe:"#6E6257", bronze:"#9C7A4F", floor:"#E7E1D3", cush:"#DCD4C2", glass:"#FBF9F4", warm:"#F6E2B0" };
+const sceneG = el(stage, "g", {});
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:NC.floor });
+el(sceneG, "line", { x1:0, y1:1560, x2:1080, y2:1560, stroke:NC.taupe, "stroke-width":3, opacity:.5 });
+// window: frame + glass + mullions (centre-left wall)
+el(sceneG, "rect", { x:300, y:880, width:380, height:440, fill:NC.glass, stroke:NC.esp, "stroke-width":8 });
+el(sceneG, "line", { x1:490, y1:884, x2:490, y2:1316, stroke:NC.taupe, "stroke-width":4, opacity:.65 });
+el(sceneG, "line", { x1:304, y1:1100, x2:676, y2:1100, stroke:NC.taupe, "stroke-width":4, opacity:.65 });
+// window sill
+el(sceneG, "rect", { x:284, y:1320, width:412, height:14, rx:4, fill:NC.cush, stroke:NC.esp, "stroke-width":5 });
+// potted plant, far left (scene depth; deliberately NOT a lamp/sofa prop)
+el(sceneG, "path", { d:"M 110 1560 L 122 1470 L 178 1470 L 190 1560 Z", fill:NC.cush, stroke:NC.esp, "stroke-width":6 });
+el(sceneG, "path", { d:"M 150 1470 C 150 1400 138 1360 118 1330", fill:"none", stroke:NC.esp, "stroke-width":6 });
+el(sceneG, "path", { d:"M 150 1470 C 152 1390 168 1350 190 1322", fill:"none", stroke:NC.esp, "stroke-width":6 });
+el(sceneG, "path", { d:"M 150 1470 C 150 1420 150 1390 150 1358", fill:"none", stroke:NC.esp, "stroke-width":6 });
+el(sceneG, "ellipse", { cx:114, cy:1324, rx:26, ry:14, fill:NC.cush, stroke:NC.esp, "stroke-width":5, transform:"rotate(-28 114 1324)" });
+el(sceneG, "ellipse", { cx:194, cy:1316, rx:26, ry:14, fill:NC.cush, stroke:NC.esp, "stroke-width":5, transform:"rotate(24 194 1316)" });
+el(sceneG, "ellipse", { cx:150, cy:1348, rx:22, ry:13, fill:NC.cush, stroke:NC.esp, "stroke-width":5 });
+
+// daylight bloom through the window (radial, warms in at B.light)
+const defs = el(stage, "defs", {});
+const grad = el(defs, "radialGradient", { id:"gday" });
+el(grad, "stop", { offset:"0%", "stop-color":"#F6E2B0", "stop-opacity":"0.42" });
+el(grad, "stop", { offset:"55%", "stop-color":"#F6E2B0", "stop-opacity":"0.20" });
+el(grad, "stop", { offset:"100%", "stop-color":"#F6E2B0", "stop-opacity":"0" });
+const dayGlow = el(stage, "ellipse", { cx:490, cy:1140, rx:430, ry:520, fill:"url(#gday)", opacity:0 });
+
+// curtain layer: rod + finials + two panels (tops ride the rod)
+const rodG = el(stage, "g", {});
+const rodLine = el(rodG, "line", { x1:250, y1:0, x2:730, y2:0, stroke:NC.esp, "stroke-width":8, "stroke-linecap":"round" });
+const finL = el(rodG, "circle", { cx:250, cy:0, r:12, fill:NC.bronze });
+const finR = el(rodG, "circle", { cx:730, cy:0, r:12, fill:NC.bronze });
+const panelL = el(stage, "g", {});
+const panelLr = el(panelL, "rect", { x:-48, y:0, width:96, height:322, fill:NC.cush, stroke:NC.esp, "stroke-width":6 });
+el(panelL, "line", { x1:-16, y1:8, x2:-16, y2:0, stroke:NC.esp, "stroke-width":3, opacity:.4 });
+const panelR = el(stage, "g", {});
+const panelRr = el(panelR, "rect", { x:-48, y:0, width:96, height:322, fill:NC.cush, stroke:NC.esp, "stroke-width":6 });
+// drape lines (redrawn per frame so they track panel height)
+const drapeL1 = el(panelL, "line", { x1:-16, y1:10, x2:-16, y2:300, stroke:NC.esp, "stroke-width":3, opacity:.35 });
+const drapeL2 = el(panelL, "line", { x1:16, y1:10, x2:16, y2:300, stroke:NC.esp, "stroke-width":3, opacity:.35 });
+const drapeR1 = el(panelR, "line", { x1:-16, y1:10, x2:-16, y2:300, stroke:NC.esp, "stroke-width":3, opacity:.35 });
+const drapeR2 = el(panelR, "line", { x1:16, y1:10, x2:16, y2:300, stroke:NC.esp, "stroke-width":3, opacity:.35 });
+
+const actorG = el(stage, "g", {});
+const cur = makeStick(actorG, { stroke:NC.esp, fill:NC.alab });
+const GROUND = 1560, SH = 208;
+
+// rod height over time: 850 while short; anticip-free mechanical ease with
+// a 6px overshoot past 554, settling by 7.35
+function rodY(t) {
+  if (t < B.rise[0]) return 850;
+  if (t < B.rise[1]) return lerp(850, 548, easeIO(ramp(t, B.rise[0], B.rise[1])));
+  return lerp(548, 554, easeIO(ramp(t, B.rise[1], B.rise[1] + 0.35)));
+}
+// hem: rides the rod (short panels), then falls to the floor with a 6px
+// overshoot + settle; sway handled as a decaying rotate on the panel group
+function hemY(t, ry) {
+  if (t < B.drop[0]) return ry + 330;
+  if (t < B.drop[1]) return lerp(ry + 330, 1556, easeIO(ramp(t, B.drop[0], B.drop[1])));
+  return lerp(1556, 1550, easeIO(ramp(t, B.drop[1], B.drop[1] + 0.3)));
+}
+function panelX(t) {
+  const k = easeIO(ramp(t, B.widen[0], B.widen[1]));
+  return { lx: lerp(330, 296, k), rx: lerp(650, 684, k), hw: lerp(48, 66, k) };
+}
+function sway(t) { // cloth sway during/after the drop, decays out
+  if (t < B.drop[0] + 0.3) return 0;
+  const dt = t - (B.drop[0] + 0.3);
+  return 1.4 * Math.exp(-dt * 1.6) * Math.sin(dt * 2.1 * Math.PI * 2);
+}
+
+function curatorPose(t) {
+  let p;
+  const breathe = Math.sin(t * 1.5) * 2;
+  if (t < B.walkIn[0]) {                        // offstage right
+    p = { ...P.stand, face:-1, tx:1180, ty:GROUND - SH };
+  } else if (t < B.walkIn[1]) {                 // enter, stop right of the window
+    const k = easeIO(ramp(t, B.walkIn[0], B.walkIn[1]));
+    const ph = (t * 1.5) % 1;
+    p = mixPose(walkPose(ph), { ...P.stand }, 0.3);
+    p.face = -1; p.torso = 178;
+    p.tx = lerp(1150, 850, k); p.ty = GROUND - SH + Math.abs(Math.sin(t*1.5*Math.PI*2))*-4;
+  } else if (t < B.regard[1]) {                 // deliberate hold: sizing up the short pair
+    p = { ...P.stand, face:-1, tx:850, ty:GROUND - SH + breathe*0.5,
+          torso:180 + breathe*0.4, headTilt:9 };
+  } else if (t < B.step[1]) {                   // half-step toward the rod
+    const k = easeIO(ramp(t, B.step[0], B.step[1]));
+    p = { ...P.stand, face:-1, torso:179,
+          tx: lerp(850, 800, k), ty: GROUND - SH + Math.abs(Math.sin(t*3*Math.PI))*-3 };
+  } else if (t < B.crouch[1]) {                 // ANTICIPATION: knees dip
+    const k = easeIO(ramp(t, B.crouch[0], B.crouch[1]));
+    p = { ...P.stand, face:-1, tx:800, ty:GROUND - SH + 18*k, torso:180 - 5*k };
+  } else if (t < B.reach[1]) {                  // one arm sweeps up to direct the rod
+    const k = easeIO(ramp(t, B.reach[0], B.reach[1]));
+    p = { ...P.stand, face:-1, tx:800, ty:GROUND - SH + 18*(1-k), torso: lerp(175, 186, k),
+          headTilt: lerp(0, 12, k),
+          laU: lerp(14, 232, k), laL: lerp(8, 214, k), raU:-14, raL:-8 };
+  } else if (t < B.rise[1] + 0.3) {             // pointing arm tracks the rising rod
+    const rk = easeIO(ramp(t, B.rise[0], B.rise[1]));
+    p = { ...P.stand, face:-1, tx:800, ty:GROUND - SH + breathe*0.4, torso:186,
+          headTilt: 12 + 4*rk,
+          laU: lerp(232, 222, rk), laL: lerp(214, 206, rk), raU:-14, raL:-8 };
+  } else if (t < B.lower[1]) {                  // arm returns, watching
+    const k = easeIO(ramp(t, B.lower[0], B.lower[1]));
+    p = { ...P.stand, face:-1, tx:800, ty:GROUND - SH + breathe*0.5,
+          torso: lerp(186, 180, k), headTilt: lerp(16, 8, k),
+          laU: lerp(222, 14, k), laL: lerp(206, 8, k), raU:-14, raL:-8 };
+  } else if (t < B.drop[1]) {                   // hems fall; gaze follows down
+    const k = easeIO(ramp(t, B.drop[0], B.drop[1]));
+    p = { ...P.stand, face:-1, tx:800, ty:GROUND - SH + breathe*0.5,
+          torso:180 + breathe*0.4, headTilt: lerp(8, 0, k) };
+  } else if (t < B.walkBack[1]) {               // step back to take it in
+    const k = easeIO(ramp(t, B.walkBack[0], B.walkBack[1]));
+    const ph = (t * 1.4) % 1;
+    p = mixPose(walkPose(ph), { ...P.stand }, Math.min(1, k*1.4));
+    p.face = 1; p.torso = 180;
+    p.tx = lerp(800, 890, k); p.ty = GROUND - SH + (k < 0.9 ? Math.abs(Math.sin(t*1.4*Math.PI*2))*-3 : 0);
+  } else {                                      // final regard, facing the window
+    p = { ...P.stand, face:-1, tx:890, ty:GROUND - SH + breathe*0.6,
+          torso:180 + breathe*0.5, headTilt:6, laU:24, laL:12, raU:-24, raL:-12 };
+    if (t >= B.nod && t < B.nod + 0.5) {
+      const nk = Math.sin(ramp(t, B.nod, B.nod + 0.5) * Math.PI);
+      p.headTilt = 6 - 10*nk;
+    }
+  }
+  p.eyes = "open";
+  if ((t >= B.blink1 && t < B.blink1 + 0.09) || (t >= B.blink2 && t < B.blink2 + 0.09) ||
+      (t >= B.blink3 && t < B.blink3 + 0.09)) p.eyes = "closed";
+  poseStick(cur, p);
+
+  // curtain hardware + panels
+  const ry = rodY(t);
+  rodG.setAttribute("transform", `translate(0,${ry.toFixed(1)})`);
+  const hem = hemY(t, ry);
+  const { lx, rx, hw } = panelX(t);
+  const hgt = Math.max(40, hem - (ry + 8));
+  const sw = sway(t);
+  for (const [g, r, cx, s] of [[panelL, panelLr, lx, 1], [panelR, panelRr, rx, -1]]) {
+    g.setAttribute("transform", `translate(${cx.toFixed(1)},${(ry + 8).toFixed(1)}) rotate(${(sw * s).toFixed(2)})`);
+    r.setAttribute("x", (-hw).toFixed(1)); r.setAttribute("width", (hw * 2).toFixed(1));
+    r.setAttribute("height", hgt.toFixed(1));
+  }
+  for (const [ln, off] of [[drapeL1, -16], [drapeL2, 16], [drapeR1, -16], [drapeR2, 16]]) {
+    ln.setAttribute("x1", off); ln.setAttribute("x2", off);
+    ln.setAttribute("y1", 10); ln.setAttribute("y2", (hgt - 10).toFixed(1));
+  }
+  // daylight bloom once the window reads tall
+  dayGlow.setAttribute("opacity", PP(t, B.light, 0.6, easeIO).toFixed(3));
+}
+
+/* ---------------- overlays ---------------- */
+window.seek = async function (t) {
+  t = clamp(t, 0, 19.5);
+  stalePaintGuard(t, bgflip, $("stagewrap"), "rgba(242,238,230,0.004)");
+  const covered = t >= 14.8;
+  const hideScene = covered && t >= 15.3;
+  for (const g of [sceneG, dayGlow, rodG, panelL, panelR, actorG])
+    g.style.visibility = hideScene ? "hidden" : "visible";
+  if (!hideScene) curatorPose(t);
+
+  const h = $('hook');
+  if (t < 3.4) h.style.opacity = String(Math.min(PP(t, 0.2, 0.5, easeOutO), 1 - PP(t, 3.1, 0.3, easeIO)));
+  else h.style.opacity = '0';
+  const pr = $('promise');
+  if (t >= 1.6 && t < 3.4) pr.style.opacity = String(Math.min(PP(t, 1.6, 0.4), 1 - PP(t, 3.1, 0.3)));
+  else pr.style.opacity = '0';
+
+  const nt = $('note');
+  if (t >= 0.8 && t < 4.8) {
+    nt.textContent = 'Hung at the frame, the window shrinks.';
+    nt.style.opacity = String(Math.min(PP(t, 0.8, 0.3), 1 - PP(t, 4.5, 0.3)));
+  } else if (t >= 12.6 && t < 14.7) {
+    nt.textContent = 'High and wide, the window grows.';
+    nt.style.opacity = String(Math.min(PP(t, 12.6, 0.3), 1 - PP(t, 14.4, 0.3)));
+  } else nt.style.opacity = '0';
+
+  const rc_ = $('rulecard');
+  if (t >= 14.8 && t < 17.3) {
+    rc_.style.opacity = String(Math.min(PP(t, 14.8, 0.4), 1 - PP(t, 17.0, 0.3)));
+    $('savecta').style.opacity = String(PP(t, 15.9, 0.4));
+  } else rc_.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= 17.3) {
+    end.style.opacity = String(PP(t, 17.3, 0.35));
+    $('endsub').style.opacity = String(PP(t, 18.0, 0.4));
+  } else end.style.opacity = '0';
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>
