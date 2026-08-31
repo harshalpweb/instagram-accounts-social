@@ -1,18 +1,22 @@
 {
+  "_license": "All files are Mixkit Free License, already vendored + logged in instagram-accounts-social/assets/audio/ATTRIBUTION.md (bgm: 'G Eazy NBA type' by Arulo). Paths are relative to the instagram-accounts-social repo root, per scripts/render_reel.py.",
   "tracks": [
-    {"file": "assets/audio/bgm/g-eazy-nba-type.mp3", "at": 0.0, "trim": [0.0, 15.9], "gain_db": -13, "fade_in": 0.2, "fade_out": 0.35},
-    {"file": "assets/audio/bgm/g-eazy-nba-type.mp3", "at": 19.0, "trim": [19.0, 21.0], "gain_db": -15, "fade_in": 0.25, "fade_out": 1.2},
-    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 0.06, "gain_db": -6},
-    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 2.9, "gain_db": -7},
-    {"file": "assets/audio/sfx/clock-tick-single.mp3", "at": 3.05, "gain_db": -6},
-    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 5.5, "gain_db": -6},
-    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 7.05, "gain_db": -8},
-    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 8.0, "gain_db": -6},
-    {"file": "assets/audio/sfx/light-aura.mp3", "at": 10.55, "gain_db": -11},
-    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 11.3, "gain_db": -6},
-    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 13.55, "gain_db": -8},
-    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.6, "gain_db": -6},
-    {"file": "assets/audio/sfx/vinyl-needle-drop.mp3", "at": 15.9, "gain_db": -4},
-    {"file": "assets/audio/sfx/pop-electric.mp3", "at": 19.1, "gain_db": -8}
+    {"file": "assets/audio/bgm/g-eazy-nba-type.mp3", "at": 0.0, "gain_db": -15, "trim": [0, 14.2], "fade_in": 0.25, "fade_out": 1.2},
+    {"file": "assets/audio/sfx/hitech-bleep.mp3", "at": 0.40, "gain_db": -8},
+    {"file": "assets/audio/sfx/hitech-bleep.mp3", "at": 0.72, "gain_db": -8},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 1.28, "gain_db": -6},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 1.90, "gain_db": -11},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 2.05, "gain_db": -4},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 3.35, "gain_db": -9},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 3.70, "gain_db": -7},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 4.00, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 4.85, "gain_db": -4},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 7.68, "gain_db": -10},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 7.95, "gain_db": -12},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 8.12, "gain_db": -4},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 9.35, "gain_db": -8},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 10.40, "gain_db": -10},
+    {"file": "assets/audio/sfx/vinyl-needle-drop.mp3", "at": 11.15, "gain_db": -6},
+    {"file": "assets/audio/sfx/bass-hit-futuristic.mp3", "at": 12.30, "gain_db": -9}
   ]
 }

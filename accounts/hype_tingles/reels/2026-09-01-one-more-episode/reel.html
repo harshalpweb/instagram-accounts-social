@@ -1,168 +1,280 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
+/* hype_tingles H2 "one more episode" -- 2D stickman, meme cut (~14.5s).
+   Redo of the rejected 3D version; same brand system as approved 2D H1.
+   Principle map: ANTICIPATION = remote-press windup + nod-off droop;
+   SQUASH&STRETCH = settle compressions on each time-jump cut;
+   COMEDIC HOLDS = sunrise freeze (THE pause) + dead-eye commute. */
 @font-face { font-family:'Archivo Black'; src:url('../../brand/fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
 @font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
 @font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
 @font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
 
-:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; }
+:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; --panel:#1B1922; --line:#2A2733; }
 * { margin:0; padding:0; box-sizing:border-box; }
-html,body { width:1080px; height:1920px; overflow:hidden; background:var(--ink); }
-body { color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
-#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--ink); color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
+body::before { content:""; position:absolute; width:1100px; height:1100px; right:-480px; top:-480px;
+  background:radial-gradient(circle, rgba(255,77,157,0.16) 0%, rgba(255,77,157,0) 62%); pointer-events:none; z-index:0; }
 
-#hook { position:absolute; top:180px; left:70px; right:70px; opacity:0; }
-#hook .big { font-family:'Archivo Black'; font-size:96px; line-height:1.05; text-transform:uppercase; text-shadow:0 4px 24px rgba(0,0,0,.8); }
-#hook .big .hl { color:var(--pink); }
-#promise { position:absolute; top:480px; left:70px; opacity:0; background:var(--volt); color:var(--ink);
-  font-family:'Archivo Black'; font-size:44px; padding:18px 34px; letter-spacing:.06em; }
+#cam { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
 
-/* big clock (top center) */
-#clock { position:absolute; top:150px; left:0; right:0; text-align:center; opacity:0; }
-#clock .t { display:inline-block; background:rgba(17,16,21,.85); border:3px solid var(--pink); color:var(--pink);
-  font-family:'Archivo Black'; font-size:72px; padding:20px 44px; letter-spacing:.08em; }
-#clock .lab { margin-top:14px; color:var(--soft); font-size:30px; font-weight:500; letter-spacing:.28em; text-transform:uppercase; }
+#ui { position:absolute; inset:0; z-index:5; }
+.snap { visibility:hidden; will-change:transform; }
 
-/* speech bubble (character's own line) */
-#bubble { position:absolute; top:560px; left:70px; max-width:640px; opacity:0; background:var(--paper); color:var(--ink);
-  border-radius:28px; padding:34px 42px; font-weight:700; font-size:46px; line-height:1.2; }
-#bubble:after { content:""; position:absolute; bottom:-24px; left:90px; border:26px solid transparent; border-top-color:var(--paper); border-bottom:0; }
+#hook { position:absolute; top:150px; left:70px; right:70px; text-align:center;
+  font-family:'Archivo Black'; font-size:80px; line-height:1.1;
+  color:var(--paper); text-shadow:0 6px 0 rgba(0,0,0,.45); transform-origin:50% 50%; }
+#hook .hl { color:var(--volt); }
+#promise { position:absolute; top:340px; left:70px; right:70px; text-align:center;
+  font-family:'Archivo Black'; font-size:54px; color:var(--pink); transform-origin:50% 50%;
+  text-shadow:0 5px 0 rgba(0,0,0,.45); }
 
-/* judge cards */
-.jcard { position:absolute; left:70px; right:70px; top:250px; background:#1B1922; border:3px solid #2A2733;
-  border-radius:30px; padding:44px 48px; opacity:0; }
-.jcard .who { display:flex; align-items:center; gap:26px; }
-.jcard .em { font-size:92px; line-height:1; font-family:'Segoe UI Emoji'; }
-.jcard .name { font-family:'Archivo Black'; font-size:40px; letter-spacing:.05em; color:var(--volt); }
-.jcard .role { font-size:25px; color:var(--soft); font-weight:500; letter-spacing:.14em; margin-top:8px; text-transform:uppercase; }
-.jcard .line { font-weight:700; font-size:54px; line-height:1.18; margin-top:36px; }
+#clockchip { position:absolute; top:60px; right:60px; background:var(--panel); border:4px solid var(--line);
+  border-radius:20px; padding:16px 30px; font-weight:700; font-size:44px; color:var(--volt);
+  letter-spacing:.06em; visibility:hidden; }
 
-#morning { position:absolute; top:1440px; left:70px; opacity:0; background:rgba(17,16,21,.85);
-  border:3px solid var(--volt); padding:18px 30px; font-family:'Archivo Black'; font-size:44px; color:var(--volt); }
+.stamp { position:absolute; left:110px; right:110px; background:var(--panel); border:6px solid var(--volt);
+  border-radius:30px; padding:34px 40px; transform-origin:50% 50%; box-shadow:0 14px 0 rgba(0,0,0,.4); }
+.stamp .who { display:flex; align-items:center; gap:24px; }
+.stamp .em { font-size:78px; line-height:1; font-family:'Segoe UI Emoji'; }
+.stamp .name { font-family:'Archivo Black'; font-size:36px; letter-spacing:.05em; color:var(--volt); }
+.stamp .line { font-weight:700; font-size:52px; line-height:1.15; margin-top:18px; }
+.stamp .line .accent { color:var(--pink); }
+#stampOwl  { top:280px; border-color:var(--volt); }
+#stampFish { top:280px; border-color:var(--pink); }
 
-#catshade { position:absolute; inset:0; background:var(--volt); opacity:0; }
-#catcard { position:absolute; left:80px; right:80px; top:600px; opacity:0; color:var(--ink); }
-#catcard .who { display:flex; align-items:center; gap:30px; }
-#catcard .em { font-size:120px; font-family:'Segoe UI Emoji'; }
-#catcard .name { font-family:'Archivo Black'; font-size:52px; }
-#catcard .role { font-size:28px; font-weight:700; letter-spacing:.16em; margin-top:8px; }
-#catcard .line { font-family:'Archivo Black'; font-size:82px; line-height:1.14; margin-top:56px; }
+#catCard { position:absolute; left:90px; right:90px; top:420px; background:var(--panel); border:3px solid var(--line);
+  border-radius:36px; padding:60px 56px; transform-origin:50% 0%; }
+#catCard .who { display:flex; align-items:center; gap:30px; }
+#catCard .em { font-size:104px; line-height:1; font-family:'Segoe UI Emoji'; }
+#catCard .name { font-family:'Archivo Black'; font-size:42px; color:var(--volt); letter-spacing:.05em; }
+#catCard .role { font-size:27px; color:var(--soft); font-weight:500; letter-spacing:.14em; text-transform:uppercase; margin-top:8px; }
+#catCard .line { font-weight:700; font-size:60px; line-height:1.2; margin-top:44px; }
+#catCard .line .accent { color:var(--pink); }
 
-#end { position:absolute; inset:0; background:var(--ink); opacity:0; }
-#endline { position:absolute; top:740px; left:80px; right:80px; text-align:center;
-  font-family:'Archivo Black'; font-size:76px; line-height:1.12; }
-#endline .hl { color:var(--pink); }
-#handle { position:absolute; top:1020px; left:0; right:0; text-align:center; color:var(--volt);
-  font-family:'Archivo Black'; font-size:52px; opacity:0; }
-#endsub { position:absolute; top:1120px; left:0; right:0; text-align:center; color:var(--soft);
-  font-size:34px; font-weight:500; opacity:0; }
+#endcard { position:absolute; inset:0; background:var(--ink); z-index:8; visibility:hidden; }
+#endcard .wm { font-family:'Archivo Black'; font-size:92px; color:var(--volt); text-align:center; margin-top:600px; }
+#endcard .wm .tingle { color:var(--pink); }
+#endcard .tag { text-align:center; font-weight:700; font-size:46px; color:var(--paper); margin-top:56px; }
+#endcard svg { position:absolute; left:0; bottom:0; width:1080px; height:600px; inset:auto; }
 </style></head><body>
-<img id="char" alt="">
 
-<div id="hook"><div class="big">POV: <span class="hl">one more episode.</span></div></div>
-<div id="promise">Watch the clock.</div>
-<div id="clock"><div class="t">11:47 PM</div><div class="lab">Episode 4 of 1</div></div>
-<div id="bubble">The plot is mid. One more.</div>
+<div id="cam">
+  <svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+</div>
 
-<div class="jcard" id="j-owl"><div class="who"><div class="em">&#129417;</div><div><div class="name">THE OWL</div><div class="role">Sleep researcher</div></div></div><div class="line">Sleep is a construct. Citation: none.</div></div>
-<div class="jcard" id="j-gf"><div class="who"><div class="em">&#128031;</div><div><div class="name">THE GOLDFISH</div><div class="role">Continuity department</div></div></div><div class="line">What are we watching?</div></div>
+<div id="ui">
+  <div id="hook" class="snap">POV: <span class="hl">one more episode.</span></div>
+  <div id="promise" class="snap">Watch the clock.</div>
+  <div id="clockchip">11:47 PM</div>
 
-<div id="morning">9:00 AM</div>
+  <div id="stampOwl" class="stamp snap">
+    <div class="who"><div class="em">&#129417;</div><div class="name">OWL</div></div>
+    <div class="line">Sleep is a construct. <span class="accent">Citation: none.</span></div>
+  </div>
+  <div id="stampFish" class="stamp snap">
+    <div class="who"><div class="em">&#128031;</div><div class="name">GOLDFISH</div></div>
+    <div class="line">What are we <span class="accent">watching?</span></div>
+  </div>
 
-<div id="catshade"></div>
-<div id="catcard"><div class="who"><div class="em">&#128008;</div><div><div class="name">THE CAT</div><div class="role">FINAL VERDICT</div></div></div>
-<div class="line">You did this yesterday. You will do it tomorrow.</div></div>
+  <div id="catCard" class="snap">
+    <div class="who"><div class="em">&#128008;</div><div><div class="name">CAT</div><div class="role">Final verdict</div></div></div>
+    <div class="line">You did this yesterday. <span class="accent">You will do it tomorrow.</span></div>
+  </div>
 
-<div id="end"><div id="endline">The animals watch you <span class="hl">every night.</span></div>
-<div id="handle">@hype_tingles</div><div id="endsub">New verdicts every day. The cat is never impressed.</div></div>
+  <div id="endcard">
+    <div class="wm">HYPE<span class="tingle"> TINGLES</span></div>
+    <div class="tag">The animals rate humans daily.</div>
+    <svg id="endsvg" viewBox="0 0 1080 600"></svg>
+  </div>
+</div>
 
+<script src="../../../../assets/rig2d.js"></script>
 <script>
-window.REEL = { duration: 21.0, fps: 30 };
-const NF = 630;
-const $ = id => document.getElementById(id);
-const c01 = p => Math.max(0, Math.min(1, p));
-const easeOut = p => 1 - Math.pow(1 - p, 3);
-const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
-const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
-const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
-const img = $('char');
+"use strict";
+/* ============================ beat table ============================ */
+const B = {
+  hookText: 0.15,
+  promiseText: 1.55,
+  windup: [0.55, 0.80],     // ANTICIPATION: arm pulls back before the press
+  press: 0.86,              // remote press -> TV flash on
+  jump2: 2.30,              // hard cut -> 1:13, slouched
+  owlStamp: 2.50,
+  droop: [3.55, 3.95],      // nod-off droop (slow) ...
+  snapback: 3.95,           // ... snap up with OVERSHOOT past zero
+  jump3: 4.60,              // hard cut -> 3:26, near horizontal + blanket
+  fishStamp: 4.90,
+  jump4: 7.20,              // hard cut -> 5:58, sunrise floods
+  sunPeak: 7.90,
+  freeze: [7.20, 9.30],     // THE comedic pause: wide-eye sunrise freeze
+  blink1: 8.60,
+  cut5: 9.30,               // commute: 9:00 AM walk of shame
+  walk: [9.45, 11.10],
+  catCard: 11.30,
+  hold4: [11.55, 12.55],    // comedic pause under the verdict
+  endcard: 12.60,
+  end: 14.50
+};
+window.BEATS = B;
+window.REEL = { duration: B.end, fps: 30 };
 
-function card(el, t, t0, t1) {
-  const ein = P(t, t0, 0.4, easeOut);
-  const eout = P(t, t1 - 0.3, 0.3, easeIO);
-  el.style.opacity = (t >= t0 && t < t1) ? String(Math.min(ein, 1 - eout)) : '0';
-  el.style.transform = `translateY(${(1 - ein) * 70 + eout * -50}px)`;
+const stage = document.getElementById("stage");
+const C = { paper:"#F4F2EC", soft:"#9A96A3", volt:"#D8FF3A", pink:"#FF4D9D", panel:"#1B1922", line:"#2A2733" };
+
+/* ============================ scenery ============================ */
+const bgflip = makeFlipRect(stage);
+const defs = el(stage, "defs", {});
+const grad = el(defs, "linearGradient", { id:"sungrad", x1:"1", y1:"0", x2:"0", y2:"1" });
+el(grad, "stop", { offset:"0%", "stop-color":"#FFB25A", "stop-opacity":"0.55" });
+el(grad, "stop", { offset:"55%", "stop-color":"#FF7A6B", "stop-opacity":"0.22" });
+el(grad, "stop", { offset:"100%", "stop-color":"#FF4D9D", "stop-opacity":"0" });
+
+const sceneG = el(stage, "g", {});   // living room (stages 1-4 share it)
+const walkG  = el(stage, "g", {});   // commute street
+
+// living room: floor, couch (left-center), TV on stand (right)
+el(sceneG, "rect", { x:0, y:1500, width:1080, height:420, fill:"#161419" });
+el(sceneG, "line", { x1:0, y1:1500, x2:1080, y2:1500, stroke:C.line, "stroke-width":6 });
+el(sceneG, "rect", { x:150, y:1290, width:90, height:220, rx:26, fill:C.panel, stroke:C.paper, "stroke-width":7 });   // back
+el(sceneG, "rect", { x:150, y:1420, width:470, height:90, rx:24, fill:"#232030", stroke:C.paper, "stroke-width":7 }); // seat
+el(sceneG, "rect", { x:560, y:1350, width:70, height:160, rx:22, fill:C.panel, stroke:C.paper, "stroke-width":7 });   // armrest
+el(sceneG, "rect", { x:250, y:1385, width:150, height:44, rx:18, fill:C.paper, opacity:.9 });                          // cushion
+el(sceneG, "rect", { x:800, y:1400, width:200, height:100, rx:10, fill:C.panel, stroke:C.line, "stroke-width":6 });    // TV stand
+el(sceneG, "rect", { x:770, y:1080, width:260, height:320, rx:14, fill:"#0B0A0E", stroke:C.paper, "stroke-width":8 }); // TV frame
+const tvScreen = el(sceneG, "rect", { x:788, y:1098, width:224, height:284, rx:8, fill:"#141B30" });
+const glow = el(sceneG, "polygon", { points:"770,1120 770,1380 370,1470 370,1330", fill:"#4A5B8C", opacity:0 });
+const blanket = el(sceneG, "path", { d:"M 300 1350 Q 420 1310 560 1360 L 560 1445 L 300 1445 Z",
+  fill:C.pink, opacity:0, stroke:C.paper, "stroke-width":6 });
+const sun = el(sceneG, "rect", { x:0, y:0, width:1080, height:1920, fill:"url(#sungrad)", opacity:0 });
+
+// commute street
+el(walkG, "rect", { x:0, y:1500, width:1080, height:420, fill:"#161419" });
+el(walkG, "line", { x1:0, y1:1500, x2:1080, y2:1500, stroke:C.line, "stroke-width":6 });
+for (let i=0;i<4;i++) el(walkG, "rect", { x:60+i*280, y:1180+((i*67)%120), width:120, height:320-((i*67)%120),
+  fill:C.panel, stroke:C.line, "stroke-width":5, opacity:.6 }); // skyline blocks
+const brief = el(walkG, "rect", { x:0, y:0, width:90, height:70, rx:10, fill:C.panel, stroke:C.paper, "stroke-width":7 });
+
+const man = makeStick(sceneG, {});
+const manW = makeStick(walkG, {});
+const remote = el(sceneG, "rect", { x:0, y:0, width:64, height:26, rx:8, fill:C.paper });
+// keep body layering: blanket + sunrise wash read OVER the seated body
+sceneG.appendChild(blanket); sceneG.appendChild(sun);
+
+// endcard mini sleeper (brand continuity with H1)
+const endsvg = document.getElementById("endsvg");
+el(endsvg, "rect", { x:300, y:430, width:480, height:60, rx:20, fill:"#232030", stroke:C.paper, "stroke-width":6 });
+el(endsvg, "rect", { x:316, y:400, width:120, height:36, rx:16, fill:C.paper, opacity:.92 });
+const manE = makeStick(endsvg, {});
+const zzE = []; for (let i=0;i<3;i++){ const z = el(endsvg, "text", { "font-family":"Archivo Black", "font-size":34, fill:C.volt }); z.textContent="z"; zzE.push(z); }
+
+/* ============================ ui handles ============================ */
+const ui = { hook:document.getElementById("hook"), promise:document.getElementById("promise"),
+  clock:document.getElementById("clockchip"), owl:document.getElementById("stampOwl"),
+  fish:document.getElementById("stampFish"), cat:document.getElementById("catCard"),
+  endcard:document.getElementById("endcard") };
+
+/* ============================ couch logic ============================ */
+const HIP = [430, 1330]; // seated hip on the couch cushion line
+function couchPose(t) {
+  let p;
+  if (t < B.jump2) {                       // STAGE 1 -- 11:47, upright + engaged
+    p = { ...P.sitUp, tx:HIP[0], ty:HIP[1] };
+    p.torso = 172 + Math.sin(t*2.6)*2;     // engaged micro-lean
+    if (t >= B.windup[0] && t < B.press) { // ANTICIPATION: arm draws back + tiny crouch
+      const k = easeInOutQuad(ramp(t, B.windup[0], B.windup[1]));
+      p.raU = 50 - 45*k; p.raL = 100 - 60*k;
+      p.sy = 1 - 0.03*k; p.px = 0; p.py = 190;
+    } else if (t >= B.press && t < B.press + 0.30) {
+      const k = easeOutCubic(ramp(t, B.press, B.press + 0.18));
+      p.raU = lerp(5, 92, k); p.raL = lerp(40, 96, k);   // snap toward the TV
+      p.eyes = "wide";
+    }
+  } else if (t < B.jump3) {                // STAGE 2 -- 1:13, slouched + nod-off
+    p = { ...P.sitSlouch, tx:HIP[0], ty:HIP[1]+14 };
+    const settle = punch(t, B.jump2, 0.10, 14);          // SQUASH: settle into the cut
+    p.sy = 1 - settle; p.sx = 1 + settle*0.6; p.px = 0; p.py = 176;
+    let tilt = 0;                                        // droop + OVERSHOOT snap-back
+    if (t >= B.droop[0] && t < B.droop[1]) tilt = 38 * easeInOutQuad(ramp(t, B.droop[0], B.droop[1]));
+    else if (t >= B.snapback && t < B.snapback + 0.16) tilt = lerp(38, -8, easeOutCubic(ramp(t, B.snapback, B.snapback + 0.16)));
+    else if (t >= B.snapback + 0.16 && t < B.snapback + 0.30) tilt = lerp(-8, 0, ramp(t, B.snapback + 0.16, B.snapback + 0.30));
+    p.headTilt = (p.headTilt || 0) - tilt;
+    p.eyes = tilt > 20 ? "closed" : "open";
+  } else if (t < B.jump4) {                // STAGE 3 -- 3:26, horizontal + blanket + dead eyes
+    p = { ...P.sitFlop, tx:HIP[0]-24, ty:HIP[1]+26 };
+    const settle = punch(t, B.jump3, 0.12, 14);
+    p.sy = 1 - settle; p.sx = 1 + settle*0.6; p.px = 0; p.py = 160;
+    p.headTilt = (p.headTilt||0) + Math.sin(t*1.4)*2;    // barely alive
+  } else {                                 // STAGE 4 -- 5:58 sunrise FREEZE (THE pause)
+    p = { ...P.sitFlop, tx:HIP[0]-24, ty:HIP[1]+26, eyes:"wide" };
+    const k = easeOutCubic(ramp(t, B.jump4, B.jump4 + 0.35));
+    p.headTilt = lerp(-35, 8, k);          // slow horror head-raise, then stone
+    if (t >= B.blink1 && t < B.blink1 + 0.08) p.eyes = "closed";
+  }
+  poseStick(man, p);
+  if (t < B.jump2) { remote.setAttribute("x", HIP[0]+120); remote.setAttribute("y", 1268 + (t>=B.windup[0]&&t<B.press ? -40*easeInOutQuad(ramp(t,B.windup[0],B.windup[1])) : 0)); }
+  else { remote.setAttribute("x", HIP[0]+150); remote.setAttribute("y", 1400); }
 }
 
-// clock jumps with the light stages (beats.json mirror)
-const CLOCKS = [[0.0,'11:47 PM','Episode 4 of 1'],[5.5,'1:13 AM','Episode 7 of 1'],[8.2,'3:26 AM','Episode 11 of 1'],[10.8,'5:58 AM','The sun is a jump scare']];
+/* ============================ commute logic ============================ */
+function walkScene(t) {
+  const k = ramp(t, B.walk[0], B.walk[1]);
+  const x = lerp(-140, 1220, k);                          // L -> R across frame
+  const ph = (t * 1.9) % 1;
+  const p = walkPose(ph);
+  p.tx = x; p.ty = 1500 - 208 + Math.abs(Math.sin(t * 1.9 * Math.PI * 2)) * -8;
+  p.torso = 168; p.headTilt = -18; p.eyes = "dead"; p.face = 1;
+  p.laU = 8; p.laL = 4;                                   // near arm pinned: briefcase carry
+  poseStick(manW, p);
+  brief.setAttribute("x", x + 30); brief.setAttribute("y", p.ty + 14 + Math.sin(ph * TAU) * 6); // hangs at hand height
+}
 
-window.seek = async function (t) {
-  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
-  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
-  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+/* ============================ camera ============================ */
+const PUNCHES = [[B.press, 0.05, 9], [B.jump4, 0.06, 8], [B.catCard, 0.05, 9]];
+const cam = document.getElementById("cam");
+function doCam(t) {
+  let s = 1;
+  for (const [t0, a, d] of PUNCHES) s += punch(t, t0, a, d);
+  const x = shake(t, B.jump4, 5, 6.5, 50, 0.4), y = shake(t, B.jump4, 4, 6.5, 56, 1.1);
+  cam.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) scale(${s.toFixed(4)})`;
+  cam.style.transformOrigin = "540px 1200px";
+}
 
-  const h = $('hook');
-  if (t < 2.95) {
-    const p = P(t, 0.12, 0.4, back);
-    h.style.opacity = String(Math.min(P(t, 0.12, 0.15), 1 - P(t, 2.7, 0.25, easeIO)));
-    h.style.transform = `translateY(${(1 - p) * 60}px)`;
-  } else h.style.opacity = '0';
-  const pr = $('promise');
-  if (t >= 1.5 && t < 2.95) {
-    pr.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.7, 0.25)));
-    pr.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
-  } else pr.style.opacity = '0';
+/* ============================ master seek ============================ */
+window.seek = async (t) => {
+  t = clamp(t, 0, B.end);
+  stalePaintGuard(t, bgflip, document.getElementById("ui"));
+  const endOn = t >= B.endcard;
+  ui.endcard.style.visibility = endOn ? "visible" : "hidden";
+  const inWalk = !endOn && t >= B.cut5;
+  sceneG.style.visibility = (!endOn && !inWalk) ? "visible" : "hidden";
+  walkG.style.visibility = inWalk ? "visible" : "hidden";
 
-  // clock: persistent 3.0 - 13.3, content jumps
-  const ck = $('clock');
-  if (t >= 2.95 && t < 13.3) {
-    let c = CLOCKS[0];
-    for (const row of CLOCKS) if (t >= row[0]) c = row;
-    ck.querySelector('.t').textContent = c[1];
-    ck.querySelector('.lab').textContent = c[2];
-    // pop on each jump
-    let pop = 1;
-    for (const row of CLOCKS) { const pj = P(t, row[0], 0.35, back); if (t >= row[0] && t < row[0] + 0.35) pop = 0.85 + 0.15 * pj; }
-    ck.querySelector('.t').style.transform = `scale(${pop})`;
-    ck.style.transform = t >= 10.8 ? 'translateX(-300px)' : 'none';
-    ck.style.opacity = String(Math.min(P(t, 2.95, 0.3), 1 - P(t, 13.05, 0.25)));
-  } else ck.style.opacity = '0';
+  if (!endOn && !inWalk) {
+    couchPose(t);
+    const on = t >= B.press && t < B.jump4;               // TV flicker = secondary action
+    tvScreen.setAttribute("fill", on ? (Math.sin(t*13) > -0.3 ? "#31427A" : "#26355F") : "#141B30");
+    glow.setAttribute("opacity", on ? (0.22 + 0.06*Math.sin(t*13)).toFixed(2) : "0");
+    blanket.setAttribute("opacity", t >= B.jump3 ? ".92" : "0");
+    sun.setAttribute("opacity", t < B.jump4 ? "0" : easeOutCubic(ramp(t, B.jump4, B.sunPeak)).toFixed(2));
+  } else if (inWalk) walkScene(t);
+  doCam(endOn ? 0 : t);
 
-  // speech bubble during stage2 (arguing)
-  const bub = $('bubble');
-  if (t >= 5.9 && t < 8.0) {
-    const ein = P(t, 5.9, 0.35, back);
-    bub.style.opacity = String(Math.min(P(t, 5.9, 0.15), 1 - P(t, 7.75, 0.25)));
-    bub.style.transform = `scale(${0.85 + 0.15 * ein})`;
-  } else bub.style.opacity = '0';
-
-  card($('j-owl'), t, 6.6, 8.1);
-  card($('j-gf'), t, 8.6, 10.6);
-
-  // 9:00 AM chip during the walk
-  const mo = $('morning');
-  if (t >= 13.5 && t < 16.4) {
-    mo.style.opacity = String(Math.min(P(t, 13.5, 0.25), 1 - P(t, 16.15, 0.25)));
-  } else mo.style.opacity = '0';
-
-  $('catshade').style.opacity = String(t >= 16.4 && t < 19.0 ? Math.min(P(t, 16.4, 0.3), 1 - P(t, 18.75, 0.25)) : 0);
-  const cc = $('catcard');
-  if (t >= 16.6 && t < 19.0) {
-    const ein = P(t, 16.6, 0.4, easeOut);
-    cc.style.opacity = String(Math.min(ein, 1 - P(t, 18.75, 0.25)));
-    cc.style.transform = `translateY(${(1 - ein) * 60}px)`;
-  } else cc.style.opacity = '0';
-
-  const end = $('end');
-  if (t >= 19.0) {
-    end.style.opacity = String(P(t, 19.0, 0.25));
-    const p = P(t, 19.1, 0.4, back);
-    $('endline').style.transform = `scale(${0.85 + 0.15 * p})`;
-    $('endline').style.opacity = String(P(t, 19.1, 0.2));
-    $('handle').style.opacity = String(P(t, 19.6, 0.3));
-    $('endsub').style.opacity = String(P(t, 19.95, 0.3));
-  } else end.style.opacity = '0';
+  // overlays
+  textIn(ui.hook, t, B.hookText); if (t >= B.jump2) ui.hook.style.visibility = "hidden";
+  if (t >= B.promiseText && t < B.jump2) textIn(ui.promise, t, B.promiseText); else ui.promise.style.visibility = "hidden";
+  const chip = ui.clock;
+  if (endOn) chip.style.visibility = "hidden";
+  else { chip.style.visibility = "visible";
+    chip.textContent = t < B.jump2 ? "11:47 PM" : t < B.jump3 ? "1:13 AM" : t < B.jump4 ? "3:26 AM" : t < B.cut5 ? "5:58 AM" : "9:00 AM"; }
+  if (t >= B.owlStamp && t < B.jump3) snapIn(ui.owl, t, B.owlStamp, 0.13, -4); else ui.owl.style.visibility = "hidden";
+  if (t >= B.fishStamp && t < B.jump4) snapIn(ui.fish, t, B.fishStamp, 0.13, 4); else ui.fish.style.visibility = "hidden";
+  if (t >= B.catCard && t < B.endcard) snapIn(ui.cat, t, B.catCard, 0.16, 0); else ui.cat.style.visibility = "hidden";
+  if (endOn) {
+    poseStick(manE, { ...P.flat, tx:520, ty:415, sx:0.62, sy:0.62*(1+Math.sin(t*2.2)*0.015), px:0, py:0, face:-0.2 });
+    zs(zzE, t, 610, 370, true);
+  } else zs(zzE, t, 0, 0, false);
+  await compositorCommit();
 };
 window.seek(0);
-</script>
-</body></html>
+</script></body></html>

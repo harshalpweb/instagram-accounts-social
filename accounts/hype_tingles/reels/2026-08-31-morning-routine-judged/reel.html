@@ -1,176 +1,607 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
-@font-face { font-family:'Archivo Black'; src:url('../../brand/fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
-@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
-@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
-@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
+/* hype_tingles 2D stickman prototype — H1 "morning routine judged", meme cut.
+   Contract: window.REEL={duration,fps}; window.seek(t) lays out state at t.
+   Every motion principle is explicit below: anticipation windups, squash &
+   stretch with fast recovery, hard comedic holds. Beat table: window.BEATS. */
+@font-face { font-family:'Archivo Black'; src:url('fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
+@font-face { font-family:'Space Grotesk'; src:url('fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
 
-:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; }
+:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; --panel:#1B1922; --line:#2A2733; }
 * { margin:0; padding:0; box-sizing:border-box; }
-html,body { width:1080px; height:1920px; overflow:hidden; background:var(--ink); }
-body { color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
-#char { position:absolute; inset:0; width:1080px; height:1920px; object-fit:cover; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--ink); color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
+body::before { content:""; position:absolute; width:1100px; height:1100px; right:-480px; top:-480px;
+  background:radial-gradient(circle, rgba(255,77,157,0.16) 0%, rgba(255,77,157,0) 62%); pointer-events:none; z-index:0; }
 
-/* hook + promise (top zone, over the 3D) */
-#hook { position:absolute; top:170px; left:70px; right:70px; opacity:0; }
-#hook .big { font-family:'Archivo Black'; font-size:92px; line-height:1.05; text-transform:uppercase; text-shadow:0 4px 24px rgba(0,0,0,.8); }
-#hook .big .hl { color:var(--volt); }
-#promise { position:absolute; top:470px; left:70px; opacity:0; background:var(--pink); color:var(--ink);
-  font-family:'Archivo Black'; font-size:44px; padding:18px 34px; letter-spacing:.06em; }
+#cam { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+.shot { visibility:hidden; }
 
-/* rewind flash */
-#flash { position:absolute; inset:0; background:var(--paper); opacity:0; }
-#rewlines { position:absolute; inset:0; opacity:0;
-  background:repeating-linear-gradient(0deg, transparent 0 46px, rgba(216,255,58,.16) 46px 52px); }
+/* ------- overlay layer (outside camera shake, always readable) ------- */
+#ui { position:absolute; inset:0; z-index:5; }
+.snap { visibility:hidden; will-change:transform; }
 
-/* clock chip (top right) */
-#clock { position:absolute; top:150px; right:70px; opacity:0; background:rgba(17,16,21,.82);
-  border:3px solid var(--volt); color:var(--volt); font-family:'Archivo Black'; font-size:54px;
-  padding:16px 30px; letter-spacing:.08em; }
+#hook { position:absolute; top:150px; left:70px; right:70px; text-align:center;
+  font-family:'Archivo Black'; font-size:76px; line-height:1.1; text-transform:none;
+  color:var(--paper); text-shadow:0 6px 0 rgba(0,0,0,.45); transform-origin:50% 50%; }
+#hook .hl { color:var(--volt); }
+#promise { position:absolute; top:340px; left:70px; right:70px; text-align:center;
+  font-family:'Archivo Black'; font-size:54px; color:var(--pink); transform-origin:50% 50%;
+  text-shadow:0 5px 0 rgba(0,0,0,.45); }
 
-/* step chip (upper left, under hook zone) */
-#step { position:absolute; top:1440px; left:70px; opacity:0; background:rgba(17,16,21,.82);
-  border:3px solid #2A2733; padding:18px 30px; }
-#step .k { color:var(--soft); font-size:26px; font-weight:500; letter-spacing:.22em; }
-#step .v { font-family:'Archivo Black'; font-size:40px; margin-top:6px; }
+#clockchip { position:absolute; top:60px; right:60px; background:var(--panel); border:4px solid var(--line);
+  border-radius:20px; padding:16px 30px; font-weight:700; font-size:44px; color:var(--volt);
+  letter-spacing:.06em; visibility:hidden; }
 
-/* judge cards (upper third, compact) */
-.jcard { position:absolute; left:70px; right:70px; top:260px; background:#1B1922; border:3px solid #2A2733;
-  border-radius:30px; padding:44px 48px; opacity:0; }
-.jcard .who { display:flex; align-items:center; gap:26px; }
-.jcard .em { font-size:92px; line-height:1; font-family:'Segoe UI Emoji'; }
-.jcard .name { font-family:'Archivo Black'; font-size:40px; letter-spacing:.05em; color:var(--volt); }
-.jcard .role { font-size:25px; color:var(--soft); font-weight:500; letter-spacing:.14em; margin-top:8px; text-transform:uppercase; }
-.jcard .line { font-weight:700; font-size:56px; line-height:1.16; margin-top:36px; }
-.jcard .score { position:absolute; right:48px; top:44px; font-family:'Archivo Black'; font-size:74px; color:var(--pink); }
+/* judge stamps — rubber-stamp slam */
+.stamp { position:absolute; left:110px; right:110px; background:var(--panel); border:6px solid var(--volt);
+  border-radius:30px; padding:34px 40px; transform-origin:50% 50%; box-shadow:0 14px 0 rgba(0,0,0,.4); }
+.stamp .who { display:flex; align-items:center; gap:24px; }
+.stamp .em { font-size:78px; line-height:1; font-family:'Segoe UI Emoji'; }
+.stamp .name { font-family:'Archivo Black'; font-size:36px; letter-spacing:.05em; color:var(--volt); }
+.stamp .line { font-weight:700; font-size:52px; line-height:1.15; margin-top:18px; }
+.stamp .line .accent { color:var(--pink); }
+#stampDog   { top:1440px; border-color:var(--volt); }
+#stampPigeon{ top:250px;  border-color:var(--pink); }
+#stampOwl   { top:280px;  border-color:var(--volt); }
 
-/* cat payoff (volt slide) */
-#catshade { position:absolute; inset:0; background:var(--volt); opacity:0; }
-#catcard { position:absolute; left:80px; right:80px; top:560px; opacity:0; color:var(--ink); }
-#catcard .who { display:flex; align-items:center; gap:30px; }
-#catcard .em { font-size:120px; font-family:'Segoe UI Emoji'; }
-#catcard .name { font-family:'Archivo Black'; font-size:52px; }
-#catcard .role { font-size:28px; font-weight:700; letter-spacing:.16em; margin-top:8px; }
-#catcard .line { font-family:'Archivo Black'; font-size:84px; line-height:1.12; margin-top:56px; }
-#catcard .score { font-family:'Archivo Black'; font-size:150px; margin-top:44px; }
+/* cat verdict card */
+#catCard { position:absolute; left:90px; right:90px; top:420px; background:var(--panel); border:3px solid var(--line);
+  border-radius:36px; padding:60px 56px; transform-origin:50% 0%; }
+#catCard .who { display:flex; align-items:center; gap:30px; }
+#catCard .em { font-size:104px; line-height:1; font-family:'Segoe UI Emoji'; }
+#catCard .name { font-family:'Archivo Black'; font-size:42px; color:var(--volt); letter-spacing:.05em; }
+#catCard .role { font-size:27px; color:var(--soft); font-weight:500; letter-spacing:.14em; text-transform:uppercase; margin-top:8px; }
+#catCard .line { font-weight:700; font-size:60px; line-height:1.2; margin-top:44px; }
+#catCard .line .accent { color:var(--pink); }
 
 /* endcard */
-#end { position:absolute; inset:0; background:var(--ink); opacity:0; }
-#endline { position:absolute; top:730px; left:80px; right:80px; text-align:center;
-  font-family:'Archivo Black'; font-size:78px; line-height:1.1; }
-#endline .hl { color:var(--volt); }
-#handle { position:absolute; top:1010px; left:0; right:0; text-align:center; color:var(--pink);
-  font-family:'Archivo Black'; font-size:52px; opacity:0; }
-#endsub { position:absolute; top:1110px; left:0; right:0; text-align:center; color:var(--soft);
-  font-size:34px; font-weight:500; opacity:0; }
+#endcard { position:absolute; inset:0; background:var(--ink); z-index:8; visibility:hidden; }
+#endcard .wm { font-family:'Archivo Black'; font-size:92px; color:var(--volt); text-align:center; margin-top:600px; }
+#endcard .wm .tingle { color:var(--pink); }
+#endcard .tag { text-align:center; font-weight:700; font-size:46px; color:var(--paper); margin-top:56px; }
+#endcard svg { position:absolute; left:0; bottom:0; width:1080px; height:600px; inset:auto; }
 </style></head><body>
-<img id="char" alt="">
-<div id="rewlines"></div>
-<div id="flash"></div>
 
-<div id="hook"><div class="big">His 5AM routine lasted <span class="hl">four minutes.</span></div></div>
-<div id="promise">The animals kept score.</div>
-<div id="clock">4:59 AM</div>
-<div id="step"><div class="k">THE ROUTINE</div><div class="v">STEP 1 OF 47</div></div>
+<div id="cam">
+  <svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+</div>
 
-<div class="jcard" id="j-dog"><div class="who"><div class="em">&#128021;</div><div><div class="name">THE DOG</div><div class="role">Morale correspondent</div></div></div><div class="score">10/10</div><div class="line">AWAKE!! He is AWAKE!!</div></div>
-<div class="jcard" id="j-pig"><div class="who"><div class="em">&#128330;</div><div><div class="name">THE PIGEON</div><div class="role">Cold exposure expert</div></div></div><div class="score">8/10</div><div class="line">I do this in fountains.</div></div>
-<div class="jcard" id="j-owl"><div class="who"><div class="em">&#129417;</div><div><div class="name">THE OWL</div><div class="role">Mindfulness scholar</div></div></div><div class="score">5/10</div><div class="line">That is a squat.</div></div>
-<div class="jcard" id="j-rac"><div class="who"><div class="em">&#129437;</div><div><div class="name">THE RACCOON</div><div class="role">Asset recovery</div></div></div><div class="score">2/10</div><div class="line">Sold his journal.</div></div>
+<div id="ui">
+  <div id="hook" class="snap">His 5AM routine lasted <span class="hl">four minutes.</span></div>
+  <div id="promise" class="snap">The animals kept score.</div>
+  <div id="clockchip">4:59 AM</div>
 
-<div id="catshade"></div>
-<div id="catcard"><div class="who"><div class="em">&#128008;</div><div><div class="name">THE CAT</div><div class="role">FINAL VERDICT</div></div></div>
-<div class="line">Back in bed by 5:04. Finally, some honesty.</div><div class="score">6/10</div></div>
+  <div id="stampDog" class="stamp snap">
+    <div class="who"><div class="em">&#128021;</div><div class="name">DOG</div></div>
+    <div class="line">AWAKE!! <span class="accent">10/10!!</span></div>
+  </div>
+  <div id="stampPigeon" class="stamp snap">
+    <div class="who"><div class="em">&#128038;</div><div class="name">PIGEON</div></div>
+    <div class="line">I do this in fountains. <span class="accent">8/10.</span></div>
+  </div>
+  <div id="stampOwl" class="stamp snap">
+    <div class="who"><div class="em">&#129417;</div><div class="name">OWL</div></div>
+    <div class="line">Technically unconscious. <span class="accent">5/10.</span></div>
+  </div>
 
-<div id="end"><div id="endline">The animals rate humans <span class="hl">daily.</span></div>
-<div id="handle">@hype_tingles</div><div id="endsub">New verdicts every day. The cat is never impressed.</div></div>
+  <div id="catCard" class="snap">
+    <div class="who"><div class="em">&#128008;</div><div><div class="name">CAT</div><div class="role">Final verdict</div></div></div>
+    <div class="line">Back in bed by 5:04. Finally, some honesty. <span class="accent">6/10.</span></div>
+  </div>
+
+  <div id="endcard">
+    <div class="wm">HYPE<span class="tingle"> TINGLES</span></div>
+    <div class="tag">The animals rate humans daily.</div>
+    <svg id="endsvg" viewBox="0 0 1080 600"></svg>
+  </div>
+</div>
 
 <script>
-window.REEL = { duration: 21.0, fps: 30 };
-const NF = 630;
-const $ = id => document.getElementById(id);
-const c01 = p => Math.max(0, Math.min(1, p));
-const easeOut = p => 1 - Math.pow(1 - p, 3);
-const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
-const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
-const P = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
-const img = $('char');
+"use strict";
+/* ============================ beat table ============================ */
+const B = {
+  hookText: 0.15,
+  alarm: 0.40,
+  anticipation_bed: 0.90,   // ANTICIPATION: compress INTO bed before launch
+  launch: 1.30,             // STRETCH along motion axis
+  apexHold: [1.62, 1.74],   // 4-frame airborne hang
+  land: 1.95,               // SQUASH at feet, 2-frame peak, fast recovery
+  dogStamp: 2.05,
+  hold1: [2.18, 2.45],      // comedic freeze #1 (short)
+  cut2: 2.45,
+  promiseText: 2.55,
+  teeter: [2.65, 3.30],
+  anticipation_crouch: [3.30, 3.62], // ANTICIPATION: windup crouch on tub rim
+  crouchHold: [3.62, 3.70],          // 2-frame hold at max windup
+  leap: 3.70,               // STRETCH on rise, tuck at apex
+  splash: 4.05,             // impact: shake + zoom punch + splash burst
+  shiver: [4.18, 4.65],
+  freezeStare: [4.65, 5.60],// comedic pause #2 (THE pause): dead-eyed hold
+  blink1: 5.25,
+  pigeonStamp: 4.85,
+  sink: [5.60, 6.10],
+  cut3: 6.10,
+  nods: [6.55, 6.95, 7.35], // droop + overshoot snap-backs
+  tipAnticipation: [7.55, 7.70], // tiny counter-lean BACK before falling
+  tipFall: 7.70,
+  tipImpact: 8.00,          // rigid statue tip-over, squash on shoulder
+  owlStamp: 8.12,
+  hold3: [8.20, 9.30],      // comedic pause #3, single blink at 8.90
+  blink2: 8.90,
+  cut4: 9.30,
+  sprint: [9.30, 9.95],
+  brake: [9.95, 10.15],     // ANTICIPATION: brake-crouch before dive
+  dive: 10.15,              // horizontal STRETCH, superman arms
+  bedImpact: 10.45,         // mattress itself squashes (secondary S&S on prop)
+  asleep: 11.00,
+  catCard: 11.15,
+  hold4: [11.40, 12.30],    // comedic pause #4 under verdict card
+  endcard: 12.30,
+  end: 14.20
+};
+window.BEATS = B;
+window.REEL = { duration: B.end, fps: 30 };
 
-function card(el, t, t0, t1) {
-  const ein = P(t, t0, 0.4, easeOut);
-  const eout = P(t, t1 - 0.3, 0.3, easeIO);
-  el.style.opacity = (t >= t0 && t < t1) ? String(Math.min(ein, 1 - eout)) : '0';
-  el.style.transform = `translateY(${(1 - ein) * 70 + eout * -50}px)`;
+/* ============================ helpers ============================ */
+const TAU = Math.PI * 2;
+const clamp = (v,a,b)=>Math.max(a,Math.min(b,v));
+const lerp = (a,b,k)=>a+(b-a)*k;
+const ramp = (t,a,b)=>clamp((t-a)/(b-a),0,1);
+const easeOutCubic = k=>1-Math.pow(1-k,3);
+const easeInCubic = k=>k*k*k;
+const easeInOutQuad = k=>k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+const easeOutBack = k=>{const c=1.70158;return 1+(c+1)*Math.pow(k-1,3)+c*Math.pow(k-1,2);};
+const easeOutBackBig = k=>{const c=3.2;return 1+(c+1)*Math.pow(k-1,3)+c*Math.pow(k-1,2);};
+// impulse that starts at max at t0 and decays — for zoom punches
+const punch=(t,t0,amp,decay)=>t<t0?0:amp*Math.exp(-(t-t0)*decay);
+// decaying oscillation — camera shake
+const shake=(t,t0,amp,decay,freq,ph)=>t<t0?0:amp*Math.exp(-(t-t0)*decay)*Math.sin((t-t0)*freq*TAU+ph);
+const D2R = Math.PI/180;
+const dir = a => [Math.sin(a*D2R), Math.cos(a*D2R)]; // 0=down 90=right 180=up
+
+const SVGNS="http://www.w3.org/2000/svg";
+function el(parent,tag,attrs){const e=document.createElementNS(SVGNS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e;}
+const stage=document.getElementById("stage");
+
+/* ============================ stickman rig ============================ */
+// FK stickman. Pose fields (angles deg, body frame, 0=down 90=screen-right 180=up):
+// tx,ty hip position; rot whole-body; torso angle (180=up); headTilt extra;
+// laU,laL,raU,raL arm segs; llU,llL,rlU,rlL leg segs; eyes state; face dir (+1 right)
+const L={torso:170,neck:26,head:56,uArm:95,lArm:88,uLeg:105,lLeg:105};
+function makeStick(parent){
+  const g=el(parent,"g",{});
+  const w=17, cap={"stroke":"#F4F2EC","stroke-width":w,"stroke-linecap":"round","fill":"none","stroke-linejoin":"round"};
+  const mk=()=>el(g,"polyline",cap);
+  const s={g,
+    lArm:mk(), lLeg:mk(), torso:mk(), rLeg:mk(), rArm:mk(),
+    head:el(g,"circle",{"fill":"#111015","stroke":"#F4F2EC","stroke-width":15}),
+    eyeL:el(g,"ellipse",{fill:"#F4F2EC"}), eyeR:el(g,"ellipse",{fill:"#F4F2EC"}),
+    lidL:el(g,"line",{"stroke":"#F4F2EC","stroke-width":9,"stroke-linecap":"round"}),
+    lidR:el(g,"line",{"stroke":"#F4F2EC","stroke-width":9,"stroke-linecap":"round"})};
+  return s;
+}
+function poseStick(s,p){
+  const hip=[0,0];
+  const tTop=[hip[0]+dir(p.torso)[0]*L.torso, hip[1]+dir(p.torso)[1]*L.torso];
+  const headC=[tTop[0]+dir(p.torso+(p.headTilt||0))[0]*(L.neck+L.head*0.9),
+               tTop[1]+dir(p.torso+(p.headTilt||0))[1]*(L.neck+L.head*0.9)];
+  const seg=(o,a1,l1,a2,l2)=>{const m=[o[0]+dir(a1)[0]*l1,o[1]+dir(a1)[1]*l1];
+    return [o,m,[m[0]+dir(a2)[0]*l2,m[1]+dir(a2)[1]*l2]];};
+  const pts=a=>a.map(q=>q[0].toFixed(1)+","+q[1].toFixed(1)).join(" ");
+  s.torso.setAttribute("points",pts([hip,tTop]));
+  s.lArm.setAttribute("points",pts(seg(tTop,p.laU,L.uArm,p.laL,L.lArm)));
+  s.rArm.setAttribute("points",pts(seg(tTop,p.raU,L.uArm,p.raL,L.lArm)));
+  s.lLeg.setAttribute("points",pts(seg(hip,p.llU,L.uLeg,p.llL,L.lLeg)));
+  s.rLeg.setAttribute("points",pts(seg(hip,p.rlU,L.uLeg,p.rlL,L.lLeg)));
+  s.head.setAttribute("cx",headC[0]); s.head.setAttribute("cy",headC[1]); s.head.setAttribute("r",L.head);
+  // face: eyes offset toward facing dir
+  const f=p.face===undefined?1:p.face, ex=headC[0]+f*16, ey=headC[1]-6, gap=21;
+  const eyes=p.eyes||"open";
+  // NB: use display, NOT visibility — an explicit visibility:visible on a child
+  // resurrects it inside a visibility:hidden ancestor (this exact bug shipped
+  // ghost eyelids/z-glyphs from hidden shots into 3 probe rounds).
+  const show=(e,on)=>e.setAttribute("display",on?"":"none");
+  const setE=(e,x,rx,ry)=>{e.setAttribute("cx",x);e.setAttribute("cy",ey);e.setAttribute("rx",rx);e.setAttribute("ry",ry);};
+  if(eyes==="open"){show(s.eyeL,1);show(s.eyeR,1);show(s.lidL,0);show(s.lidR,0);setE(s.eyeL,ex-gap,7,9);setE(s.eyeR,ex+gap,7,9);}
+  else if(eyes==="wide"){show(s.eyeL,1);show(s.eyeR,1);show(s.lidL,0);show(s.lidR,0);setE(s.eyeL,ex-gap,12,14);setE(s.eyeR,ex+gap,12,14);}
+  else if(eyes==="dead"){show(s.eyeL,0);show(s.eyeR,0);show(s.lidL,1);show(s.lidR,1);
+    s.lidL.setAttribute("x1",ex-gap-11);s.lidL.setAttribute("x2",ex-gap+11);s.lidL.setAttribute("y1",ey);s.lidL.setAttribute("y2",ey);
+    s.lidR.setAttribute("x1",ex+gap-11);s.lidR.setAttribute("x2",ex+gap+11);s.lidR.setAttribute("y1",ey);s.lidR.setAttribute("y2",ey);}
+  else { // closed: gentle down-arcs drawn as short lines
+    show(s.eyeL,0);show(s.eyeR,0);show(s.lidL,1);show(s.lidR,1);
+    s.lidL.setAttribute("x1",ex-gap-10);s.lidL.setAttribute("x2",ex-gap+10);s.lidL.setAttribute("y1",ey+3);s.lidL.setAttribute("y2",ey+3);
+    s.lidR.setAttribute("x1",ex+gap-10);s.lidR.setAttribute("x2",ex+gap+10);s.lidR.setAttribute("y1",ey+3);s.lidR.setAttribute("y2",ey+3);}
+  // transform: place, rotate (optional pivot rx,ry), then squash about pivot px,py
+  const sx=p.sx||1, sy=p.sy||1, px=p.px||0, py=p.py||0;
+  const rot=(p.rx||p.ry)?`rotate(${p.rot||0},${p.rx||0},${p.ry||0})`:`rotate(${p.rot||0})`;
+  s.g.setAttribute("transform",
+    `translate(${p.tx},${p.ty}) ${rot} translate(${px},${py}) scale(${sx},${sy}) translate(${-px},${-py})`);
+}
+const mixPose=(a,b,k)=>{const o={};for(const key in a){o[key]=(typeof a[key]==="number"&&typeof b[key]==="number")?lerp(a[key],b[key],k):(k<0.5?a[key]:b[key]);}for(const key in b)if(!(key in o))o[key]=b[key];return o;};
+
+/* base poses (hip-local angle sets) */
+const P={
+  idle:{rot:0,torso:180,laU:12,laL:6,raU:-12,raL:-6,llU:6,llL:2,rlU:-6,rlL:-2,eyes:"open",face:1},
+  sleep:{rot:-90,torso:180,headTilt:0,laU:55,laL:135,raU:40,raL:120,llU:10,llL:-4,rlU:-6,rlL:4,eyes:"closed",face:-0.2},
+  curl:{rot:-90,torso:170,laU:40,laL:100,raU:25,raL:85,llU:60,llL:-30,rlU:45,rlL:-15,eyes:"closed",face:-0.2},
+  launch:{rot:0,torso:182,laU:225,laL:250,raU:135,raL:110,llU:30,llL:80,rlU:-18,rlL:-60,eyes:"wide",face:1},
+  apex:{rot:0,torso:180,laU:120,laL:100,raU:-120,raL:-100,llU:35,llL:-30,rlU:-35,rlL:30,eyes:"wide",face:1},
+  landCrouch:{rot:0,torso:176,laU:115,laL:70,raU:-115,raL:-70,llU:48,llL:-8,rlU:-48,rlL:8,eyes:"wide",face:1},
+  stand:{rot:0,torso:180,laU:14,laL:8,raU:-14,raL:-8,llU:6,llL:2,rlU:-6,rlL:-2,eyes:"open",face:1},
+  teeter:{rot:0,torso:178,laU:150,laL:190,raU:-150,raL:-190,llU:5,llL:2,rlU:-5,rlL:-2,eyes:"open",face:1},
+  windup:{rot:8,torso:150,laU:-70,laL:-75,raU:-55,raL:-60,llU:55,llL:-15,rlU:-40,rlL:12,eyes:"open",face:1},
+  ball:{rot:20,torso:160,laU:95,laL:-165,raU:85,raL:-155,llU:100,llL:-140,rlU:88,rlL:-130,eyes:"closed",face:1},
+  soak:{rot:0,torso:178,laU:60,laL:-120,raU:-60,raL:120,llU:80,llL:-60,rlU:-80,rlL:60,eyes:"dead",face:0},
+  zen:{rot:0,torso:180,laU:55,laL:-25,raU:-55,raL:25,llU:80,llL:-155,rlU:-80,rlL:155,eyes:"closed",face:0},
+  sprint:{rot:0,torso:158,laU:110,laL:60,raU:-60,raL:-120,llU:70,llL:15,rlU:-55,rlL:-25,eyes:"wide",face:-1},
+  brakeP:{rot:0,torso:190,laU:160,laL:175,raU:-30,raL:-60,llU:-35,llL:5,rlU:20,rlL:-6,eyes:"wide",face:-1},
+  dive:{rot:-90,torso:180,laU:186,laL:178,raU:174,raL:182,llU:12,llL:-8,rlU:-10,rlL:6,eyes:"wide",face:-1},
+  flat:{rot:-90,torso:180,laU:60,laL:140,raU:45,raL:125,llU:8,llL:-3,rlU:-6,rlL:3,eyes:"closed",face:-0.2},
+};
+
+/* ============================ scenery builders ============================ */
+const C={paper:"#F4F2EC",soft:"#9A96A3",volt:"#D8FF3A",pink:"#FF4D9D",panel:"#1B1922",line:"#2A2733",water:"#7FA8BC"};
+function room(g){ // floor + back wall line
+  el(g,"rect",{x:0,y:1500,width:1080,height:420,fill:"#161419"});
+  el(g,"line",{x1:0,y1:1500,x2:1080,y2:1500,stroke:C.line,"stroke-width":6});
+}
+function bedroom(g){
+  room(g);
+  // bed: frame, mattress, pillow (pillow LEFT)
+  el(g,"rect",{x:120,y:1436,width:660,height:64,rx:14,fill:C.panel,stroke:C.line,"stroke-width":6}); // frame
+  const mat=el(g,"g",{});
+  el(mat,"rect",{x:140,y:1360,width:620,height:84,rx:26,fill:"#232030",stroke:C.paper,"stroke-width":7});
+  el(mat,"rect",{x:160,y:1318,width:170,height:52,rx:22,fill:C.paper,opacity:.92}); // pillow
+  el(g,"rect",{x:806,y:1392,width:180,height:108,rx:10,fill:C.panel,stroke:C.line,"stroke-width":6}); // nightstand
+  const clockG=el(g,"g",{});
+  el(clockG,"rect",{x:826,y:1318,width:140,height:66,rx:12,fill:"#0B0A0E",stroke:C.volt,"stroke-width":5});
+  const ct=el(clockG,"text",{x:896,y:1364,"text-anchor":"middle","font-family":"Space Grotesk","font-weight":"700","font-size":"40",fill:C.volt});
+  ct.textContent="4:59";
+  const arcs=el(g,"g",{stroke:C.volt,"stroke-width":7,fill:"none","stroke-linecap":"round"});
+  el(arcs,"path",{d:"M 806 1300 q -18 30 0 60"}); el(arcs,"path",{d:"M 986 1300 q 18 30 0 60"});
+  el(arcs,"path",{d:"M 786 1288 q -30 42 0 84"}); el(arcs,"path",{d:"M 1006 1288 q 30 42 0 84"});
+  return {mat,clockG,clockText:ct,arcs};
+}
+function bathroom(g){
+  room(g);
+  for(let y=300;y<=1100;y+=200) el(g,"line",{x1:0,y1:y,x2:1080,y2:y,stroke:"#1A1820","stroke-width":4});
+  // (mirror prop removed: a dark rounded rect in this minimal void read as an
+  //  empty UI card, not a mirror -- CoS frame review 2026-08-31)
+  const tub=el(g,"g",{});
+  el(tub,"path",{d:"M 250 1180 L 830 1180 L 810 1440 Q 800 1500 740 1500 L 340 1500 Q 280 1500 270 1440 Z",
+    fill:C.panel,stroke:C.paper,"stroke-width":9});
+  const water=el(g,"g",{});
+  el(water,"path",{d:"M 268 1270 L 812 1270 L 800 1440 Q 792 1492 740 1492 L 340 1492 Q 288 1492 280 1440 Z",
+    fill:C.water,opacity:.85});
+  const surface=el(g,"ellipse",{cx:540,cy:1270,rx:272,ry:16,fill:"#A8C8D8",opacity:.9});
+  const rim=el(g,"path",{d:"M 236 1160 L 844 1160 L 844 1196 L 236 1196 Z",fill:"#26232f",stroke:C.paper,"stroke-width":8}); // front rim strip
+  const splash=el(g,"g",{});
+  return {water,surface,rim,splash};
+}
+function livingroom(g){
+  room(g);
+  el(g,"rect",{x:330,y:1466,width:420,height:38,rx:19,fill:C.pink,opacity:.75}); // mat
+  el(g,"rect",{x:850,y:1360,width:110,height:140,rx:10,fill:C.panel,stroke:C.line,"stroke-width":6}); // pot
+  el(g,"path",{d:"M 905 1360 q -60 -90 -20 -160 M 905 1360 q 10 -110 70 -140 M 905 1360 q -110 -40 -150 -20",
+    stroke:"#5F7A4A","stroke-width":12,fill:"none","stroke-linecap":"round"});
+  const ring=el(g,"circle",{cx:540,cy:1050,r:60,fill:"none",stroke:C.volt,"stroke-width":8,opacity:.9});
+  const dust=el(g,"g",{});
+  return {ring,dust};
 }
 
-const CLOCKS = [[3.0,'4:59 AM'],[4.5,'5:00 AM'],[7.0,'5:01 AM'],[10.5,'5:02 AM'],[13.5,'5:03 AM'],[14.6,'5:04 AM']];
-const STEPS = [[4.5,'STEP 1: RISE'],[7.0,'STEP 2: COLD PLUNGE'],[10.5,'STEP 3: STILLNESS'],[13.5,'STEP 4: JOURNAL'],[14.6,'STEP 4: ABANDONED']];
+/* full-canvas rect FIRST in the svg: its per-frame 1-LSB fill flip damages the
+   whole #cam layer so every tile re-rasters (see stale-paint guard in seek) */
+const bgflip=el(stage,"rect",{x:0,y:0,width:1080,height:1920,fill:"none"});
 
-window.seek = async function (t) {
-  const idx = Math.max(1, Math.min(NF, Math.floor(t * 30) + 1));
-  const src = `frames/frame_${String(idx).padStart(4, '0')}.png`;
-  if (img.getAttribute('src') !== src) { img.src = src; await img.decode(); }
+/* shots */
+function shotG(){const g=el(stage,"g",{class:"shot"});return g;}
+const s1g=shotG(), s2g=shotG(), s3g=shotG(), s4g=shotG();
+const s1=bedroom(s1g), s2=bathroom(s2g), s3=livingroom(s3g), s4=bedroom(s4g);
+const speedlines=el(s4g,"g",{stroke:C.soft,"stroke-width":8,"stroke-linecap":"round",opacity:0});
+for(let i=0;i<5;i++) el(speedlines,"line",{x1:0,y1:0,x2:120,y2:0});
+const zz1=[],zz4=[];
+for(let i=0;i<3;i++){const z=el(s1g,"text",{"font-family":"Archivo Black","font-size":42,fill:C.volt});z.textContent="z";zz1.push(z);}
+for(let i=0;i<3;i++){const z=el(s4g,"text",{"font-family":"Archivo Black","font-size":42,fill:C.volt});z.textContent="z";zz4.push(z);}
+// splash burst parts (built once, driven by seek)
+const splashBits=[];
+for(let i=0;i<10;i++){splashBits.push(el(s2.splash,"circle",{r:12+(i%3)*7,fill:i%2?C.paper:"#A8C8D8"}));}
+const dustBits=[];
+for(let i=0;i<6;i++){dustBits.push(el(s3.dust,"circle",{r:10+(i%3)*6,fill:C.soft}));}
 
-  // hook 0.15 - 2.95
-  const h = $('hook');
-  if (t < 2.95) {
-    const p = P(t, 0.15, 0.4, back);
-    h.style.opacity = String(Math.min(P(t, 0.15, 0.15), 1 - P(t, 2.7, 0.25, easeIO)));
-    h.style.transform = `translateY(${(1 - p) * 60}px)`;
-  } else h.style.opacity = '0';
-  const pr = $('promise');
-  if (t >= 1.5 && t < 2.95) {
-    pr.style.opacity = String(Math.min(P(t, 1.5, 0.2), 1 - P(t, 2.7, 0.25)));
-    pr.style.transform = `scale(${0.8 + 0.2 * P(t, 1.5, 0.35, back)})`;
-  } else pr.style.opacity = '0';
+const man1=makeStick(s1g), man2=makeStick(s2g), man3=makeStick(s3g), man4=makeStick(s4g);
+// water sits visually OVER the seated body: re-append water+rim after stickman in s2
+s2g.appendChild(s2.water.parentNode===s2g?s2.water:s2.water); s2g.appendChild(s2.surface); s2g.appendChild(s2.rim); s2g.appendChild(s2.splash);
+// endcard mini sleeper
+const endsvg=document.getElementById("endsvg");
+el(endsvg,"rect",{x:300,y:430,width:480,height:60,rx:20,fill:"#232030",stroke:C.paper,"stroke-width":6});
+el(endsvg,"rect",{x:316,y:400,width:120,height:36,rx:16,fill:C.paper,opacity:.92});
+const manE=makeStick(endsvg);
+const zzE=[];for(let i=0;i<3;i++){const z=el(endsvg,"text",{"font-family":"Archivo Black","font-size":34,fill:C.volt});z.textContent="z";zzE.push(z);}
 
-  // rewind flash at 3.0
-  $('flash').style.opacity = String(t >= 2.95 && t < 3.35 ? (1 - P(t, 2.95, 0.4, easeIO)) * 0.9 : 0);
-  $('rewlines').style.opacity = String(t >= 2.95 && t < 4.5 ? Math.min(P(t, 2.95, 0.1), 1 - P(t, 4.2, 0.3)) * 0.8 : 0);
+/* ============================ ui handles ============================ */
+const ui={hook:document.getElementById("hook"),promise:document.getElementById("promise"),
+  clock:document.getElementById("clockchip"),dog:document.getElementById("stampDog"),
+  pigeon:document.getElementById("stampPigeon"),owl:document.getElementById("stampOwl"),
+  cat:document.getElementById("catCard"),endcard:document.getElementById("endcard")};
+function snapIn(e,t,t0,dur=0.14,tilt=0){
+  if(t<t0){e.style.visibility="hidden";return;}
+  e.style.visibility="visible";
+  const k=ramp(t,t0,t0+dur), s=lerp(2.1,1,easeOutBackBig(k));
+  e.style.transform=`scale(${s.toFixed(3)}) rotate(${tilt}deg)`;
+}
+function textIn(e,t,t0,dur=0.12){
+  if(t<t0){e.style.visibility="hidden";return;}
+  e.style.visibility="visible";
+  const k=ramp(t,t0,t0+dur), s=lerp(1.35,1,easeOutBack(k));
+  e.style.transform=`scale(${s.toFixed(3)})`;
+}
+function zs(arr,t,x,y,on){
+  arr.forEach((z,i)=>{
+    if(!on){z.setAttribute("display","none");return;}
+    const ph=((t*0.55+i*0.33)%1);
+    z.setAttribute("display","");
+    z.setAttribute("x",x+i*8+Math.sin((t+i)*2)*10+ph*30);
+    z.setAttribute("y",y-ph*130);
+    z.setAttribute("opacity",(1-ph).toFixed(2));
+    z.setAttribute("font-size",30+ph*26);
+  });
+}
 
-  // clock chip: 3.0 -> 15.9
-  const ck = $('clock');
-  if (t >= 3.0 && t < 15.9) {
-    let label = CLOCKS[0][1];
-    for (const [tt, v] of CLOCKS) if (t >= tt) label = v;
-    ck.textContent = label;
-    ck.style.opacity = String(Math.min(P(t, 3.0, 0.25), 1 - P(t, 15.65, 0.25)));
-  } else ck.style.opacity = '0';
+/* ============================ per-shot logic ============================ */
+const GROUND1=1500, MATT_TOP=1360;
+function doShot1(t){
+  // clock face + ring behavior
+  const ringing=t>=B.alarm&&t<B.land;
+  s1.clockText.textContent=t<B.alarm?"4:59":"5:00";
+  const j=ringing?Math.sin(t*70)*5:0, j2=ringing?Math.cos(t*63)*4:0;
+  s1.clockG.setAttribute("transform",`translate(${j},${j2}) rotate(${ringing?Math.sin(t*80)*2:0},896,1350)`);
+  s1.arcs.setAttribute("opacity",ringing?(Math.sin(t*40)>0?1:0.15):0);
 
-  // step chip: 4.5 -> 15.9
-  const st = $('step');
-  if (t >= 4.5 && t < 15.9) {
-    let label = STEPS[0][1];
-    for (const [tt, v] of STEPS) if (t >= tt) label = v;
-    st.querySelector('.v').textContent = label;
-    st.style.opacity = String(Math.min(P(t, 4.5, 0.25), 1 - P(t, 15.65, 0.25)));
-  } else st.style.opacity = '0';
+  let p, hipLie=[440,1322];
+  if(t<B.anticipation_bed){                     // asleep, gentle breathing
+    p={...P.sleep,tx:hipLie[0],ty:hipLie[1],sx:1,sy:1+Math.sin(t*2.2)*0.012,px:0,py:0};
+    zs(zz1,t,610,1260,t<B.alarm);
+    if(ringing){p.eyes=Math.sin(t*30)>0?"closed":"open";} // startled flutter
+  } else if(t<B.launch){                        // ANTICIPATION: curl + compress into mattress
+    const k=easeInOutQuad(ramp(t,B.anticipation_bed,B.launch));
+    p=mixPose({...P.sleep},{...P.curl},k);
+    p.tx=hipLie[0];p.ty=hipLie[1]+k*10;
+    p.sx=1;p.sy=1-0.10*k;p.px=0;p.py=0;        // squash INTO the bed (windup)
+    p.eyes="wide";
+    // mattress pre-compresses with him (scale pivoted at mattress bottom y=1444)
+    const bsq=0.04*k;
+    s1.mat.setAttribute("transform",`translate(0,${(1444*bsq).toFixed(1)}) scale(1,${(1-bsq).toFixed(3)})`);
+  } else if(t<B.apexHold[0]){                   // LAUNCH: vertical rocket, stretch
+    const k=easeOutCubic(ramp(t,B.launch,B.apexHold[0]));
+    p=mixPose({...P.curl},{...P.launch},Math.min(1,k*1.6));
+    p.tx=lerp(hipLie[0],470,k); p.ty=lerp(hipLie[1],780,k);
+    const st=1+0.18*Math.sin(Math.min(1,k*1.3)*Math.PI); // stretch mid-flight, relax at top
+    p.sy=st; p.sx=1/Math.sqrt(st); p.px=0; p.py=0;
+    s1.mat.setAttribute("transform","");
+  } else if(t<B.apexHold[1]){                   // APEX HOLD: 4-frame hang, wide eyes
+    p={...P.apex,tx:470,ty:780,sx:1,sy:1,px:0,py:0};
+  } else if(t<B.land){                          // fall — lands standing ON the mattress
+    const k=easeInCubic(ramp(t,B.apexHold[1],B.land));
+    p=mixPose({...P.apex},{...P.landCrouch},k);
+    p.tx=470; p.ty=lerp(780,MATT_TOP-208,k);
+    const st=1+0.10*k; p.sy=st; p.sx=1/Math.sqrt(st); p.px=0;p.py=0;
+  } else {                                      // LAND: squash at feet, 2-frame peak, fast recover
+    const dt=t-B.land;
+    const sq=dt<0.067?0.16:0.16*Math.exp(-(dt-0.067)*18); // hold 2 frames then decay fast
+    const k=easeOutCubic(ramp(t,B.land+0.07,B.land+0.30));
+    p=mixPose({...P.landCrouch},{...P.stand},k);
+    p.tx=470; p.ty=MATT_TOP-208+8*(1-k);
+    p.sy=1-sq; p.sx=1+sq*0.8; p.px=0; p.py=208; // pivot at feet
+    p.eyes=t<B.hold1[0]?"wide":"open";
+    const msq=dt<0.067?0.06:0.06*Math.exp(-(dt-0.067)*14); // mattress reacts too
+    s1.mat.setAttribute("transform",`translate(0,${(1444*msq).toFixed(1)}) scale(1,${(1-msq).toFixed(3)})`);
+  }
+  poseStick(man1,p);
+}
 
-  // judge cards
-  card($('j-dog'), t, 5.5, 7.0);
-  card($('j-pig'), t, 8.0, 10.3);
-  card($('j-owl'), t, 11.3, 13.4);
-  card($('j-rac'), t, 14.6, 15.9);
+const RIM_Y=1160, TUB_CX=540;
+function doShot2(t){
+  let p; const rimX=300;
+  // splash burst driver
+  const sp=t-B.splash;
+  splashBits.forEach((b,i)=>{
+    if(sp<0||sp>0.5){b.setAttribute("display","none");return;}
+    b.setAttribute("display","");
+    const a=(i/10)*Math.PI - Math.PI, spd=380+((i*97)%160), k=sp/0.5;
+    b.setAttribute("cx",TUB_CX+Math.cos(a)*spd*easeOutCubic(k));
+    b.setAttribute("cy",1270-Math.abs(Math.sin(a))*(spd*0.9)*easeOutCubic(k)+520*k*k);
+    b.setAttribute("opacity",(1-k).toFixed(2));
+  });
+  // water surface reacts
+  const wob=sp>0&&sp<1?Math.sin(sp*22)*Math.exp(-sp*4)*10:0;
+  s2.surface.setAttribute("transform",`translate(0,${wob.toFixed(1)})`);
 
-  // cat payoff 16.0 - 19.0
-  $('catshade').style.opacity = String(t >= 15.9 && t < 19.0 ? Math.min(P(t, 15.9, 0.3), 1 - P(t, 18.75, 0.25)) : 0);
-  const cc = $('catcard');
-  if (t >= 16.1 && t < 19.0) {
-    const ein = P(t, 16.1, 0.4, easeOut);
-    cc.style.opacity = String(Math.min(ein, 1 - P(t, 18.75, 0.25)));
-    cc.style.transform = `translateY(${(1 - ein) * 60}px)`;
-  } else cc.style.opacity = '0';
+  if(t<B.anticipation_crouch[0]){               // teeter on rim, arms windmilling
+    const w=Math.sin(t*9)*14;
+    p={...P.teeter,tx:rimX,ty:RIM_Y-212,rot:Math.sin(t*5)*6,
+       laU:150+w*2.2,laL:190+w*2.2,raU:-150+w*2.2,raL:-190+w*2.2,sx:1,sy:1,px:0,py:212};
+  } else if(t<B.crouchHold[0]){                 // ANTICIPATION: windup crouch, arms swing back
+    const k=easeInOutQuad(ramp(t,B.anticipation_crouch[0],B.anticipation_crouch[1]));
+    p=mixPose({...P.teeter},{...P.windup},k);
+    p.tx=rimX; p.ty=RIM_Y-212+70*k;
+    p.sy=1-0.10*k; p.sx=1+0.06*k; p.px=0; p.py=212;
+  } else if(t<B.leap){                          // 2-frame HOLD at max windup
+    p={...P.windup,tx:rimX,ty:RIM_Y-142,sy:0.90,sx:1.06,px:0,py:212};
+  } else if(t<B.splash){                        // leap: rise stretched, tuck to cannonball
+    const k=ramp(t,B.leap,B.splash);
+    const arcY=RIM_Y-142-Math.sin(k*Math.PI)*330+k*260;
+    p=mixPose({...P.launch},{...P.ball},easeInOutQuad(clamp((k-0.25)/0.6,0,1)));
+    p.rot=lerp(0,110,easeInOutQuad(k));
+    p.tx=lerp(rimX,TUB_CX,easeOutCubic(k)); p.ty=arcY;
+    const st=k<0.4?1+0.15*Math.sin(k/0.4*Math.PI):1;
+    p.sy=st;p.sx=1/Math.sqrt(st);p.px=0;p.py=0;p.eyes="wide";
+  } else if(t<B.shiver[0]){                     // entry squash under water
+    const k=ramp(t,B.splash,B.shiver[0]);
+    p={...P.ball,rot:110,tx:TUB_CX,ty:lerp(1180,1330,easeOutCubic(k)),
+       sx:1+0.2*(1-k),sy:1-0.2*(1-k),px:0,py:0};
+  } else if(t<B.freezeStare[0]){                // violent shiver, dead eyes forming
+    const k=ramp(t,B.shiver[0],B.shiver[1]);
+    p=mixPose({...P.ball,rot:110},{...P.soak,rot:0},easeOutCubic(Math.min(1,k*1.8)));
+    p.tx=TUB_CX+Math.sin(t*60)*4; p.ty=lerp(1330,1380,k);
+    p.sx=1;p.sy=1;p.px=0;p.py=0;
+    p.eyes=k>0.5?"dead":"closed"; p.headTilt=Math.sin(t*55)*3;
+  } else if(t<B.sink[0]){                       // THE comedic pause: frozen stare, one blink
+    p={...P.soak,tx:TUB_CX,ty:1380,sx:1,sy:1,px:0,py:0,eyes:"dead",headTilt:0,face:0};
+    if(t>=B.blink1&&t<B.blink1+0.08)p.eyes="closed";
+  } else {                                      // slow sink to eye level
+    const k=easeInOutQuad(ramp(t,B.sink[0],B.sink[1]));
+    p={...P.soak,tx:TUB_CX,ty:1380+k*110,sx:1,sy:1,px:0,py:0,eyes:"dead",face:0};
+  }
+  poseStick(man2,p);
+}
 
-  // endcard 19.0 - 21.0
-  const end = $('end');
-  if (t >= 19.0) {
-    end.style.opacity = String(P(t, 19.0, 0.25));
-    const p = P(t, 19.1, 0.4, back);
-    $('endline').style.transform = `scale(${0.85 + 0.15 * p})`;
-    $('endline').style.opacity = String(P(t, 19.1, 0.2));
-    $('handle').style.opacity = String(P(t, 19.6, 0.3));
-    $('endsub').style.opacity = String(P(t, 19.95, 0.3));
-  } else end.style.opacity = '0';
+function doShot3(t){
+  const hip=[540,1408];
+  let p={...P.zen,tx:hip[0],ty:hip[1],sx:1,sy:1,px:0,py:0};
+  const dustT=t-B.tipImpact;
+  dustBits.forEach((b,i)=>{
+    if(dustT<0||dustT>0.45){b.setAttribute("display","none");return;}
+    b.setAttribute("display","");
+    const a=Math.PI+(i/6)*Math.PI, k=dustT/0.45, r=140*easeOutCubic(k);
+    b.setAttribute("cx",705+Math.cos(a)*r);
+    b.setAttribute("cy",1440-Math.abs(Math.sin(a))*r*0.5);
+    b.setAttribute("opacity",(0.7*(1-k)).toFixed(2));
+  });
+  s3.ring.setAttribute("opacity",t<B.nods[0]?(0.9*(0.7+0.3*Math.sin(t*3))).toFixed(2):Math.max(0,0.9-(t-B.nods[0])*2).toFixed(2));
+  s3.ring.setAttribute("cy",1050+Math.sin(t*2)*8);
+
+  if(t<B.nods[0]){                              // serene float
+    p.ty=hip[1]-6+Math.sin(t*2.4)*5; p.eyes="closed"; p.headTilt=0;
+  } else if(t<B.tipAnticipation[0]){            // three nod-offs with overshoot snap-backs
+    p.eyes="closed";
+    let tilt=0;
+    for(const n of B.nods){
+      if(t>=n-0.30&&t<n) tilt=45*easeInOutQuad(ramp(t,n-0.30,n));            // slow droop
+      else if(t>=n&&t<n+0.16){const k=ramp(t,n,n+0.16); tilt=lerp(45,-9,easeOutCubic(k));} // snap up, OVERSHOOT past zero
+      else if(t>=n+0.16&&t<n+0.28){tilt=lerp(-9,0,ramp(t,n+0.16,n+0.28));}   // settle
+    }
+    p.headTilt=-tilt; // negative tilts head forward given torso=180
+    if(t>=B.nods[2]-0.1)p.eyes="closed";
+  } else if(t<B.tipFall){                       // ANTICIPATION: tiny counter-lean AWAY from the fall
+    const k=ramp(t,B.tipAnticipation[0],B.tipAnticipation[1]);
+    p.rot=6*easeInOutQuad(k); p.rx=-120; p.ry=92; p.eyes="closed";
+  } else if(t<B.tipImpact){                     // rigid statue tip-over LEFT onto the mat
+    const k=easeInCubic(ramp(t,B.tipFall,B.tipImpact));
+    p.rot=lerp(6,-88,k); p.rx=-120; p.ry=92; p.eyes=k>0.6?"wide":"closed";
+    p.tx=hip[0]; p.ty=hip[1];
+  } else {                                      // down. squash on shoulder, then LONG hold
+    const dt=t-B.tipImpact;
+    const sq=dt<0.067?0.12:0.12*Math.exp(-(dt-0.067)*16);
+    p.rot=-88; p.rx=-120; p.ry=92; p.tx=hip[0]; p.ty=hip[1];
+    p.sx=1-sq; p.sy=1+sq*0.5; p.px=-120; p.py=92; // squash along screen-vertical (body-x after 88deg)
+    p.eyes="dead";
+    if(t>=B.blink2&&t<B.blink2+0.08)p.eyes="closed";
+  }
+  poseStick(man3,p);
+}
+
+function doShot4(t){
+  s4.clockText.textContent="5:04"; s4.arcs.setAttribute("opacity",0);
+  let p; const bedHip=[440,1322];
+  const running=t<B.brake[0];
+  speedlines.setAttribute("opacity",running?0.8:0);
+  if(running){
+    const x=lerp(1180,640,easeOutCubic(ramp(t,B.sprint[0],B.sprint[1])));
+    for(let i=0;i<5;i++){const ln=speedlines.children[i];
+      ln.setAttribute("x1",x+120+((i*53)%90));ln.setAttribute("x2",x+240+((i*53)%90));
+      ln.setAttribute("y1",1180+i*45);ln.setAttribute("y2",1180+i*45);}
+    // sprint cycle: legs/arms scissor
+    const c=Math.sin(t*22)*38;
+    p={...P.sprint,tx:x,ty:GROUND1-205+Math.abs(Math.sin(t*22))*-14,
+       llU:70+c,llL:15+c*0.5,rlU:-55-c,rlL:-25-c*0.5,
+       laU:30+c*0.8,laL:115+c*0.5,raU:-30-c*0.8,raL:-115-c*0.5, // bent pumping arms
+       sx:1,sy:1,px:0,py:205};
+    const lean=1+0.06; p.sx=lean; p.sy=1/Math.sqrt(lean); // slight forward stretch
+  } else if(t<B.dive){                          // ANTICIPATION: brake-crouch, arms back
+    const k=easeInOutQuad(ramp(t,B.brake[0],B.brake[1]));
+    p=mixPose({...P.sprint},{...P.windup,rot:-8},k);
+    p.tx=640-40*k; p.ty=GROUND1-205+60*k;
+    p.sy=1-0.08*k; p.sx=1+0.05*k; p.px=0; p.py=205;
+  } else if(t<B.bedImpact){                     // superman dive, horizontal stretch
+    const k=ramp(t,B.dive,B.bedImpact);
+    p=mixPose({...P.windup,rot:-8},{...P.dive},easeOutCubic(Math.min(1,k*1.7)));
+    p.tx=lerp(600,470,k); p.ty=lerp(GROUND1-145,MATT_TOP-90,easeInOutQuad(k))-Math.sin(k*Math.PI)*130;
+    const st=1+0.16*Math.sin(Math.min(1,k)*Math.PI);
+    p.sy=st; p.sx=1/Math.sqrt(st); p.px=0; p.py=0; p.eyes="wide";
+  } else {                                      // bed impact: MATTRESS squashes, body bounces flat
+    const dt=t-B.bedImpact;
+    const msq=dt<0.067?0.18:0.18*Math.exp(-(dt-0.067)*14);
+    s4.mat.setAttribute("transform",`translate(0,${(1444*msq).toFixed(1)}) scale(1,${(1-msq).toFixed(3)})`);
+    const bounce=Math.abs(Math.sin(dt*9))*34*Math.exp(-dt*5);
+    const k=easeOutCubic(ramp(t,B.bedImpact,B.asleep));
+    p=mixPose({...P.dive},{...P.flat},k);
+    p.tx=bedHip[0]+lerp(30,0,k); p.ty=bedHip[1]-bounce;
+    const sq=dt<0.067?0.10:0.10*Math.exp(-(dt-0.067)*16);
+    p.sy=1-sq; p.sx=1+sq*0.5; p.px=0; p.py=0;
+    p.eyes=t>=B.asleep?"closed":"wide"; p.face=-0.2;
+    zs(zz4,t,610,1260,t>=B.asleep+0.15);
+  }
+  poseStick(man4,p);
+}
+
+/* ============================ camera ============================ */
+const PUNCHES=[[B.land,0.07,9],[B.splash,0.09,8],[B.tipImpact,0.06,9],[B.bedImpact,0.07,9]];
+const SHAKES=[[B.splash,9,55,0],[B.tipImpact,6,50,1.3],[B.bedImpact,8,52,2.1]];
+const cam=document.getElementById("cam");
+function doCam(t){
+  let s=1;
+  for(const[t0,a,d]of PUNCHES)s+=punch(t,t0,a,d);
+  let x=0,y=0;
+  for(const[t0,a,f,ph]of SHAKES){x+=shake(t,t0,a,6.5,f,ph);y+=shake(t,t0,a*0.8,6.5,f*1.13,ph+0.7);}
+  cam.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) scale(${s.toFixed(4)})`;
+  cam.style.transformOrigin="540px 1100px";
+}
+
+/* ============================ master seek ============================ */
+const shots=[[0,B.cut2,s1g,doShot1],[B.cut2,B.cut3,s2g,doShot2],[B.cut3,B.cut4,s3g,doShot3],[B.cut4,B.endcard,s4g,doShot4]];
+window.seek=async (t)=>{
+  t=clamp(t,0,B.end);
+  // Chromium stale-paint guard (verified across 3 rounds: ghost eyes/z-glyphs
+  // survive DOM re-append, display-toggle, AND a body-bg flip -- the body bg is
+  // a composited solid-color quad, so it never damages the #cam/#ui layers'
+  // cached tiles). Flip 1 LSB INSIDE each layer instead: a full-canvas rect at
+  // the bottom of the svg, and a near-transparent bg on #ui. Both are visually
+  // imperceptible but damage the full layer, forcing every tile to re-raster.
+  // seek is async: resolves after a real compositor commit (double rAF);
+  // render_reel.py's page.evaluate awaits the promise.
+  const odd=Math.round(t*30)%2;
+  bgflip.setAttribute("fill",odd?"rgba(17,16,21,0.004)":"none");
+  document.getElementById("ui").style.backgroundColor=odd?"rgba(17,16,21,0.004)":"transparent";
+  const endOn=t>=B.endcard;
+  ui.endcard.style.visibility=endOn?"visible":"hidden";
+  for(const[a,b,g,fn]of shots){
+    const on=!endOn&&t>=a&&t<b;
+    g.style.visibility=on?"visible":"hidden";
+    if(on)fn(t);
+  }
+  doCam(endOn?0:t);
+  // overlays
+  textIn(ui.hook,t,B.hookText); if(t>=B.cut2)ui.hook.style.visibility="hidden";
+  if(t>=B.promiseText&&t<B.cut3)textIn(ui.promise,t,B.promiseText);else ui.promise.style.visibility="hidden";
+  // clock chip per shot
+  const chip=ui.clock;
+  if(endOn){chip.style.visibility="hidden";}
+  else{chip.style.visibility="visible";
+    chip.textContent=t<B.cut2?(t<B.alarm?"4:59 AM":"5:00 AM"):t<B.cut3?"5:01 AM":t<B.cut4?"5:02 AM":"5:04 AM";}
+  // stamps
+  if(t>=B.dogStamp&&t<B.cut2)snapIn(ui.dog,t,B.dogStamp,0.13,-5);else ui.dog.style.visibility="hidden";
+  if(t>=B.pigeonStamp&&t<B.cut3)snapIn(ui.pigeon,t,B.pigeonStamp,0.13,4);else ui.pigeon.style.visibility="hidden";
+  if(t>=B.owlStamp&&t<B.cut4)snapIn(ui.owl,t,B.owlStamp,0.13,-4);else ui.owl.style.visibility="hidden";
+  if(t>=B.catCard&&t<B.endcard)snapIn(ui.cat,t,B.catCard,0.16,0);else ui.cat.style.visibility="hidden";
+  // endcard mini sleeper breathes + z's
+  if(endOn){
+    poseStick(manE,{...P.flat,tx:520,ty:415,sx:0.62,sy:0.62*(1+Math.sin(t*2.2)*0.015),px:0,py:0,face:-0.2});
+    zs(zzE,t,610,370,true);
+  } else zs(zzE,t,0,0,false);
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
 };
 window.seek(0);
-</script>
-</body></html>
+</script></body></html>
