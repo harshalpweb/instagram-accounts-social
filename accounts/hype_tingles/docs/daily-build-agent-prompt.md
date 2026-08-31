@@ -55,6 +55,16 @@ format twice in a row; F1 (Panel) max 1/day; never repeat a
 format+topic+cast combination. Also check "Queued promises to keep" at
 the bottom of that file — an owed episode/format beats a trend topic.
 
+**Scene/prop rule (Reels, added 2026-08-31 after a real near-duplicate
+on a sibling account):** recurring sets and cast are this brand's
+format, but two Reels can differ in joke and still look identical at
+thumbnail scale. Before building the Reel, look at the last **7 days'**
+Reel QA frames (`accounts/hype_tingles/reels/<id>/qa/` where present)
+and the ledger's topic column: the same scene-set + hero-prop/gag
+combination (e.g. "news desk + phone prop") must not recur within 7
+days. Same set with a genuinely different prop/composition is fine;
+when in doubt, compare your hook frame against theirs at ~350px.
+
 ### Step 3 — fallback
 
 If the trend search yields nothing usable for a slot, take the next
@@ -135,8 +145,12 @@ top-of-hour still lands in the target window.
 
 Append one row per queued post to
 `accounts/hype_tingles/brand/topic-bank.md` (existing table format:
-date, post id, format, topic, cast used). Add any new on-air promise to
-"Queued promises to keep."
+date, post id, format, topic, cast used). The format cell MUST include
+the exact `type` value from the queue JSON, verbatim (the F-code prefix
+before it is fine, e.g. "F5 reel-breaking-news") — a ledger filed under
+one vocabulary while the queue uses another produced a real
+anti-repetition false clear on a sibling account (2026-08-31). Add any
+new on-air promise to "Queued promises to keep."
 
 ### Step 9 — commit (shared-repo git safety, non-negotiable)
 
