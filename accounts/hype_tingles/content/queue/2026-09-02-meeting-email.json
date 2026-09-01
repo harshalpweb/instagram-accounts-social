@@ -6,5 +6,6 @@
   "scheduled_time_ist": "2026-09-03T20:00:00+05:30",
   "status": "pending",
   "attempts": 0,
-  "needs_review": false
+  "needs_review": true,
+  "review_note": "Re-gated 2026-09-01 (Group CTO, CCO spot-check P0): same-day meetings-topic collision with 2026-09-03-owl-smart-masterclass (13:00). Founder to decide which ships Sep 3, or respace."
 }
