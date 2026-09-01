@@ -1,0 +1,50 @@
+{
+  "slug": "2026-09-01-raccoon-deals-masterclass",
+  "episode": "MASTERCLASS · 02",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "HYPE TINGLE MASTERCLASS",
+      "h": "FINDING DEALS, TAUGHT BY A {{RACCOON}}.",
+      "dek": "This instructor has never paid retail. Or paid.",
+      "tease": "**Five lessons.** One pending court case."
+    },
+    {
+      "role": "guide",
+      "num": 1,
+      "h": "EVERYTHING IS FREE AFTER MIDNIGHT",
+      "body": "Stores call it closing time. The raccoon calls it the night market. Legal has asked us to state clearly: do not do this."
+    },
+    {
+      "role": "guide",
+      "num": 2,
+      "h": "THE CART IS A COMMITMENT",
+      "body": "Humans abandon 70% of their carts. The raccoon has never abandoned anything in its life. Commitment IS the discount."
+    },
+    {
+      "role": "guide",
+      "num": 3,
+      "h": "NEGOTIATE WITH FULL CONFIDENCE",
+      "body": "The raccoon once traded a bottle cap for an entire sandwich. Yes, the other party was a child. A deal is a deal."
+    },
+    {
+      "role": "guide",
+      "num": 4,
+      "h": "SCARCITY IS AN INVENTION. INVENT HARDER.",
+      "body": "Limited edition means someone counted. The raccoon numbered 300 identical rocks and sold out. Twice. Same rocks."
+    },
+    {
+      "role": "guide",
+      "payoff": true,
+      "num": 5,
+      "h": "IF THE DEAL LOOKS TOO GOOD, IT'S HIS",
+      "body": "Found a designer lamp at 90% off? Congratulations. You are buying it from the raccoon. Check your garden. It is your lamp."
+    },
+    {
+      "role": "closer",
+      "h": "CLASS [[DISMISSED]].",
+      "body": "Send this to the friend with 14 open cart tabs.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}

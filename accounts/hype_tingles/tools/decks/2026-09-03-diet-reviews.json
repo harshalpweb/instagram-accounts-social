@@ -1,0 +1,64 @@
+{
+  "slug": "2026-09-03-diet-reviews",
+  "episode": "ONE-STAR FILES",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "WELCOME TO HYPE TINGLE",
+      "h": "ANIMALS REVIEWED [[DIETS]]. THE DOG ATE THE {{MEAL PLAN}}.",
+      "tease": "**Cheat day became a lifestyle.** The cat watched one almond become lunch."
+    },
+    {
+      "role": "review",
+      "animal": "🐕",
+      "name": "The Dog",
+      "meta": "Day 1, attempt 47",
+      "stars": 5,
+      "title": "WOULD CHEAT AGAIN",
+      "body": "Started Monday. Cheat day Tuesday. Cheat week Wednesday. The plan is now a lifestyle and the lifestyle is snacks."
+    },
+    {
+      "role": "review",
+      "animal": "🦉",
+      "name": "The Owl",
+      "meta": "Reviewed the literature",
+      "stars": 2,
+      "title": "Scientifically bankrupt",
+      "body": "Surveyed the celery juice studies. There are none. The owl drank it anyway and would like that stricken from the record."
+    },
+    {
+      "role": "review",
+      "animal": "🐦",
+      "name": "The Pigeon",
+      "meta": "Trains outside a gym",
+      "stars": 5,
+      "title": "Carbs are a superfood",
+      "body": "Bread crumbs daily, eaten confidently in front of a spin class. Zero regrets. Look at me. This physique is bread."
+    },
+    {
+      "role": "review",
+      "animal": "🐟",
+      "name": "The Goldfish",
+      "meta": "Accidental fasting pioneer",
+      "stars": 4,
+      "title": "Forgot to be hungry",
+      "body": "Intermittent fasting is easy when meals slip your mind. Remembered food at 4PM. Ate everything. Restarted the app."
+    },
+    {
+      "role": "review",
+      "payoff": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "meta": "Verified unimpressed",
+      "stars": 1,
+      "title": "Balance, apparently",
+      "body": "Watched a human eat one almond and call it lunch. Then watched the same human eat a cake and call it balance. Case closed."
+    },
+    {
+      "role": "closer",
+      "h": "NEW REVIEWS [[DAILY]].",
+      "body": "Tag the friend who starts every diet on a Monday.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}

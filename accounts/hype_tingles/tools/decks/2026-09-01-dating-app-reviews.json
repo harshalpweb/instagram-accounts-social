@@ -1,0 +1,64 @@
+{
+  "slug": "2026-09-01-dating-app-reviews",
+  "episode": "ONE-STAR FILES",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "WELCOME TO HYPE TINGLE",
+      "h": "ANIMALS REVIEWED [[DATING APPS]]. THE CAT SWIPED {{ONCE}}.",
+      "tease": "**The dog matched with everyone.** The cat's review closes the case."
+    },
+    {
+      "role": "review",
+      "animal": "🐕",
+      "name": "The Dog",
+      "meta": "Matched with the whole city",
+      "stars": 5,
+      "title": "9,000 SOULMATES",
+      "body": "Swiped right on everyone. Every match is the one. Meeting all of them at the park at 3. Bring your friends."
+    },
+    {
+      "role": "review",
+      "animal": "🐦",
+      "name": "The Pigeon",
+      "meta": "Never downloaded the app",
+      "stars": 5,
+      "title": "The matches come to me",
+      "body": "Stood on a statue looking magnificent. Three humans pointed. That is three matches and I did not lift a wing."
+    },
+    {
+      "role": "review",
+      "animal": "🦉",
+      "name": "The Owl",
+      "meta": "Peer reviewer, self-appointed",
+      "stars": 2,
+      "title": "Methodologically unsound",
+      "body": "Reviewed 40 profiles for grammar. Rejected all 40. Matched with nobody and logged it as a successful study."
+    },
+    {
+      "role": "review",
+      "animal": "🦝",
+      "name": "The Raccoon",
+      "meta": "Verified entrepreneur",
+      "stars": 5,
+      "title": "Excellent marketplace",
+      "body": "Bio says visionary. Sold my first match a candle subscription by message two. This app pays for itself."
+    },
+    {
+      "role": "review",
+      "payoff": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "meta": "Verified unimpressed",
+      "stars": 1,
+      "title": "One swipe was plenty",
+      "body": "Every third photo is a human holding a fish. I live with a human. I know what the fish means. It means nothing."
+    },
+    {
+      "role": "closer",
+      "h": "NEW REVIEWS [[DAILY]].",
+      "body": "Tag the friend whose bio says fluent in sarcasm.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}

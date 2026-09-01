@@ -1,0 +1,64 @@
+{
+  "slug": "2026-09-02-family-group-reviews",
+  "episode": "ONE-STAR FILES",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "WELCOME TO HYPE TINGLE",
+      "h": "ANIMALS REVIEWED THE [[FAMILY GROUP CHAT]].",
+      "tease": "**400 good mornings later.** The cat has left the group three times."
+    },
+    {
+      "role": "review",
+      "animal": "🐕",
+      "name": "The Dog",
+      "meta": "First to react since 2019",
+      "stars": 5,
+      "title": "BEST CHAT EVER MADE",
+      "body": "Someone posts the sunrise every day at 6AM. I reply first every time. We are all so proud of the sun."
+    },
+    {
+      "role": "review",
+      "animal": "🐟",
+      "name": "The Goldfish",
+      "meta": "Not sure which group this is",
+      "stars": 3,
+      "title": "Wait, whose wedding",
+      "body": "Joined for the wedding photos. Forgot whose wedding. Congratulated a stranger with 40 heart emojis. Lovely ceremony though."
+    },
+    {
+      "role": "review",
+      "animal": "🦉",
+      "name": "The Owl",
+      "meta": "Fact-checks the uncles",
+      "stars": 2,
+      "title": "Riddled with misinformation",
+      "body": "Forwarded as received. No. It should not have been received the first time. The owl has questions. The uncle has 40 more forwards."
+    },
+    {
+      "role": "review",
+      "animal": "🐦",
+      "name": "The Pigeon",
+      "meta": "Family famous",
+      "stars": 5,
+      "title": "Finally, an audience",
+      "body": "Posted one photo of myself on a wire. Twelve thumbs up from relatives I have never met. This is what fame feels like."
+    },
+    {
+      "role": "review",
+      "payoff": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "meta": "Added without consent",
+      "stars": 1,
+      "title": "Escape attempt no. 3",
+      "body": "Left the group at dawn. They added me back before breakfast. This review is being written from inside the group."
+    },
+    {
+      "role": "closer",
+      "h": "NEW REVIEWS [[DAILY]].",
+      "body": "Tag the cousin who only replies in thumbs up.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}

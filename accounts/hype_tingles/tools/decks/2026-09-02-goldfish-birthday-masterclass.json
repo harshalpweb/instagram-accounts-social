@@ -1,0 +1,50 @@
+{
+  "slug": "2026-09-02-goldfish-birthday-masterclass",
+  "episode": "MASTERCLASS · 03",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "HYPE TINGLE MASTERCLASS",
+      "h": "REMEMBERING BIRTHDAYS, TAUGHT BY A {{GOLDFISH}}.",
+      "dek": "This instructor forgot the topic twice during the introduction.",
+      "tease": "**Five lessons.** Approximately."
+    },
+    {
+      "role": "guide",
+      "num": 1,
+      "h": "WRITE IT DOWN SOMEWHERE SAFE",
+      "body": "The goldfish wrote your birthday on a sticky note. The note is safe. The location of the note is a mystery for future generations."
+    },
+    {
+      "role": "guide",
+      "num": 2,
+      "h": "EVERY DAY COULD BE THE DAY",
+      "body": "The goldfish wishes everyone a happy birthday every morning. Statistically it is always someone's. Accuracy through volume."
+    },
+    {
+      "role": "guide",
+      "num": 3,
+      "h": "THE CAKE SYSTEM",
+      "body": "Buy a cake on the 1st. If nobody's birthday shows up by the 30th, the cake was yours all along. This system has no losers."
+    },
+    {
+      "role": "guide",
+      "num": 4,
+      "h": "PANIC IS ALSO A CALENDAR",
+      "body": "That cold feeling at 11PM? That is the calendar app of the soul. Send the wish now. Add 'sorry, network issues.'"
+    },
+    {
+      "role": "guide",
+      "payoff": true,
+      "num": 5,
+      "h": "FORGIVE YOURSELF INSTANTLY",
+      "body": "The goldfish forgot your birthday, its own birthday, and this sentence. It is at peace. Be the goldfish."
+    },
+    {
+      "role": "closer",
+      "h": "WHAT WERE WE [[TALKING ABOUT]]?",
+      "body": "Send this to the friend whose wishes always land a day late.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}

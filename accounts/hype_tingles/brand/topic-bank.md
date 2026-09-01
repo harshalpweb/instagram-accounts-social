@@ -31,6 +31,12 @@ resolutions, "seen" messages, salary day
 | 2026-08-31 | 2026-08-31-morning-routine-judged | NEW: judged-routine (REEL, 3D character) | 5AM morning routines | dog, pigeon, owl, raccoon, cat |
 | 2026-09-01 | 2026-09-01-one-more-episode | NEW: pov-night (REEL, 3D character) | bingeing / one more episode | owl, goldfish, cat |
 | 2026-09-02 | 2026-09-02-meeting-email | F5 breaking news (REEL, 3D character) | work meetings | dog, owl, raccoon, cat |
+| 2026-09-01 | 2026-09-01-dating-app-reviews | F2 carousel-one-star-files | dating apps | dog, pigeon, owl, raccoon, cat |
+| 2026-09-01 | 2026-09-01-raccoon-deals-masterclass | F3 carousel-masterclass (MC 02) | online shopping / deal hunting | raccoon |
+| 2026-09-02 | 2026-09-02-family-group-reviews | F2 carousel-one-star-files | family WhatsApp groups | dog, goldfish, owl, pigeon, cat |
+| 2026-09-02 | 2026-09-02-goldfish-birthday-masterclass | F3 carousel-masterclass (MC 03) | birthdays / forgetting wishes | goldfish |
+| 2026-09-03 | 2026-09-03-diet-reviews | F2 carousel-one-star-files | diets | dog, owl, pigeon, goldfish, cat |
+| 2026-09-03 | 2026-09-03-owl-smart-masterclass | F3 carousel-masterclass (MC 04) | sounding smart / meeting-speak | owl |
 | 2026-09-04 | 2026-09-04-animal-panel-ep02 | F1 panel (EP 02) | red flags | dog, pigeon, owl, goldfish, cat |
 | 2026-09-04 | 2026-09-04-drop-day-reviews | F2 one-star-files | drop day / limited-edition queues (trend) | dog, pigeon, raccoon, sloth, cat |
 | 2026-09-04 | 2026-09-04-pre-coffee-alert | pov-morning (REEL, 2D stickman) | talking before coffee (trend: Eeffoc) | dog, owl, cat |

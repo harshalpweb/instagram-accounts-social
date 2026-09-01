@@ -1,0 +1,50 @@
+{
+  "slug": "2026-09-03-owl-smart-masterclass",
+  "episode": "MASTERCLASS · 04",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "HYPE TINGLE MASTERCLASS",
+      "h": "SOUNDING SMART, TAUGHT BY AN {{OWL}}.",
+      "dek": "Tenured professor. Zero publications. Infinite eyebrow.",
+      "tease": "**Five techniques.** Citations unavailable."
+    },
+    {
+      "role": "guide",
+      "num": 1,
+      "h": "PAUSE BEFORE ANSWERING",
+      "body": "The owl waits four full seconds before speaking. It is not thinking. The silence is doing all of the work."
+    },
+    {
+      "role": "guide",
+      "num": 2,
+      "h": "NEVER SAY 'I DON'T KNOW'",
+      "body": "Say 'that is outside the scope of this discussion.' The owl decides the scope. Everything is outside it."
+    },
+    {
+      "role": "guide",
+      "num": 3,
+      "h": "ASK 'BUT HAVE YOU CONSIDERED'",
+      "body": "You do not need an actual counterpoint. The phrase is the counterpoint. Watch the whole room fold."
+    },
+    {
+      "role": "guide",
+      "num": 4,
+      "h": "DEPLOY THE SLOW HEAD TURN",
+      "body": "The owl rotates its head, slowly, toward whoever spoke last. Nothing follows. That person now doubts their entire education."
+    },
+    {
+      "role": "guide",
+      "payoff": true,
+      "num": 5,
+      "h": "CITE YOURSELF",
+      "body": "'As I said earlier' is a footnote, a source, and a threat. The owl never said it earlier. Nobody has ever checked."
+    },
+    {
+      "role": "closer",
+      "h": "OFFICE HOURS: [[NEVER]].",
+      "body": "Send this to the friend who says 'per my last message.'",
+      "handle": "@hype_tingles"
+    }
+  ]
+}
