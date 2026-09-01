@@ -140,6 +140,18 @@ One JSON per post in `accounts/anime_ekaya/content/queue/`, id format
 Reels use `"video": "accounts/anime_ekaya/content/queue/video/<id>.mp4"`
 instead of `"slides"`.
 
+**Type whitelist (added 2026-09-01, Group CTO — three undocumented
+pillar values had slipped into the queue by then):** `type` MUST be one
+of `mood-match`, `fan-vote`, `gateway-guide`, `hot-take`,
+`seasonal-preview`, `diagnostic`, or the same list with a `reel-`
+prefix, plus `reel-relatable-action`. These are exactly the pillars
+documented in strategy §3. If the piece you built doesn't fit any of
+them, STOP: do not invent a new type value — either reshape the piece
+into a documented pillar, or queue it under the closest documented
+pillar and flag the proposed new pillar in the commit message for a
+strategy-doc decision. A new pillar becomes usable only after it is
+added to strategy §3 (the seasonal-preview precedent).
+
 **Standing slots (IST), from strategy §6 (confirmed as this account's
 3-a-day standing schedule by Group CTO 2026-08-31):**
 - **13:00** — carousel (Slot A, India lunch; the timely piece — FAN VOTE
@@ -149,10 +161,18 @@ instead of `"slides"`.
 - **22:30** — carousel (Slot C, India late-night anime hours + US
   lunch; GATEWAY/HOT TAKE).
 
-If a slot on the target date is already occupied by an existing queue
-item, shift your new piece +30 minutes and note it in the commit
-message. The publish cron is hourly; these times are chosen so the next
-top-of-hour still lands in the target window.
+**Slot-occupancy rule (tightened 2026-09-01, Group CTO):** before
+building anything, list the target date's existing queue items. A
+standing slot already occupied by an existing queue item is COVERED —
+do not build a piece for it. Build only for the standing slots that are
+empty on the target date; if all three are occupied, stop and do
+nothing (the day is fully covered by an earlier batch). The old "+30
+minutes shift" rule applied only to accidental one-off collisions and
+would duplicate a whole pre-built day — never shift-and-double. If a
+genuine timing conflict arises for a slot you ARE building (e.g. a
+moved Reel), shift +30 minutes and note it in the commit message; the
+publish cron is hourly, so the next top-of-hour still lands in the
+target window.
 
 ### Step 8 — update the ledger
 

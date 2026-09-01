@@ -4,48 +4,36 @@
   "slides": [
     {
       "role": "hook",
-      "h": "For when your brain is [[completely fried]]: 5 comedies with zero plot to track.",
-      "dek": "No lore. No stakes. Just gags and good company."
+      "h": "When did you last laugh [[out loud]] at a screen?",
+      "dek": "Five comedies built for real laughs, ranked by how fast the first one lands."
     },
     {
-      "role": "pick",
-      "n": "01",
-      "title": "Nichijou",
-      "why": "Ordinary school life animated like an action blockbuster. The best overreactions in the medium.",
-      "meta": "Absurd comedy · 26 eps"
+      "role": "rank",
+      "h": "The podium",
+      "items": [
+        {"n": "01", "title": "Nichijou", "note": "School life animated like an action film. The hardest-hitting single gags in the medium."},
+        {"n": "02", "title": "KonoSuba", "note": "Every party member is the worst person available. Funny for three straight seasons."},
+        {"n": "03", "title": "The Way of the Househusband", "note": "A yakuza legend takes on housework. Episodes are minutes long."}
+      ]
     },
     {
-      "role": "pick",
-      "n": "02",
-      "title": "KonoSuba",
-      "why": "An adventuring party where every member is the worst, and it never stops being funny.",
-      "meta": "Fantasy comedy · 3 seasons"
+      "role": "rank",
+      "h": "Ranks 4 and 5",
+      "items": [
+        {"n": "04", "title": "Grand Blue", "note": "A college diving club at full volume. Three seasons of terrible decisions."},
+        {"n": "05", "title": "Daily Lives of High School Boys", "note": "Sketch comedy. Any episode, any order, same result."}
+      ]
     },
     {
-      "role": "pick",
-      "n": "03",
-      "title": "The Way of the Househusband",
-      "why": "A retired yakuza legend attacks housework with terrifying intensity. Episodes are minutes long.",
-      "meta": "Comedy · short episodes"
-    },
-    {
-      "role": "pick",
-      "n": "04",
-      "title": "Grand Blue",
-      "why": "A diving club, questionable decisions, and university chaos at full volume.",
-      "meta": "College comedy · 12 eps"
-    },
-    {
-      "role": "pick",
-      "n": "05",
-      "title": "Daily Lives of High School Boys",
-      "why": "Sketch comedy about boys being profoundly, lovingly dumb. Watch any episode in any order.",
-      "meta": "Sketch comedy · 12 eps"
+      "role": "principle",
+      "label": "The test",
+      "h": "A comedy owes you [[one thing]]: the laugh.",
+      "body": ["Three real laughs in the first episode or it drops off this list. All five up top clear that bar inside twenty minutes, and none of them ask for homework first."]
     },
     {
       "role": "closer",
-      "h": "What do you watch on [[empty brain]] nights?",
-      "body": "Drop it below. Save this for the next long day.",
+      "h": "Which one gets the [[first laugh]]?",
+      "body": "Pick one for tonight, then report back in the comments. Save the list for a flat evening.",
       "handle": "@anime_ekaya"
     }
   ]

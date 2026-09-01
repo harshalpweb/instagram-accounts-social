@@ -15,7 +15,7 @@ repeat. Append one line per queued post.
 | 2026-09-02 | pick-your-door (REEL, 2D EKAYA -- 2026-08-31 redo) | GATEWAY (acted) | first-anime genre doors | Jujutsu Kaisen, Delicious in Dungeon, Skip and Loafer |
 | 2026-09-01 | thriller-gateway | GATEWAY (gateway-guide) | thriller / crime starters for skeptics | Monster, Steins;Gate, Erased, Terror in Resonance, Paranoia Agent (+Perfect Blue name-dropped in a note) |
 | 2026-09-01 | hot-take-dubs | HOT TAKE (hot-take) | dubs are fine / sub vs dub gatekeeping (take used, never repeat) | none (no shows named) |
-| 2026-09-02 | brain-off-comedies | MOOD MATCH (mood-match) | fried brain / zero-plot comedies | Nichijou, KonoSuba, The Way of the Househusband, Grand Blue, Daily Lives of High School Boys (+Asobi Asobase in caption) |
+| 2026-09-02 | brain-off-comedies | MOOD MATCH (mood-match) | out-loud laugh / gag comedies (reworked 2026-09-01: original fried-brain/zero-plot premise breached the 30-day mood cooldown vs mood-match-01's bad-week comfort; layout switched pick -> rank to break same-day pick-deck pairing with movie-night-gateway) | Nichijou, KonoSuba, The Way of the Househusband, Grand Blue, Daily Lives of High School Boys (+Asobi Asobase in caption) |
 | 2026-09-02 | movie-night-gateway | GATEWAY (gateway-guide) | first-anime movie night films | Spirited Away, Your Name, A Silent Voice, Princess Mononoke, Suzume |
 | 2026-09-03 | hype-boost-picks | MOOD MATCH (mood-match) | hype boost / motivation / caffeine shows | Gurren Lagann, Haikyuu!!, One Punch Man, Demon Slayer, Kill la Kill |
 | 2026-09-03 | anime-friend-signs | DIAGNOSTIC (diagnostic) | being the anime friend of the group | none (no shows named) |
