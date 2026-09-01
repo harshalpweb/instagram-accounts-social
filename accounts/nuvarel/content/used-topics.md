@@ -28,6 +28,12 @@ the check is decorative.
 | 2026-09-01 | art-height (REEL, 2D Curator) | reel-the-rule | art hanging height (145 cm to centre); framed art; gallery wall | living room: sofa + framed art on wall |
 | 2026-09-02 | rich-rooms-buy-two (REEL, 2D Curator) | reel-splurge-skip | symmetry / buying in pairs — a PAIR OF LAMPS flanking the sofa (lighting, lamps, cushions) | living room: sofa + two matching lamps |
 | 2026-09-03 | one-big-thing (REEL, 2D Curator) | reel-the-rule | one large piece beats many small frames; scale; oversized art | living room: sofa + framed art on wall |
+| 2026-09-01 | study-green-palette | palette-study | "The Study Green" palette; deep green, chalk cream, walnut, aged bronze; green-needs-warm-wood pairing rule | n/a (typography carousel) |
+| 2026-09-01 | rugs-splurge-skip | splurge-skip | Splurge or Skip No. 02: rugs; rug size over designer label; front-legs-on rule; seating-zone measuring | n/a (typography carousel) |
+| 2026-09-02 | black-anchor-rule | the-rule | one black element per room; black anchor; frames, lamp base, matte handles as the dark dose | n/a (typography carousel) |
+| 2026-09-02 | hardware-reads-expensive | reads-expensive | hardware, handles, knobs, pulls, hinges, tap; unlacquered brass, aged bronze, matte black; one metal family per room | n/a (typography carousel) |
+| 2026-09-03 | hotel-bed-rule | the-rule | hotel bed making; white bedding, linen, oversized duvet, foot layer, pillow stack; bedroom | n/a (typography carousel) |
+| 2026-09-03 | sofa-splurge-skip | splurge-skip | Splurge or Skip No. 03: sofa; hardwood frame, suspension, cushion fill; skip trend colour upholstery | n/a (typography carousel) |
 | 2026-09-04 | palette-study-02 | palette-study | "Chocolate" palette (Warm Ivory / Bitter Chocolate / Toffee / Dried Olive); chocolate brown as 2026's top designer colour; dark-sits-low rule | n/a (typography carousel) |
 | 2026-09-04 | texture-reads-expensive | reads-expensive | why texture reads expensive when colour stays quiet; matte vs gloss; three-textures-to-one-colour | n/a (typography carousel) |
 | 2026-09-04 | curtains-hang-higher (REEL, 2D Curator) | reel-splurge-skip | curtain height and length; mount rod near ceiling, panels high wide floor-length; skip designer fabric | window wall: window + curtain pair + potted plant (NO sofa/lamps) |

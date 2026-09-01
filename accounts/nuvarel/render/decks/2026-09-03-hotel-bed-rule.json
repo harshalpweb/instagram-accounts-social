@@ -1,0 +1,51 @@
+{
+  "slug": "2026-09-03-hotel-bed-rule",
+  "series": "The Rule",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "Why hotel beds look like that.",
+      "dek": "Four moves housekeeping makes that most bedrooms skip."
+    },
+    {
+      "role": "principle",
+      "klabel": "Move one",
+      "h": "The linen is plain and white.",
+      "body": [
+        "Hotels standardised on white because it survives industrial washing. The side effect is the point.",
+        "White bedding reads crisp and intentional in any room, under any light, forever."
+      ]
+    },
+    {
+      "role": "principle",
+      "klabel": "Move two",
+      "h": "The duvet runs one size up.",
+      "body": [
+        "A king duvet on a queen bed drops the sides low and hides the mattress line.",
+        "That overhang is most of the plush the eye remembers from a hotel room."
+      ]
+    },
+    {
+      "role": "principle",
+      "klabel": "Move three",
+      "h": "One folded layer at the foot.",
+      "body": [
+        "A coverlet or throw folded in thirds across the foot of the bed.",
+        "It adds the single line of weight and texture the white field needs."
+      ]
+    },
+    {
+      "role": "principle",
+      "klabel": "Move four",
+      "h": "Pillows stack by size, back to front.",
+      "body": [
+        "Sleepers at the back, standards in front, one lumbar at most.",
+        "Even numbers keep the stack calm. Odd cushions are where hotel turns hostel."
+      ]
+    },
+    {
+      "role": "closer",
+      "h": "Save this for the next linen change."
+    }
+  ]
+}

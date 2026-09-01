@@ -1,0 +1,52 @@
+{
+  "slug": "2026-09-01-study-green-palette",
+  "series": "Palette Study · The Study Green",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "The Study Green.",
+      "dek": "A deep green that reads like old money, and the three colours that keep it quiet."
+    },
+    {
+      "role": "swatch",
+      "hex": "#F5F1E8",
+      "name": "Chalk Cream",
+      "role_line": "Walls · The field",
+      "body": "Every wall, the ceiling, the trim. Green this deep needs a pale, warm field around it or the room closes in."
+    },
+    {
+      "role": "swatch",
+      "hex": "#2E4034",
+      "name": "Study Green",
+      "role_line": "The green · One surface",
+      "body": "Cabinetry, a bookcase wall, or the island. One committed surface beats four scattered accents."
+    },
+    {
+      "role": "swatch",
+      "hex": "#8A6F4D",
+      "name": "Walnut",
+      "role_line": "Wood · The mid tones",
+      "body": "Deep green goes cold next to pale ash. Walnut and oiled teak carry the warmth this palette runs on."
+    },
+    {
+      "role": "swatch",
+      "hex": "#8C7853",
+      "name": "Aged Bronze",
+      "role_line": "Metal · Small doses",
+      "body": "A picture light, a lamp stem, a sculptural bowl. A mellow metal seals the scheme; chrome would cut it."
+    },
+    {
+      "role": "principle",
+      "klabel": "The pairing rule",
+      "h": "Deep green needs warm wood beside it.",
+      "body": [
+        "Every convincing green room leans on timber: shelves, a desk, a floor in oak or walnut.",
+        "The wood reads as age, and age is what makes green read expensive."
+      ]
+    },
+    {
+      "role": "closer",
+      "h": "Save this before the repaint."
+    }
+  ]
+}
