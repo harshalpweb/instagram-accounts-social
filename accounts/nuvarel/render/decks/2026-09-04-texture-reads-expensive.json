@@ -1,6 +1,6 @@
 {
   "slug": "2026-09-04-texture-reads-expensive",
-  "series": "Reads Expensive · No. 02",
+  "series": "Why It Reads · No. 03",
   "slides": [
     {
       "role": "hook",
@@ -18,10 +18,10 @@
     },
     {
       "role": "principle",
-      "klabel": "Light",
-      "h": "Matte holds light. Gloss throws it back.",
+      "klabel": "Shadow",
+      "h": "Texture is light landing unevenly.",
       "body": [
-        "A hard sheen is a shortcut the eye knows too well: lacquered fast furniture, poly blends, plastic. Honed stone, limewash and brushed wood absorb lamplight and give back depth."
+        "Evening light raking across boucle, cane or rough linen leaves a thousand tiny shadows, and that shadow map is the depth a flat surface cannot fake. Place one textured piece where the light grazes it and the effect doubles."
       ]
     },
     {

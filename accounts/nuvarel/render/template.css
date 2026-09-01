@@ -133,7 +133,7 @@ strong { font-weight: 600; }
 /* ---- swatch slide (palette study) ---- */
 .swatch-block {
   flex: 0 0 620px;
-  border: 2px solid rgba(42, 36, 30, 0.16);
+  border: 2px solid rgba(42, 36, 30, 0.28);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -155,6 +155,8 @@ strong { font-weight: 600; }
   color: var(--bronze-text);
   margin-bottom: 30px;
 }
+.dark .swatch-role { color: var(--bronze-dark-bg); }
+.dark .swatch-block { border-color: rgba(242, 238, 230, 0.22); }
 .swatch .body { font-size: 39px; }
 
 /* ---- principle / fix slide ---- */

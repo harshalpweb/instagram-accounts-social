@@ -116,9 +116,20 @@ built to be *referenced later*, not just admired.
    explained deeply (60-30-10, the 2/3 curtain rule, lighting in threes,
    negative space). Anchor format for authority; slower, monthly-ish.
 
-Anti-repetition: rotate pillars daily so the same format never posts two
-days running; each Palette Study gets a new named palette; principle
-posts draw from a maintained backlog list, never re-run within 60 days.
+Anti-repetition (reconciled for 3x/day by Group CTO 2026-09-01 — the
+original "same format never posts two days running" was written for the
+1x/day cadence and is arithmetically unsatisfiable at 3 posts/day from 4
+pillars: any two consecutive days must share at least two pillars.
+**Pending founder ratification**; the ledger header at
+`accounts/nuvarel/content/used-topics.md` mirrors this wording):
+- No pillar appears twice among the same day's three posts (carousels
+  and the Reel both count).
+- A carousel pillar never occupies the same time-slot two days running
+  (no back-to-back 10:00 Palette Studies, etc.).
+- Each Palette Study gets a new named palette; principle posts draw from
+  a maintained backlog list, never re-run within 60 days.
+The durable fix for rotation pressure is a 5th pillar (§7's AI-imagery
+option) — revisit when Insights data arrives.
 
 ## 4. Hooks and captions
 

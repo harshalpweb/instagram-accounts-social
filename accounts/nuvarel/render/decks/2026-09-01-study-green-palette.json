@@ -1,6 +1,6 @@
 {
   "slug": "2026-09-01-study-green-palette",
-  "series": "Palette Study · The Study Green",
+  "series": "Palette Study · No. 02",
   "slides": [
     {
       "role": "hook",
@@ -9,6 +9,7 @@
     },
     {
       "role": "swatch",
+      "theme": "dark",
       "hex": "#F5F1E8",
       "name": "Chalk Cream",
       "role_line": "Walls · The field",
@@ -23,7 +24,7 @@
     },
     {
       "role": "swatch",
-      "hex": "#8A6F4D",
+      "hex": "#5E4633",
       "name": "Walnut",
       "role_line": "Wood · The mid tones",
       "body": "Deep green goes cold next to pale ash. Walnut and oiled teak carry the warmth this palette runs on."

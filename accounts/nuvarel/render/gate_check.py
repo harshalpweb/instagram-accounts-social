@@ -8,20 +8,72 @@ Checks per slide PNG in a rendered deck dir:
      below = an empty/failed render, above = visual mud at feed scale.
      Swatch slides carry large color fields, hence the wide top of the
      band vs. text-only systems;
-  3. writes 350px-wide previews to <dir>/_preview350/ .
+  3. writes 350px-wide previews to <dir>/_preview350/ ;
+  4. swatch differentiation (added 2026-09-01 after a CCO-caught defect:
+     two near-identical swatches and one swatch invisible on its own
+     ground shipped to review): if ../decks/<slug>.json exists, every
+     pair of swatch hexes must be >= MIN_SWATCH_DIST apart (Euclidean
+     RGB), and each swatch must be >= MIN_SWATCH_DIST from its own
+     slide ground (espresso if the slide is theme "dark", alabaster
+     otherwise). Ink-vs-background alone cannot see this class.
 
 Viewing the previews is still a mandatory human/agent step; the numbers
 do not replace eyes (same doctrine as trend-signals-social's gate).
 
 Usage: py -3 gate_check.py out/<slug>
 """
+import json
 import sys
 from collections import Counter
+from itertools import combinations
 from pathlib import Path
 
 from PIL import Image
 
 BAND = (0.02, 0.60)
+MIN_SWATCH_DIST = 25.0
+ALABASTER = (0xF2, 0xEE, 0xE6)
+ESPRESSO = (0x2A, 0x24, 0x1E)
+
+
+def _rgb(hexcode):
+    h = hexcode.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _dist(a, b):
+    return sum((x - y) ** 2 for x, y in zip(a, b)) ** 0.5
+
+
+def check_swatches(deck_dir: Path) -> int:
+    """Swatch-differentiation check. Returns failure count (0 if the
+    deck JSON is absent or has < 1 swatch)."""
+    deck_path = deck_dir.parent.parent / "decks" / f"{deck_dir.name}.json"
+    if not deck_path.exists():
+        return 0
+    deck = json.loads(deck_path.read_text(encoding="utf-8"))
+    swatches = [
+        (sl.get("name", sl["hex"]), _rgb(sl["hex"]),
+         ESPRESSO if sl.get("theme") == "dark" else ALABASTER)
+        for sl in deck.get("slides", []) if sl.get("role") == "swatch"
+    ]
+    failures = 0
+    for (na, ca, _), (nb, cb, _) in combinations(swatches, 2):
+        d = _dist(ca, cb)
+        if d < MIN_SWATCH_DIST:
+            print(f"FAIL swatch-pair: {na} vs {nb} RGB dist {d:.1f} "
+                  f"< {MIN_SWATCH_DIST} (indistinguishable at feed scale)")
+            failures += 1
+    for name, rgb, ground in swatches:
+        d = _dist(rgb, ground)
+        if d < MIN_SWATCH_DIST:
+            print(f"FAIL swatch-ground: {name} RGB dist {d:.1f} from its "
+                  f"slide ground < {MIN_SWATCH_DIST} (swatch invisible)")
+            failures += 1
+    if swatches and not failures:
+        print(f"PASS swatch differentiation ({len(swatches)} swatches, "
+              f"min pair dist >= {MIN_SWATCH_DIST})")
+    return failures
 
 
 def check(deck_dir: Path) -> int:
@@ -51,6 +103,7 @@ def check(deck_dir: Path) -> int:
         if status == "FAIL":
             failures += 1
         print(f"{status} {p.name}: dim={img.size} ink={ink:.1%}")
+    failures += check_swatches(deck_dir)
     print(f"previews -> {prev_dir}")
     return 1 if failures else 0
 

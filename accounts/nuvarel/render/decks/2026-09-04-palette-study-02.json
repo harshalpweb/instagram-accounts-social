@@ -1,6 +1,6 @@
 {
   "slug": "2026-09-04-palette-study-02",
-  "series": "Palette Study · No. 02",
+  "series": "Palette Study · No. 03",
   "slides": [
     {
       "role": "hook",
@@ -9,6 +9,7 @@
     },
     {
       "role": "swatch",
+      "theme": "dark",
       "hex": "#F1E8DA",
       "name": "Warm Ivory",
       "role_line": "Walls · The 60",
