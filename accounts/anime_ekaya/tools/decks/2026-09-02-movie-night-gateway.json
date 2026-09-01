@@ -1,0 +1,52 @@
+{
+  "slug": "2026-09-02-movie-night-gateway",
+  "kicker": "Gateway Guide · No. 003",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "No time for a 24-episode commitment? Start with [[one movie night]].",
+      "dek": "Five films that work on anyone, anime fan or not."
+    },
+    {
+      "role": "pick",
+      "n": "01",
+      "title": "Spirited Away",
+      "why": "The consensus masterpiece. A bathhouse for spirits and not one wasted frame.",
+      "meta": "Fantasy · Studio Ghibli"
+    },
+    {
+      "role": "pick",
+      "n": "02",
+      "title": "Your Name",
+      "why": "Two strangers start swapping bodies across Japan. The twist lands every single time.",
+      "meta": "Romance · 2016"
+    },
+    {
+      "role": "pick",
+      "n": "03",
+      "title": "A Silent Voice",
+      "why": "A former bully grows up and tries to make it right. Heavier than the others, and worth it.",
+      "meta": "Drama · 2016"
+    },
+    {
+      "role": "pick",
+      "n": "04",
+      "title": "Princess Mononoke",
+      "why": "A war between forest and industry with no real villain anywhere in it.",
+      "meta": "Epic fantasy · Studio Ghibli"
+    },
+    {
+      "role": "pick",
+      "n": "05",
+      "title": "Suzume",
+      "why": "A road trip across Japan closing doors that end worlds. Gorgeous and fast.",
+      "meta": "Adventure · 2022"
+    },
+    {
+      "role": "closer",
+      "h": "Movie night [[sorted]].",
+      "body": "Which film made anime click for you? Send this to tonight's watch group.",
+      "handle": "@anime_ekaya"
+    }
+  ]
+}

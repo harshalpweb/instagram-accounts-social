@@ -1,0 +1,52 @@
+{
+  "slug": "2026-09-01-thriller-gateway",
+  "kicker": "Gateway Guide · No. 002",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "For the friend who says anime is silly: [[5 thrillers]] with zero power-ups.",
+      "dek": "Crime, paranoia, and time travel that plays fair. Pick any one, no homework required."
+    },
+    {
+      "role": "pick",
+      "n": "01",
+      "title": "Monster",
+      "why": "A doctor saves a child. The child grows up. A slow-burn manhunt written for adults.",
+      "meta": "Psychological thriller · 74 eps · complete"
+    },
+    {
+      "role": "pick",
+      "n": "02",
+      "title": "Steins;Gate",
+      "why": "A microwave starts sending texts to the past. Opens as comedy, tightens like a vice.",
+      "meta": "Sci-fi thriller · 24 eps · complete"
+    },
+    {
+      "role": "pick",
+      "n": "03",
+      "title": "Erased",
+      "why": "A man wakes up in his 11-year-old body with one murder to prevent. One tight season.",
+      "meta": "Mystery · 12 eps · complete"
+    },
+    {
+      "role": "pick",
+      "n": "04",
+      "title": "Terror in Resonance",
+      "why": "Two teenagers announce their crimes in riddles. One detective takes them seriously.",
+      "meta": "Crime drama · 11 eps · complete"
+    },
+    {
+      "role": "pick",
+      "n": "05",
+      "title": "Paranoia Agent",
+      "why": "A whole city blames one skater for everything. From the director of Perfect Blue.",
+      "meta": "Psychological · 13 eps · complete"
+    },
+    {
+      "role": "closer",
+      "h": "Started one of these? [[Report back]].",
+      "body": "Drop your pick below. Send this to the true crime friend.",
+      "handle": "@anime_ekaya"
+    }
+  ]
+}

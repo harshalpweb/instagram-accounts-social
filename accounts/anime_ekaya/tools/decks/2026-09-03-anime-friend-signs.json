@@ -1,0 +1,47 @@
+{
+  "slug": "2026-09-03-anime-friend-signs",
+  "kicker": "Diagnostic",
+  "slides": [
+    {
+      "role": "hook",
+      "h": "5 signs you are [[the anime friend]] of the group.",
+      "dek": "A diagnostic. No cure is currently available."
+    },
+    {
+      "role": "principle",
+      "label": "Sign 01",
+      "h": "Your recommendations come with [[disclaimers]].",
+      "body": ["'It gets good in episode 8' has left your mouth unironically. You keep a starter list for every personality type in your contacts, and you have deployed it."]
+    },
+    {
+      "role": "principle",
+      "label": "Sign 02",
+      "h": "A soundtrack in public [[stops you cold]].",
+      "body": ["A train station jingle, a cafe playlist, one violin note. Your friends have watched you leave a conversation mid-sentence to identify it."]
+    },
+    {
+      "role": "principle",
+      "label": "Sign 03",
+      "h": "Your gallery is 40% subtitled screenshots.",
+      "body": ["Not memes. Frames. You screenshot dialogue the way other people bookmark quotes, and you will never delete a single one."]
+    },
+    {
+      "role": "principle",
+      "label": "Sign 04",
+      "h": "You defend a show harder than your own decisions.",
+      "body": ["Someone called your favorite mid at a party once. Your friends still bring up what happened next. You maintain you were right."]
+    },
+    {
+      "role": "principle",
+      "label": "Sign 05",
+      "h": "The group already [[assigned you the role]].",
+      "body": ["Nobody asks whether you watch anime anymore. They just forward clips captioned 'this is you.' It is you."]
+    },
+    {
+      "role": "closer",
+      "h": "Tag yourself. Or get [[tagged]].",
+      "body": "Send this to your group's anime friend. If nobody comes to mind, it's you.",
+      "handle": "@anime_ekaya"
+    }
+  ]
+}
