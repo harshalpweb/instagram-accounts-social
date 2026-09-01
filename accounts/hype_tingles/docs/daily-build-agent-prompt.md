@@ -136,10 +136,18 @@ instead of `"slides"`.
   carries the strongest piece; Reels carry non-follower reach).
 - Weekends: 11:30 carousel, 16:30 carousel, **20:30 Reel**.
 
-If a slot on the target date is already occupied by an existing queue
-item, shift your new piece +30 minutes and note it in the commit
-message. The publish cron is hourly; these times are chosen so the next
-top-of-hour still lands in the target window.
+**Slot-occupancy rule (tightened 2026-09-01, Group CTO):** before
+building anything, list the target date's existing queue items. A
+standing slot already occupied by an existing queue item is COVERED —
+do not build a piece for it. Build only for the standing slots that are
+empty on the target date; if all three are occupied, stop and do
+nothing (the day is fully covered by an earlier batch). The old "+30
+minutes shift" rule applied only to accidental one-off collisions and
+would duplicate a whole pre-built day — never shift-and-double. If a
+genuine timing conflict arises for a slot you ARE building (e.g. a
+moved Reel), shift +30 minutes and note it in the commit message; the
+publish cron is hourly, so the next top-of-hour still lands in the
+target window.
 
 ### Step 8 — update the ledger
 
