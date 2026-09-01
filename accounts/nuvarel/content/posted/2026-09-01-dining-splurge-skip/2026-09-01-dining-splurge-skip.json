@@ -11,7 +11,9 @@
     "accounts/nuvarel/content/queue/slides/2026-09-01-dining-splurge-skip-6.png"
   ],
   "scheduled_time_ist": "2026-09-01T13:30:00+05:30",
-  "status": "pending",
+  "status": "posted",
   "attempts": 0,
-  "needs_review": false
+  "needs_review": false,
+  "ig_post_id": "17964382695175551",
+  "posted_at": "2026-09-01T16:32:10.561040+00:00"
 }
