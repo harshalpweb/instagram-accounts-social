@@ -24,8 +24,9 @@ paths below are relative to it. Work ONLY inside
 ## Your job today (one run)
 
 Build and queue **3 posts for today's date** (the date the run starts,
-IST): **2 carousels + 1 Reel**, each on a different topic, trend-sourced
-where possible. Everything queues at `needs_review: true` — you never
+IST): **1 carousel + 2 Reels** (cadence flip, founder-direct instruction
+2026-09-02 — was 2 carousels + 1 Reel), each on a different topic,
+trend-sourced where possible. Everything queues at `needs_review: true` — you never
 publish, and you NEVER set `needs_review` to `false` under any
 circumstances; clearing review is founder-reserved.
 
@@ -73,32 +74,49 @@ rotation. Never block or skip the run for an empty trend day.
 
 ### Step 4 — pick 3 topics
 
-Day shape (strategy §10): 1 flagship-format piece (F1/F3), 1 fast
-relatable piece (F2/F4), 1 reactive/experimental piece (F5 or a format
-test — this is where today's trend topic most naturally lands). Three
-distinct topics, no overlap with each other or with anything already in
-`accounts/hype_tingles/content/queue/`.
+Day shape (strategy §10, cadence-flip mapping 2026-09-02): the
+flagship-format piece (F1/F3) is the day's **carousel** — F1's
+cast-payoff slide needs the carousel format. The fast relatable piece
+(F2/F4) and the reactive/experimental piece (F5 or a format test — this
+is where today's trend topic most naturally lands) are the day's **two
+Reels**. Three distinct topics, no overlap with each other or with
+anything already in `accounts/hype_tingles/content/queue/`.
 
 ### Step 5 — build
 
-**Carousels (2):** deck JSON in `accounts/hype_tingles/tools/decks/`,
+**Carousel (1):** deck JSON in `accounts/hype_tingles/tools/decks/`,
 rendered via `py -3 accounts/hype_tingles/tools/render.py` (Neon Panel
 brand system — tokens only, no new colors/fonts). 1080x1350 PNGs go to
 `accounts/hype_tingles/content/queue/slides/`. Eyeball every slide at
 feed scale (~350px) before queueing; the cat-payoff slide inverts to
 volt background.
 
-**Reel (1):** load the skill at
-`.claude/skills/meme-worthy-character-reels/` and follow it — it is the
-process, including its frame-level human review of the rendered mp4 (a
-passing ffmpeg check is not a review). Render via
+**Reels (2):** load the skill at
+`.claude/skills/meme-worthy-character-reels/` and follow it for EACH
+Reel — it is the process, including its frame-level human review of
+every rendered mp4 (a passing ffmpeg check is not a review). Render via
 `py -3 scripts/render_reel.py <reel.html> --out <out.mp4> --audio <spec.json>`,
 rig helpers at `assets/rig2d.js`. Tone ruling for this account: punchy,
-meme-fast, ~14-15s. Music is mandatory (free Pixabay/Mixkit track); log
-the license in `assets/audio/ATTRIBUTION.md` in that file's existing
-format, keep the raw audio file LOCAL-ONLY (never commit it — public
-repo; the rendered mp4 with mixed audio is committed). Final mp4 goes to
-`accounts/hype_tingles/content/queue/video/`.
+meme-fast, ~14-15s each. Music is mandatory on both (free Pixabay/Mixkit
+track, use a different track for each of the two so they don't sound
+identical back to back); log each license in
+`assets/audio/ATTRIBUTION.md` in that file's existing format, keep raw
+audio files LOCAL-ONLY (never commit them — public repo; each rendered
+mp4 with mixed audio is committed). Final mp4s go to
+`accounts/hype_tingles/content/queue/video/`. **Same-day scene/prop
+check:** the two Reels must not share the same scene-set + hero-prop
+combination with EACH OTHER, not just against history — apply the
+7-day rule above between them too before queueing either.
+
+**Reel quality ratchet (standing, added 2026-09-02 — founder wants the
+Reels kept improving, not just repeated):** before building, open the
+last 3 live or queued Reels for this account and pick ONE concrete
+thing to make better in today's builds — rig/motion fluidity, comedic
+timing, hook-frame strength (the first 1 second), audio mix/sync,
+background polish, or character expressiveness. Actually implement the
+improvement, don't just note it; name the dimension and what changed in
+the commit message. The bar each day is "better than last time" on at
+least one axis, not "as good as last time."
 
 ### Step 6 — copydesk gate (mandatory)
 
@@ -131,10 +149,11 @@ One JSON per post in `accounts/hype_tingles/content/queue/`, id format
 Reels use `"video": "accounts/hype_tingles/content/queue/video/<id>.mp4"`
 instead of `"slides"`.
 
-**Standing slots (IST), from strategy §9:**
-- Weekdays: 08:00 carousel, 13:00 carousel, **20:00 Reel** (prime slot
-  carries the strongest piece; Reels carry non-follower reach).
-- Weekends: 11:30 carousel, 16:30 carousel, **20:30 Reel**.
+**Standing slots (IST), from strategy §9, cadence-flip 2026-09-02:**
+- Weekdays: **08:00 carousel** (flagship F1/F3), **13:00 Reel**, **20:00
+  Reel** (prime slot; Reels carry non-follower reach).
+- Weekends: **11:30 carousel** (flagship F1/F3), **16:30 Reel**,
+  **20:30 Reel**.
 
 **Slot-occupancy rule (tightened 2026-09-01, Group CTO):** before
 building anything, list the target date's existing queue items. A
@@ -172,7 +191,7 @@ git command its own separate invocation — NEVER chained with `&&`/`;`:
    `accounts/hype_tingles/` (plus at most the ATTRIBUTION.md line you
    added). If anything else is staged, unstage it and investigate
    before proceeding.
-3. `git commit -m "feat(hype_tingles): daily 3x batch <date> (2 carousels + 1 Reel, needs_review)"`
+3. `git commit -m "feat(hype_tingles): daily 3x batch <date> (1 carousel + 2 Reels, needs_review)"`
 4. Push with the race-retry loop (same pattern as `publish-*.yml`):
    `git push`; on rejection, `git pull --rebase`, wait 1-5s, retry, up
    to 5 times.

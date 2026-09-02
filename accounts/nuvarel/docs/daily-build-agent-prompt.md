@@ -31,8 +31,9 @@ only (pure CSS), per the ₹0 lane in the strategy.
 ## Your job today (one run)
 
 Build and queue **3 posts for today's date** (the date the run starts,
-IST): **2 carousels + 1 Reel**, each on a different topic, trend-sourced
-where possible. Everything queues at `needs_review: true` — you never
+IST): **1 carousel + 2 Reels** (cadence flip, founder-direct instruction
+2026-09-02 — was 2 carousels + 1 Reel), each on a different topic,
+trend-sourced where possible. Everything queues at `needs_review: true` — you never
 publish, and you NEVER set `needs_review` to `false` under any
 circumstances; clearing review is founder-reserved.
 
@@ -86,15 +87,17 @@ an empty trend day.
 
 ### Step 4 — pick 3 topics
 
-Day shape: 1 save-magnet piece (Palette Study or The Rule), 1
-mechanism piece (Reads Expensive), 1 shareable piece (Splurge/Skip) —
-bend this shape toward whatever the trend search actually gave you.
-Three distinct topics, no overlap with each other or with anything
+Day shape (cadence-flip mapping 2026-09-02): the save-magnet piece
+(Palette Study or The Rule) is the day's **carousel** — swatch blocks
+and hex labels need the carousel format. The mechanism piece (Reads
+Expensive) and the shareable piece (Splurge/Skip) are the day's **two
+Reels**. Bend this shape toward whatever the trend search actually gave
+you. Three distinct topics, no overlap with each other or with anything
 already in `accounts/nuvarel/content/queue/`.
 
 ### Step 5 — build
 
-**Carousels (2):** deck JSON in `accounts/nuvarel/render/decks/`,
+**Carousel (1):** deck JSON in `accounts/nuvarel/render/decks/`,
 rendered via `py -3 accounts/nuvarel/render/render_nuvarel.py`
 (quiet-luxury editorial system — alabaster/espresso/taupe/bronze tokens
 only; Cormorant Garamond + Archivo). Run the gate check
@@ -103,19 +106,34 @@ eyeball every slide at 350px feed scale. 1080x1350 PNGs go to
 `accounts/nuvarel/content/queue/slides/`. 5-9 slides; slide 1 is the
 hook card; last slide asks for the save.
 
-**Reel (1):** load the skill at
-`.claude/skills/meme-worthy-character-reels/` and follow it — it is the
-process, including its frame-level human review of the rendered mp4 (a
-passing ffmpeg check is not a review). Render via
+**Reels (2):** load the skill at
+`.claude/skills/meme-worthy-character-reels/` and follow it for EACH
+Reel — it is the process, including its frame-level human review of
+every rendered mp4 (a passing ffmpeg check is not a review). Render via
 `py -3 scripts/render_reel.py <reel.html> --out <out.mp4> --audio <spec.json>`,
 rig helpers at `assets/rig2d.js`, wordless Curator figure. Tone ruling
-for this account: calm, deliberate pacing, 19-20s, no camera punches —
-never propagate hype_tingles' energy here. Music is mandatory (free
-Pixabay/Mixkit track, calm/elegant); log the license in
-`assets/audio/ATTRIBUTION.md` in that file's existing format, keep the
-raw audio file LOCAL-ONLY (never commit it — public repo; the rendered
-mp4 with mixed audio is committed). Final mp4 goes to
-`accounts/nuvarel/content/queue/video/`.
+for this account: calm, deliberate pacing, 19-20s each, no camera
+punches — never propagate hype_tingles' energy here. Music is mandatory
+on both (free Pixabay/Mixkit track, calm/elegant, use a different track
+for each of the two); log each license in `assets/audio/ATTRIBUTION.md`
+in that file's existing format, keep raw audio files LOCAL-ONLY (never
+commit them — public repo; each rendered mp4 with mixed audio is
+committed). Final mp4s go to `accounts/nuvarel/content/queue/video/`.
+**Same-day scene/prop check:** the two Reels must not share the same
+scene-set + hero-prop combination with EACH OTHER, not just against
+history — apply the 14-day rule above between them too before queueing
+either.
+
+**Reel quality ratchet (standing, added 2026-09-02 — founder wants the
+Reels kept improving, not just repeated):** before building, open the
+last 3 live or queued Reels for this account and pick ONE concrete
+thing to make better in today's builds — Curator rig/motion fluidity,
+pacing/stillness quality, hook-frame strength (the first 1 second),
+audio mix/sync, set/lighting polish. Actually implement the
+improvement, don't just note it; name the dimension and what changed in
+the commit message. The bar each day is "better than last time" on at
+least one axis, not "as good as last time" — but never at the cost of
+the calm, no-camera-punches tone ruling above.
 
 ### Step 6 — copydesk gate (mandatory)
 
@@ -148,10 +166,10 @@ One JSON per post in `accounts/nuvarel/content/queue/`, id format
 Reels use `"video": "accounts/nuvarel/content/queue/video/<id>.mp4"`
 instead of `"slides"`.
 
-**Standing slots (IST), from strategy §6:**
-- **10:00** — carousel (decor-specific morning-at-home window; the
+**Standing slots (IST), from strategy §6, cadence-flip 2026-09-02:**
+- **10:00** — **carousel** (decor-specific morning-at-home window; the
   save-magnet piece goes here).
-- **13:30** — carousel (lunch browse).
+- **13:30** — **Reel** (lunch browse).
 - **19:30** — **Reel** (all-India evening peak, aspirational browsing;
   Reels carry the non-follower reach, so they take the best slot).
 
@@ -190,7 +208,7 @@ git command its own separate invocation — NEVER chained with `&&`/`;`:
    `accounts/nuvarel/` (plus at most the ATTRIBUTION.md line you
    added). If anything else is staged, unstage it and investigate
    before proceeding.
-3. `git commit -m "feat(nuvarel): daily 3x batch <date> (2 carousels + 1 Reel, needs_review)"`
+3. `git commit -m "feat(nuvarel): daily 3x batch <date> (1 carousel + 2 Reels, needs_review)"`
 4. Push with the race-retry loop (same pattern as `publish-*.yml`):
    `git push`; on rejection, `git pull --rebase`, wait 1-5s, retry, up
    to 5 times.
