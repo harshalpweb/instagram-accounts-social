@@ -14,5 +14,5 @@
   "scheduled_time_ist": "2026-09-03T08:00:00+05:30",
   "status": "pending",
   "attempts": 0,
-  "needs_review": true
+  "needs_review": false
 }
