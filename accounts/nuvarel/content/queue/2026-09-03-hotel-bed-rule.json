@@ -10,8 +10,8 @@
     "accounts/nuvarel/content/queue/slides/2026-09-03-hotel-bed-rule-5.png",
     "accounts/nuvarel/content/queue/slides/2026-09-03-hotel-bed-rule-6.png"
   ],
-  "scheduled_time_ist": "2026-09-04T10:00:00+05:30",
+  "scheduled_time_ist": "2026-09-05T10:00:00+05:30",
   "status": "pending",
   "attempts": 0,
-  "needs_review": true
+  "needs_review": false
 }

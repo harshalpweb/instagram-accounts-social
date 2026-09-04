@@ -1,0 +1,66 @@
+{
+  "_license": "All files Mixkit Free License, vendored (local-only, gitignored) + logged in assets/audio/ATTRIBUTION.md. Beats match reel.html window.BEATS (2D Curator, 20.0s). BGM: Serene View (Arulo) at bed level -- a different track from the sibling Reel of the same day, per the daily-build prompt. Gains raised 2026-09-04 after an ebur128 check read -24.7 LUFS integrated (target about -19).",
+  "tracks": [
+    {
+      "file": "assets/audio/bgm/serene-view.mp3",
+      "at": 0.0,
+      "trim": [
+        0,
+        20.0
+      ],
+      "gain_db": -9,
+      "fade_in": 0.5,
+      "fade_out": 1.6
+    },
+    {
+      "file": "assets/audio/sfx/chime-crystal.mp3",
+      "at": 0.3,
+      "gain_db": -6
+    },
+    {
+      "file": "assets/audio/sfx/paper-move-quick.mp3",
+      "at": 3.95,
+      "gain_db": -7
+    },
+    {
+      "file": "assets/audio/sfx/paper-move-quick.mp3",
+      "at": 5.05,
+      "gain_db": -7
+    },
+    {
+      "file": "assets/audio/sfx/paper-move-quick.mp3",
+      "at": 6.15,
+      "gain_db": -7
+    },
+    {
+      "file": "assets/audio/sfx/sparkle-touch.mp3",
+      "at": 7.0,
+      "gain_db": -8
+    },
+    {
+      "file": "assets/audio/sfx/sparkle-touch.mp3",
+      "at": 8.2,
+      "gain_db": -8
+    },
+    {
+      "file": "assets/audio/sfx/swoosh-slow.mp3",
+      "at": 10.4,
+      "gain_db": -7
+    },
+    {
+      "file": "assets/audio/sfx/marker-pen-line.mp3",
+      "at": 11.0,
+      "gain_db": -7
+    },
+    {
+      "file": "assets/audio/sfx/switch-tap.mp3",
+      "at": 14.1,
+      "gain_db": -3
+    },
+    {
+      "file": "assets/audio/sfx/chime-crystal.mp3",
+      "at": 17.1,
+      "gain_db": -6
+    }
+  ]
+}

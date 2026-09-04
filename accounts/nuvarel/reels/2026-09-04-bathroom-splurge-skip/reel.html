@@ -1,0 +1,328 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+/* nuvarel "Splurge or Skip No. 04: the bathroom" -- reel-splurge-skip, 2D
+   Curator, 20s. Scene-set: BATHROOM (new set: half-height tile, towel rail,
+   shower rod + curtain, mat). Hero props: towel rail + towels; shower
+   curtain. Nothing in common with the living-room sets of the last 14 days,
+   and nothing in common with the sibling Reel of the same day (media wall).
+   Calm per the account tone ruling: single deliberate takes, one slow wipe,
+   no punches, no shake.
+
+   Same quality ratchet as the sibling Reel (hook from frame 0, IK-driven
+   hand, flow-layout rule card, set polish, bed track). Composition rule
+   carried from that Reel's frame review: the head never sits on top of the
+   prop the hand is handling. */
+:root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,sans-serif; position:relative; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:44px; letter-spacing:.30em; color:var(--esp); }
+.kicker { font-size:24px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--taupe); }
+#toprule { position:absolute; top:190px; left:80px; right:80px; height:2px; background:var(--bronze); opacity:.7; z-index:10; }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:1; z-index:12; }
+#hook .line { font-family:'Cormorant Garamond',Georgia,serif; font-size:84px; line-height:1.14; color:var(--esp); }
+#promise { position:absolute; top:520px; left:80px; opacity:0; z-index:12;
+  font-size:30px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); }
+
+#tags { position:absolute; top:250px; left:80px; right:80px; z-index:12; }
+.tag { display:inline-block; border:2px solid var(--esp); padding:14px 28px; margin:0 16px 16px 0; font-size:28px;
+  font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--esp); visibility:hidden; opacity:0; }
+.tag.skip { color:var(--taupe); border-color:var(--taupe); }
+
+#count { position:absolute; top:1640px; left:80px; right:80px; opacity:0; z-index:12;
+  font-size:30px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--taupe); }
+
+#rulecard { position:absolute; inset:0; background:var(--alab); opacity:0; z-index:14; }
+#rulecard .inner { position:absolute; top:470px; left:100px; right:100px; text-align:center; }
+#rulecard .no { font-size:26px; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); margin-bottom:40px; }
+#rulecard h2 { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:92px; line-height:1.16; color:var(--esp); margin-bottom:52px; }
+#rulecard .sub { font-size:34px; line-height:1.5; color:var(--taupe); padding:0 20px; }
+#savecta { margin-top:84px; opacity:0; }
+#savecta span { display:inline-block; border:2px solid var(--esp); padding:16px 36px; font-size:30px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--esp); }
+
+#end { position:absolute; inset:0; background:var(--esp); opacity:0; z-index:15; }
+#endword { position:absolute; top:840px; left:0; right:0; text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; letter-spacing:.34em; color:var(--alab); }
+#endsub { position:absolute; top:1010px; left:0; right:0; text-align:center; color:#B8AFA2;
+  font-size:30px; letter-spacing:.2em; text-transform:uppercase; opacity:0; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
+<div id="brandrow"><div class="wordmark">NUVAREL</div><div class="kicker">Splurge wisely</div></div>
+<div id="toprule"></div>
+
+<div id="hook"><div class="line">Splurge or skip:<br>the bathroom.</div></div>
+<div id="promise">Where the money shows</div>
+
+<div id="tags"><span class="tag" id="tag1">Splurge &middot; the towels</span><span class="tag skip" id="tag2">Skip &middot; the printed curtain</span></div>
+
+<div id="count">Three towels. None of them match.</div>
+
+<div id="rulecard"><div class="inner">
+  <div class="no">Splurge or Skip &middot; No. 04</div>
+  <h2>Splurge on the towels.<br>Skip the pattern.</h2>
+  <div class="sub">Heavy white towels, all one weight, folded the same way. A plain curtain close to the wall colour. That is most of the hotel look.</div>
+  <div id="savecta"><span>Save this for the next towel buy</span></div>
+</div></div>
+
+<div id="end"><div id="endword">NUVAREL</div><div id="endsub">The expensive look, explained</div></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 20.0, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOutO = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+/* beat table */
+const B = {
+  blink1: 1.7,
+  walkTo: [2.5, 3.3],                 // 760 -> 720, beside the rail's right end
+  lean: [3.5, 3.8],                   // ANTICIPATION before the first take
+  takes: [[3.8, 4.3], [4.9, 5.4], [6.0, 6.5]],   // reach windows, right to left
+  drops: [3.95, 5.05, 6.15], dropDur: 0.45,
+  steps: [[4.3, 4.85], [5.4, 5.95]],  // 720 -> 600 -> 480
+  hold1: [6.5, 6.9],                  // regard the empty rail
+  hangA: [6.9, 7.45], inA: 7.0,       // white towel 1 at x=360
+  step3: [7.5, 8.1],                  // 480 -> 680 (side-step right)
+  hangB: [8.1, 8.65], inB: 8.2,       // white towel 2 at x=520
+  hold2: [8.65, 9.0],
+  turn: [9.0, 9.9],                   // 680 -> 570, turn to face the curtain
+  antic: [10.0, 10.4],                // ANTICIPATION: hand draws back before the wipe
+  wipe: [10.4, 11.9],                 // pattern wiped left -> right under the hand
+  hold3: [11.9, 12.3],
+  stepBack: [12.3, 13.2],             // 860 -> 760, regard
+  nod: 13.4, blink2: 13.75,
+  card: 14.0, end: 17.0
+};
+window.BEATS = B;
+
+/* ---------------- stage ---------------- */
+const stage = $("stage");
+const NC = { alab:"#F2EEE6", esp:"#2A241E", taupe:"#6E6257", bronze:"#9C7A4F", floor:"#E7E1D3", skirt:"#DCD5C6", white:"#FBF9F4" };
+const defs = el(stage, "defs", {});
+const grad = el(defs, "linearGradient", { id:"wall", x1:0, y1:0, x2:0, y2:1 });
+el(grad, "stop", { offset:"0", "stop-color":"#F4F0E8" });
+el(grad, "stop", { offset:"1", "stop-color":"#EDE8DE" });
+const blur = el(defs, "filter", { id:"soft", x:"-20%", y:"-50%", width:"140%", height:"200%" });
+el(blur, "feGaussianBlur", { stdDeviation: 14 });
+const clip = el(defs, "clipPath", { id:"pat" });
+const clipRect = el(clip, "rect", { x:720, y:706, width:320, height:839 });
+el(stage, "rect", { x:0, y:0, width:1080, height:1560, fill:"url(#wall)" });
+const bgflip = makeFlipRect(stage);
+const sceneG = el(stage, "g", {});
+// half-height tile (wainscot) with a bronze cap line
+const tileG = el(sceneG, "g", { stroke:NC.taupe, "stroke-width":2, opacity:.12 });
+for (let x = 0; x <= 1080; x += 120) el(tileG, "line", { x1:x, y1:900, x2:x, y2:1540 });
+for (let y = 900; y <= 1540; y += 120) el(tileG, "line", { x1:0, y1:y, x2:1080, y2:y });
+el(sceneG, "line", { x1:0, y1:900, x2:1080, y2:900, stroke:NC.bronze, "stroke-width":2, opacity:.45 });
+// floor + skirting + mat
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:NC.floor });
+el(sceneG, "rect", { x:0, y:1540, width:1080, height:20, fill:NC.skirt });
+el(sceneG, "line", { x1:0, y1:1540, x2:1080, y2:1540, stroke:NC.taupe, "stroke-width":2, opacity:.45 });
+el(sceneG, "rect", { x:740, y:1566, width:280, height:26, rx:4, fill:"#CFC6B6" });
+// shower rod + rings + curtain (plain), then the pattern layer (clipped)
+el(sceneG, "rect", { x:720, y:1520, width:320, height:30, fill:NC.esp, opacity:.08, filter:"url(#soft)" });
+const curtain = el(sceneG, "g", {});
+el(curtain, "rect", { x:720, y:706, width:320, height:839, rx:4, fill:"#F7F3EC", stroke:NC.esp, "stroke-width":4 });
+for (let x = 768; x < 1040; x += 66) el(curtain, "line", { x1:x, y1:720, x2:x, y2:1530, stroke:NC.taupe, "stroke-width":2, opacity:.22 });
+const patG = el(curtain, "g", { "clip-path":"url(#pat)" });
+for (let y = 750; y < 1520; y += 62) for (let x = 750; x < 1030; x += 58) el(patG, "circle", { cx:x + ((Math.floor((y - 750) / 62) % 2) ? 29 : 0), cy:y, r:13, fill:NC.taupe, opacity:.45 });
+el(sceneG, "line", { x1:705, y1:700, x2:1055, y2:700, stroke:NC.esp, "stroke-width":6, "stroke-linecap":"round" });
+for (let x = 730; x <= 1035; x += 45) el(sceneG, "circle", { cx:x, cy:702, r:9, fill:"none", stroke:NC.esp, "stroke-width":3 });
+// towel rail
+el(sceneG, "line", { x1:240, y1:1060, x2:240, y2:1080, stroke:NC.esp, "stroke-width":6 });
+el(sceneG, "line", { x1:580, y1:1060, x2:580, y2:1080, stroke:NC.esp, "stroke-width":6 });
+const railG = el(sceneG, "g", {});   // towels hang in front of the rail line but the rail is drawn first
+el(sceneG, "line", { x1:230, y1:1080, x2:590, y2:1080, stroke:NC.esp, "stroke-width":8, "stroke-linecap":"round" });
+// the three that do not match (right to left: T3 first)
+const MESSY = [
+  { x:290, w:100, h:300, r:-2, fill:"#B9AE9D", stripes:true },
+  { x:410, w:90,  h:220, r:3,  fill:"#C9BFAE", stripes:false },
+  { x:530, w:110, h:340, r:-1, fill:"#8F8478", stripes:true }
+];
+const messyG = MESSY.map(m => {
+  const g = el(railG, "g", {});
+  el(g, "rect", { x:-m.w/2, y:0, width:m.w, height:m.h, rx:6, fill:m.fill, stroke:NC.esp, "stroke-width":4 });
+  if (m.stripes) for (let y = 40; y < m.h - 20; y += 44) el(g, "line", { x1:-m.w/2 + 8, y1:y, x2:m.w/2 - 8, y2:y, stroke:NC.esp, "stroke-width":3, opacity:.35 });
+  return { g, m };
+});
+// the two that match
+const WHITE = [{ x:330 }, { x:490 }];
+const whiteG = WHITE.map(w => {
+  const g = el(railG, "g", { opacity:0 });
+  el(g, "rect", { x:-65, y:0, width:130, height:320, rx:6, fill:NC.white, stroke:NC.esp, "stroke-width":4 });
+  el(g, "line", { x1:-57, y1:110, x2:57, y2:110, stroke:NC.taupe, "stroke-width":2, opacity:.5 });
+  el(g, "line", { x1:-57, y1:214, x2:57, y2:214, stroke:NC.taupe, "stroke-width":2, opacity:.5 });
+  return { g, w };
+});
+const cur = makeStick(sceneG, { stroke:NC.esp, fill:NC.alab });
+const GROUND = 1560, SH = 208;
+
+/* 2-bone IK in the rig's angle convention (0=down, 90=screen-right, 180=up) */
+function ik(sx, sy, tx, ty, bend) {
+  const L1 = L.uArm, L2 = L.lArm;
+  let dx = tx - sx, dy = ty - sy, d = Math.hypot(dx, dy);
+  const maxD = L1 + L2 - 3;
+  if (d > maxD) { dx *= maxD / d; dy *= maxD / d; d = maxD; }
+  const base = Math.atan2(dx, dy);
+  const cosA = (L1*L1 + d*d - L2*L2) / (2*L1*d);
+  const alpha = Math.acos(clamp(cosA, -1, 1));
+  const u = base + bend * alpha;
+  const ex = sx + Math.sin(u) * L1, ey = sy + Math.cos(u) * L1;
+  const l = Math.atan2((sx + dx) - ex, (sy + dy) - ey);
+  return { u: u / D2R, l: l / D2R };
+}
+function shoulder(p) { return [p.tx + Math.sin(p.torso * D2R) * L.torso, p.ty + Math.cos(p.torso * D2R) * L.torso]; }
+function reachWith(p, tx, ty, bend) { const s = shoulder(p); const a = ik(s[0], s[1], tx, ty, bend); p.raU = a.u; p.raL = a.l; }
+
+const standAt = (tx, face, torso, tilt) => ({ ...P.stand, face, tx, ty:GROUND - SH, torso, headTilt:tilt });
+function stepPose(t, t0, t1, x0, x1, face) {
+  const k = easeIO(ramp(t, t0, t1));
+  const p = mixPose(walkPose((t * 1.5) % 1), { ...P.stand }, 0.35);
+  p.face = face; p.torso = 178;
+  p.tx = lerp(x0, x1, k); p.ty = GROUND - SH + Math.abs(Math.sin(t*1.5*Math.PI*2))*-3;
+  return p;
+}
+/* reach arc: hand goes to the target and comes back within the window */
+function reachArc(t, w) { return Math.sin(ramp(t, w[0], w[1]) * Math.PI); }
+/* x leads y on every reach so the hand clears the head before it rises (frame review 2026-09-04) */
+const ax = a => Math.min(1, a * 1.7);
+
+function wipeX(t) { return lerp(750, 1030, easeIO(ramp(t, B.wipe[0], B.wipe[1]))); }
+
+function curatorPose(t) {
+  let p;
+  const breathe = Math.sin(t * 1.5) * 2;
+  const IDLE = 660;   // on the tile between the rail (ends 590) and the curtain (starts 720)
+  if (t < B.walkTo[0]) {
+    p = standAt(IDLE, -1, 180 + breathe*0.5, 8); p.ty += breathe*0.6;
+  } else if (t < B.walkTo[1]) {
+    p = stepPose(t, B.walkTo[0], B.walkTo[1], IDLE, 690, -1);
+  } else if (t < B.lean[1]) {                              // ANTICIPATION: lean away, then in
+    const k = easeIO(ramp(t, B.lean[0], B.lean[1]));
+    p = standAt(690, -1, lerp(180, 190, k) - Math.sin(k*Math.PI)*4, lerp(6, -4, k));
+    reachWith(p, lerp(620, 580, k), lerp(1200, 1150, k), 1);
+  } else if (t < B.takes[0][1]) {                          // take T3 (x=530): hand to its far edge
+    const a = reachArc(t, B.takes[0]);
+    p = standAt(690, -1, 190, -4); reachWith(p, lerp(580, 500, ax(a)), lerp(1150, 1095, a), 1);
+  } else if (t < B.steps[0][1]) {
+    p = stepPose(t, B.steps[0][0], B.steps[0][1], 690, 580, -1);
+  } else if (t < B.takes[1][1]) {                          // take T2 (x=410)
+    const a = reachArc(t, B.takes[1]);
+    p = standAt(580, -1, 190, -4); reachWith(p, lerp(460, 380, ax(a)), lerp(1150, 1095, a), 1);
+  } else if (t < B.steps[1][1]) {
+    p = stepPose(t, B.steps[1][0], B.steps[1][1], 580, 440, -1);
+  } else if (t < B.takes[2][1]) {                          // take T1 (x=290)
+    const a = reachArc(t, B.takes[2]);
+    p = standAt(440, -1, 190, -4); reachWith(p, lerp(340, 260, ax(a)), lerp(1150, 1095, a), 1);
+  } else if (t < B.hold1[1]) {                             // regard the empty rail
+    p = standAt(440, -1, 184, 10 + breathe*0.5);
+  } else if (t < B.hangA[1]) {                             // hang W1 (x=330)
+    const a = reachArc(t, B.hangA);
+    p = standAt(440, -1, 190, -4); reachWith(p, lerp(380, 300, ax(a)), lerp(1160, 1090, a), 1);
+  } else if (t < B.step3[1]) {
+    p = stepPose(t, B.step3[0], B.step3[1], 440, 660, 1);
+  } else if (t < B.hangB[1]) {                             // hang W2 (x=490)
+    const a = reachArc(t, B.hangB);
+    p = standAt(660, -1, 190, -4); reachWith(p, lerp(540, 460, ax(a)), lerp(1160, 1090, a), 1);
+  } else if (t < B.hold2[1]) {
+    p = standAt(660, -1, 184, 8);
+  } else if (t < B.turn[1]) {                              // turn toward the curtain
+    const k = ramp(t, B.turn[0], B.turn[1]);
+    p = stepPose(t, B.turn[0], B.turn[1], 660, 620, k < 0.5 ? -1 : 1);
+  } else if (t < B.antic[1]) {                             // ANTICIPATION: hand back, then forward
+    const k = easeIO(ramp(t, B.antic[0], B.antic[1]));
+    p = standAt(620, 1, lerp(180, 172, k), 4);
+    reachWith(p, lerp(650, 750, k), lerp(1250, 1150, k), -1);
+  } else if (t < B.hold3[1]) {                             // the wipe: hand leads, body follows
+    const hx = t < B.wipe[1] ? wipeX(t) : 1030;
+    if (t < B.wipe[1]) { p = stepPose(t, B.wipe[0], B.wipe[1], 620, 900, 1); p.tx = hx - 130; p.torso = 172; }
+    else p = standAt(900, 1, 174, 4);
+    reachWith(p, hx, 1150, -1);
+  } else if (t < B.stepBack[1]) {                          // back to the tile, regard the rail
+    const k = ramp(t, B.stepBack[0], B.stepBack[1]);
+    p = stepPose(t, B.stepBack[0], B.stepBack[1], 900, IDLE, k < 0.6 ? 1 : -1);
+  } else {
+    p = standAt(IDLE, -1, 180 + breathe*0.5, 6); p.ty += breathe*0.6;
+    p.laU = 24; p.laL = 12; p.raU = -24; p.raL = -12;
+    if (t >= B.nod && t < B.nod + 0.5) p.headTilt = 6 - 10*Math.sin(ramp(t, B.nod, B.nod + 0.5) * Math.PI);
+  }
+  p.eyes = "open";
+  if ((t >= B.blink1 && t < B.blink1 + 0.09) || (t >= B.blink2 && t < B.blink2 + 0.09)) p.eyes = "closed";
+  poseStick(cur, p);
+
+  // towels
+  messyG.forEach((tw, i) => {
+    const k = easeIO(PP(t, B.drops[2 - i], B.dropDur));   // drops[0] is T3 (rightmost)
+    if (k >= 1) { tw.g.setAttribute("display", "none"); return; }
+    tw.g.setAttribute("display", "");
+    tw.g.setAttribute("opacity", (1 - k).toFixed(2));
+    tw.g.setAttribute("transform", `translate(${tw.m.x},${1084 + 90*k}) rotate(${tw.m.r + 6*k})`);
+  });
+  whiteG.forEach((tw, i) => {
+    const t0 = i === 0 ? B.inA : B.inB;
+    const k = easeOutO(PP(t, t0, 0.5));
+    tw.g.setAttribute("opacity", k.toFixed(2));
+    tw.g.setAttribute("transform", `translate(${tw.w.x},${lerp(1060, 1084, k).toFixed(1)})`);
+  });
+  // curtain pattern: clipped away from the left as the hand passes
+  const wx = t < B.wipe[0] ? 720 : wipeX(t);
+  clipRect.setAttribute("x", wx.toFixed(1));
+  clipRect.setAttribute("width", Math.max(0, 1040 - wx).toFixed(1));
+}
+
+/* ---------------- overlays ---------------- */
+window.seek = async function (t) {
+  t = clamp(t, 0, 20.0);
+  stalePaintGuard(t, bgflip, $("stagewrap"), "rgba(242,238,230,0.004)");
+  const covered = t >= B.card;
+  sceneG.style.visibility = covered && t >= B.card + 0.5 ? "hidden" : "visible";
+  if (!covered || t < B.card + 0.5) curatorPose(t);
+
+  const h = $('hook');   // visible from frame 0
+  h.style.opacity = t < 3.4 ? String(1 - PP(t, 3.1, 0.3, easeIO)) : '0';
+  const pr = $('promise');
+  if (t >= 1.2 && t < 3.4) pr.style.opacity = String(Math.min(PP(t, 1.2, 0.4), 1 - PP(t, 3.1, 0.3)));
+  else pr.style.opacity = '0';
+
+  fadeUp($('tag1'), t, 7.6, 0.5);
+  fadeUp($('tag2'), t, 11.0, 0.5);
+  if (t >= 13.6) { $('tag1').style.opacity = String(1 - PP(t, 13.6, 0.3)); $('tag2').style.opacity = String(1 - PP(t, 13.6, 0.3)); }
+
+  const ct = $('count');
+  if (t >= 3.2 && t < 13.7) {
+    ct.textContent = t >= 10.4 ? 'One plain curtain.' : (t >= 6.9 ? 'Two towels. One weight.' : 'Three towels. None of them match.');
+    let o = Math.min(PP(t, 3.2, 0.3), 1 - PP(t, 13.4, 0.3));
+    if (t >= 6.7 && t < 7.1) o = Math.min(o, Math.abs(t - 6.9) / 0.2);
+    if (t >= 10.2 && t < 10.6) o = Math.min(o, Math.abs(t - 10.4) / 0.2);
+    ct.style.opacity = String(o);
+  } else ct.style.opacity = '0';
+
+  const rc_ = $('rulecard');
+  if (t >= B.card && t < B.end) {
+    rc_.style.opacity = String(Math.min(PP(t, B.card, 0.4), 1 - PP(t, B.end - 0.3, 0.3)));
+    $('savecta').style.opacity = String(PP(t, B.card + 1.3, 0.4));
+  } else rc_.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= B.end) {
+    end.style.opacity = String(PP(t, B.end, 0.35));
+    $('endsub').style.opacity = String(PP(t, B.end + 0.7, 0.4));
+  } else end.style.opacity = '0';
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>
