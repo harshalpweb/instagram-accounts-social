@@ -1,0 +1,408 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* anime_ekaya "show converter" (21s) -- GATEWAY GUIDE acted by the 2D
+   stickman EKAYA on the shared rig2d. Premise: a friend's favourite
+   non-anime show goes into a CONVERTER machine, EKAYA pulls the lever,
+   an anime title pops out. Three rounds; round 3 is the struggle beat.
+   Tone: energetic but not slapstick (per-account ruling) -- no cartoon
+   camera punches, one recoil in round 3, everything else is acting.
+   Scene/prop: converter machine + lever + request/result cards + a floor
+   pile of converted cards. Nothing in the last 14 days used a machine or
+   a lever (tower/cards, doors, lane pillars, phone panel, typographic).
+   Quality ratchet (2026-09-04): HOOK-FRAME STRENGTH -- the mascot, the
+   hero prop and the hook line are fully composed by t=0.4s (previous
+   Reels open on a near-empty stage with EKAYA walking in), plus a
+   SECONDARY SQUASH on the prop at every lever pull.
+   Principle map: ANTICIPATION = hands raised 0.25s before each card
+   drops; reach-and-grip holds before each pull (2f hold at 3.30-3.37 /
+   7.98-8.05 / 11.88-11.95); the lean-in before the round-3 pop.
+   SQUASH = machine sy pop at each pull end (3.55 / 8.23 / 12.13, pivot
+   at the floor), card-catch sy at 1.10 / 7.00 / 10.90, recoil landing
+   13.57 (about the feet), pile landings 6.40 / 10.30.
+   HOLDS = read-the-card 1.10-2.30 (blink 1.90), result holds 5.15-6.05
+   (blink 5.70) and 9.30-10.00 (blink 9.70), round-3 struggle
+   12.45-13.25 (dead eyes from 12.85), recoil hold 13.60-14.75
+   (blink 14.25). */
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:78px; line-height:1.1; }
+#hook .line mark { background:none; color:var(--coral); }
+#hook .sub { font-size:40px; font-weight:500; color:var(--lav); margin-top:20px; }
+
+#payoff { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:14; }
+#payoff .pre { position:absolute; top:300px; left:90px; font-size:30px; font-weight:500; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--lav); }
+#payoff h2 { position:absolute; top:360px; left:90px; right:90px; font-family:'Space Grotesk'; font-weight:700;
+  font-size:84px; line-height:1.08; }
+.pick { position:absolute; left:90px; right:90px; background:var(--panel); border:2px solid var(--hair);
+  border-radius:22px; padding:34px 40px; opacity:0; }
+.pick .mood { font-size:26px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--coral); }
+.pick .title { font-family:'Space Grotesk'; font-weight:700; font-size:50px; margin-top:10px; }
+.pick .why { font-size:28px; color:var(--muted); margin-top:8px; line-height:1.35; }
+#p1 { top:620px; } #p2 { top:880px; } #p3 { top:1140px; }
+#savecta { position:absolute; top:1430px; left:90px; opacity:0; background:var(--coral); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:40px; padding:16px 34px; border-radius:14px; }
+
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
+#endword { position:absolute; top:800px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:92px; color:var(--coral); }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:56px; color:var(--lav); display:block; margin-top:16px; }
+#endsub { position:absolute; top:1060px; left:0; right:0; text-align:center; color:var(--muted);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">gateway guide</div></div>
+
+<div id="hook"><div class="line">Your friend only watches <mark>Netflix.</mark></div><div class="sub">Fine. We convert.</div></div>
+
+<div id="payoff">
+  <div class="pre">Gateway guide</div>
+  <h2>Their show, your first anime.</h2>
+  <div class="pick" id="p1"><div class="mood">Game of Thrones fans</div><div class="title">Attack on Titan</div><div class="why">Walls, politics, and an ending people still argue about.</div></div>
+  <div class="pick" id="p2"><div class="mood">Stranger Things fans</div><div class="title">Dan Da Dan</div><div class="why">Aliens, ghosts, and two kids in over their heads.</div></div>
+  <div class="pick" id="p3"><div class="mood">Squid Game fans</div><div class="title">Kaiji: Ultimate Survivor</div><div class="why">Gambling death games since 2007.</div></div>
+  <div id="savecta">Send this to that friend.</div>
+</div>
+
+<div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
+<div id="endsub">Your next anime, sorted. New picks daily.</div></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 21.0, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const lerpN = lerp;
+
+/* ---------------- beat table: three conversion rounds ---------------- */
+const R = [
+  { req:"GAME OF THRONES", from:"Game of Thrones fans", out:"ATTACK ON TITAN",
+    drop:0.70, catchAt:1.10, readEnd:2.30, insert:[2.40,2.80], reach:[2.95,3.30], grip:3.37, pull:[3.37,3.55],
+    proc:[3.60,4.70], pop:4.80, holdEnd:6.05, fly:[6.10,6.40], blinkRead:1.90, blinkHold:5.70 },
+  { req:"STRANGER THINGS", from:"Stranger Things fans", out:"DAN DA DAN",
+    drop:6.65, catchAt:7.00, readEnd:7.30, insert:[7.35,7.65], reach:[7.75,7.98], grip:8.05, pull:[8.05,8.23],
+    proc:[8.28,8.90], pop:9.00, holdEnd:10.00, fly:[10.05,10.30], blinkRead:null, blinkHold:9.70 },
+  { req:"SQUID GAME", from:"Squid Game fans", out:"KAIJI",
+    drop:10.55, catchAt:10.90, readEnd:11.20, insert:[11.25,11.55], reach:[11.65,11.88], grip:11.95, pull:[11.95,12.13],
+    proc:[12.17,13.25], pop:13.30, holdEnd:14.75, fly:null, blinkRead:null, blinkHold:14.25, struggle:true,
+    strugAt:12.45, deadAt:12.85 }
+];
+/* invariant: each round's drop-0.25 >= previous round's fly end, so the
+   flying card never gets cut off by the next round's hand-raise */
+const B = { hookIn:-0.12, hookOut:3.00, payoff:14.85, payoffOut:19.35, rows:[15.35,15.85,16.35], cta:17.35 };
+window.BEATS = { rounds:R, ...B };
+
+/* ---------------- stage ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const AC = { paper:"#F3F0FF", coral:"#FF5D73", lav:"#9D8DF1", panel:"#1C1834", hair:"#37315A", bg:"#131022", muted:"#A9A3C2", floor:"#0E0C1B" };
+const sceneG = el(stage, "g", {});
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:AC.floor });
+el(sceneG, "line", { x1:0, y1:1560, x2:1080, y2:1560, stroke:AC.hair, "stroke-width":5 });
+
+/* pile of converted cards (left, on the floor) -- the running counter */
+const PILE_X = 190;
+const pileCards = [];
+for (let i = 0; i < 3; i++) {
+  const g = el(sceneG, "g", { display:"none" });
+  el(g, "rect", { x:-270, y:-80, width:540, height:160, rx:18, fill:AC.coral, stroke:AC.paper, "stroke-width":5 });
+  const t2 = el(g, "text", { x:0, y:30, fill:AC.bg, "text-anchor":"middle", "font-family":"Space Grotesk", "font-size":"46", "font-weight":"700" });
+  t2.textContent = R[i].out;
+  pileCards.push(g);
+}
+
+/* EKAYA (drawn before the machine so nothing of the mascot overlaps the prop) */
+const eka = makeStick(sceneG, { stroke:AC.paper, fill:AC.bg, tuft:AC.coral });
+
+/* request card -- held by its RIGHT edge, hangs to the left of the hand, so it
+   never crosses the machine face until it is pushed into the slot */
+const reqG = el(sceneG, "g", { display:"none" });
+el(reqG, "rect", { x:-340, y:-42, width:340, height:84, rx:12, fill:AC.lav, stroke:AC.paper, "stroke-width":4 });
+const reqT = el(reqG, "text", { x:-170, y:11, fill:AC.bg, "text-anchor":"middle", "font-family":"Space Grotesk", "font-size":"30", "font-weight":"700", "letter-spacing":"1" });
+
+/* the CONVERTER machine: chunky body, lid, ready-lamp, screen with three
+   chasing dots, a side slot, an output tray. Deliberately NOT an empty UI
+   card (known-pitfalls rule): lid, lamp, screen, slot and tray give it a
+   silhouette no card in this brand system has. */
+const MX0 = 620, MX1 = 1000, MY0 = 900, MY1 = 1560, MCX = (MX0 + MX1) / 2;
+const machG = el(sceneG, "g", {});
+el(machG, "rect", { x:MX0, y:MY0, width:MX1-MX0, height:MY1-MY0, rx:22, fill:AC.panel, stroke:AC.lav, "stroke-width":5 });
+el(machG, "rect", { x:MX0-18, y:MY0-24, width:MX1-MX0+36, height:40, rx:12, fill:AC.hair, stroke:AC.lav, "stroke-width":4 });
+const lamp = el(machG, "circle", { cx:MCX, cy:MY0-52, r:18, fill:AC.hair, stroke:AC.lav, "stroke-width":4 });
+el(machG, "rect", { x:MCX-3, y:MY0-34, width:6, height:12, fill:AC.lav });
+el(machG, "rect", { x:680, y:940, width:260, height:90, rx:12, fill:AC.bg, stroke:AC.hair, "stroke-width":3 });
+const dots = [0,1,2].map(i => el(machG, "circle", { cx:760 + i*50, cy:985, r:13, fill:AC.hair }));
+const lbl = el(machG, "text", { x:MCX, y:1092, fill:AC.coral, "text-anchor":"middle", "font-family":"Inter", "font-size":"26", "font-weight":"500", "letter-spacing":"6" });
+lbl.textContent = "CONVERTER";
+el(machG, "rect", { x:MX0-10, y:1258, width:26, height:96, rx:6, fill:AC.bg, stroke:AC.lav, "stroke-width":3 });   /* side slot */
+el(machG, "rect", { x:680, y:1470, width:260, height:52, rx:8, fill:AC.bg, stroke:AC.hair, "stroke-width":3 });   /* tray */
+el(machG, "line", { x1:660, y1:1396, x2:960, y2:1396, stroke:AC.hair, "stroke-width":3 });
+el(machG, "line", { x1:660, y1:1432, x2:960, y2:1432, stroke:AC.hair, "stroke-width":3 });
+
+/* lever: pivot on the machine's left face, knob follows EKAYA's hand */
+const PIV = [626, 1180], LEV_R = 110;
+const levG = el(sceneG, "g", {});
+el(levG, "circle", { cx:PIV[0], cy:PIV[1], r:16, fill:AC.hair, stroke:AC.lav, "stroke-width":4 });
+const levRod = el(levG, "line", { x1:PIV[0], y1:PIV[1], x2:PIV[0], y2:PIV[1], stroke:AC.lav, "stroke-width":12, "stroke-linecap":"round" });
+const levKnob = el(levG, "circle", { cx:0, cy:0, r:24, fill:AC.coral, stroke:AC.paper, "stroke-width":4 });
+const REST_A = 250 * D2R, PULL_A = 150 * D2R;   /* knob sweeps up-left -> down-left */
+const knobAt = a => [PIV[0] + LEV_R * Math.cos(a), PIV[1] + LEV_R * Math.sin(a)];
+
+/* result card (pops out of the tray, floats up, then flies to the pile) */
+const outG = el(sceneG, "g", { display:"none" });
+el(outG, "rect", { x:-270, y:-80, width:540, height:160, rx:18, fill:AC.coral, stroke:AC.paper, "stroke-width":5 });
+const outT1 = el(outG, "text", { x:0, y:-26, fill:AC.bg, "text-anchor":"middle", "font-family":"Inter", "font-size":"24", "font-weight":"500", "letter-spacing":"4" });
+const outT2 = el(outG, "text", { x:0, y:34, fill:AC.bg, "text-anchor":"middle", "font-family":"Space Grotesk", "font-size":"46", "font-weight":"700" });
+
+/* ---------------- helpers ---------------- */
+const STAND_X = 440, STAND_Y = 1352;
+const OUT_HOME = [540, 720];
+const PILE_S = 0.5;
+const pileY = i => 1560 - 40 - 80 * i;
+/* 2-segment IK in the rig's angle convention (0=down, 90=screen-right) */
+function ik(S, T, a, b) {
+  let dx = T[0] - S[0], dy = T[1] - S[1];
+  let d = Math.hypot(dx, dy);
+  const dmax = a + b - 1;
+  if (d > dmax) { dx *= dmax / d; dy *= dmax / d; d = dmax; }
+  const phi = Math.atan2(dx, dy);
+  const alpha = Math.acos(clamp((a*a + d*d - b*b) / (2*a*d), -1, 1));
+  /* elbow up (screen-up) = the natural grip for a pull-down lever */
+  const uA = phi + alpha, uB = phi - alpha;
+  const ey = (u) => S[1] + Math.cos(u) * a;
+  const u = ey(uA) < ey(uB) ? uA : uB;
+  const E = [S[0] + Math.sin(u) * a, S[1] + Math.cos(u) * a];
+  const l = Math.atan2(T[0] - E[0], T[1] - E[1]);
+  return { u: u / D2R, l: l / D2R };
+}
+const shoulderOf = p => [p.tx + dir(p.torso)[0] * L.torso, p.ty + dir(p.torso)[1] * L.torso];
+const handOf = (p, u, l) => { const S = shoulderOf(p);
+  const E = [S[0] + dir(u)[0]*L.uArm, S[1] + dir(u)[1]*L.uArm];
+  return [E[0] + dir(l)[0]*L.lArm, E[1] + dir(l)[1]*L.lArm]; };
+const IDLE = { torso:180, headTilt:0, laU:14, laL:8, raU:-14, raL:-8, llU:6, llL:2, rlU:-6, rlL:-2, eyes:"open", face:1 };
+const CARRY = { torso:178, headTilt:0, laU:60, laL:30, raU:50, raL:22, llU:6, llL:2, rlU:-6, rlL:-2, eyes:"open", face:1 };
+const PUSH  = { torso:176, headTilt:-4, laU:70, laL:60, raU:62, raL:52, llU:6, llL:2, rlU:-6, rlL:-2, eyes:"open", face:1 };
+const CROUCH_LEGS = { llU:30, llL:-4, rlU:-30, rlL:4 };   /* wide stance, hip drops ~14px */
+
+function roundAt(t) { for (let i = R.length - 1; i >= 0; i--) if (t >= R[i].drop - 0.25) return i; return -1; }
+
+function layout(t) {
+  const sway = Math.sin(t * 1.9) * 2;
+  const ri = roundAt(t);
+  const r = ri >= 0 ? R[ri] : null;
+  let p = { ...IDLE, tx: STAND_X, ty: STAND_Y, torso: 180 + sway };
+  let leverA = REST_A;
+  let reqPos = null, reqSq = 1;
+  let out = null;                    /* {x,y,s,sy} */
+  let machSy = 1, machDx = 0, lampOn = false, dotMode = "off";
+  let visiblePile = 0;
+  for (let i = 0; i < R.length; i++) if (R[i].fly && t >= R[i].fly[1]) visiblePile = i + 1;
+
+  if (r) {
+    /* ---- 1. hands up (ANTICIPATION), card drop + catch (SQUASH) + read (HOLD) ---- */
+    if (t >= r.drop - 0.25 && t < r.insert[0]) {
+      const k = ramp(t, r.drop - 0.25, r.drop);
+      p = { ...mixPose({ ...IDLE }, { ...CARRY }, easeIO(k)), tx: STAND_X, ty: STAND_Y };
+      p.torso = 178 + sway * 0.5; p.eyes = t >= r.drop - 0.1 ? "wide" : "open"; p.headTilt = -6 * k;
+      const H = handOf(p, p.laU, p.laL);
+      if (t >= r.drop) {
+        const fk = ramp(t, r.drop, r.catchAt);
+        const cy = lerpN(-120, H[1], easeInCubic(fk));
+        reqPos = [H[0] + 6, t < r.catchAt ? cy : H[1]];
+        if (t >= r.catchAt) { reqSq = 1 - punch(t, r.catchAt, 0.18, 16); p.headTilt = -14; p.eyes = t < r.catchAt + 0.45 ? "wide" : "open"; }
+        if (r.blinkRead && t >= r.blinkRead && t < r.blinkRead + 0.09) p.eyes = "closed";
+        if (r.struggle && t >= r.catchAt) p.eyes = "wide";   /* round 3: the request itself is alarming */
+      }
+    }
+    /* ---- 2. push the card into the slot (secondary SQUASH on the machine) ---- */
+    else if (t >= r.insert[0] && t < r.reach[0]) {
+      const k = easeIO(ramp(t, r.insert[0], r.insert[1]));
+      p = { ...mixPose({ ...CARRY }, { ...PUSH }, k), tx: STAND_X, ty: STAND_Y };
+      const H = handOf(p, p.laU, p.laL);
+      const rx = lerpN(H[0] + 6, MX1 - 12, easeInCubic(k));   /* right edge slides behind the machine, never past its far side */
+      reqPos = [rx, lerpN(H[1], 1306, k)];
+      if (t >= r.insert[1]) { reqPos = null; machSy = 1 - punch(t, r.insert[1], 0.03, 16); }
+      if (t >= r.insert[1] + 0.05) p = { ...mixPose({ ...PUSH }, { ...IDLE }, easeIO(ramp(t, r.insert[1] + 0.05, r.reach[0]))), tx: STAND_X, ty: STAND_Y };
+    }
+    /* ---- 3. reach, grip (ANTICIPATION hold), pull, machine SQUASH, processing ---- */
+    else if (t >= r.reach[0] && t < r.pop) {
+      const reachK = easeIO(ramp(t, r.reach[0], r.reach[1]));
+      const pullK = easeInCubic(ramp(t, r.pull[0], r.pull[1]));
+      const relK = easeIO(ramp(t, r.pull[1] + 0.35, r.pull[1] + 0.75));
+      const crouch = Math.max(pullK * (1 - relK), 0);
+      p = { ...IDLE, tx: STAND_X, ty: STAND_Y + 16 * crouch, torso: 180 - 8 * crouch + sway * 0.4, headTilt: -4 * reachK, eyes:"open", face:1 };
+      p.llU = lerpN(6, CROUCH_LEGS.llU, crouch); p.llL = lerpN(2, CROUCH_LEGS.llL, crouch);
+      p.rlU = lerpN(-6, CROUCH_LEGS.rlU, crouch); p.rlL = lerpN(-2, CROUCH_LEGS.rlL, crouch);
+      leverA = lerpN(REST_A, PULL_A, pullK);
+      if (t >= r.pull[1] + 0.35) leverA = lerpN(PULL_A, REST_A, back(ramp(t, r.pull[1] + 0.35, r.pull[1] + 0.75)));
+      const K = knobAt(t < r.pull[1] + 0.35 ? leverA : PULL_A);
+      const S = shoulderOf(p);
+      /* right hand: idle -> knob during reach; on the knob through the pull; back to idle on release */
+      const idleHand = handOf(p, IDLE.raU, IDLE.raL);
+      const target = t < r.pull[1] + 0.35 ? [lerpN(idleHand[0], K[0], reachK), lerpN(idleHand[1], K[1], reachK)]
+                                          : [lerpN(K[0], idleHand[0], relK), lerpN(K[1], idleHand[1], relK)];
+      const a = ik(S, target, L.uArm, L.lArm); p.raU = a.u; p.raL = a.l;
+      p.laU = lerpN(14, 40, reachK) - 20 * crouch; p.laL = lerpN(8, 20, reachK);
+      machSy = 1 - punch(t, r.pull[1], 0.09, 14);
+      if (t >= r.proc[0] && t < r.proc[1]) {
+        dotMode = "chase";
+        machDx = shake(t, r.proc[0], 3, 1.2, 11, 0);
+        p.eyes = "wide";
+        if (r.struggle) {
+          const sk = ramp(t, r.strugAt, r.strugAt + 0.5);
+          const on = t >= r.strugAt ? 1 : 0;
+          machDx = shake(t, r.proc[0], 3, 0.6, 11, 0) + shake(t, r.strugAt, 9, 0.4, 16, 1.3) * on;
+          machSy = machSy * (1 - Math.abs(Math.sin((t - r.strugAt) * 22)) * 0.025 * on);
+          dotMode = on ? "erratic" : "chase";
+          /* lean in, then the eyes give up */
+          p.torso = 180 - 10 * sk + sway * 0.3; p.headTilt = -8 * sk;
+          p.laU = 40 + 20 * sk; p.laL = 20 + 20 * sk;
+          if (t >= r.deadAt) p.eyes = "dead";
+        }
+      } else if (t >= r.proc[1]) { dotMode = "all"; lampOn = true; p.eyes = "wide"; }
+    }
+    /* ---- 4. pop + hold (+ round-3 recoil) + fly to pile ---- */
+    else if (t >= r.pop) {
+      const big = !!r.struggle;
+      const pk = ramp(t, r.pop, r.pop + 0.35);
+      const sPop = lerpN(0.15, big ? 1.14 : 1.0, back(pk));
+      const settle = big && t >= r.pop + 0.35 ? 1 + 0.14 * Math.exp(-(t - r.pop - 0.35) * 9) : sPop;
+      const ox = lerpN(MCX, OUT_HOME[0], easeOutCubic(pk)), oy = lerpN(1496, OUT_HOME[1], easeOutCubic(pk));
+      out = { x: ox, y: oy, s: big ? Math.min(sPop, settle) : sPop, sy: 1 };
+      lampOn = t < r.pop + 0.9; dotMode = "all";
+      machSy = 1 + punch(t, r.pop, big ? 0.10 : 0.05, 12);
+      if (!big) {
+        /* small fist-pump, look up at the card, then hold */
+        const fk = easeIO(ramp(t, r.pop + 0.05, r.pop + 0.30));
+        p = { ...IDLE, tx: STAND_X, ty: STAND_Y - 4 * fk, torso: 182 + sway * 0.5, headTilt: -10 * fk,
+              raU: lerpN(-14, 176, fk), raL: lerpN(-8, 166, fk), laU: 14, laL: 8, eyes:"open", face:1 };
+      } else {
+        /* recoil: lean back + step back with a landing SQUASH about the feet, then a held stare */
+        const rk = c01((t - r.pop) / 0.27);
+        const jump = Math.sin(rk * Math.PI) * 44;
+        p = { ...IDLE, tx: lerpN(STAND_X, STAND_X - 30, rk), ty: STAND_Y - jump, torso: 200, headTilt: 10,
+              laU: 150, laL: 172, raU: 145, raL: 168, llU: 26, llL: -12, rlU: -26, rlL: 10, eyes:"wide", face:1 };
+        if (t >= r.pop + 0.27) {
+          const sq = punch(t, r.pop + 0.27, 0.11, 15);
+          const rec = easeIO(ramp(t, r.pop + 0.6, r.pop + 1.2));
+          p.tx = STAND_X - 30; p.ty = STAND_Y; p.sy = 1 - sq; p.sx = 1 + sq * 0.5; p.px = 0; p.py = 208;
+          p.torso = lerpN(200, 186, rec) + sway * 0.4; p.headTilt = lerpN(10, -8, rec);
+          p.laU = lerpN(150, 120, rec); p.laL = lerpN(172, 60, rec); p.raU = lerpN(145, 110, rec); p.raL = lerpN(168, 52, rec);
+          p.llU = 6; p.llL = 2; p.rlU = -6; p.rlL = -2;
+          p.eyes = "wide";
+        }
+      }
+      if (r.blinkHold && t >= r.blinkHold && t < r.blinkHold + 0.09) p.eyes = "closed";
+      if (r.fly && t >= r.fly[0]) {
+        const fl = ramp(t, r.fly[0], r.fly[1]), fk = easeInCubic(fl);
+        out = { x: lerpN(OUT_HOME[0], PILE_X, fk), y: lerpN(OUT_HOME[1], pileY(ri), fk) - Math.sin(fl * Math.PI) * 160, s: lerpN(1, PILE_S, fk), sy: 1 };
+        if (t >= r.fly[1]) { out = null; }
+        p = { ...IDLE, tx: STAND_X, ty: STAND_Y, torso: 180 + sway, headTilt: -6 * (1 - fk), eyes:"open", face:1 };
+      }
+    }
+  }
+  return { p, leverA, reqPos, reqSq, out, machSy, machDx, lampOn, dotMode, visiblePile, ri };
+}
+
+function apply(t, s) {
+  poseStick(eka, s.p);
+  /* machine: squash about the floor, jitter on x */
+  machG.setAttribute("transform", `translate(${s.machDx.toFixed(2)},0) translate(0,${MY1}) scale(1,${s.machSy.toFixed(4)}) translate(0,${-MY1})`);
+  lamp.setAttribute("fill", s.lampOn ? AC.coral : AC.hair);
+  dots.forEach((d, i) => {
+    let on = false;
+    if (s.dotMode === "chase") on = Math.floor(t * 7) % 3 === i;
+    else if (s.dotMode === "erratic") on = Math.sin(t * 41 + i * 2.1) > 0.2;
+    else if (s.dotMode === "all") on = true;
+    d.setAttribute("fill", on ? AC.coral : AC.hair);
+  });
+  /* lever */
+  const K = knobAt(s.leverA);
+  levRod.setAttribute("x2", K[0].toFixed(1)); levRod.setAttribute("y2", K[1].toFixed(1));
+  levKnob.setAttribute("cx", K[0].toFixed(1)); levKnob.setAttribute("cy", K[1].toFixed(1));
+  levG.setAttribute("transform", `translate(${s.machDx.toFixed(2)},0)`);
+  /* request card */
+  if (s.reqPos) {
+    reqG.setAttribute("display", "");
+    reqT.textContent = R[s.ri].req;
+    reqG.setAttribute("transform", `translate(${s.reqPos[0].toFixed(1)},${s.reqPos[1].toFixed(1)}) scale(1,${s.reqSq.toFixed(3)})`);
+  } else reqG.setAttribute("display", "none");
+  /* result card */
+  if (s.out) {
+    outG.setAttribute("display", "");
+    outT1.textContent = R[s.ri].from.toUpperCase();
+    outT2.textContent = R[s.ri].out;
+    outG.setAttribute("transform", `translate(${s.out.x.toFixed(1)},${s.out.y.toFixed(1)}) scale(${s.out.s.toFixed(3)},${(s.out.s * s.out.sy).toFixed(3)})`);
+  } else outG.setAttribute("display", "none");
+  /* pile */
+  pileCards.forEach((g, i) => {
+    if (i < s.visiblePile) {
+      g.setAttribute("display", "");
+      const land = R[i].fly[1];
+      const sq = punch(t, land, 0.16, 14);
+      /* squash about the card's own bottom edge (local y=80), which sits on the pile floor */
+      g.setAttribute("transform", `translate(${PILE_X},${pileY(i) + 40}) scale(${(PILE_S * (1 + sq * 0.4)).toFixed(3)},${(PILE_S * (1 - sq)).toFixed(3)}) translate(0,-80)`);
+    } else g.setAttribute("display", "none");
+  });
+}
+
+window.seek = async function (t) {
+  t = clamp(t, 0, 21.0);
+  stalePaintGuard(t, bgflip, document.getElementById("stagewrap"), "rgba(19,16,34,0.004)");
+  const covered = t >= B.payoff + 0.4;
+  sceneG.style.visibility = covered ? "hidden" : "visible";
+  if (!covered) apply(t, layout(t));
+
+  const h = $('hook');
+  if (t < B.hookOut + 0.3) {
+    const p = PP(t, B.hookIn, 0.3, back);
+    h.style.opacity = String(Math.min(PP(t, B.hookIn, 0.12), 1 - PP(t, B.hookOut - 0.25, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - p) * 40}px)`;
+  } else h.style.opacity = '0';
+
+  const po = $('payoff');
+  if (t >= B.payoff && t < B.payoffOut) {
+    po.style.opacity = String(Math.min(PP(t, B.payoff, 0.3), 1 - PP(t, B.payoffOut - 0.25, 0.25)));
+    [['p1', B.rows[0]], ['p2', B.rows[1]], ['p3', B.rows[2]]].forEach(([id, t0]) => {
+      const e = $(id);
+      const p = PP(t, t0, 0.4, back);
+      e.style.opacity = String(PP(t, t0, 0.15));
+      e.style.transform = `translateY(${(1 - p) * 60}px)`;
+    });
+    $('savecta').style.opacity = String(PP(t, B.cta, 0.3));
+  } else po.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= B.payoffOut) {
+    end.style.opacity = String(PP(t, B.payoffOut, 0.25));
+    $('endword').style.transform = `scale(${0.88 + 0.12 * PP(t, B.payoffOut + 0.1, 0.4, back)})`;
+    $('endsub').style.opacity = String(PP(t, B.payoffOut + 0.7, 0.3));
+  } else end.style.opacity = '0';
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>
