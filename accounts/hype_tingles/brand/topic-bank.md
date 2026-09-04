@@ -40,6 +40,7 @@ resolutions, "seen" messages, salary day
 | 2026-09-04 | 2026-09-04-animal-panel-ep02 | F1 panel (EP 02) | red flags | dog, pigeon, owl, goldfish, cat |
 | 2026-09-04 | 2026-09-04-drop-day-reviews | F2 one-star-files | drop day / limited-edition queues (trend) | dog, pigeon, raccoon, sloth, cat |
 | 2026-09-04 | 2026-09-04-pre-coffee-alert | pov-morning (REEL, 2D stickman) | talking before coffee (trend: Eeffoc) | dog, owl, cat |
+| 2026-09-05 | 2026-09-05-hold-and-judge-left-on-seen | NEW: reel-hold-and-judge (REEL, 2D cat rig, auto-play card carousel; bonus 17:00 slot, new-format debut) | left on seen / texting habits | cat |
 
 ## Queued promises to keep
 - EP 01's "EP 02 drops tomorrow" promise: fulfilled by

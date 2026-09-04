@@ -1,0 +1,131 @@
+{
+ "_license": "All files Mixkit Free License, vendored + logged in assets/audio/ATTRIBUTION.md (no new files). Beats match reel.html window.BEATS (HOLD & JUDGE 01, 16.6s).",
+ "tracks": [
+  {
+   "file": "assets/audio/bgm/cat-walk.mp3",
+   "at": 0.0,
+   "gain_db": -15,
+   "trim": [
+    0,
+    16.6
+   ],
+   "fade_in": 0.2,
+   "fade_out": 1.2
+  },
+  {
+   "file": "assets/audio/sfx/bass-hit-futuristic.mp3",
+   "at": 0.15,
+   "gain_db": -8
+  },
+  {
+   "file": "assets/audio/sfx/paper-slide.mp3",
+   "at": 2.2,
+   "gain_db": -7
+  },
+  {
+   "file": "assets/audio/sfx/ui-popup-dry.mp3",
+   "at": 2.75,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 3.47,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/paper-slide.mp3",
+   "at": 4.1,
+   "gain_db": -7
+  },
+  {
+   "file": "assets/audio/sfx/ui-popup-dry.mp3",
+   "at": 4.65,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 5.37,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/paper-slide.mp3",
+   "at": 6.3,
+   "gain_db": -7
+  },
+  {
+   "file": "assets/audio/sfx/ui-popup-dry.mp3",
+   "at": 6.85,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 7.57,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/paper-slide.mp3",
+   "at": 8.0,
+   "gain_db": -7
+  },
+  {
+   "file": "assets/audio/sfx/ui-popup-dry.mp3",
+   "at": 8.55,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 9.27,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/paper-slide.mp3",
+   "at": 10.4,
+   "gain_db": -7
+  },
+  {
+   "file": "assets/audio/sfx/ui-popup-dry.mp3",
+   "at": 10.95,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/switch-tap.mp3",
+   "at": 11.67,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/clock-tick-single.mp3",
+   "at": 12.2,
+   "gain_db": -8
+  },
+  {
+   "file": "assets/audio/sfx/air-woosh-quick.mp3",
+   "at": 12.65,
+   "gain_db": -7
+  },
+  {
+   "file": "assets/audio/sfx/impact-cine-big.mp3",
+   "at": 12.7,
+   "gain_db": -12
+  },
+  {
+   "file": "assets/audio/sfx/paper-page-turn.mp3",
+   "at": 12.8,
+   "gain_db": -8
+  },
+  {
+   "file": "assets/audio/sfx/pop-electric.mp3",
+   "at": 13.7,
+   "gain_db": -6
+  },
+  {
+   "file": "assets/audio/sfx/chime-crystal.mp3",
+   "at": 14.25,
+   "gain_db": -8
+  },
+  {
+   "file": "assets/audio/sfx/ui-message-pop.mp3",
+   "at": 15.2,
+   "gain_db": -6
+  }
+ ]
+}

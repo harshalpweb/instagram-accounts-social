@@ -1,0 +1,387 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* hype_tingles "HOLD & JUDGE" -> Carousel Reel prototype (~16.8s), production (founder-approved direction 2026-09-04).
+   Auto-playing card carousel: each human-line card slides in from the right
+   (previous card exits left) while a persistent 2D paper-stroke cat pushes
+   the phone one step toward the table edge per card; volt flip + kinetic
+   payoff; end card. Principle map: ANTICIPATION = paw pull-back 0.22s before
+   every push; OVERSHOOT = phone easeOutBack on each push (settles with a
+   wobble); COMEDIC HOLD = 0.55s dead stare between card landing and the
+   say chip; PAYOFF = volt flip + 3-word stagger + camera punch. */
+@font-face { font-family:'Archivo Black'; src:url('../../brand/fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
+
+:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; --panel:#1C1B23; --line:#2E2C38; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--ink); color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
+body::before { content:""; position:absolute; width:1100px; height:1100px; right:-480px; top:-480px;
+  background:radial-gradient(circle, rgba(255,77,157,0.14) 0%, rgba(255,77,157,0) 62%); pointer-events:none; z-index:0; }
+body.volt { background:var(--volt); color:var(--ink); }
+body.volt::before { background:radial-gradient(circle, rgba(17,16,21,0.10) 0%, rgba(17,16,21,0) 62%); }
+
+#cam { position:absolute; inset:0; z-index:1; }
+#ui  { position:absolute; inset:0; z-index:3; }
+#stage { position:absolute; inset:0; width:1080px; height:1920px; z-index:2; }
+#flash { position:absolute; inset:0; background:var(--paper); opacity:0; z-index:4; pointer-events:none; }
+
+/* text budget: A = 92px Archivo (.display), B = 64px Archivo (.quote, .status-word),
+   body = 36px Grotesk 400 (.dek), meta = 28px Grotesk 700 caps tracked (.chip, .wordmark-tag). .say = 36/700. */
+.display, .quote, .status-word { font-kerning:normal; font-feature-settings:"kern" 1; letter-spacing:0; font-family:'Archivo Black',Arial,sans-serif; }
+.display { font-size:92px; line-height:1.0; text-transform:uppercase; }
+.quote { font-size:64px; line-height:1.14; }
+.dek { font-size:36px; line-height:1.38; font-weight:400; }
+.chip { display:inline-block; font-size:28px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase;
+  padding:10px 20px; background:var(--paper); color:var(--ink); }
+.chip.volt { background:var(--volt); color:var(--ink); }
+.chip.pink { background:var(--pink); color:var(--ink); }
+.chip.ink  { background:var(--ink); color:var(--volt); }
+.chip.soft { background:transparent; color:var(--soft); padding:0; letter-spacing:0.22em; }
+body.volt .chip.soft { color:#4A4A22; }
+body.volt .chip.pink { background:var(--ink); color:var(--volt); }
+
+.topbar { position:absolute; left:84px; right:84px; top:120px; display:flex; justify-content:space-between; align-items:baseline; }
+.wordmark { font-family:'Archivo Black',Arial,sans-serif; font-size:34px; letter-spacing:0.04em; color:var(--volt); }
+.wordmark .t { color:var(--pink); }
+body.volt .wordmark, body.volt .wordmark .t { color:var(--ink); }
+.wordmark-tag { font-size:28px; font-weight:700; letter-spacing:0.22em; color:var(--soft); text-transform:uppercase; }
+body.volt .wordmark-tag { color:#4A4A22; }
+
+/* carousel card zone */
+#cards { position:absolute; left:84px; top:250px; width:912px; height:390px; }
+.card { position:absolute; left:0; top:0; width:912px; height:390px; padding:40px 48px;
+  background:var(--panel); border:3px solid var(--line); border-radius:28px; visibility:hidden;
+  display:flex; flex-direction:column; }
+.card .chip { align-self:flex-start; margin-bottom:26px; }
+.card .quote { color:var(--paper); }
+.card.hook { background:transparent; border-color:transparent; padding:0 0 0 0; }
+.card.hook .display .hl { color:var(--volt); }
+.card.pay { background:transparent; border-color:transparent; padding:0; }
+.card.pay .display { color:var(--ink); display:flex; flex-wrap:wrap; gap:0 24px; align-items:baseline; }
+.card.pay .kw { display:inline-block; visibility:hidden; transform-origin:left bottom; }
+.card.pay .kw.slam { position:relative; margin-left:6px; }
+.card.pay .kw.slam::after { content:""; position:absolute; top:0.24em; right:-88px; width:66px; height:0.5em;
+  background:repeating-linear-gradient(to bottom, var(--ink) 0 7px, transparent 7px 20px);
+  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 40%); mask-image:linear-gradient(to right, transparent 0, #000 40%); }
+.card.pay .dek { color:var(--ink); margin-top:22px; visibility:hidden; }
+.card.endc { background:transparent; border-color:transparent; padding:0; }
+.card.endc .display { color:var(--paper); }
+.card.endc .display .hp { color:var(--pink); }
+.card.endc .dek { margin-top:24px; }
+.card.endc .chip { margin-top:34px; }
+
+/* carousel dots */
+#dots { position:absolute; left:84px; top:684px; display:flex; gap:16px; }
+#dots span { width:18px; height:18px; border-radius:9px; background:var(--line); display:block; }
+#dots span.on { background:var(--volt); width:46px; }
+body.volt #dots span { background:rgba(17,16,21,0.18); }
+body.volt #dots span.on { background:var(--ink); }
+
+/* status */
+#status { position:absolute; left:84px; top:790px; width:400px; display:flex; flex-direction:column; visibility:hidden; }
+.status-word { font-size:64px; line-height:1.1; color:var(--paper); margin-top:14px; transform-origin:left center; }
+.status-word.pink { color:var(--pink); }
+body.volt .status-word { color:var(--ink); }
+
+/* cat one-word reaction */
+#say { position:absolute; left:470px; top:770px; font-size:36px; font-weight:700; line-height:1;
+  background:var(--paper); color:var(--ink); padding:16px 24px; border-radius:18px 18px 18px 4px; visibility:hidden; transform-origin:left bottom; }
+body.volt #say { background:var(--ink); color:var(--volt); }
+</style></head>
+<body>
+<div id="cam">
+  <svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+<div id="ui">
+  <div class="topbar"><span class="wordmark">HYPE&nbsp;<span class="t">TINGLE</span></span><span class="wordmark-tag">Hold &amp; Judge · 01</span></div>
+  <div id="cards">
+    <div class="card hook" id="c-hook"><span class="chip volt">POV</span><h1 class="display">Explaining why you left them <span class="hl">on seen.</span></h1></div>
+    <div class="card" id="c0"><span class="chip">You</span><h2 class="quote">I saw it. I was going to reply.</h2></div>
+    <div class="card" id="c1"><span class="chip">You</span><h2 class="quote">I was busy that whole day.</h2></div>
+    <div class="card" id="c2"><span class="chip">You</span><h2 class="quote">I was drafting the perfect reply.</h2></div>
+    <div class="card" id="c3"><span class="chip">You</span><h2 class="quote">Replying now would be weird.</h2></div>
+    <div class="card" id="c4"><span class="chip">You</span><h2 class="quote">If I wait long enough it's a fresh chat.</h2></div>
+    <div class="card pay" id="c-pay"><span class="chip ink">The cat</span>
+      <h1 class="display"><span class="kw" id="kw0">There.</span><span class="kw" id="kw1">Now</span><span class="kw" id="kw2">you</span><span class="kw" id="kw3">have</span><span class="kw" id="kw4">an</span><span class="kw slam" id="kw5">excuse.</span></h1>
+      <p class="dek" id="spoken">The cat has spoken.</p></div>
+    <div class="card endc" id="c-end"><h1 class="display">Now go <span class="hp">reply.</span></h1><p class="dek">Or send this to the person who left you on seen.</p><span class="chip pink">@hype_tingles</span></div>
+  </div>
+  <div id="dots"><span></span><span></span><span></span><span></span><span></span></div>
+  <div id="status"><span class="chip soft">Phone status</span><div class="status-word" id="status-word">Safe</div></div>
+  <div id="say">mhm.</div>
+</div>
+<div id="flash"></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+/* ============================ beat table ============================ */
+const CARD_T = [2.2, 4.1, 6.3, 8.0, 10.4];   // varied spacing so five pushes don't read as a metronome
+const B = {
+  hookIn: -0.30,        // landed before frame 0: frame 0 is the default Reels cover
+  cards: CARD_T,
+  cardDur: 0.38,        // slide transition length
+  sayDelay: 0.55,       // COMEDIC HOLD before the cat reacts
+  pushDelay: 1.05,      // windup starts this long after the card lands
+  windup: 0.22,         // ANTICIPATION: paw pulls back
+  push: 0.28,           // push travel (easeOutBack -> wobble)
+  blink: [7.05, 7.20],
+  finalWindup: 12.2,
+  finalPush: 12.42,
+  fall: 12.7,
+  voltFlip: 12.7,
+  payWords: [12.9, 13.1, 13.22, 13.34, 13.46, 13.7],  // per word; last = slam
+  spoken: 14.25,
+  endcard: 15.2,
+  end: 16.6
+};
+window.BEATS = B;
+window.REEL = { duration: B.end, fps: 30 };
+
+const TABLE_Y = 1360, EDGE_X = 230, CAT_X = 830, CAT_SCALE = 1.08;
+const PHONE_X = [560, 495, 430, 365, 300, 200];  // last = 30px over the edge (teeter)  // resting x before push k (k=0..4), last = after 5th push
+const PHONE_W = 88, PHONE_H = 172;
+const SAY = ["mhm.", "you napped.", "four days.", "agreed.", "bold."];
+const STATUS = ["Safe", "Fine", "Risky", "Edge", "Bye"];
+const STATUS_PINK = [false, false, true, true, true];
+
+const INK="#111015", VOLT="#D8FF3A", PINK="#FF4D9D", PAPER="#F4F2EC";
+
+/* ============================ cat rig (ported from flipbook_render.py) ============================ */
+function catSVG(p, x, y, scale, onVolt) {
+  const stroke = onVolt ? INK : PAPER, fill = onVolt ? VOLT : INK, eye = onVolt ? PAPER : VOLT;
+  const sw = 16; const parts = [];
+  const tails = {0:"M 150 -40 C 230 -70, 262 -160, 218 -236", 1:"M 150 -40 C 250 -18, 312 -84, 304 -190", 2:"M 150 -40 C 214 -110, 236 -260, 178 -350"};
+  parts.push(`<path d="${tails[p.tail]}" stroke="${stroke}" stroke-width="${sw}" fill="none" stroke-linecap="round"/>`);
+  parts.push(`<path d="M -160 0 C -160 -180, -110 -292, 0 -292 C 110 -292, 160 -180, 160 0 Z" stroke="${stroke}" stroke-width="${sw}" fill="${fill}" stroke-linejoin="round"/>`);
+  for (const lx of [-72, 72]) {
+    parts.push(`<line x1="${lx}" y1="-130" x2="${lx}" y2="-30" stroke="${stroke}" stroke-width="${sw}" stroke-linecap="round"/>`);
+    parts.push(`<path d="M ${lx-34} 0 A 34 34 0 0 1 ${lx+34} 0" stroke="${stroke}" stroke-width="${sw-2}" fill="${fill}"/>`);
+  }
+  if (p.paw) {
+    const lx = (p.paw[0] - x) / scale, ly = (p.paw[1] - y) / scale;
+    const cx = (-118 + lx) / 2, cy = Math.max(-150, ly) + 34;
+    parts.push(`<path d="M -118 -150 Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${lx.toFixed(1)} ${ly.toFixed(1)}" stroke="${stroke}" stroke-width="${sw}" fill="none" stroke-linecap="round"/>`);
+    parts.push(`<circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="21" fill="${fill}" stroke="${stroke}" stroke-width="${sw-4}"/>`);
+  }
+  const head = []; const hx = 0, hy = -330;
+  for (const side of [-1, 1]) {
+    const ang = -p.ear * side, bx = side * 48, by = -452;
+    head.push(`<g transform="rotate(${ang.toFixed(1)} ${bx} ${by})"><path d="M ${side*105} -410 L ${side*125} -545 L ${side*40} -455 Z" stroke="${stroke}" stroke-width="${sw}" fill="${fill}" stroke-linejoin="round"/><path d="M ${side*96} -422 L ${side*110} -505 L ${side*58} -455 Z" fill="${PINK}"/></g>`);
+  }
+  head.push(`<circle cx="${hx}" cy="${hy}" r="135" stroke="${stroke}" stroke-width="${sw}" fill="${fill}"/>`);
+  const [gx, gy] = p.gaze;
+  [-1, 1].forEach((side, i) => {
+    const ex = side * 52, ey = -352, cid = `eye${i}`;
+    head.push(`<clipPath id="${cid}"><ellipse cx="${ex}" cy="${ey}" rx="34" ry="38"/></clipPath>`);
+    if (p.blink) { head.push(`<path d="M ${ex-30} ${ey-4} Q ${ex} ${ey+18} ${ex+30} ${ey-4}" stroke="${stroke}" stroke-width="9" fill="none" stroke-linecap="round"/>`); return; }
+    head.push(`<ellipse cx="${ex}" cy="${ey}" rx="34" ry="38" fill="${eye}"/>`);
+    const prx = Math.max(5, 22 * p.pupil);
+    head.push(`<ellipse cx="${ex+gx}" cy="${ey+gy}" rx="${prx.toFixed(1)}" ry="27" fill="${INK}" clip-path="url(#${cid})"/>`);
+    head.push(`<circle cx="${ex+gx-6}" cy="${ey+gy-10}" r="5" fill="${eye}" clip-path="url(#${cid})"/>`);
+    if (p.lid > 0.02) {
+      const lidY = (ey - 38) + 76 * p.lid;
+      head.push(`<rect x="${ex-40}" y="${ey-44}" width="80" height="${(lidY-(ey-44)).toFixed(1)}" fill="${fill}" clip-path="url(#${cid})"/>`);
+      head.push(`<line x1="${ex-36}" y1="${lidY.toFixed(1)}" x2="${ex+36}" y2="${lidY.toFixed(1)}" stroke="${stroke}" stroke-width="7" clip-path="url(#${cid})" stroke-linecap="round"/>`);
+    }
+  });
+  if (p.brow > 0.5) for (const side of [-1, 1]) head.push(`<line x1="${side*92}" y1="-410" x2="${side*24}" y2="${(-418+p.brow).toFixed(1)}" stroke="${stroke}" stroke-width="11" stroke-linecap="round"/>`);
+  head.push(`<path d="M -12 -300 L 12 -300 L 0 -286 Z" fill="${PINK}"/>`);
+  const mouths = {0:"M -24 -276 Q -12 -262 0 -282 Q 12 -262 24 -276", 1:"M -22 -270 L 22 -270", 2:"M -26 -262 Q 0 -280 26 -262", 3:"M -30 -254 Q 0 -286 30 -254"};
+  head.push(`<path d="${mouths[p.mouth]}" stroke="${stroke}" stroke-width="7" fill="none" stroke-linecap="round"/>`);
+  for (const side of [-1, 1]) for (const [a, b] of [[-318,-330],[-302,-300],[-286,-270]]) head.push(`<line x1="${side*64}" y1="${a}" x2="${side*156}" y2="${b}" stroke="${stroke}" stroke-width="5" stroke-linecap="round"/>`);
+  parts.push(`<g transform="rotate(${p.tilt.toFixed(1)} ${hx} ${hy})">${head.join("")}</g>`);
+  // squash & stretch about the base
+  return `<g transform="translate(${x} ${y}) scale(${(scale*(p.sx||1)).toFixed(4)} ${(scale*(p.sy||1)).toFixed(4)})">${parts.join("")}</g>`;
+}
+
+function tableSVG(onVolt) {
+  const s = onVolt ? INK : PAPER;
+  return `<line x1="${EDGE_X}" y1="${TABLE_Y}" x2="1080" y2="${TABLE_Y}" stroke="${s}" stroke-width="14" stroke-linecap="round"/>
+          <line x1="${EDGE_X+22}" y1="${TABLE_Y+8}" x2="${EDGE_X+22}" y2="${TABLE_Y+250}" stroke="${s}" stroke-width="14" stroke-linecap="round"/>`;
+}
+function phoneSVG(x, y, rot, onVolt, motion) {
+  const s = onVolt ? INK : PAPER, f = onVolt ? VOLT : "#1C1B23", sc = onVolt ? INK : "#2E2C38", w = PHONE_W, h = PHONE_H;
+  let m = "";
+  if (motion > 0) { const c = onVolt ? INK : PINK; for (let k = 0; k < 3; k++) { const dy = k === 1 ? -18 : 0; m += `<line x1="${x+30+k*34}" y1="${y-118+dy}" x2="${x+30+k*34}" y2="${y-62+dy}" stroke="${c}" stroke-width="8" stroke-linecap="round" opacity="${motion.toFixed(2)}"/>`; } }
+  return `<g transform="rotate(${rot.toFixed(1)} ${x+w/2} ${y+h/2})"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="16" fill="${f}" stroke="${s}" stroke-width="10"/><rect x="${x+12}" y="${y+22}" width="${w-24}" height="${h-52}" rx="6" fill="${sc}"/><circle cx="${x+w/2}" cy="${y+h-14}" r="5" fill="${s}"/></g>${m}`;
+}
+
+/* ============================ logic ============================ */
+const stage = document.getElementById("stage");
+const bgflip = makeFlipRect(stage);
+const ui = { cards: document.getElementById("cards"), status: document.getElementById("status"), sw: document.getElementById("status-word"),
+             say: document.getElementById("say"), flash: document.getElementById("flash"), dots: [...document.querySelectorAll("#dots span")],
+             spoken: document.getElementById("spoken") };
+const cardEls = ["c-hook","c0","c1","c2","c3","c4","c-pay","c-end"].map(id => document.getElementById(id));
+const kws = [0,1,2,3,4,5].map(i => document.getElementById("kw"+i));
+
+/* card sequence: [element, tIn]. Each card slides in at tIn; the previous slides out at the same time. */
+const SEQ = [[cardEls[0], B.hookIn], [cardEls[1], CARD_T[0]], [cardEls[2], CARD_T[1]], [cardEls[3], CARD_T[2]], [cardEls[4], CARD_T[3]], [cardEls[5], CARD_T[4]], [cardEls[6], B.voltFlip + 0.1], [cardEls[7], B.endcard]];
+
+function cardsLogic(t) {
+  let cur = -1;
+  for (let i = 0; i < SEQ.length; i++) if (t >= SEQ[i][1]) cur = i;
+  cardEls.forEach(c => { c.style.visibility = "hidden"; });
+  if (cur < 0) return -1;
+  const [elIn, tIn] = SEQ[cur];
+  const k = ramp(t, tIn, tIn + B.cardDur);
+  const hookOrEnd = cur === 0 || cur >= 6;
+  if (hookOrEnd) {
+    // hook / payoff / end card: snap-in (scale pop), not a slide
+    elIn.style.visibility = "visible";
+    if (cur === 6) {  // payoff: card FLIP (rotateY) -- the one transition variant in the piece
+      elIn.style.transformOrigin = "left center";
+      elIn.style.transform = `perspective(1600px) rotateY(${lerp(-90, 0, easeOutCubic(k)).toFixed(1)}deg)`;
+      elIn.style.opacity = "1";
+    } else {
+      const s = 0.86 + 0.14 * easeOutBack(k);
+      elIn.style.transform = `scale(${s.toFixed(4)})`;
+      elIn.style.opacity = Math.min(1, k * 3).toFixed(3);
+    }
+  } else {
+    elIn.style.visibility = "visible";
+    elIn.style.opacity = "1";
+    elIn.style.transform = `translateX(${lerp(1100, 0, easeOutCubic(k)).toFixed(1)}px)`;
+    if (cur > 0 && k < 1) {
+      const [elOut] = SEQ[cur - 1];
+      elOut.style.visibility = "visible";
+      elOut.style.opacity = "1";
+      elOut.style.transform = `translateX(${lerp(0, -1100, easeInCubic(k)).toFixed(1)}px)`;
+    }
+  }
+  return cur;
+}
+
+function pushIndexAt(t) {  // number of completed/started pushes and progress within the current push
+  let k = -1, prog = 1, wind = 0;
+  for (let i = 0; i < 5; i++) {
+    const tw = CARD_T[i] + B.pushDelay, tp = tw + B.windup;
+    if (t >= tw) { k = i; wind = ramp(t, tw, tp); prog = ramp(t, tp, tp + B.push); }
+  }
+  return { k, wind, prog };
+}
+
+function phoneState(t) {
+  const { k, wind, prog } = pushIndexAt(t);
+  let x = PHONE_X[0], rot = 0, y = TABLE_Y - PHONE_H, motion = 0;
+  if (k >= 0) x = lerp(PHONE_X[k], PHONE_X[k + 1], easeOutBack(prog));
+  if (k === 4 && prog >= 1 && t < B.finalPush) rot = 4 * Math.sin((t - (CARD_T[4] + B.pushDelay + B.windup + B.push)) * 2 * Math.PI * 1.7);  // TEETER: anticipation before the shove
+  if (t >= B.finalPush) {
+    const p = ramp(t, B.finalPush, B.fall);
+    x = lerp(PHONE_X[5], 150, easeOutCubic(p));
+    rot = lerp(0, -28, easeInCubic(p));
+  }
+  if (t >= B.fall) {
+    const ft = t - B.fall;
+    x = 150 - 140 * ft;
+    y = TABLE_Y - PHONE_H + 0.5 * 2600 * ft * ft;
+    rot = -28 - 160 * ft;
+    motion = clamp(1 - ft / 0.6, 0, 1);
+  }
+  return { x, y, rot, motion, k, wind, prog };
+}
+
+function catState(t, ph) {
+  const k = Math.max(0, ph.k);
+  const after = t >= B.voltFlip;
+  const p = { ear: -2 * k, lid: 0.14 + 0.04 * k, pupil: 0.75 - 0.08 * k, brow: Math.max(0, (k - 1) * 4), mouth: 1, tail: 0,
+              tilt: -2 * k, gaze: [-8 - k, 4 + k], blink: t >= B.blink[0] && t < B.blink[1], paw: null, sx: 1, sy: 1 };
+  // tail swishes slowly
+  p.tail = Math.floor(t * 1.2) % 2;
+  if (ph.k >= 0) {
+    // paw rests on the phone's right edge; pulls back during windup, travels with the phone during the push
+    let pawX = ph.x + PHONE_W + 12;
+    if (ph.wind < 1) pawX = ph.k === 0
+      ? lerp(CAT_X - 200, PHONE_X[0] + PHONE_W + 12, easeOutCubic(ph.wind))   // first push: the paw REACHES out (that is the anticipation)
+      : PHONE_X[ph.k] + PHONE_W + 12 + 60 * easeInOutQuad(ph.wind);   // 60px: 46 read faint at viewing scale in the 0.1s timing check            // later pushes: pull back, then shove
+    p.paw = [pawX, TABLE_Y - 90];
+    // squash & stretch on the push impulse
+    const s = punch(t, CARD_T[ph.k] + B.pushDelay + B.windup, 0.06, 9);
+    p.sx = 1 + s; p.sy = 1 - s;
+  }
+  if (t >= B.finalWindup) {
+    const w = ramp(t, B.finalWindup, B.finalPush);
+    let pawX = PHONE_X[5] + PHONE_W + 12 + 70 * easeInOutQuad(w);
+    if (t >= B.finalPush) pawX = ph.x + PHONE_W + 12;
+    if (t >= B.fall) pawX = 300;
+    p.paw = [pawX, TABLE_Y - 90];
+    const s = punch(t, B.finalPush, 0.08, 8);
+    p.sx = 1 + s; p.sy = 1 - s;
+  }
+  if (after) { p.mouth = 0; p.lid = 0.30; p.brow = 8; p.tilt = -6; p.pupil = 0.3; p.tail = 2; p.gaze = [-12, 10]; }
+  if (t >= B.endcard) { p.blink = true; p.mouth = 0; p.brow = 0; p.tilt = 0; p.ear = 0; p.paw = null; p.tail = 0; }
+  return p;
+}
+
+function overlaysLogic(t, ph) {
+  // status
+  const anyCard = t >= CARD_T[0];
+  ui.status.style.visibility = anyCard ? "visible" : "hidden";
+  let word = "Safe", pink = false, popT = CARD_T[0];
+  for (let i = 0; i < 5; i++) { const tp = CARD_T[i] + B.pushDelay + B.windup; if (t >= tp) { word = STATUS[i]; pink = STATUS_PINK[i]; popT = tp; } }
+  if (t >= B.fall) { word = "Gone"; pink = false; popT = B.fall; }
+  if (t >= B.endcard) { word = "Safe"; pink = false; popT = B.endcard; }
+  ui.sw.textContent = word;
+  ui.sw.className = "status-word" + (pink ? " pink" : "");
+  const sp = 1 + punch(t, popT, 0.14, 12);
+  ui.sw.style.transform = `scale(${sp.toFixed(4)})`;
+  // cat reaction chip
+  let sayOn = false;
+  for (let i = 0; i < 5; i++) {
+    const t0 = CARD_T[i] + B.sayDelay, t1 = (i < 4 ? CARD_T[i + 1] : B.finalWindup);
+    if (t >= t0 && t < t1) { sayOn = true; ui.say.textContent = SAY[i]; snapIn(ui.say, t, t0, 0.14, -3); }
+  }
+  if (!sayOn) ui.say.style.visibility = "hidden";
+  // dots
+  let active = -1;
+  for (let i = 0; i < 5; i++) if (t >= CARD_T[i]) active = i;
+  const dotsOn = t >= CARD_T[0] && t < B.endcard;
+  document.getElementById("dots").style.visibility = dotsOn ? "visible" : "hidden";
+  ui.dots.forEach((d, i) => d.className = i === active ? "on" : "");
+  // payoff words (kinetic: staggered pop, last word slams from 1.5x)
+  kws.forEach((w, i) => {
+    const t0 = B.payWords[i];
+    if (t < t0 || t < B.voltFlip) { w.style.visibility = "hidden"; return; }
+    w.style.visibility = "visible";
+    const k = ramp(t, t0, t0 + (i === 5 ? 0.22 : 0.12));
+    if (i === 5) w.style.transform = `skewX(-9deg) scale(${lerp(1.5, 1.06, easeOutCubic(k)).toFixed(4)}) translateY(4px)`;
+    else w.style.transform = `translateY(${lerp(18, 0, easeOutCubic(k)).toFixed(1)}px)`;
+    w.style.opacity = Math.min(1, k * 2).toFixed(3);
+  });
+  ui.spoken.style.visibility = t >= B.spoken && t < B.endcard ? "visible" : "hidden";
+}
+
+/* camera */
+const cam = document.getElementById("cam");
+function doCam(t) {
+  let s = 1;
+  for (let i = 0; i < 5; i++) s += punch(t, CARD_T[i] + B.pushDelay + B.windup, 0.018, 10);
+  s += punch(t, B.voltFlip, 0.06, 8);
+  let x = shake(t, B.voltFlip, 6, 6.5, 40, 0.3), y = shake(t, B.voltFlip, 5, 6.5, 46, 1.0);
+  cam.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) scale(${s.toFixed(4)})`;
+  cam.style.transformOrigin = "540px 1150px";
+}
+
+/* ============================ master seek ============================ */
+window.seek = async (t) => {
+  t = clamp(t, 0, B.end);
+  stalePaintGuard(t, bgflip, document.getElementById("ui"));
+  const onVolt = t >= B.voltFlip && t < B.endcard;
+  document.body.className = onVolt ? "volt" : "";
+  const ph = phoneState(t);
+  const cat = catState(t, ph);
+  const catScale = CAT_SCALE, catX = CAT_X, catY = TABLE_Y;
+  const showPhone = ph.y < 1750 && !(t >= B.endcard);
+  const phoneAtEnd = t >= B.endcard ? phoneSVG(PHONE_X[0], TABLE_Y - PHONE_H, 0, false, 0) : "";
+  stage.innerHTML = tableSVG(onVolt) + (showPhone ? phoneSVG(ph.x, ph.y, ph.rot, onVolt, ph.motion) : "") + phoneAtEnd + catSVG(cat, catX, catY, catScale, onVolt);
+  stage.appendChild(bgflip);
+  cardsLogic(t);
+  overlaysLogic(t, ph);
+  doCam(t);
+  ui.flash.style.opacity = punch(t, B.voltFlip, 0.7, 14).toFixed(3);
+  await compositorCommit();
+};
+window.seek(0);
+</script></body></html>
