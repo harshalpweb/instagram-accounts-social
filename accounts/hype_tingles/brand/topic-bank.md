@@ -38,9 +38,10 @@ resolutions, "seen" messages, salary day
 | 2026-09-03 | 2026-09-03-diet-reviews | F2 carousel-one-star-files | diets | dog, owl, pigeon, goldfish, cat |
 | 2026-09-03 | 2026-09-03-owl-smart-masterclass | F3 carousel-masterclass (MC 04) | sounding smart / meeting-speak | owl |
 | 2026-09-04 | 2026-09-04-animal-panel-ep02 | F1 panel (EP 02) | red flags | dog, pigeon, owl, goldfish, cat |
-| 2026-09-04 | 2026-09-04-drop-day-reviews | F2 one-star-files | drop day / limited-edition queues (trend) | dog, pigeon, raccoon, sloth, cat |
+| 2026-09-05 | 2026-09-04-drop-day-reviews | F2 carousel-one-star-files (deferred from 09-04 13:00 to Sat 11:30 carousel slot, cadence-ratio fix 2026-09-04; id unchanged) | drop day / limited-edition queues (trend) | dog, pigeon, raccoon, sloth, cat |
 | 2026-09-04 | 2026-09-04-pre-coffee-alert | pov-morning (REEL, 2D stickman) | talking before coffee (trend: Eeffoc) | dog, owl, cat |
-| 2026-09-05 | 2026-09-05-hold-and-judge-left-on-seen | NEW: reel-hold-and-judge (REEL, 2D cat rig, auto-play card carousel; bonus 17:00 slot, new-format debut) | left on seen / texting habits | cat |
+| 2026-09-05 | 2026-09-05-hold-and-judge-left-on-seen | NEW: reel-hold-and-judge (REEL, 2D cat rig, auto-play card carousel; moved 17:00 -> 16:30 standing Reel slot 2026-09-04 so the day stays 1 carousel + 2 Reels, new-format debut) | left on seen / texting habits | cat |
+| 2026-09-04 | 2026-09-04-salary-day-breaking | F5 reel-breaking-news (REEL, 2D stickman; 16:00 fill slot for the 2-Reel ratio) | salary day / rich for 48 hours (topic wheel) | dog, raccoon, cat |
 
 ## Queued promises to keep
 - EP 01's "EP 02 drops tomorrow" promise: fulfilled by

@@ -1,0 +1,429 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* hype_tingles "salary day" -- 2D stickman BREAKING NEWS cut (~14.6s).
+   Topic wheel: salary day (rich for two days, humble for twenty-eight).
+   Principle map: ANTICIPATION = crouch before the joy launch (1.10-1.35),
+   lean-back before each shopping sprint (3.30 / 4.90), the 0.4s freeze
+   before the balance spins down (7.40); SQUASH&STRETCH = joy landing
+   (1.85, 16%), every sprint stride, the deflate-collapse (10.40, 12%);
+   COMEDIC HOLDS = the open-mouth scream freeze on Rs 412 (8.20-10.00,
+   one slow blink at 9.30 inside it), cat-verdict hold (12.10-13.30).
+   Quality ratchet vs. the last 3 Reels: MOUTH SHAPES on the stickman
+   (grin / flat / open scream / frown), drawn inside the rig group so
+   they inherit squash + rotation -- first time this account's rig has a
+   readable expression channel beyond the eyes. */
+@font-face { font-family:'Archivo Black'; src:url('../../brand/fonts/archivo-black-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-400.woff2') format('woff2'); font-weight:400; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-500.woff2') format('woff2'); font-weight:500; }
+@font-face { font-family:'Space Grotesk'; src:url('../../brand/fonts/space-grotesk-700.woff2') format('woff2'); font-weight:700; }
+
+:root { --ink:#111015; --volt:#D8FF3A; --pink:#FF4D9D; --paper:#F4F2EC; --soft:#9A96A3; --panel:#1B1922; --line:#2A2733; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--ink); color:var(--paper); font-family:'Space Grotesk',Arial,sans-serif; position:relative; }
+body::before { content:""; position:absolute; width:1100px; height:1100px; right:-480px; top:-480px;
+  background:radial-gradient(circle, rgba(255,77,157,0.12) 0%, rgba(255,77,157,0) 62%); pointer-events:none; z-index:0; }
+
+#cam { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+#flash { position:absolute; inset:0; z-index:4; background:var(--volt); opacity:0; pointer-events:none; }
+#flash2 { position:absolute; inset:0; z-index:4; background:var(--pink); opacity:0; pointer-events:none; }
+#ui { position:absolute; inset:0; z-index:5; }
+.snap { visibility:hidden; will-change:transform; }
+
+/* BREAKING title (top overlay) */
+#title { position:absolute; top:150px; left:60px; right:60px; transform-origin:50% 50%; }
+#title .tag { display:inline-block; background:var(--pink); color:var(--ink); font-family:'Archivo Black';
+  font-size:40px; padding:10px 26px; border-radius:12px; letter-spacing:.04em; }
+#title .txt { margin-top:18px; background:var(--panel); border:5px solid var(--line); border-radius:22px;
+  padding:28px 34px; font-family:'Archivo Black'; font-size:56px; line-height:1.14; color:var(--paper);
+  text-shadow:0 5px 0 rgba(0,0,0,.4); }
+#title .txt .hl { color:var(--volt); }
+
+/* DAY chip (replaces the title once the spree starts) */
+#day { position:absolute; top:150px; left:60px; transform-origin:0% 50%; display:flex; align-items:center; gap:22px; }
+#day .num { background:var(--volt); color:var(--ink); font-family:'Archivo Black'; font-size:64px; padding:14px 34px; border-radius:16px; letter-spacing:.03em; }
+#day.late .num { background:var(--pink); }
+#day .sub { font-weight:700; font-size:34px; color:var(--soft); letter-spacing:.14em; text-transform:uppercase; }
+
+/* salary credited -> balance card (same slot, the notification becomes the counter) */
+#credit { position:absolute; left:110px; right:110px; top:470px; background:var(--volt); color:var(--ink);
+  border-radius:30px; padding:34px 40px; transform-origin:50% 50%; box-shadow:0 14px 0 rgba(0,0,0,.4); display:flex; align-items:center; gap:26px; }
+#credit .bell { font-size:72px; line-height:1; font-family:'Segoe UI Emoji'; }
+#credit .t1 { font-family:'Archivo Black'; font-size:52px; letter-spacing:.03em; line-height:1; }
+#credit .t2 { font-weight:700; font-size:30px; margin-top:10px; letter-spacing:.08em; text-transform:uppercase; }
+
+#bal { position:absolute; left:110px; right:110px; top:470px; background:var(--panel); border:6px solid var(--volt);
+  border-radius:30px; padding:20px 40px 22px; transform-origin:50% 50%; box-shadow:0 14px 0 rgba(0,0,0,.4); }
+#bal .lbl { font-weight:700; font-size:26px; color:var(--soft); letter-spacing:.22em; text-transform:uppercase; }
+#bal .num { font-family:'Archivo Black','Segoe UI Black','Arial Black',Arial; font-size:92px; line-height:1.02; color:var(--volt); margin-top:4px; transform-origin:0% 50%; }
+#bal.broke { border-color:var(--pink); }
+#bal.broke .num { color:var(--pink); }
+
+.stamp { position:absolute; left:110px; right:110px; background:var(--panel); border:6px solid var(--volt);
+  border-radius:30px; padding:24px 36px 26px; transform-origin:50% 50%; box-shadow:0 14px 0 rgba(0,0,0,.4); }
+.stamp .who { display:flex; align-items:center; gap:22px; }
+.stamp .em { font-size:64px; line-height:1; font-family:'Segoe UI Emoji'; }
+.stamp .name { font-family:'Archivo Black'; font-size:34px; letter-spacing:.05em; color:var(--volt); }
+.stamp .line { font-weight:700; font-size:44px; line-height:1.16; margin-top:14px; }
+.stamp .line .accent { color:var(--pink); }
+/* stamps end above y~930 so the character's head (top ~965 standing) and the boxed TV never pass behind them */
+#stampDog { top:670px; border-color:var(--volt); }
+#stampRac { top:670px; border-color:var(--pink); }
+
+#catCard { position:absolute; left:90px; right:90px; top:460px; background:var(--panel); border:3px solid var(--line);
+  border-radius:36px; padding:60px 56px; transform-origin:50% 0%; }
+#catCard .who { display:flex; align-items:center; gap:30px; }
+#catCard .em { font-size:104px; line-height:1; font-family:'Segoe UI Emoji'; }
+#catCard .name { font-family:'Archivo Black'; font-size:42px; color:var(--volt); letter-spacing:.05em; }
+#catCard .role { font-size:27px; color:var(--soft); font-weight:500; letter-spacing:.14em; text-transform:uppercase; margin-top:8px; }
+#catCard .line { font-weight:700; font-size:56px; line-height:1.22; margin-top:44px; }
+#catCard .line .accent { color:var(--pink); }
+
+#endcard { position:absolute; inset:0; background:var(--ink); z-index:8; visibility:hidden; }
+#endcard .wm { font-family:'Archivo Black'; font-size:92px; color:var(--volt); text-align:center; margin-top:600px; }
+#endcard .wm .tingle { color:var(--pink); }
+#endcard .tag2 { text-align:center; font-weight:700; font-size:46px; color:var(--paper); margin-top:56px; }
+#endcard svg { position:absolute; left:0; bottom:0; width:1080px; height:600px; inset:auto; }
+</style></head><body>
+
+<div id="cam">
+  <svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg>
+</div>
+<div id="flash"></div>
+<div id="flash2"></div>
+
+<div id="ui">
+  <div id="title" class="snap"><span class="tag">BREAKING</span>
+    <div class="txt">Local human becomes rich <span class="hl">for 48 hours.</span></div></div>
+
+  <div id="day" class="snap"><span class="num" id="dayNum">DAY 1</span><span class="sub" id="daySub">of the month</span></div>
+
+  <div id="credit" class="snap"><div class="bell">&#128276;</div><div><div class="t1">SALARY CREDITED</div><div class="t2">Bank of Hype Tingle</div></div></div>
+
+  <div id="bal" class="snap"><div class="lbl">Balance</div><div class="num" id="balNum">&#8377;0</div></div>
+
+  <div id="stampDog" class="stamp snap">
+    <div class="who"><div class="em">&#128021;</div><div class="name">DOG</div></div>
+    <div class="line">He bought me a bed!! <span class="accent">And a bed for the bed!!</span></div>
+  </div>
+  <div id="stampRac" class="stamp snap">
+    <div class="who"><div class="em">&#129437;</div><div class="name">RACCOON</div></div>
+    <div class="line">Rent the bed back to the dog. <span class="accent">Weekly rates.</span></div>
+  </div>
+
+  <div id="catCard" class="snap">
+    <div class="who"><div class="em">&#128008;</div><div><div class="name">CAT</div><div class="role">Final verdict</div></div></div>
+    <div class="line">Same movie. <span class="accent">Every month.</span></div>
+  </div>
+
+  <div id="endcard">
+    <div class="wm">HYPE<span class="tingle"> TINGLES</span></div>
+    <div class="tag2">The cat has spoken.</div>
+    <svg id="endsvg" viewBox="0 0 1080 600"></svg>
+  </div>
+</div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+/* ============================ beat table ============================ */
+const B = {
+  title: -0.30,                 // landed before frame 0: frame 0 is the Reels cover
+  credit: 1.00,                 // notification drops in
+  crouch: [1.10, 1.35],         // ANTICIPATION: crouch before the joy launch
+  launch: [1.35, 1.85],         // joy leap
+  land: 1.85,                   // SQUASH on landing, volt flash, camera punch
+  rain: [1.40, 5.20],           // money rain window
+  balIn: 2.10,                  // credit card becomes the balance counter
+  roll: [2.10, 3.10],           // counter rolls 0 -> 84,000
+  day1: 3.20,
+  pass1: [3.30, 4.50],          // shopping sprint #1 (2 bags), lean-back windup at start
+  dogStamp: 4.60,
+  pass2: [4.90, 6.20],          // sprint #2 (4 bags + TV box on head)
+  day3: 6.40,
+  walkIn: [6.45, 7.40],         // shuffles back in, hands empty
+  spin: [7.80, 8.20],           // balance spins down 19,800 -> 412 (0.4s freeze before it: 7.40-7.80)
+  broke: 8.20,                  // pink flash, mouth opens
+  hold: [8.20, 10.00],          // COMEDIC HOLD #1: scream freeze, slow blink at 9.30
+  blink: 9.30,
+  racStamp: 9.00,
+  deflate: [10.00, 10.40],      // collapse, squash at 10.40
+  catCard: 11.70,
+  hold2: [12.10, 13.30],        // COMEDIC HOLD #2: verdict sits
+  endcard: 13.50,
+  end: 14.60
+};
+window.BEATS = B;
+window.REEL = { duration: B.end, fps: 30 };
+
+const stage = document.getElementById("stage");
+const C = { paper:"#F4F2EC", soft:"#9A96A3", volt:"#D8FF3A", pink:"#FF4D9D", panel:"#1B1922", line:"#2A2733", ink:"#111015" };
+
+/* ============================ scenery ============================ */
+const bgflip = makeFlipRect(stage);
+const sceneG = el(stage, "g", {});
+
+// floor
+el(sceneG, "rect", { x:0, y:1500, width:1080, height:420, fill:"#161419" });
+el(sceneG, "line", { x1:0, y1:1500, x2:1080, y2:1500, stroke:C.line, "stroke-width":6 });
+
+// shop storefront at frame-right: awning stripes + a door -- a distinct silhouette on
+// purpose (known-pitfalls: no bare panel-shaped rectangles that read as an empty UI card)
+const shopG = el(sceneG, "g", {});
+el(shopG, "rect", { x:830, y:1160, width:250, height:340, fill:"#19171F", stroke:C.paper, "stroke-width":9 });
+el(shopG, "rect", { x:900, y:1290, width:110, height:210, rx:8, fill:"#0B0A0E", stroke:C.paper, "stroke-width":8 }); // door
+el(shopG, "circle", { cx:990, cy:1400, r:7, fill:C.volt });                                                          // handle
+const awn = el(shopG, "g", {});
+for (let i = 0; i < 6; i++) el(awn, "path", { d:`M ${800 + i*48} 1130 L ${848 + i*48} 1130 L ${848 + i*48} 1178 q -24 22 -48 0 Z`, fill: i % 2 ? C.pink : C.paper });
+el(shopG, "text", { x:955, y:1245, "text-anchor":"middle", fill:C.volt, "font-family":"Archivo Black", "font-size":38, "letter-spacing":2 }).textContent = "SALE";
+
+// money rain (behind the protagonist)
+const rainG = el(sceneG, "g", {});
+const NOTES = [];
+for (let i = 0; i < 26; i++) {
+  const g = el(rainG, "g", { display:"none" });
+  el(g, "rect", { x:-30, y:-16, width:60, height:32, rx:5, fill: i % 3 === 0 ? C.pink : C.volt, stroke:C.ink, "stroke-width":3 });
+  el(g, "circle", { cx:0, cy:0, r:7, fill:C.ink, opacity:0.55 });
+  NOTES.push({ g, t0: B.rain[0] + (i % 13) * 0.11 + (i >= 13 ? 0.65 : 0), x: 40 + ((i * 191) % 1000), spin: (i % 2 ? 1 : -1) * (180 + (i * 37) % 160), sway: 22 + (i % 5) * 6 });
+}
+
+const man = makeStick(sceneG, {});   // protagonist
+
+/* MOUTH channel (quality ratchet): drawn inside man.g so it inherits squash + rotation */
+const mouthPath = el(man.g, "path", { stroke:C.paper, "stroke-width":7, fill:"none", "stroke-linecap":"round" });
+const mouthO = el(man.g, "ellipse", { fill:C.paper, display:"none" });
+function headLocal(p) {
+  const tTop = [dir(p.torso)[0] * L.torso, dir(p.torso)[1] * L.torso];
+  const a = p.torso + (p.headTilt || 0);
+  return [tTop[0] + dir(a)[0] * (L.neck + L.head * 0.9), tTop[1] + dir(a)[1] * (L.neck + L.head * 0.9)];
+}
+function setMouth(p, kind) {
+  const hc = headLocal(p), f = p.face === undefined ? 1 : p.face;
+  const mx = hc[0] + f * 12, my = hc[1] + 22;
+  mouthPath.setAttribute("display", kind === "scream" ? "none" : "");
+  mouthO.setAttribute("display", kind === "scream" ? "" : "none");
+  if (kind === "grin")       mouthPath.setAttribute("d", `M ${mx-24} ${my-4} q 24 26 48 0`);
+  else if (kind === "frown") mouthPath.setAttribute("d", `M ${mx-22} ${my+8} q 22 -22 44 0`);
+  else if (kind === "flat")  mouthPath.setAttribute("d", `M ${mx-16} ${my} l 32 0`);
+  else if (kind === "small") mouthPath.setAttribute("d", `M ${mx-10} ${my} q 10 8 20 0`);
+  if (kind === "scream") { mouthO.setAttribute("cx", mx); mouthO.setAttribute("cy", my + 6); mouthO.setAttribute("rx", 16); mouthO.setAttribute("ry", 22); }
+}
+
+/* bags + box ride inside man.g too (hip-local coords), so they squash with him */
+const bagsG = el(man.g, "g", { display:"none" });
+function bagShape(parent, fill) {
+  const g = el(parent, "g", {});
+  el(g, "path", { d:"M -36 0 L 36 0 L 30 96 L -30 96 Z", fill, stroke:C.paper, "stroke-width":6, "stroke-linejoin":"round" });
+  el(g, "path", { d:"M -18 0 q 18 -34 36 0", fill:"none", stroke:C.paper, "stroke-width":6, "stroke-linecap":"round" });
+  return g;
+}
+const bagA = bagShape(bagsG, C.volt), bagB = bagShape(bagsG, C.pink), bagC = bagShape(bagsG, C.panel), bagD = bagShape(bagsG, C.volt);
+const boxG = el(bagsG, "g", { display:"none" });
+el(boxG, "rect", { x:-92, y:-60, width:184, height:60, rx:10, fill:C.panel, stroke:C.paper, "stroke-width":7 });
+el(boxG, "rect", { x:-70, y:-47, width:140, height:34, rx:6, fill:"#2D3B7A" });   // the screen of the boxed TV
+el(boxG, "text", { x:0, y:-20, "text-anchor":"middle", fill:C.volt, "font-family":"Archivo Black", "font-size":22 }).textContent = "75\"";
+function handPt(u, l) { return [dir(u)[0] * L.uArm + dir(l)[0] * L.lArm, -L.torso + dir(u)[1] * L.uArm + dir(l)[1] * L.lArm]; }
+
+// endcard mini: a coin stack with one note on top
+const endsvg = document.getElementById("endsvg");
+for (let i = 0; i < 4; i++) el(endsvg, "ellipse", { cx:540, cy:470 - i*22, rx:90, ry:26, fill:C.panel, stroke:C.volt, "stroke-width":7 });
+el(endsvg, "rect", { x:470, y:340, width:140, height:64, rx:8, fill:C.pink, stroke:C.paper, "stroke-width":7, transform:"rotate(-8 540 372)" });
+
+/* ============================ ui handles ============================ */
+const ui = { title:document.getElementById("title"), day:document.getElementById("day"), dayNum:document.getElementById("dayNum"),
+  credit:document.getElementById("credit"), bal:document.getElementById("bal"), balNum:document.getElementById("balNum"),
+  dog:document.getElementById("stampDog"), rac:document.getElementById("stampRac"),
+  cat:document.getElementById("catCard"), endcard:document.getElementById("endcard"),
+  flash:document.getElementById("flash"), flash2:document.getElementById("flash2") };
+
+/* ============================ protagonist ============================ */
+const GROUND = 1292;   // hip y standing on the floor
+const HOME = 480;
+const CARRY = { laU:95, laL:45, raU:60, raL:30 };           // both arms forward, locked on the bags
+const CARRY2 = { laU:95, laL:45, raU:-60, raL:-30 };        // one bag arm forward, one back
+function manLogic(t) {
+  let p, mouth = "flat", bags = 0, box = false;
+  if (t < B.crouch[0]) {
+    // waiting, small breathing bob
+    p = { ...P.stand, tx:HOME, ty:GROUND + Math.sin(t * 2.2) * 3, torso:178, face:1, eyes:"open" };
+  } else if (t < B.launch[0]) {
+    // ANTICIPATION: crouch
+    const k = easeInOutQuad(ramp(t, B.crouch[0], B.crouch[1]));
+    p = mixPose({ ...P.stand, tx:HOME, ty:GROUND }, { ...P.landCrouch, tx:HOME, ty:GROUND + 40 }, k);
+    p.eyes = "wide"; p.sy = 1 - 0.10*k; p.sx = 1 + 0.06*k; p.px = 0; p.py = 210; mouth = "small";
+  } else if (t < B.land) {
+    // joy leap
+    const k = ramp(t, B.launch[0], B.launch[1]);
+    p = { ...P.apex, tx:HOME, ty:GROUND - Math.sin(k * Math.PI) * 240, face:1, eyes:"wide" };
+    p.laU = 200; p.laL = 215; p.raU = -200; p.raL = -215;   // arms straight up
+    p.llU = 22; p.llL = -60; p.rlU = -14; p.rlL = -75;        // heel-kick: lower legs trail back (no kite silhouette)
+    mouth = "grin";
+  } else if (t < B.pass1[0]) {
+    // landing SQUASH then relentless happy bounce
+    p = { ...P.stand, tx:HOME, ty:GROUND, face:1, eyes:"open", laU:160, laL:175, raU:-160, raL:-175, torso:186 };
+    const land = punch(t, B.land, 0.16, 12);
+    const bt = Math.max(0, t - B.land - 0.25);
+    p.ty = GROUND - Math.abs(Math.sin(bt * 3.6)) * 30;
+    const bsq = Math.max(0, -Math.sin(bt * 3.6 + 0.35)) * 0.05;
+    p.sy = 1 - land - bsq; p.sx = 1 + (land + bsq) * 0.7; p.px = 0; p.py = 210;
+    p.laU = 160 + Math.sin(bt * 7) * 16; p.raU = -160 - Math.sin(bt * 7 + 0.4) * 16;
+    mouth = "grin";
+  } else if (t < B.pass2[0]) {
+    // PASS 1: lean-back windup, then sprint right with 2 bags
+    const w = easeInOutQuad(ramp(t, B.pass1[0], B.pass1[0] + 0.18));
+    const k = ramp(t, B.pass1[0] + 0.18, B.pass1[1]);   // linear: no running-in-place
+    if (t < B.pass1[0] + 0.18) {
+      p = { ...P.stand, ...CARRY, tx:HOME - 30*w, ty:GROUND, torso: 180 + 14*w, face:1, eyes:"wide" };  // ANTICIPATION lean-back
+    } else {
+      const ph = (t * 3.2) % 1;
+      p = walkPose(ph); Object.assign(p, CARRY);
+      p.torso = 160; p.face = 1; p.eyes = "wide";
+      p.tx = lerp(HOME - 30, 1420, k); p.ty = GROUND - Math.abs(Math.sin(ph * TAU)) * 14;
+      const st = Math.abs(Math.sin(ph * TAU)) * 0.05; p.sy = 1 + st; p.sx = 1 - st; p.px = 0; p.py = 210;
+    }
+    bags = 2; mouth = "grin";
+  } else if (t < B.day3) {
+    // PASS 2: re-enter from the left with 4 bags + a boxed TV on the head
+    const k = ramp(t, B.pass2[0], B.pass2[1]);
+    const ph = (t * 3.0) % 1;
+    p = walkPose(ph); Object.assign(p, CARRY2);
+    p.torso = 150; p.face = 1; p.eyes = "wide";
+    p.tx = lerp(-220, 1400, k); p.ty = GROUND - Math.abs(Math.sin(ph * TAU)) * 12;   // linear, on screen by ~5.1s
+    const st = Math.abs(Math.sin(ph * TAU)) * 0.05; p.sy = 1 + st; p.sx = 1 - st; p.px = 0; p.py = 210;
+    bags = 4; box = true; mouth = "grin";
+  } else if (t < B.walkIn[1]) {
+    // DAY 3: shuffles back in, hands empty, slower stride
+    const k = ramp(t, B.walkIn[0], B.walkIn[1]);
+    const ph = (t * 1.3) % 1;
+    p = walkPose(ph); p.torso = 172; p.headTilt = -8; p.face = 1; p.eyes = "open";
+    p.tx = lerp(-160, HOME, easeOutCubic(k)); p.ty = GROUND - Math.abs(Math.sin(ph * TAU)) * 5;
+    if (k > 0.85) p = mixPose(p, { ...P.stand, tx:HOME, ty:GROUND, torso:176, headTilt:-4, face:1 }, ramp(k, 0.85, 1));
+    mouth = "flat";
+  } else if (t < B.broke) {
+    // stands, looks at the counter; still (freeze BEFORE the spin so the drop lands on a quiet frame)
+    p = { ...P.stand, tx:HOME, ty:GROUND, torso:176, headTilt:-4, face:1, eyes: t >= B.spin[0] ? "wide" : "open" };
+    mouth = t >= B.spin[0] ? "small" : "flat";
+  } else if (t < B.deflate[0]) {
+    // COMEDIC HOLD: scream freeze. Tiny tremble, one slow blink at B.blink.
+    const tr = Math.sin((t - B.broke) * TAU * 6) * 2;
+    p = { ...P.stand, tx:HOME + tr, ty:GROUND, torso:184, headTilt:6, face:1, eyes:"wide",
+          laU:100, laL:215, raU:-100, raL:-215 };   // hands on the cheeks (stays at head height, clear of the stamp)
+    if (t >= B.blink - 0.08 && t <= B.blink + 0.14) p.eyes = "closed";
+    const sh = punch(t, B.broke, 0.07, 14);   // hit-reaction stretch
+    p.sy = 1 + sh; p.sx = 1 - sh * 0.6; p.px = 0; p.py = 210;
+    mouth = "scream";
+  } else {
+    // DEFLATE: collapse into a slump, squash on the settle
+    const k = easeOutCubic(ramp(t, B.deflate[0], B.deflate[1]));
+    p = { ...P.stand, tx:HOME, ty:GROUND, face:1,
+      torso: lerp(184, 148, k), headTilt: lerp(6, -30, k),
+      laU: lerp(100, 24, k), laL: lerp(215, 10, k), raU: lerp(-100, -24, k), raL: lerp(-215, -10, k),
+      eyes: k > 0.6 ? "dead" : "wide" };
+    const sq = punch(t, B.deflate[1], 0.12, 12);
+    p.sy = 1 - sq; p.sx = 1 + sq * 0.7; p.px = 0; p.py = 210;
+    p.ty = GROUND + Math.sin((t - B.deflate[1]) * 1.6) * 2;
+    mouth = k > 0.5 ? "frown" : "scream";
+  }
+  poseStick(man, p);
+  setMouth(p, mouth);
+  // bags / box
+  bagsG.setAttribute("display", bags ? "" : "none");
+  if (bags) {
+    const hl = handPt(p.laU, p.laL), hr = handPt(p.raU, p.raL);
+    bagA.setAttribute("transform", `translate(${hl[0].toFixed(1)},${hl[1].toFixed(1)})`);
+    bagB.setAttribute("transform", `translate(${(hl[0] - 44).toFixed(1)},${(hl[1] + 8).toFixed(1)})`);
+    bagB.setAttribute("display", bags >= 2 ? "" : "none");
+    bagC.setAttribute("transform", `translate(${hr[0].toFixed(1)},${hr[1].toFixed(1)})`);
+    bagD.setAttribute("transform", `translate(${(hr[0] + 44).toFixed(1)},${(hr[1] + 8).toFixed(1)})`);
+    bagC.setAttribute("display", bags >= 3 ? "" : "none");
+    bagD.setAttribute("display", bags >= 4 ? "" : "none");
+    boxG.setAttribute("display", box ? "" : "none");
+    if (box) { const hc = headLocal(p); boxG.setAttribute("transform", `translate(${hc[0].toFixed(1)},${(hc[1] - L.head - 2).toFixed(1)}) rotate(${(p.torso - 180) * 0.5})`); }
+  }
+  return p;
+}
+
+/* ============================ money rain ============================ */
+function rainLogic(t) {
+  for (const n of NOTES) {
+    const dt = t - n.t0;
+    if (t < B.rain[0] || dt < 0 || dt > 2.2) { n.g.setAttribute("display", "none"); continue; }
+    const y = -40 + dt * 560 + dt * dt * 160;
+    if (y > 1520) { n.g.setAttribute("display", "none"); continue; }
+    n.g.setAttribute("display", "");
+    const x = n.x + Math.sin(dt * 3.1 + n.x) * n.sway;
+    n.g.setAttribute("transform", `translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${(dt * n.spin).toFixed(1)})`);
+  }
+}
+
+/* ============================ balance counter ============================ */
+function fmt(n) { n = Math.round(n); const s = String(n); return "₹" + (s.length > 3 ? s.slice(0, -3) + "," + s.slice(-3) : s); }
+function balanceValue(t) {
+  if (t < B.roll[0]) return 0;
+  if (t < B.roll[1]) return lerp(0, 84000, easeOutCubic(ramp(t, B.roll[0], B.roll[1])));
+  if (t < B.pass1[0] + 0.3) return 84000;
+  if (t < B.pass1[1]) return lerp(84000, 61200, ramp(t, B.pass1[0] + 0.3, B.pass1[1] - 0.2));
+  if (t < B.pass2[0] + 0.5) return 61200;
+  if (t < B.pass2[1]) return lerp(61200, 19800, ramp(t, B.pass2[0] + 0.5, B.pass2[1] - 0.2));
+  if (t < B.spin[0]) return 19800;
+  if (t < B.spin[1]) return lerp(19800, 412, easeInCubic(ramp(t, B.spin[0], B.spin[1])));
+  return 412;
+}
+function balLogic(t) {
+  const on = t >= B.balIn && t < B.catCard;
+  if (!on) { ui.bal.style.visibility = "hidden"; return; }
+  snapIn(ui.bal, t, B.balIn, 0.14, 0);
+  const v = balanceValue(t);
+  ui.balNum.textContent = fmt(v);
+  ui.bal.className = t >= B.broke ? "snap broke" : "snap";
+  // number jitters while spinning down, pops on the broke frame
+  let s = 1 + punch(t, B.broke, 0.22, 10);
+  const spinning = t >= B.spin[0] && t < B.spin[1];
+  const jx = spinning ? Math.sin(t * TAU * 11) * 4 : 0;
+  ui.balNum.style.transform = `translate(${jx.toFixed(1)}px,0) scale(${s.toFixed(3)})`;
+}
+
+/* ============================ camera + flash ============================ */
+const PUNCHES = [[B.land, 0.06, 10], [B.broke, 0.05, 9], [B.deflate[1], 0.03, 10], [B.catCard, 0.05, 9]];
+const SHAKES = [[B.land, 5, 46, 0.4], [B.broke, 6, 50, 1.0]];
+const cam = document.getElementById("cam");
+function doCam(t) {
+  let s = 1;
+  for (const [t0, a, d] of PUNCHES) s += punch(t, t0, a, d);
+  s += 0.05 * easeInOutQuad(ramp(t, B.hold[0], B.hold[1]));   // slow push-in through the scream hold
+  if (t >= B.deflate[0]) s += 0.05 * (1 - easeInOutQuad(ramp(t, B.deflate[0], B.deflate[1]))) - 0.05;
+  let x = 0, y = 0;
+  for (const [t0, a, f, ph] of SHAKES) { x += shake(t, t0, a, 6.5, f, ph); y += shake(t, t0, a*0.8, 6.5, f*1.13, ph+0.7); }
+  cam.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) scale(${s.toFixed(4)})`;
+  cam.style.transformOrigin = "540px 1200px";
+}
+
+/* ============================ master seek ============================ */
+window.seek = async (t) => {
+  t = clamp(t, 0, B.end);
+  stalePaintGuard(t, bgflip, document.getElementById("ui"));
+  const endOn = t >= B.endcard;
+  ui.endcard.style.visibility = endOn ? "visible" : "hidden";
+  sceneG.style.visibility = endOn ? "hidden" : "visible";
+  if (!endOn) { manLogic(t); rainLogic(t); }
+  doCam(endOn ? 0 : t);
+  ui.flash.style.opacity = endOn ? 0 : punch(t, B.land, 0.65, 16).toFixed(3);
+  ui.flash2.style.opacity = endOn ? 0 : punch(t, B.broke, 0.55, 16).toFixed(3);
+
+  // overlays
+  if (t < B.day1) snapIn(ui.title, t, B.title, 0.15, 0); else ui.title.style.visibility = "hidden";
+  if (t >= B.day1 && t < B.catCard) {
+    const late = t >= B.day3;
+    ui.dayNum.textContent = late ? "DAY 3" : "DAY 1";
+    ui.day.className = late ? "snap late" : "snap";
+    snapIn(ui.day, t, late ? B.day3 : B.day1, 0.14, 0);
+  } else ui.day.style.visibility = "hidden";
+  if (t >= B.credit && t < B.balIn) snapIn(ui.credit, t, B.credit, 0.13, -2); else ui.credit.style.visibility = "hidden";
+  if (endOn) ui.bal.style.visibility = "hidden"; else balLogic(t);
+  if (t >= B.dogStamp && t < B.day3) snapIn(ui.dog, t, B.dogStamp, 0.13, -4); else ui.dog.style.visibility = "hidden";
+  if (t >= B.racStamp && t < B.catCard) snapIn(ui.rac, t, B.racStamp, 0.13, 4); else ui.rac.style.visibility = "hidden";
+  if (t >= B.catCard && t < B.endcard) snapIn(ui.cat, t, B.catCard, 0.16, 0); else ui.cat.style.visibility = "hidden";
+  await compositorCommit();
+};
+window.seek(0);
+</script></body></html>

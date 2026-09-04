@@ -11,8 +11,8 @@
     "accounts/hype_tingles/content/queue/slides/2026-09-04-drop-day-reviews-6.png",
     "accounts/hype_tingles/content/queue/slides/2026-09-04-drop-day-reviews-7.png"
   ],
-  "scheduled_time_ist": "2026-09-04T13:00:00+05:30",
+  "scheduled_time_ist": "2026-09-05T11:30:00+05:30",
   "status": "pending",
   "attempts": 0,
-  "needs_review": true
+  "needs_review": false
 }

@@ -1,0 +1,23 @@
+{
+  "_license": "All files Mixkit Free License, vendored + logged in assets/audio/ATTRIBUTION.md (no new files). Beats match reel.html window.BEATS (salary day BREAKING, 14.6s). BGM deliberately differs from the same day's other Reel (pre-coffee-alert uses house-vibez).",
+  "tracks": [
+    {"file": "assets/audio/bgm/g-eazy-nba-type.mp3", "at": 0.0, "gain_db": -16, "trim": [0, 14.6], "fade_in": 0.2, "fade_out": 1.1},
+    {"file": "assets/audio/sfx/bass-hit-futuristic.mp3", "at": 0.05, "gain_db": -9},
+    {"file": "assets/audio/sfx/ui-message-pop.mp3", "at": 1.00, "gain_db": -5},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 1.35, "gain_db": -9},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 1.85, "gain_db": -13},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 1.85, "gain_db": -7},
+    {"file": "assets/audio/sfx/data-load-os.mp3", "at": 2.10, "gain_db": -11},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 3.20, "gain_db": -5},
+    {"file": "assets/audio/sfx/air-woosh-quick.mp3", "at": 3.48, "gain_db": -8},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 4.60, "gain_db": -5},
+    {"file": "assets/audio/sfx/sweep-fast-small.mp3", "at": 4.90, "gain_db": -8},
+    {"file": "assets/audio/sfx/switch-tap.mp3", "at": 6.40, "gain_db": -5},
+    {"file": "assets/audio/sfx/glitch-static.mp3", "at": 7.80, "gain_db": -11},
+    {"file": "assets/audio/sfx/break-glitch-digital.mp3", "at": 8.20, "gain_db": -7},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 9.00, "gain_db": -5},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 10.00, "gain_db": -10},
+    {"file": "assets/audio/sfx/bass-hit-futuristic.mp3", "at": 11.70, "gain_db": -9},
+    {"file": "assets/audio/sfx/light-aura.mp3", "at": 13.50, "gain_db": -12}
+  ]
+}
