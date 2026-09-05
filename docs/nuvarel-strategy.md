@@ -18,6 +18,19 @@ material, light or weight cannot signify wealth, no matter what the caption
 says. Full reasoning, comparable accounts, and the dissent on audience
 targeting: see the CCO consult linked above.
 
+**Second revision, same day:** the founder separately noticed real audience
+reaction on the (still-live-at-the-time) stickman Reels and asked whether a
+character could be kept. CCO and Group CTO gave genuinely conflicting
+advice — CTO: redesign it into a distinct figure, it's currently nuvarel's
+only *proven* Reel pipeline (photoreal Reels are unproven, ~2h GPU/clip,
+unlike the now-validated photoreal *stills*); CCO: retire the figure
+entirely, replace with hands-only demonstration ("The Inspection," §3), on
+the theory that a cartoon face trains Instagram's early-distribution
+algorithm to seed the account to the wrong audience while it's still small.
+**Founder decision: CCO's case.** No character/mascot on this account,
+redesigned or otherwise. See §3's Reel pillars and "The Inspection" device
+below for what replaces it.
+
 ---
 
 ## 1. The chosen angle (revised 2026-09-05)
@@ -116,12 +129,11 @@ rotating so no pillar repeats inside any 7-day window if avoidable.
      "global" angle, and a genuine differentiator vs. US-only comparables
    - *Care Secrets* — how to keep expensive materials looking expensive
      for decades
-6. **Mood** (`mood`, new — pure vibe, no lesson) — candid, texture, and
+6. **Mood** (`mood`, new — pure vibe, no lesson) — texture and
    plausible-object photography with no caption payload beyond a feeling.
-   Three registers, rotate freely:
-   - Candid gesture shots (hands only, never a posed AI face — see the
-     platform note in §8): smoothing raw silk, folding linen, pouring
-     coffee, closing a notebook
+   Two registers (candid gesture shots moved out to The Inspection, §3.5
+   below, per the 2026-09-05 character-question resolution — they're a
+   demonstration, not decoration, and belong under Evidence/Inspection):
    - Plausible imagined objects: an unlabeled amber bottle catching
      window light, a stack of uncut-edge books with a wax seal, a
      decanter half-poured at golden hour
@@ -129,6 +141,19 @@ rotating so no pillar repeats inside any 7-day window if avoidable.
      in raking light, candlelight on dark wood at dusk
 
 ### Reel pillars
+
+**Production reality, 2026-09-05:** the character/stickman is retired
+(see the second revision note above) and full photoreal *video* is
+unproven and expensive (~2h GPU/clip via the video_lab I2V chain — only
+photoreal *stills* have been validated so far). Until a photoreal-Reel
+workflow is proven by hand, **prioritize Quick Games** — its
+guess-then-reveal structure works as a sequence of photoreal *stills*
+with simple cuts/text overlay (the same mechanism as the now-validated
+still pipeline), inherits the stickman's actual engagement function
+(setup → tension → payoff) without needing a character or expensive
+video generation, and converts a passive reaction into a comment, a
+better seed-audience signal. Ship 3 Quick Games Reels before any other
+Reel pillar gets production time.
 
 7. **Satisfying Process** (`reel-satisfying`) — oddly-satisfying, no
    character needed: oil spreading on water, wax being poured and set,
@@ -173,6 +198,32 @@ Two Objects, and Palette Study especially:
   until the core rotation above is running reliably — this is a
   numbered-series-shaped commitment, and the portfolio already has one
   unfulfilled "EP02" promise on file elsewhere as a cautionary example.
+- **The Inspection** — founder decision 2026-09-05, resolving the
+  character question below. Not a mascot: a recurring point of view.
+  Hands only, performing the exact verb this account's positioning
+  promises ("tell the difference yourself") — a thumb along a seam
+  checking whether veneer wraps or stops, a panel tilted into raking
+  light to expose a printed grain repeat, a cushion pressed and timed as
+  it recovers, a corner lifted to feel hardwood vs. ply. Anchors: hands
+  always enter from lower right, never centred; one plain dark unbranded
+  cuff at the wrist, always (a shape/tone anchor a generator can hold
+  consistent — not a ring or watch, which will drift across posts and a
+  drifting signature is worse than none); one action, one take, no cuts;
+  **never a face, never past the cuff, never two hands doing different
+  things.** Applies inside The Evidence, Two Objects, and Insider
+  Knowledge (esp. The 60-Second Inspection, Care Secrets, Ages Well/
+  Ages Badly) on the carousel side, and Satisfying Process/Quick Games/
+  Reveal on the Reel side. **Never** on a carousel's frame 1 (the hook
+  stays the object alone), never on The Room That Proves It, Palette
+  Study, Mood, or Trend-Jack (whose whole mechanic is "applied to an
+  object instead of a person" — reintroducing hands voids it). Cap: no
+  more than ~1 post in 3. **Gated on a hands-specific feasibility spike
+  before any real production** — hands are harder to generate cleanly
+  than objects (the photoreal spike already logged a ~1/3 artifact rate
+  on objects alone), and a Group Legal/Compliance read on whether an
+  AI-generated disembodied hand falls inside Instagram's 2026-08-31
+  AI-people reach-limit policy (which targets generated *people*, not
+  products/backgrounds — likely clear, not yet confirmed).
 
 ### Anti-repetition (revised for 2/day)
 
