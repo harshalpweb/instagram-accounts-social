@@ -1,0 +1,158 @@
+{
+  "timestamp": "2026-09-05T22:24:37.856716",
+  "total_keywords": 8,
+  "keywords_searched": [
+    "online course",
+    "coaching",
+    "masterclass",
+    "training program",
+    "ebook",
+    "template",
+    "bootcamp",
+    "certification"
+  ],
+  "total_ads": 8,
+  "creators": {
+    "Sarah Chen": 1,
+    "Mike Johnson": 1,
+    "Lisa Wong": 1,
+    "Alex Martinez": 1,
+    "Emma Davis": 1,
+    "James Wilson": 1,
+    "Rachel Green": 1,
+    "Design Studio Pro": 1
+  },
+  "ads_by_type": {
+    "course": 4,
+    "coaching": 2,
+    "ebook": 1,
+    "template": 1
+  },
+  "keywords_found": {
+    "online course": 3,
+    "digital marketing": 1,
+    "training": 1,
+    "programming": 1,
+    "python": 1,
+    "content creation": 1,
+    "social media": 1,
+    "coaching": 2,
+    "business": 3,
+    "mentorship": 1,
+    "career": 1,
+    "leadership": 1,
+    "masterclass": 1,
+    "seo": 1,
+    "marketing": 1,
+    "ebook": 1,
+    "freelancing": 1,
+    "template": 1,
+    "notion": 1
+  },
+  "ads": [
+    {
+      "id": "1",
+      "creator": "Sarah Chen",
+      "product": "Complete Digital Marketing Masterclass 2025",
+      "type": "course",
+      "cta": "Enroll Now",
+      "copy": "Learn proven strategies to build a 6-figure digital business from home. 500+ students, $2M+ in revenue created. Limited spots.",
+      "keywords": [
+        "online course",
+        "digital marketing",
+        "training"
+      ]
+    },
+    {
+      "id": "2",
+      "creator": "Mike Johnson",
+      "product": "Python for Beginners - Comprehensive Programming Course",
+      "type": "course",
+      "cta": "Start Learning",
+      "copy": "Master Python in 30 days. No experience needed. Includes 50+ projects and lifetime access.",
+      "keywords": [
+        "online course",
+        "programming",
+        "python"
+      ]
+    },
+    {
+      "id": "3",
+      "creator": "Lisa Wong",
+      "product": "Content Creation Academy",
+      "type": "course",
+      "cta": "Join Today",
+      "copy": "Learn TikTok, YouTube & Instagram secrets. Turn your content into a full-time income.",
+      "keywords": [
+        "online course",
+        "content creation",
+        "social media"
+      ]
+    },
+    {
+      "id": "4",
+      "creator": "Alex Martinez",
+      "product": "1-on-1 Business Coaching",
+      "type": "coaching",
+      "cta": "Book Free Call",
+      "copy": "Get personalized guidance to scale your business. 2x growth guarantee or money back.",
+      "keywords": [
+        "coaching",
+        "business",
+        "mentorship"
+      ]
+    },
+    {
+      "id": "5",
+      "creator": "Emma Davis",
+      "product": "Executive Career Coaching",
+      "type": "coaching",
+      "cta": "Schedule Consultation",
+      "copy": "Land your dream job or promotion. Personalized coaching for C-suite leaders.",
+      "keywords": [
+        "coaching",
+        "career",
+        "leadership"
+      ]
+    },
+    {
+      "id": "6",
+      "creator": "James Wilson",
+      "product": "Advanced SEO Masterclass",
+      "type": "course",
+      "cta": "Get Access",
+      "copy": "Rank #1 on Google in your niche. Real case studies, real results, real ROI.",
+      "keywords": [
+        "masterclass",
+        "seo",
+        "marketing"
+      ]
+    },
+    {
+      "id": "8",
+      "creator": "Rachel Green",
+      "product": "The Ultimate Freelancing Guide",
+      "type": "ebook",
+      "cta": "Download Free",
+      "copy": "Everything you need to start and scale a 6-figure freelance business.",
+      "keywords": [
+        "ebook",
+        "freelancing",
+        "business"
+      ]
+    },
+    {
+      "id": "7",
+      "creator": "Design Studio Pro",
+      "product": "Notion Business Template Bundle",
+      "type": "template",
+      "cta": "Buy Now",
+      "copy": "Pre-built templates for your business. CRM, project management, invoicing - all in Notion.",
+      "keywords": [
+        "template",
+        "notion",
+        "business"
+      ]
+    }
+  ]
+}
