@@ -181,6 +181,41 @@ strong { font-weight: 600; }
 }
 .dark .verdict-tag.splurge { background: var(--alabaster); color: var(--espresso); }
 
+/* ---- photo slides (photoreal pivot, strategy §8 rev. 2026-09-05) ----
+   Photography is the subject; type sits in a margin, <=15% of frame, no
+   footer bar. Two layouts: full-bleed (dark key, alabaster type over an
+   espresso scrim) and matted (alabaster mat around the photograph). A
+   "silent" photo slide carries no type at all (frame 2 of every deck). */
+body.photo { padding: 0; position: relative; overflow: hidden; }
+body.photo .bg { position: absolute; inset: 0; background-size: cover;
+  background-position: center; }
+body.photo .scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 46%;
+  background: linear-gradient(to bottom, rgba(42,36,30,0) 0%, rgba(42,36,30,0.42) 100%); }
+body.photo .scrim-top { position: absolute; left: 0; right: 0; top: 0; height: 22%;
+  background: linear-gradient(to top, rgba(42,36,30,0) 0%, rgba(42,36,30,0.45) 100%); }
+body.photo .meta-row { position: absolute; top: 88px; left: 92px; right: 92px;
+  color: var(--bronze-dark-bg); }
+body.photo .meta-row .wordmark { color: var(--alabaster); }
+body.photo .caption { position: absolute; left: 92px; right: 92px; bottom: 96px; }
+body.photo .caption .rule { margin: 0 0 30px; }
+body.photo .caption .display { color: var(--alabaster); font-size: 96px;
+  max-width: 760px; }
+body.photo .index { position: absolute; right: 92px; bottom: 96px;
+  font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600;
+  font-size: 84px; color: var(--bronze-dark-bg); line-height: 1; }
+
+body.matted { padding: 88px 92px 72px; position: relative; }
+body.matted .frame { flex: 0 0 auto; width: 896px; height: 860px;
+  background-size: cover; background-position: center; margin-top: 56px; }
+body.matted.silent .frame { width: 896px; height: 1120px; margin-top: 0; }
+body.matted .caption { flex: 1 1 auto; display: flex; flex-direction: column;
+  justify-content: flex-end; }
+body.matted .caption .rule { margin: 44px 0 26px; }
+body.matted .caption .display { font-size: 84px; max-width: 800px; }
+body.matted .index { position: absolute; right: 92px; bottom: 72px;
+  font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600;
+  font-size: 84px; color: var(--bronze-text); line-height: 1; }
+
 /* ---- closer ---- */
 .closer main { align-items: flex-start; }
 .closer .handle {

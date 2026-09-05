@@ -1,0 +1,35 @@
+{
+  "_doc": "Production gates for nuvarel's daily build (Group CTO, 2026-09-05). The daily-build prompt reads this file FIRST and builds only what is open. Flip a gate only with the named evidence; record who/when/why in `note`. Covers both the CronCreate rail and a manual run -- same file, one mechanism.",
+  "photo_carousel": {
+    "state": "open",
+    "since": "2026-09-05",
+    "by": "Group CTO",
+    "note": "Photoreal STILLS validated (spike 2026-09-05, registry instagram_accounts_social) and productionised the same day: render/gen_photo.py + `photo` role in render_nuvarel.py + photo-aware gate_check.py. Keys allowed: dark, mid. Light key stays experimental until one light-key deck passes the gate AND eyes-on review; log the first attempt here.",
+    "keys_allowed": ["dark", "mid"],
+    "light_key": "experimental"
+  },
+  "photo_reel": {
+    "state": "closed",
+    "since": "2026-09-05",
+    "by": "Group CTO",
+    "note": "Any Reel whose visuals are AI-generated photoreal imagery (video OR a cut sequence of stills) stays closed until BOTH: (1) Group Legal/Compliance confirms Meta's `is_ai_generated=true` container parameter (now wired in scripts/publish_due_posts.py, opt-in via queue JSON `ai_generated: true`) satisfies the Misinformation-standard disclosure duty on AI photoreal video; (2) a stills-to-Reel build path exists and one Quick Games Reel has passed a frame-level review. Photoreal VIDEO generation itself is separately unproven (~2h GPU/clip)."
+  },
+  "inspection_hands": {
+    "state": "closed",
+    "since": "2026-09-05",
+    "by": "Group CTO",
+    "note": "The Inspection (hands-only device) is NOT settled: the canonical 'thumb along a seam' gesture rendered 0/10; founder decision open between a real photographed hand and an AI hand without the signature cuff; CCO gesture vocabulary not ratified; Legal read open on the cuff as an identity marker. No hands in any nuvarel frame until this is flipped."
+  },
+  "typography_only": {
+    "state": "closed",
+    "since": "2026-09-05",
+    "by": "Group CTO",
+    "note": "All-text hook cards and CSS-only carousels/Reels are retired as a DEFAULT format (founder: 'just mentioning rich in text doesn't make it look rich'; measured 0-8 reach on 31 carousels, 88% skip on the one typography Reel). Do not fall back to them when a photo build fails -- skip the slot and log a BUILD-INCIDENT instead."
+  },
+  "character_rig": {
+    "state": "retired",
+    "since": "2026-09-05",
+    "by": "founder decision",
+    "note": "assets/rig2d.js and any character/mascot are permanently retired on this account. Not a gate that reopens."
+  }
+}

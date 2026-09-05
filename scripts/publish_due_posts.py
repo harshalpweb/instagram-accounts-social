@@ -19,6 +19,14 @@ input to check_token.py's `--due-count` incident throttle (see publish.yml), so
 it must stay side-effect-free and must use exactly the same due logic as a real
 run — otherwise the throttle would be deciding on a different reality than the
 publisher acts on.
+
+AI-content self-disclosure (Group CTO, 2026-09-05): a queue JSON carrying
+`"ai_generated": true` publishes with Meta's `is_ai_generated=true` container
+parameter — on the REELS container, and on the CAROUSEL parent container only
+(Meta's content-publishing reference: setting it on carousel children errors).
+Meta's Misinformation standard requires disclosure on AI-generated photoreal
+video unconditionally (Group Legal read, 2026-09-05); this flag is how the
+pipeline satisfies it. Absent/false = unchanged behaviour.
 """
 import argparse
 import json
@@ -152,7 +160,14 @@ def load_due_posts(verbose: bool = True):
     return due
 
 
+def ai_disclosure(post: dict) -> dict:
+    """Container params for Meta's AI self-disclosure, from the queue JSON's
+    `ai_generated` flag. Empty when absent/false (legacy posts unchanged)."""
+    return {"is_ai_generated": "true"} if post.get("ai_generated") is True else {}
+
+
 def create_item_container(slide_path: str) -> str:
+    # Never carries is_ai_generated: Meta rejects it on carousel children.
     image_url = f"{RAW_BASE}/{slide_path}"
     payload = api_post(
         f"{IG_USER_ID}/media",
@@ -178,17 +193,14 @@ def wait_until_finished(container_id: str, timeout_s: float = POLL_TIMEOUT_S) ->
     raise PostError(f"container {container_id} timed out waiting to finish")
 
 
-def create_carousel_container(item_ids, caption: str) -> str:
-    payload = api_post(
-        f"{IG_USER_ID}/media",
-        ACCESS_TOKEN,
-        data={
-            "media_type": "CAROUSEL",
-            "children": ",".join(item_ids),
-            "caption": caption,
-        },
-        base=BASE,
-    )
+def create_carousel_container(item_ids, caption: str, extra: dict | None = None) -> str:
+    data = {
+        "media_type": "CAROUSEL",
+        "children": ",".join(item_ids),
+        "caption": caption,
+    }
+    data.update(extra or {})
+    payload = api_post(f"{IG_USER_ID}/media", ACCESS_TOKEN, data=data, base=BASE)
     return payload["id"]
 
 
@@ -202,20 +214,17 @@ def publish_container(container_id: str) -> str:
     return payload["id"]
 
 
-def publish_reel(video_path: str, caption: str) -> str:
+def publish_reel(video_path: str, caption: str, extra: dict | None = None) -> str:
     """Create, process and publish one Reel from a public repository video."""
     video_url = f"{RAW_BASE}/{video_path}"
-    payload = api_post(
-        f"{IG_USER_ID}/media",
-        ACCESS_TOKEN,
-        data={
-            "media_type": "REELS",
-            "video_url": video_url,
-            "caption": caption,
-            "share_to_feed": "true",
-        },
-        base=BASE,
-    )
+    data = {
+        "media_type": "REELS",
+        "video_url": video_url,
+        "caption": caption,
+        "share_to_feed": "true",
+    }
+    data.update(extra or {})
+    payload = api_post(f"{IG_USER_ID}/media", ACCESS_TOKEN, data=data, base=BASE)
     container_id = payload.get("id")
     if not container_id:
         raise PostError("reel container response had no id")
@@ -224,14 +233,15 @@ def publish_reel(video_path: str, caption: str) -> str:
 
 
 def publish_post(post: dict) -> str:
+    extra = ai_disclosure(post)
     if post.get("video"):
-        return publish_reel(post["video"], post["caption"])
+        return publish_reel(post["video"], post["caption"], extra)
     if not post.get("slides"):
         raise PostError("no slides listed")
     item_ids = [create_item_container(slide) for slide in post["slides"]]
     for item_id in item_ids:
         wait_until_finished(item_id)
-    carousel_id = create_carousel_container(item_ids, post["caption"])
+    carousel_id = create_carousel_container(item_ids, post["caption"], extra)
     wait_until_finished(carousel_id)
     return publish_container(carousel_id)
 

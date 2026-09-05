@@ -1,31 +1,35 @@
 # nuvarel used-topics ledger
 
-Anti-repetition rules (docs/nuvarel-strategy.md §3/§7 — this header and
-the strategy doc were reconciled 2026-09-01 by Group CTO after they had
-drifted apart; the strategy doc's §3 wording is canonical): a principle,
-palette, or rule never re-runs within 60 days; a named palette is never
-reissued under the same name; **pillar rotation at 3x/day:** (a) no
-pillar twice among the same day's three posts (carousel or Reel), (b) a
-carousel pillar never occupies the same time-slot two days running (the
-original 1x/day "never two days running" rule is arithmetically
-unsatisfiable at 3 posts/day from 4 pillars and was reconciled, pending
-founder ratification — see strategy §3); **the same scene-set + hero-prop
-combination never recurs in a Reel within 14 days** (scene rule added
-2026-08-31 after a real near-duplicate shipped to review). Append one
-line per queued post.
+Anti-repetition rules (docs/nuvarel-strategy.md §3, revised 2026-09-05 for
+the **2 posts/day** cadence — 1 carousel + 1 Reel; the strategy doc's §3
+wording is canonical): a topic, material or object never re-runs within
+60 days; a named palette/material is never reissued under the same name;
+**no carousel pillar two days running; no Reel pillar two days running;**
+Insider Knowledge sub-angles don't repeat within 30 days; a Two Objects
+pair is never reused; **the same staged setup (object family + surface +
+key) never recurs within 7 days across photographic pieces**, and the same
+scene-set + hero-prop combination never recurs in a Reel within 14 days
+(scene rule added 2026-08-31 after a real near-duplicate shipped to
+review). Append one line per queued post. The 3x/day pillar-rotation
+wording that lived here 2026-09-01..09-05 is superseded.
 
-**Schema rule (Group CTO, 2026-08-31):** the Format column MUST be the
-exact `type` value from the post's queue JSON, verbatim (`palette-study`,
-`reads-expensive`, `splurge-skip`, `the-rule`; Reels prefix `reel-`) —
-never a free-text reclassification. The topic column carries every
-searchable keyword the post is about (a lamp post must say "lamp" and
-"lighting" here, whatever pillar it filed under). Cause: the 09-02 Reel
-was queued as `reel-splurge-skip` but filed here as `the-rule`, so a
-"lighting" lookup returned a false clear and a visual near-duplicate
-(09-04 lamps) queued 2 days behind it. One vocabulary, both files, or
-the check is decorative.
+**Schema rule (Group CTO, 2026-08-31, slugs revised 2026-09-05):** the
+Format column MUST be the exact `type` value from the post's queue JSON,
+verbatim — current carousel slugs `the-evidence`, `two-objects`, `the-room`,
+`palette-study`, `insider`, `mood`; Reel slugs `reel-satisfying`,
+`reel-reveal`, `reel-game`, `reel-trend`. Older slugs below
+(`reads-expensive`, `splurge-skip`, `the-rule`, older `reel-*`) are history
+and still count for the 60-day topic check — never reclassify them. The
+topic column carries every searchable keyword the post is about (a lamp
+post must say "lamp" and "lighting" here, whatever pillar it filed under).
+Cause: the 09-02 Reel was queued as `reel-splurge-skip` but filed here as
+`the-rule`, so a "lighting" lookup returned a false clear and a visual
+near-duplicate (09-04 lamps) queued 2 days behind it. One vocabulary, both
+files, or the check is decorative. **Photographic pieces (from 2026-09-06)**
+record in the scene cell: `photo: <subject/surface> · key=<dark|mid|light>
+· seed=<n>` — the tonal rotation and the 7-day setup check both read it.
 
-| Date | Post | Format (= queue JSON `type`) | Principle / palette / topic (all keywords) | Scene-set + props (Reels) |
+| Date | Post | Format (= queue JSON `type`) | Principle / palette / topic (all keywords) | Scene-set + props (Reels) / photo setup |
 |---|---|---|---|---|
 | 2026-08-30 | palette-study-01 | palette-study | "The Quiet Greige" palette (Palette Study No. 01); greige, warm alabaster walls, umber dark wood frames, aged brass accents; 60-30-10 split; no chrome (keywords backfilled 2026-09-01 to current schema) | n/a (typography carousel) |
 | 2026-08-30 | reads-cheap-01 | reads-expensive | Why It Reads No. 01: 5 things that read cheap — gloss vs matte finishes; single overhead light vs three light sources at three heights; RUG size, floating rug, front legs on the rug, size up; matching furniture set vs collected pieces; warm vs cool daylight bulbs, kelvin (keywords backfilled 2026-09-01 — title-only cell caused false clears) | n/a (typography carousel) |

@@ -1,1 +1,5 @@
 out/
+# Raw generated photographs are regenerable (seed + prompt are committed in
+# photos/<post-id>/gen-<seed>.json); the picked frame is baked into the
+# committed slide PNG. Keep the ~2 MB candidates local -- public repo.
+photos/**/*.png
