@@ -2,229 +2,288 @@
 
 **Account:** `nuvarel_` (Instagram, dormant, being revived)
 **Written:** 2026-08-30, overnight autonomous session (founder-delegated)
-**Founder's original brief:** "creating a brand for the rich category people
-where some tips tricks regarding home decor, colours, aesthetics etc etc
-i also wasnt clear about" — this doc sharpens that into one defensible angle.
+**Revised:** 2026-09-05, founder-direct strategy conversation (CoS + CCO consult
+`income-engine/docs/consults/2026-09-05-cco-nuvarel-brand-strategy.md`) —
+supersedes §1, §3, §7, §8 below. §2 (algorithm reality), §4-6 (hooks/hashtags/
+posting times) remain valid and are kept as-is except where noted.
+
+**Why this revision exists:** the founder reviewed the account directly and
+said (paraphrased): "just mentioning rich in text doesn't make it look rich"
+— the account was teaching quiet-luxury *principles* in text/diagram form but
+never actually showing anything that reads as rich. CCO's audit found the
+root cause: the "Curator" character was never a bespoke asset — it's
+`assets/rig2d.js`, the same shared stickman rig `hype_tingles` uses for meme
+jokes (including a `sitFlop`/`eyes:"dead"` pose). A stick figure with no
+material, light or weight cannot signify wealth, no matter what the caption
+says. Full reasoning, comparable accounts, and the dissent on audience
+targeting: see the CCO consult linked above.
 
 ---
 
-## 1. The chosen angle
+## 1. The chosen angle (revised 2026-09-05)
 
-**Nuvarel teaches the aspirational-but-not-rich viewer WHY rooms read
-expensive, and how to get that read without the money. Quiet-luxury
-design education, delivered as premium editorial carousels.**
+**Nuvarel shows the physical evidence that separates an expensive object
+from a cheap one — the knot, the grain, the joint, the weave, the weight —
+so the viewer can tell the difference themselves, in any showroom, in any
+country.**
 
-One line: *"The expensive look, explained."*
+One line: *"The proof, not the claim."*
 
-### Why this angle and not the alternatives
+### Audience (revised — see CCO dissent before treating this as settled)
 
-Three candidate sharpenings of "rich category people... tips tricks...
-home decor, colours, aesthetics":
+Not "rich people globally" — actually wealthy people hire designers and
+don't consume this content. The real, reachable, buyable audience:
+**English-speaking, 28-45, in the 6-24 month window after buying,
+renovating or relocating into a home they intend to keep.** Already follows
+at least one designer account. Past inspiration, into decision. Their live
+question isn't "what's pretty" — it's "which of these four do I actually
+buy, and is the expensive one worth it." Geography: US/UK/UAE/Singapore/
+Australia plus metro India; not trade, retail buyers who can be sold to.
 
-| Candidate angle | Verdict | Why |
+**Founder should know:** CCO dissents that this reachable definition and
+"rich audience across the globe" (the original brief) may not fully
+overlap — flagged directly rather than buried. This doc is written for the
+reachable version because it's also the better business.
+
+### What changed and why
+
+| Old (2026-08-30) | New (2026-09-05) | Why |
 |---|---|---|
-| Real high-end interiors showcase (luxury real estate / designer homes) | **NO** | Needs photography rights or paid stock we don't have at ₹0. Reposting others' photos is a copyright and takedown risk, and pure inspo accounts compete with millions of identical feeds with no wedge. |
-| Genuine trade-level interior design education (for designers) | **NO** | Tiny audience, wrong monetization path, and the founder's brief was consumer-facing ("tips tricks"). |
-| **Quiet-luxury principles for aspirational viewers** ("why it looks expensive, how to get the look") | **YES** | Massive proven demand (below), fully producible at ₹0 as typography/color/diagram carousels, and matches the dominant 2026 aesthetic trend. |
-
-**Demand evidence.** "Make your home look expensive on a budget" is one of
-the most durable evergreen content franchises in the niche: it's covered by
-Tom's Guide, The Everygirl, Brookfield Residential and dozens of dedicated
-blogs, and creators riding the budget-luxury trend have hit 1M+ followers on
-short-form platforms ([Tom's Guide](https://www.tomsguide.com/home/how-to-make-your-home-look-expensive-on-a-budget-try-these-7-interior-design-hacks),
-[AOL/budget-luxury coverage citing a 1.1M-follower creator](https://www.aol.com/budget-luxury-spruce-home-easy-115402212.html)).
-
-**Trend evidence.** Quiet luxury is repeatedly named the defining interior
-aesthetic of 2026: "elegance expressed through simplicity, natural
-materials, and subtle refinement" ([Navilize](https://navilize.com/blog/quiet-luxury-interiors/)),
-warm minimalism + quiet luxury as the top 2026 decor trends
-([ModernLuxCo](https://modernluxco.com/blogs/news/top-home-decor-trends-for-2026)),
-earth tones/warm whites/taupe replacing clinical greys, matte over gloss
-([jane at home](https://jane-athome.com/quiet-luxury-style/),
-[Fratantoni](https://www.fratantoniinteriordesigners.com/luxury-interior-design-trends-2026-quiet-timeless-elegance)).
-We are teaching the exact aesthetic the audience is currently trying to buy.
-
-**₹0 honesty.** We cannot shoot or license luxury interiors for free. We CAN
-produce: color-palette swatch cards (pure CSS), principle/rule cards
-(typography), do-vs-don't breakdowns, and proportion diagrams. That maps
-perfectly onto educational carousels, which happen to be the highest-save
-format on the platform (next section). The constraint and the optimal
-strategy point at the same output. AI-generated room imagery is a later
-option (video_lab / local SD pipelines) once the account has a baseline.
-
-### Audience
-
-25-40, urban India + global English-speaking, renting or first-home,
-follows luxury/interior inspo accounts, cannot spend like them, and wants
-to be told *the rules* rather than shown another unattainable mansion.
-They save posts to act on later. Voice: knowing, calm, specific. Never
-preachy, never "hacks!!", never mocking cheap things (the reader owns
-those cheap things).
+| Teach quiet-luxury *principles* via text/diagram carousels | Show physical *evidence* of quality via photoreal imagery | Diagrams and hex-color blocks cannot signal wealth; every real comparable account (Studio McGee, Becki Owens, Alyssa Kapito) is photographic |
+| "Aspirational-but-not-rich" viewer, budget-conscious voice | High-intent buyer mid-purchase-decision | The founder's brief moved; the old audience was explicitly *budget*-facing ("outlive three flats," "skip the trend colour") |
+| Illustrated Curator character (shared `rig2d.js` stickman) | No character — the object is the subject | The character was never bespoke; it actively borrowed a meme account's visual register |
+| 3 posts/day (2 carousel + 1 Reel) | **2 posts/day** (1 carousel + 1 Reel), reduce further once followers grow | Founder decision 2026-09-05. Alyssa Kapito reached 240k on 264 *total* posts — volume is a downmarket signal in this category, and the ledger already showed 3 near-duplicate withdrawals in one week at 3x/day |
+| `#quietluxury` as a core hashtag | Drop the phrase, keep the substance | 1stDibs' 2026 Designer Trends Survey: maximalism (39%) and eclecticism (38%) now lead demand, quiet-luxury discourse in active backlash. The materials underneath (chocolate brown, natural stone, matte finishes) are NOT decaying — just the label |
 
 ---
 
-## 2. Algorithm reality, 2026 (what we're optimizing for)
+## 2. Algorithm reality, 2026 (unchanged, still valid)
 
 - Instagram's confirmed top ranking signals: **watch time, sends per
-  reach (DM shares), likes per reach** — likes weakest of the three
-  ([Hootsuite](https://blog.hootsuite.com/instagram-algorithm/),
-  [Later](https://later.com/blog/how-instagram-algorithm-works/)).
-- **Saves outweigh likes**: a save signals "worth returning to," and
-  educational/reference posts earn saves at far higher weight
-  ([CreatorFlow](https://creatorflow.so/blog/instagram-algorithm-2026/)).
-  Why saves dominate in THIS niche specifically: decor content is
-  reference material by nature — people save palettes and rules for the
-  weekend they repaint, so the niche's native user behavior is exactly
-  the signal the algorithm rewards most.
+  reach (DM shares), likes per reach** — likes weakest of the three.
+- **Saves outweigh likes**: a save signals "worth returning to."
 - **Carousels are the save/reach vehicle**: ~1.7x the reach of static
-  posts, 114% more engagement than single images, 1.4x more saves
-  ([TrueFuture Media](https://www.truefuturemedia.com/articles/instagram-carousel-strategy-2026),
-  [PostNitro](https://postnitro.ai/blog/post/instagram-carousel-post)).
-  8-12 slides is the sweet spot for educational carousels; each extra
-  swipe is watch time ([Krumzi](https://www.krumzi.com/blog/15-instagram-carousel-ideas-that-actually-drive-engagement-in-2026)).
+  posts. 8-12 slides is the sweet spot for educational carousels.
 - Distribution is staged: small test audience first, expansion only if
-  early save/share/watch signals fire ([SocialBotify](https://socialbotify.com/guides/instagram-algorithm-2026)).
-  So slide 1 (the hook card) carries the whole post.
-- What's working in the niche right now: educational carousels (design
-  tips, mistakes to avoid, **color palette breakdowns explicitly named**),
-  budget transformations, "expert positioning" over inspo dumps
-  ([DesignFiles](https://blog.designfiles.co/interior-design-instagram-post-ideas/),
-  [Cedreo](https://cedreo.com/blog/instagram-content-ideas-for-interior-designers/)).
+  early save/share/watch signals fire. Slide 1 (the hook) carries the post.
 
-**Design consequences:** every post is a 5-9 slide carousel; slide 1 is a
-bold hook card; the last slide asks for the save explicitly; content is
-built to be *referenced later*, not just admired.
+**New for this revision:** sends-per-reach is the specific metric to watch
+for the Two Objects pillar (§3) — it's the intended proxy for "this
+resolved a decision I was about to discuss with someone." No Insights
+collection exists yet for this account (or any of the three); building one
+is the single highest-priority open engineering item portfolio-wide.
 
 ---
 
-## 3. Content pillars (4 repeatable formats)
+## 3. Content pillars (revised 2026-09-05 — expanded from 4 to a full rotation)
 
-1. **Palette Study** (`palette-study`) — a named quiet-luxury palette:
-   large hex swatches, where each color goes (walls / large pieces /
-   accents, the 60-30-10 split), what to avoid pairing with it. The
-   purest save-magnet; "color palette breakdowns" are named working
-   content in the niche sources above. Series-numbered (No. 01, 02...).
-2. **Why It Reads Expensive / Cheap** (`reads-expensive`) — one
-   principle per slide explaining the *mechanism* of the expensive look:
-   matte vs gloss, lighting temperature, rug size, curtain height,
-   visual quiet. The "why" framing is the differentiator vs. tip-lists.
-3. **Splurge / Skip** (`splurge-skip`) — where money is visible in a
-   room vs where it vanishes. Budget-vs-splurge is a proven evergreen
-   franchise (demand evidence in §1). Naturally shareable ("send this to
-   whoever is buying a sofa").
-4. **The Rule** (`the-rule`) — one canonical design rule per post,
-   explained deeply (60-30-10, the 2/3 curtain rule, lighting in threes,
-   negative space). Anchor format for authority; slower, monthly-ish.
+**Structure:** every day = **1 carousel + 1 Reel** (see §7). Carousel
+pillars and Reel pillars are separate lists — pick one from each per day,
+rotating so no pillar repeats inside any 7-day window if avoidable.
 
-Anti-repetition (reconciled for 3x/day by Group CTO 2026-09-01 — the
-original "same format never posts two days running" was written for the
-1x/day cadence and is arithmetically unsatisfiable at 3 posts/day from 4
-pillars: any two consecutive days must share at least two pillars.
-**Pending founder ratification**; the ledger header at
-`accounts/nuvarel/content/used-topics.md` mirrors this wording):
-- No pillar appears twice among the same day's three posts (carousels
-  and the Reel both count).
-- A carousel pillar never occupies the same time-slot two days running
-  (no back-to-back 10:00 Palette Studies, etc.).
-- Each Palette Study gets a new named palette; principle posts draw from
-  a maintained backlog list, never re-run within 60 days.
-The durable fix for rotation pressure is a 5th pillar (§7's AI-imagery
-option) — revisit when Insights data arrives.
+### Carousel pillars
 
-## 4. Hooks and captions
+1. **The Evidence** (`the-evidence`) — one object, one macro photoreal
+   detail that proves quality or its absence: the dovetail vs. the staple,
+   solid brass vs. plated, book-matched veining vs. printed. Near-zero
+   text; the photo does the work.
+2. **Two Objects** (`two-objects`) — the same object at two price points,
+   photographed identically, four named differences, one honest verdict
+   on when the expensive one is (and isn't) worth it. This is the impulse
+   engine — see §3.4 on why.
+3. **The Room That Proves It** (`the-room`) — one photoreal room built
+   around a single material decision, named in three words. No tips, no
+   list. Pure desire, replaces the old inspo-diagram slides.
+4. **Palette Study** (`palette-study`, kept, re-worked) — same series
+   numbering as before ("No. 01, 02...") but the swatch is now a
+   *photographed material* (real stained oak, real leather, real linen)
+   instead of a flat hex-color rectangle. The account's best existing
+   asset; keep the mechanic, fix the execution.
+5. **Insider Knowledge** (`insider`, new — the "tips" angle) — a rotating
+   set of sub-angles under one pillar so the ledger doesn't fragment:
+   - *Showroom Secrets* — what salespeople don't volunteer (how to spot
+     real wood veneer vs. laminate, genuine vs. fake leather)
+   - *The 60-Second Inspection* — exactly what to check in person before
+     buying a specific item (a sofa, a rug, a dining table)
+   - *Ages Well / Ages Badly* — which materials improve with age (brass
+     patina, real leather) vs. which just look worn (ties to §3.6 below)
+   - *The One Swap* — one small, specific, buyable change that upgrades a
+     room (a hardware swap, one lamp)
+   - *Real Cost Breakdown* — an itemized "here's what a real ₹X room
+     actually costs" — genuine numbers, high save rate
+   - *Where It's Made* — real craftsmanship traditions (Italian marble,
+     Kashmiri weaves, Japanese joinery) — this is the account's actual
+     "global" angle, and a genuine differentiator vs. US-only comparables
+   - *Care Secrets* — how to keep expensive materials looking expensive
+     for decades
+6. **Mood** (`mood`, new — pure vibe, no lesson) — candid, texture, and
+   plausible-object photography with no caption payload beyond a feeling.
+   Three registers, rotate freely:
+   - Candid gesture shots (hands only, never a posed AI face — see the
+     platform note in §8): smoothing raw silk, folding linen, pouring
+     coffee, closing a notebook
+   - Plausible imagined objects: an unlabeled amber bottle catching
+     window light, a stack of uncut-edge books with a wax seal, a
+     decanter half-poured at golden hour
+   - Pure texture/atmosphere: water beading on cold marble, linen creases
+     in raking light, candlelight on dark wood at dusk
 
-Hook-card patterns (slide 1, max ~8 words):
-- "Why [X] always looks expensive"
-- "The palette that reads expensive" / "[Name]: a palette study"
-- "Expensive rooms skip these" / "Money you can't see"
-- "The rule rich rooms follow"
+### Reel pillars
 
-Caption pattern: 1 keyword-rich opening line that restates the hook (IG
-indexes caption keywords for search, see §5) → 2-4 short lines of real
-substance or the key takeaway → a save CTA phrased as utility ("Save
-this for the repaint") → 3-5 hashtags. Aspirational, never preachy:
-we say "reads expensive," not "stop being tacky." No "hack," no
-exclamation stacking, no shame. All captions pass `copydesk --caption`
-(0 em-dashes in captions, no banned antithesis patterns).
+7. **Satisfying Process** (`reel-satisfying`) — oddly-satisfying, no
+   character needed: oil spreading on water, wax being poured and set,
+   raw wood being sanded to reveal grain, ice melting on warm stone.
+   Cheapest to produce well because the eye follows motion, not scene
+   detail.
+8. **Reveal / Transformation** (`reel-reveal`) — a dust sheet pulled off
+   a covered piece, a plain box unwrapped to reveal something beautiful,
+   a raw-material-to-finished-object fast-forward (thread to fabric, clay
+   to vessel). Drama + payoff under 10 seconds.
+9. **Quick Games** (`reel-game`) — comment-bait, genuinely fun: "which
+   one's real" (two near-identical objects, guess before reveal), "guess
+   the price," quick material-vs-material showdowns (sunlight test, water
+   test) with a clear winner.
+10. **Trend-Jack** (`reel-trend`) — whatever Reel audio/format is
+    actually trending that week, applied to an object instead of a
+    person (e.g. an "expectation vs. reality" trend applied to
+    online-bought furniture vs. how it looks in person). Borrows the
+    platform's own momentum; check what's live before building, don't
+    invent from a stale list.
 
-## 5. Hashtags and keywords
+### Signature devices (not separate pillars — applied ACROSS the pillars above)
 
-2026 reality: hashtags categorize, caption keywords drive search
-discovery; 3-5 relevant tags beat 30; niche tags (50k-500k posts) keep
-posts visible longer ([Toptal](https://www.toptal.com/creator/post/instagram-seo),
-[ManyChat](https://manychat.com/blog/instagram-hashtag-strategy/),
-[Sprout Social](https://sproutsocial.com/insights/instagram-hashtags/)).
+These are what make the account recognizably *itself* over time, the way
+"the cat has spoken" works for hype_tingles. Apply them inside Evidence,
+Two Objects, and Palette Study especially:
 
-- Always-on pool (rotate 3-5 per post, in-caption): `#quietluxury`
-  `#homedecortips` `#interiordesigntips` `#colourpalette` `#warmminimalism`
-  `#expensivelooking` `#homestyling` `#neutralhome` `#greige`
-- Caption keywords to work into the first line naturally: "look
-  expensive", "colour palette", "quiet luxury", "interior design tips",
-  "home decor". Bio gets the same treatment (bio is indexed).
+- **The Nuvarel Index** — a proprietary, consistent 0-100 score (weight,
+  material, finish, how it ages) applied to objects shown. Built to be
+  quoted back ("that's only a 60?!"). This is the one signature device to
+  build first — cheapest, and it works inside every other pillar rather
+  than needing its own content slot.
+- **The Provenance Card** — auction-house visual language (letterspaced
+  serif, a stamped number, a wax-seal mark) applied to ordinary objects.
+  Borrow this treatment for Evidence and Two Objects hook cards.
+- **A signature sound cue** — one consistent, clean sound (a clink or a
+  thud) at the reveal moment of every Reel. Sonic branding; nobody else
+  in this niche does it.
+- **One Object, Aged** (later, v2) — a slow-burn format tracking one kind
+  of object at day one / year one / year ten. Genuinely differentiated
+  because it requires patience most accounts won't invest. Don't start
+  until the core rotation above is running reliably — this is a
+  numbered-series-shaped commitment, and the portfolio already has one
+  unfulfilled "EP02" promise on file elsewhere as a cautionary example.
 
-## 6. Posting times (IST)
+### Anti-repetition (revised for 2/day)
 
-India-wide engagement peaks 7-9 PM; general sweet spot Tue-Thu; **home
-decor specifically over-indexes late morning (10-12) weekdays and 9-11 AM
-weekends** (people are at home looking at their rooms), plus the 12-2 PM
-lunch browse ([WsCube](https://www.wscubetech.com/blog/instagram-post-time/),
-[Brand Update](https://brand-update.com/resources/best-time-to-post-instagram-india),
-[CreatorFlow niche schedule](https://creatorflow.so/blog/best-times-post-instagram/)).
+- No carousel pillar repeats two days running.
+- No Reel pillar repeats two days running.
+- Palette Study gets a new named material each time; Insider Knowledge
+  sub-angles don't repeat within 30 days; a Two Objects comparison never
+  reuses the same object pair.
+- Add a scene/prop check to Mood and Evidence photography the same way
+  Reels already have one — two posts in one week must not share the same
+  staged setup even if the "lesson" differs.
 
-Standing schedule (3 posts/day, confirmed as this account's standing
-slots by Group CTO 2026-08-31 per the 3x-daily cadence spec): **10:00**
-(decor-specific morning-at-home window; 9-11 weekend peak — carousel,
-save-magnet formats like Palette Study go here), **13:30** (lunch browse
-— carousel), **19:30** (all-India evening peak, aspirational browsing
-hours — the day's Reel, since Reels carry the non-follower-reach load).
-After 2-3 weeks, recalibrate from the account's own Insights, which beat
-any generic study.
+---
 
-## 7. Cadence plan (standing: 3 posts/day — founder decision 2026-08-31)
+## 4-6. Hooks, hashtags, posting times
 
-Superseded "1 carousel/day minimum" 2026-08-31 per
-`income-engine/docs/superpowers/specs/2026-08-31-instagram-3x-daily-cadence-design.md`
-(founder-approved). Standing plan:
+Unchanged from the 2026-08-30 doc **except**: drop `#quietluxury` from the
+always-on hashtag pool per §1's table above (the label is in backlash, the
+substance isn't — don't advertise the label). Everything else in these
+sections (caption pattern, copydesk gate, hashtag/keyword strategy,
+posting-time research) remains valid and is not repeated here to avoid
+drift between two copies of the same guidance.
 
-- **Daily: 3 posts — 2 carousels + 1 Reel**, each on a different
-  trending + niche-relevant topic, sourced by a daily trend search
-  (query templates and full run procedure:
-  `accounts/nuvarel/docs/daily-build-agent-prompt.md`). Reel via the
-  `meme-worthy-character-reels` skill + `scripts/render_reel.py`, calm
-  Curator pacing per this account's tone ruling.
-- **Trend-first, pillar fallback:** candidate topics come from the daily
-  trend search, then get expressed through this account's own pillars
-  (§3). If the search yields nothing usable, fall back to straight
-  pillar rotation (PS → RE → SS → TR ...) — the run never blocks on an
-  empty trend day.
-- **Anti-repetition:** every queued post is checked against and appended
-  to `accounts/nuvarel/content/used-topics.md`. A principle, palette, or
-  rule never re-runs within 60 days; a named palette is never reissued
-  under the same name.
-- Every post: gate-checked render (contrast + ink coverage + eyeballed
-  350px feed preview), copydesk-clean caption, `needs_review: true` for
-  founder clearance.
-- Weekly: review saves-per-reach per pillar in Insights; double down on
-  the top pillar, fix or retire the bottom one.
-- Later (not blocking): quiet-luxury room renders via AI imagery as a
-  5th pillar if quality clears the account's visual bar.
+---
 
-## 8. Visual identity (locked for the account)
+## 7. Cadence plan (revised 2026-09-05 — founder decision)
 
-Distinct from every other portfolio account (explicitly NOT TrendGiri's
-cream/ink/marigold). Quiet-luxury editorial:
+**Daily: 2 posts — 1 carousel + 1 Reel.** Reduce further (to 1/day, or
+3/week) once follower growth is real — the founder's own stated plan, not
+a fixed schedule. Revisit this number once Insights data exists (§2).
 
-- **Palette:** alabaster `#F2EEE6` ground, espresso `#2A241E` ink, taupe
-  `#6E6257` secondary, bronze `#9C7A4F` accent (hairlines, numerals,
-  labels; never long body text on light ground), dark slides espresso
-  ground with alabaster text.
-- **Type:** Cormorant Garamond (display serif, the "quiet luxury" voice)
-  for headlines; Archivo for body and letterspaced uppercase meta labels.
-- **Layout:** generous margins, hairline rules, swatch blocks with hex
-  labels, series numbering ("PALETTE STUDY · NO. 01"). The niche lives on
-  visual polish; the grid must look like a design magazine, not a meme
-  page.
-- Renderer: `accounts/nuvarel/render/` (deck JSON → HTML → headless
-  Chromium at 2x → 1080x1350 PNG), gate check on contrast/ink coverage +
-  350px feed previews. Same proven mechanism as trend-signals-social's
-  `render_html`, own code and own brand.
+Sample week (illustrative rotation, not a fixed script — trend-jack and
+real trending audio always take priority over the pre-planned Reel slot
+when something genuinely relevant is live):
+
+| Day | Carousel | Reel |
+|---|---|---|
+| Mon | Palette Study | Satisfying Process |
+| Tue | Two Objects | Quick Game |
+| Wed | The Evidence | Reveal/Transformation |
+| Thu | Insider Knowledge | Trend-Jack |
+| Fri | The Room That Proves It | Satisfying Process |
+| Sat | Mood | Quick Game |
+| Sun | Insider Knowledge | Reveal/Transformation |
+
+**Every post:** gate-checked render (contrast + ink coverage + eyeballed
+350px feed preview), copydesk-clean caption, `needs_review: true` for
+founder clearance — unchanged from before.
+
+---
+
+## 8. Visual identity (revised 2026-09-05 — the pivot)
+
+**Retired:** the Curator character and the illustrated room-set renderer.
+`assets/rig2d.js` (the shared stickman) is no longer used on this account
+under any pose.
+
+**New primary visual: photoreal object/material imagery**, generated
+locally at ₹0 via the `video_lab` ComfyUI pipeline. **This is not yet
+technically validated** — the existing local setup is proven for
+text-to-video (WAN 2.1), not verified for 1080x1350 still-image
+generation. **Immediate next step, before any real production:** a
+Group CTO spike — 3 test images of one object under the lighting
+discipline below, gate-checked, compared side by side against the old
+cream hook-card style at actual feed scale. Decide from the thumbnails,
+not from this document.
+
+**Photography discipline (once the pipeline is validated):**
+- One light source, low angle, warm (~3000-3500K), consistent across
+  every post — this consistency is what makes a grid read as one
+  continuous world (Studio McGee's mechanism).
+- Desaturated grade. Saturation is the loudest cheap signal there is.
+- Matte surfaces only — gloss reads cheap in stills.
+- Real shadow with soft falloff.
+- **No people, no hands with visible faces, no silhouettes that read as a
+  posed human.** This is a hard platform constraint, not a style choice:
+  Instagram (as of 2026-08-31) limits reach on undisclosed AI-generated
+  *people* specifically — it does not restrict AI-generated objects,
+  backgrounds, or products. The Mood pillar's candid gesture shots must
+  stay partial/ambiguous (a hand, never a posed face) for this reason.
+
+**Palette — tokens kept, roles changed:**
+- Alabaster `#F2EEE6` — now the mat/frame/negative-space around
+  photography, not the dominant ground.
+- Espresso `#2A241E` — ink, and the ground for every third post (see
+  tonal rotation below).
+- Taupe `#6E6257` — secondary type only, never a photographic subject.
+- Bronze `#9C7A4F` — hairlines, numerals, meta labels only. Never body
+  text, never more than ~2% of frame area.
+
+**New rule — tonal rotation across the grid**, the single fastest fix for
+"the grid looks monotonic": every post rotates strictly light -> mid ->
+dark value key (light = alabaster-dominant, mid = the photo's own
+mid-tones, dark = espresso ground). Checkable mechanically (mean
+luminance, banded into three ranges) in `gate_check.py`.
+
+**Typography restraint (tightened):**
+- On any frame containing photography, type occupies ≤15% of frame area,
+  sits in a margin, never centered, never over the subject.
+- Maximum 7 words on frame 1 (the old hook cards ran 8-10 words across
+  three lines, eating ~40% of the frame — fix this specifically).
+- Cormorant Garamond for the one headline, Archivo letterspaced caps for
+  eyebrow/numeral/Nuvarel Index score. Nothing else.
+- Drop the `@NUVAREL_ · 01/07` footer bar from photographic frames
+  entirely — it signals "a template made this."
+- Frame 2 of every carousel is a full-bleed photograph with no type at
+  all. A silent frame is the cheapest luxury signal available.
+
+**What makes a frame instantly recognizable as nuvarel:** a single
+object, lit from one low warm side, on an alabaster or espresso ground,
+one bronze hairline, at most seven words of Cormorant in a margin, and
+(once built) the Nuvarel Index numeral in the corner. Renderer path stays
+`accounts/nuvarel/render/` — same deck-JSON → HTML → headless Chromium
+mechanism, new deck content and new photography step, not a new pipeline.
