@@ -247,6 +247,7 @@ def main():
         )
         for i, sl in enumerate(deck["slides"], 1):
             is_photo = sl["role"] == "photo"
+            meta = None
             if is_photo:
                 doc, meta = photo_html(deck, sl)
             else:
@@ -261,7 +262,7 @@ def main():
             img = img.resize((W, H), Image.LANCZOS)
             img.save(out_dir / f"slide-{i}.png")
             raw.unlink()
-            if is_photo:
+            if meta is not None:
                 meta["type_coverage"] = round(page.evaluate(COVERAGE_JS), 4)
                 lum = sum(img.convert("L").getdata()) / (W * H) / 255
                 meta["mean_luminance"] = round(lum, 3)

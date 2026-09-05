@@ -86,6 +86,37 @@ resolved a decision I was about to discuss with someone." No Insights
 collection exists yet for this account (or any of the three); building one
 is the single highest-priority open engineering item portfolio-wide.
 
+**Hook & genre-matching rule (added 2026-09-05, CoS, data-driven — first
+real evidence from this account's own numbers).** Insights collection
+went live same day (§ above); its first snapshot surfaced one real
+outlier: the (now-retired-pipeline) `cables-read-cheap` Reel hit 377
+reach / 32% 3-second-skip — the best of any nuvarel post so far, and the
+only post across all 3 accounts with an earned share — against a
+same-day, same-quality, same-slot sibling (`bathroom-splurge-skip`) that
+got 61 reach / 72.9% skip. Full root-cause trail:
+`income-engine/docs/registry/instagram_accounts_social.md`. Two rules
+worth carrying forward into every pillar, independent of the visual
+pipeline in use:
+1. **The hook must open a curiosity gap, never state the verdict.**
+   "The cheapest thing in an expensive room" (withholds the answer) beat
+   "Splurge or skip: the bathroom" (states the format) with identical
+   production quality either side of it. Frame-1/second-1 copy should
+   make the viewer need the payoff, not already have it.
+2. **Prefer a topic that maps onto an already-proven viral content
+   genre** ("chaos resolves to order," "reveal under a cover," "which one
+   wins the test") **over a topic that is only a personal-taste opinion**
+   (towel weight, lamp symmetry) — the genre itself carries pre-existing
+   shareability the account doesn't have to build from zero, and Reels'
+   2026 ranking model weights sends/DM-shares far above likes, so a
+   topic's built-in forward-to-a-friend utility matters more than polish.
+   This is a direct, evidence-based reason to actually prioritize **Reel
+   pillars 7 (Satisfying Process) and 8 (Reveal/Transformation)** in §3
+   below over the current default of shipping 3 Quick Games Reels
+   first — that default was a reasonable bet before any real performance
+   data existed; it now has a data point arguing the other way.
+   **Flag for Group CTO/CCO, not unilaterally overridden here:** worth
+   revisiting the pillar sequencing decision with this evidence in hand.
+
 ---
 
 ## 3. Content pillars (revised 2026-09-05 — expanded from 4 to a full rotation)
@@ -160,10 +191,53 @@ Reel pillar gets production time.
    raw wood being sanded to reveal grain, ice melting on warm stone.
    Cheapest to produce well because the eye follows motion, not scene
    detail.
+   - **Recommended first (2026-09-05, data-informed, hook & genre-matching
+     rule above): "The Recovery Test."** Hook (curiosity gap, no verdict
+     stated): *"Press it. Count to three."* Press a cushion, hold, watch
+     it recover — or not. Genre match: cushion/foam "poke test" content
+     is an established viral category (the same mechanism as a mattress
+     press-test video) and this account's actual positioning ("the proof,
+     not the claim") makes it more than generic ASMR — it's a real
+     showroom technique. Draft caption (copydesk-clean, 51 words, 0
+     em-dash): "Press a cushion and count to three. Cheap foam holds your
+     handprint. High-density fill or a real feather-and-down mix stands
+     back up before you finish counting. You can test this in the
+     showroom before you buy, no salesperson needed. Save this for the
+     next sofa shop. #interiordesigntips #homedecortips
+     #furnitureshopping #expensivelooking #homestyling".
+     **Correction (income-engine-d1, 2026-09-05, same day):** originally
+     written as an Inspection-device (hands-only) shot — that's premature.
+     Inspection is NOT settled: a feasibility spike found the originally
+     -proposed gesture ("thumb along a seam") doesn't render reliably, and
+     there's an open founder decision between a real photographed hand vs.
+     an AI-generated hand without the stated signature cuff. Don't build
+     this with a hand until Inspection resolves. **Hands-free fallback,
+     buildable once stills-only photoreal is validated (it is — see the
+     revision note above; only Reels/video generation is unproven):** a
+     fixed two-shot of two cushions with a small weight dropped/removed to
+     trigger the press instead of a hand — keeps the genre-match and the
+     curiosity-gap hook, no Inspection dependency. Topic is clear against
+     the 60-day ledger either way.
 8. **Reveal / Transformation** (`reel-reveal`) — a dust sheet pulled off
    a covered piece, a plain box unwrapped to reveal something beautiful,
    a raw-material-to-finished-object fast-forward (thread to fabric, clay
    to vessel). Drama + payoff under 10 seconds.
+   - **Recommended second (2026-09-05, data-informed): "The Grain
+     Underneath."** Hook (curiosity gap): *"This board was headed for the
+     scrap pile."* One continuous sanding pass across two boards side by
+     side — real wood reveals new grain the deeper it goes, printed
+     veneer reveals the same repeating pattern no matter how far you
+     sand. Genre match: wood-refinishing/sanding-reveal content is an
+     established satisfying-video category; ties directly to The
+     Evidence pillar's dovetail/veneer mechanic. Draft caption
+     (copydesk-clean, 58 words, 0 em-dash): "Sand two boards side by
+     side. Real wood reveals new grain the deeper you go, every pass
+     looks a little different. Printed veneer reveals the same repeating
+     pattern no matter how far you sand. Ten seconds with sandpaper tells
+     you what the price tag will not. Save this for the next furniture
+     aisle. #interiordesigntips #homedecortips #furnitureshopping
+     #expensivelooking #homestyling". Not yet queued — same gate as
+     above; topic is clear against the 60-day ledger.
 9. **Quick Games** (`reel-game`) — comment-bait, genuinely fun: "which
    one's real" (two near-identical objects, guess before reveal), "guess
    the price," quick material-vs-material showdowns (sunlight test, water
@@ -282,16 +356,22 @@ founder clearance — unchanged from before.
 under any pose.
 
 **New primary visual: photoreal object/material imagery**, generated
-locally at ₹0 via the `video_lab` ComfyUI pipeline. **This is not yet
-technically validated** — the existing local setup is proven for
-text-to-video (WAN 2.1), not verified for 1080x1350 still-image
-generation. **Immediate next step, before any real production:** a
-Group CTO spike — 3 test images of one object under the lighting
-discipline below, gate-checked, compared side by side against the old
-cream hook-card style at actual feed scale. Decide from the thumbnails,
-not from this document.
+locally at ₹0 via the `video_lab` ComfyUI pipeline. **Reconciled
+2026-09-05, Group CTO (this line was stale — flagged in the daily-build
+rewrite consult):** the validation spike described below has RUN and
+PASSED. Stills generation for single objects under the lighting
+discipline below is validated and in production (`build-gates.json`:
+`photo_carousel` open, keys `dark`/`mid`, `light` experimental); 5 known
+issues from the spike are tracked there, including a real material-
+fidelity failure mode (a generated "honed travertine" came back as
+veined marble) that any human pick step must specifically check for, not
+just composition/lighting. **Photoreal Reels/video remain unproven**
+(~2h GPU/clip via the WAN 2.1 text-to-video path) — that gap, not stills,
+is what gates the Reel pillars in §3 above. Full record:
+`income-engine/docs/consults/2026-09-05-group-cto-nuvarel-daily-build-rewrite-photoreal-productionisation.md`.
 
-**Photography discipline (once the pipeline is validated):**
+**Photography discipline (now validated for stills; still applies as
+written to the eventual Reel/video pipeline):**
 - One light source, low angle, warm (~3000-3500K), consistent across
   every post — this consistency is what makes a grid read as one
   continuous world (Studio McGee's mechanism).
