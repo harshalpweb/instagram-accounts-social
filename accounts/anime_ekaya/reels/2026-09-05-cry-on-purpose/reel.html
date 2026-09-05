@@ -1,0 +1,398 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* anime_ekaya "cry on purpose" (21s) -- MOOD MATCH acted by the 2D stickman
+   EKAYA on the shared rig2d. Premise: EKAYA settles in for a sad show on a
+   rainy night, tissue box on the lap; each episode chip escalates the
+   tears, the FINALE folds EKAYA in half, the tissue box tumbles, and a
+   thumbs-up rises from the wreckage: "Worth it."
+   Tone: energetic but not slapstick (per-account ruling) -- one fold-over
+   collapse, otherwise small acting (sniffs, dabs, a failed "I'm fine").
+   Scene/prop: couch + rain window + tissue box on the lap + TV glow.
+   Nothing in the last 14 days used any of these (machine/lever, slab
+   tower, doors, lane pillars, phone panel, typographic card).
+   Quality ratchet (2026-09-05): BACKDROP POLISH -- first living backdrop
+   on this account: rain streaks that intensify per beat (light / medium /
+   heavy) and a TV-glow flicker, versus the static stages so far.
+   Principle map: ANTICIPATION = hesitation before each tissue reach
+   (2f holds at 3.50-3.57 / 5.23-5.30), lean-back + arms-up 8.30-8.85
+   before the fold; SQUASH = tissue stretch on each pull, fold impact 9.15
+   (figure sy about the hip + seat cushion sy about its base), box bounce
+   9.65, tissue landings 9.6 / 9.8 / 10.0; HOLDS = dab holds 4.2-4.9 and
+   5.6-6.4 (eyes closed), "I'm fine" composure 7.0-8.0 (blink 7.5),
+   wrecked hold 9.2-10.6, thumbs-up hold 11.0-12.4. */
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:0; z-index:12; }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:78px; line-height:1.1; }
+#hook .line mark { background:none; color:var(--coral); }
+#hook .sub { font-size:40px; font-weight:500; color:var(--lav); margin-top:20px; }
+
+#chip { position:absolute; top:660px; right:80px; visibility:hidden; background:var(--panel); border:3px solid var(--lav);
+  color:var(--paper); border-radius:999px; padding:14px 34px; font-family:'Space Grotesk'; font-weight:700; font-size:40px;
+  letter-spacing:.06em; z-index:12; transform-origin:center; }
+#chip.finale { border-color:var(--coral); color:var(--coral); }
+
+#bubble { position:absolute; top:930px; left:640px; opacity:0; background:var(--paper); color:var(--bg);
+  border-radius:26px; padding:26px 36px; font-family:'Space Grotesk'; font-weight:700; font-size:46px; line-height:1.2; z-index:12; }
+#bubble:after { content:""; position:absolute; bottom:-22px; left:60px; border:24px solid transparent; border-top-color:var(--paper); border-bottom:0; }
+
+#payoff { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:14; }
+#payoff .pre { position:absolute; top:300px; left:90px; font-size:30px; font-weight:500; letter-spacing:.26em;
+  text-transform:uppercase; color:var(--lav); }
+#payoff h2 { position:absolute; top:360px; left:90px; right:90px; font-family:'Space Grotesk'; font-weight:700;
+  font-size:84px; line-height:1.08; }
+.pick { position:absolute; left:90px; right:90px; background:var(--panel); border:2px solid var(--hair);
+  border-radius:22px; padding:34px 40px; opacity:0; }
+.pick .mood { font-size:26px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--coral); }
+.pick .title { font-family:'Space Grotesk'; font-weight:700; font-size:50px; margin-top:10px; }
+.pick .why { font-size:28px; color:var(--muted); margin-top:8px; line-height:1.35; }
+#p1 { top:620px; } #p2 { top:880px; } #p3 { top:1140px; }
+#savecta { position:absolute; top:1430px; left:90px; opacity:0; background:var(--coral); color:var(--bg);
+  font-family:'Space Grotesk'; font-weight:700; font-size:40px; padding:16px 34px; border-radius:14px; }
+
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
+#endword { position:absolute; top:800px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:92px; color:var(--coral); }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:56px; color:var(--lav); display:block; margin-top:16px; }
+#endsub { position:absolute; top:1060px; left:0; right:0; text-align:center; color:var(--muted);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">what to watch</div></div>
+
+<div id="hook"><div class="line">You want to <mark>cry</mark> tonight.</div><div class="sub">On purpose. We have the list.</div></div>
+<div id="chip">EP 2</div>
+<div id="bubble">Worth it.</div>
+
+<div id="payoff">
+  <div class="pre">Mood match</div>
+  <h2>Cry on purpose tonight.</h2>
+  <div class="pick" id="p1"><div class="mood">Short and devastating</div><div class="title">Anohana</div><div class="why">11 episodes. One summer, one promise, one goodbye.</div></div>
+  <div class="pick" id="p2"><div class="mood">Slow, beautiful ache</div><div class="title">Violet Evergarden</div><div class="why">13 episodes. Letters that land one at a time.</div></div>
+  <div class="pick" id="p3"><div class="mood">The big one</div><div class="title">Clannad: After Story</div><div class="why">Two seasons deep. The one everyone warns you about.</div></div>
+  <div id="savecta">Save this for a rainy night.</div>
+</div>
+
+<div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
+<div id="endsub">Your next anime, sorted. New picks daily.</div></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 21.0, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+const lerpN = lerp;
+
+/* ---------------- beat table ---------------- */
+const B = {
+  hookIn:-0.12, hookOut:3.0,
+  chips:[[0.6,"EP 2",false],[4.9,"EP 6",false],[8.2,"FINALE",true]],
+  blink1:1.6,
+  sniff:[2.8,3.1],
+  reach1:[3.2,3.5], grip1:3.57, pull1:[3.57,3.75], toFace1:[3.75,4.2], dab1:[4.2,4.9],
+  reach2:[5.05,5.23], grip2:5.30, pull2:[5.30,5.45], toFace2:[5.45,5.6], dab2:[5.6,6.4],
+  compose:[6.5,7.0], composeHold:[7.0,8.0], blink2:7.5,
+  lean:[8.3,8.6], armsUp:[8.6,8.85], fold:[8.95,9.15], wreckHold:[9.2,10.6],
+  thumb:[10.7,11.0], bubble:[11.0,12.4],
+  tears:[4.3, 5.7, 6.1, 9.25, 9.5, 9.8, 10.15, 10.6, 11.2, 11.8],
+  payoff:12.7, payoffOut:18.9, rows:[13.2,13.7,14.2], cta:15.2
+};
+window.BEATS = B;
+
+/* ---------------- stage ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const AC = { paper:"#F3F0FF", coral:"#FF5D73", lav:"#9D8DF1", panel:"#1C1834", hair:"#37315A", bg:"#131022", muted:"#A9A3C2", floor:"#0E0C1B" };
+const sceneG = el(stage, "g", {});
+const defs = el(sceneG, "defs", {});
+const clip = el(defs, "clipPath", { id:"winclip" });
+const WIN = { x:90, y:640, w:330, h:360 };
+el(clip, "rect", { x:WIN.x, y:WIN.y, width:WIN.w, height:WIN.h, rx:18 });
+const grad = el(defs, "radialGradient", { id:"tvglow", cx:"50%", cy:"50%", r:"50%" });
+el(grad, "stop", { offset:"0%", "stop-color":AC.coral, "stop-opacity":"0.55" });
+el(grad, "stop", { offset:"100%", "stop-color":AC.coral, "stop-opacity":"0" });
+
+/* TV glow from off-frame right (the show EKAYA is watching) */
+const glow = el(sceneG, "ellipse", { cx:1150, cy:1330, rx:460, ry:420, fill:"url(#tvglow)", opacity:0.18 });
+
+/* floor */
+el(sceneG, "rect", { x:0, y:1560, width:1080, height:360, fill:AC.floor });
+el(sceneG, "line", { x1:0, y1:1560, x2:1080, y2:1560, stroke:AC.hair, "stroke-width":5 });
+
+/* rain window: frame + mullions + clipped streaks */
+el(sceneG, "rect", { x:WIN.x, y:WIN.y, width:WIN.w, height:WIN.h, rx:18, fill:"#0F0D1E", stroke:AC.hair, "stroke-width":5 });
+const rainG = el(sceneG, "g", { "clip-path":"url(#winclip)" });
+const N_RAIN = 34;
+const rain = [];
+for (let i = 0; i < N_RAIN; i++) {
+  const l = el(rainG, "line", { stroke:AC.lav, "stroke-width":3, "stroke-linecap":"round", opacity:0 });
+  rain.push({ l, x: WIN.x + 12 + ((i * 47) % (WIN.w - 24)), len: 26 + (i * 13) % 34, ph: (i * 0.173) % 1, sp: 0.85 + (i % 5) * 0.08 });
+}
+el(sceneG, "line", { x1:WIN.x + WIN.w/2, y1:WIN.y, x2:WIN.x + WIN.w/2, y2:WIN.y + WIN.h, stroke:AC.hair, "stroke-width":6 });
+el(sceneG, "line", { x1:WIN.x, y1:WIN.y + WIN.h/2, x2:WIN.x + WIN.w, y2:WIN.y + WIN.h/2, stroke:AC.hair, "stroke-width":6 });
+el(sceneG, "rect", { x:WIN.x - 14, y:WIN.y + WIN.h - 4, width:WIN.w + 28, height:16, rx:6, fill:AC.hair });   /* sill */
+
+/* couch: backrest, armrests, seat, legs, one coral throw pillow */
+el(sceneG, "rect", { x:320, y:1190, width:520, height:230, rx:34, fill:AC.panel, stroke:AC.lav, "stroke-width":4 });
+el(sceneG, "rect", { x:268, y:1300, width:76, height:214, rx:26, fill:AC.panel, stroke:AC.lav, "stroke-width":4 });
+el(sceneG, "rect", { x:816, y:1300, width:76, height:214, rx:26, fill:AC.panel, stroke:AC.lav, "stroke-width":4 });
+const seatG = el(sceneG, "g", {});
+el(seatG, "rect", { x:290, y:1395, width:580, height:112, rx:22, fill:AC.hair, stroke:AC.lav, "stroke-width":4 });
+el(seatG, "line", { x1:580, y1:1402, x2:580, y2:1500, stroke:AC.lav, "stroke-width":3, opacity:0.5 });
+el(sceneG, "rect", { x:300, y:1506, width:22, height:54, rx:5, fill:AC.hair });
+el(sceneG, "rect", { x:838, y:1506, width:22, height:54, rx:5, fill:AC.hair });
+el(sceneG, "rect", { x:350, y:1290, width:118, height:118, rx:16, fill:AC.coral, transform:"rotate(-10 409 1349)" });
+
+/* EKAYA */
+const eka = makeStick(sceneG, { stroke:AC.paper, fill:AC.bg, tuft:AC.coral });
+const HIP = [560, 1385];
+
+/* tissue box (lap) + the tissue in hand + 3 flying tissues */
+const boxG = el(sceneG, "g", {});
+el(boxG, "rect", { x:-50, y:-36, width:100, height:72, rx:10, fill:AC.lav, stroke:AC.paper, "stroke-width":4 });
+el(boxG, "rect", { x:-22, y:-40, width:44, height:10, rx:5, fill:AC.bg });
+const boxTuft = el(boxG, "path", { d:"M -12 -38 q 6 -26 14 -12 q 6 -18 12 4", fill:"none", stroke:AC.paper, "stroke-width":6, "stroke-linecap":"round" });
+const tisG = el(sceneG, "g", { display:"none" });
+el(tisG, "path", { d:"M -30 -18 q 12 -14 30 -4 q 14 -12 30 6 L 30 22 L -30 22 Z", fill:AC.paper, stroke:AC.lav, "stroke-width":3, "stroke-linejoin":"round" });
+const flyT = [0,1,2].map(() => { const g = el(sceneG, "g", { display:"none" });
+  el(g, "path", { d:"M -26 -14 q 10 -12 26 -4 q 12 -10 26 6 L 26 18 L -26 18 Z", fill:AC.paper, stroke:AC.lav, "stroke-width":3, "stroke-linejoin":"round" }); return g; });
+/* tears */
+const tearEls = B.tears.map(() => el(sceneG, "ellipse", { rx:6, ry:11, fill:AC.lav, display:"none" }));
+
+/* ---------------- helpers ---------------- */
+function ik(S, T, a, b, elbowUp) {
+  let dx = T[0] - S[0], dy = T[1] - S[1];
+  let d = Math.hypot(dx, dy);
+  const dmax = a + b - 1;
+  if (d > dmax) { dx *= dmax / d; dy *= dmax / d; d = dmax; }
+  const phi = Math.atan2(dx, dy);
+  const alpha = Math.acos(clamp((a*a + d*d - b*b) / (2*a*d), -1, 1));
+  const uA = phi + alpha, uB = phi - alpha;
+  const ey = u => S[1] + Math.cos(u) * a;
+  const u = elbowUp ? (ey(uA) < ey(uB) ? uA : uB) : (ey(uA) < ey(uB) ? uB : uA);
+  const E = [S[0] + Math.sin(u) * a, S[1] + Math.cos(u) * a];
+  const l = Math.atan2(T[0] - E[0], T[1] - E[1]);
+  return { u: u / D2R, l: l / D2R };
+}
+const tTopOf = p => [p.tx + dir(p.torso)[0] * L.torso, p.ty + dir(p.torso)[1] * L.torso];
+const headOf = p => { const T = tTopOf(p); const a = p.torso + (p.headTilt || 0);
+  return [T[0] + dir(a)[0] * (L.neck + L.head * 0.9), T[1] + dir(a)[1] * (L.neck + L.head * 0.9)]; };
+const handOf = (p, u, l) => { const S = tTopOf(p);
+  const E = [S[0] + dir(u)[0]*L.uArm, S[1] + dir(u)[1]*L.uArm];
+  return [E[0] + dir(l)[0]*L.lArm, E[1] + dir(l)[1]*L.lArm]; };
+
+const LEGS = { llU:78, llL:8, rlU:70, rlL:4 };
+const SIT     = { torso:172, headTilt:0, laU:90, laL:10, raU:85, raL:5, ...LEGS, eyes:"open", face:1 };
+const COMPOSE = { torso:181, headTilt:2, laU:30, laL:120, raU:26, raL:112, ...LEGS, eyes:"open", face:1 };
+const LEANBK  = { torso:190, headTilt:4, laU:60, laL:40, raU:52, raL:34, ...LEGS, eyes:"wide", face:1 };
+const ARMSUP  = { torso:190, headTilt:6, laU:165, laL:172, raU:160, raL:168, ...LEGS, eyes:"wide", face:1 };
+const HUNCH   = { torso:108, headTilt:-26, laU:60, laL:40, raU:52, raL:34, ...LEGS, eyes:"closed", face:1 };
+const BOX_LAP = [640, 1348];
+const FACE_T  = [636, 1152];
+
+function armToward(p, target, elbowUp, k) {
+  /* left arm from its current pose toward a target, blend k */
+  const S = tTopOf(p);
+  const a = ik(S, target, L.uArm, L.lArm, elbowUp);
+  p.laU = lerpN(p.laU, a.u, k); p.laL = lerpN(p.laL, a.l, k);
+}
+
+function tissueRound(t, p, reach, grip, pull, toFace, dab, out) {
+  /* hesitate, reach to the box, 2f grip hold, pull (tissue stretch), bring to face, dab hold */
+  if (t < reach[0] || t >= dab[1] + 0.25) return false;
+  const rk = easeIO(ramp(t, reach[0], reach[1]));
+  const fk = easeIO(ramp(t, toFace[0], toFace[1]));
+  const back2 = easeIO(ramp(t, dab[1], dab[1] + 0.25));
+  let target = BOX_LAP;
+  if (t >= toFace[0]) target = [lerpN(BOX_LAP[0], FACE_T[0], fk), lerpN(BOX_LAP[1], FACE_T[1], fk)];
+  if (t >= dab[1]) target = [lerpN(FACE_T[0], BOX_LAP[0] + 40, back2), lerpN(FACE_T[1], BOX_LAP[1] - 30, back2)];
+  armToward(p, target, t >= toFace[0], t < reach[1] ? rk : 1);
+  p.headTilt = -6 * rk - 10 * fk * (1 - back2);
+  if (t >= pull[0] && t < dab[1] + 0.1) {
+    const H = handOf(p, p.laU, p.laL);
+    const st = 1 + punch(t, pull[0], 0.55, 10);            /* stretch on the pull, fast recovery */
+    out.tissue = { x: H[0] + 6, y: H[1] - 8, sy: st, rot: -12 * fk };
+  }
+  if (t >= pull[0]) p.eyes = "closed";
+  return true;
+}
+
+function layout(t) {
+  const sway = Math.sin(t * 1.6) * 1.5;
+  let p = { ...SIT, tx: HIP[0], ty: HIP[1], torso: 172 + sway };
+  const out = { tissue:null, box:{ x:BOX_LAP[0], y:BOX_LAP[1], rot:0, s:1 }, seatSy:1, fly:[null,null,null],
+                rainLvl:0, glowK:0, tearsOn:[] };
+  /* rain / glow escalation */
+  out.rainLvl = t < B.chips[1][0] ? 0 : t < B.chips[2][0] ? 1 : 2;
+  out.glowK = t >= B.chips[2][0] ? 1 : 0;
+
+  if (t >= B.blink1 && t < B.blink1 + 0.09) p.eyes = "closed";
+  if (t >= B.sniff[0] && t < B.sniff[1]) { p.headTilt = -5 + Math.sin((t - B.sniff[0]) * 40) * 4; p.eyes = "closed"; }
+
+  const r1 = tissueRound(t, p, B.reach1, B.grip1, B.pull1, B.toFace1, B.dab1, out);
+  const r2 = !r1 && tissueRound(t, p, B.reach2, B.grip2, B.pull2, B.toFace2, B.dab2, out);
+
+  if (t >= B.compose[0] && t < B.lean[0]) {                /* "I'm fine": sit up straight, arms folded */
+    const k = easeIO(ramp(t, B.compose[0], B.compose[1]));
+    p = { ...mixPose({ ...SIT }, { ...COMPOSE }, k), tx: HIP[0], ty: HIP[1] };
+    p.torso += sway * 0.4; p.eyes = k < 0.5 ? "closed" : "wide";
+    if (t >= B.composeHold[0]) p.eyes = "open";
+    if (t >= B.blink2 && t < B.blink2 + 0.09) p.eyes = "closed";
+  }
+  else if (t >= B.lean[0] && t < B.fold[0]) {              /* ANTICIPATION: lean back, arms up */
+    const lk = easeIO(ramp(t, B.lean[0], B.lean[1]));
+    const ak = easeOutBack(ramp(t, B.armsUp[0], B.armsUp[1]));
+    p = { ...mixPose({ ...COMPOSE }, { ...LEANBK }, lk), tx: HIP[0], ty: HIP[1] };
+    if (t >= B.armsUp[0]) p = { ...mixPose({ ...LEANBK }, { ...ARMSUP }, clamp(ak, 0, 1.2)), tx: HIP[0], ty: HIP[1] };
+    p.eyes = "wide";
+  }
+  else if (t >= B.fold[0]) {                               /* fold in half, impact SQUASH, wrecked hold, thumbs-up */
+    const fk = easeInCubic(ramp(t, B.fold[0], B.fold[1]));
+    p = { ...mixPose({ ...ARMSUP }, { ...HUNCH }, fk), tx: HIP[0], ty: HIP[1] };
+    p.eyes = fk < 0.6 ? "wide" : "closed";
+    if (t >= B.fold[1]) {
+      const sq = punch(t, B.fold[1], 0.10, 14);
+      p.sy = 1 - sq; p.sx = 1 + sq * 0.4; p.px = 0; p.py = 0;
+      out.seatSy = 1 - punch(t, B.fold[1], 0.05, 14);
+      p.torso = 108 + Math.sin(t * 9) * 1.2;                /* sobbing shudder */
+    }
+    if (t >= B.thumb[0]) {                                 /* right arm rises straight up from the wreck */
+      const tk = easeOutBack(ramp(t, B.thumb[0], B.thumb[1]));
+      p.raU = lerpN(52, 172, tk); p.raL = lerpN(34, 178, tk);
+    }
+    /* box tumbles off the lap to the floor, tissues erupt */
+    const bk = ramp(t, B.fold[1] - 0.03, B.fold[1] + 0.5);
+    if (bk > 0) {
+      const be = easeInCubic(bk);
+      out.box = { x: lerpN(BOX_LAP[0], 930, bk), y: lerpN(BOX_LAP[1], 1526, be) - Math.sin(bk * Math.PI) * 120, rot: 210 * bk, s: 1 };
+      if (bk >= 1) { const bs = punch(t, B.fold[1] + 0.5, 0.14, 14); out.box = { x: 930, y: 1526, rot: 210, s: 1, sy: 1 - bs }; }
+    }
+    for (let i = 0; i < 3; i++) {
+      const t0 = B.fold[1] + i * 0.15, t1 = t0 + 0.45;
+      if (t >= t0) {
+        const k = ramp(t, t0, t1);
+        const lx = 760 + i * 80, ly = 1546;
+        out.fly[i] = { x: lerpN(BOX_LAP[0], lx, k), y: lerpN(BOX_LAP[1], ly, easeInCubic(k)) - Math.sin(k * Math.PI) * (170 + i * 40),
+                       rot: (i - 1) * 40 * k + (i * 25), sy: k >= 1 ? 1 - punch(t, t1, 0.3, 14) : 1 };
+      }
+    }
+  }
+  /* tears: spawn at B.tears, fall 0.55s from the eye line */
+  const H = headOf(p);
+  B.tears.forEach((t0, i) => {
+    if (t >= t0 && t < t0 + 0.55) {
+      const k = (t - t0) / 0.55;
+      const side = i % 2 ? 1 : -1;
+      out.tearsOn.push({ i, x: H[0] + 16 + side * 21, y: H[1] - 2 + k * 80 + 10, op: 1 - k * k });
+    }
+  });
+  return { p, out };
+}
+
+function apply(t, s) {
+  const { p, out } = s;
+  poseStick(eka, p);
+  /* rain */
+  const lvl = out.rainLvl;
+  const show = [12, 22, 34][lvl], speed = [300, 460, 700][lvl], op = [0.35, 0.55, 0.8][lvl];
+  rain.forEach((r, i) => {
+    if (i >= show) { r.l.setAttribute("opacity", 0); return; }
+    const yy = ((t * speed * r.sp + r.ph * (WIN.h + 80)) % (WIN.h + 80)) - 60 + WIN.y;
+    const slant = 4 + lvl * 4;
+    r.l.setAttribute("x1", r.x); r.l.setAttribute("y1", yy);
+    r.l.setAttribute("x2", r.x - slant); r.l.setAttribute("y2", yy + r.len);
+    r.l.setAttribute("opacity", op);
+  });
+  /* glow flicker */
+  const flick = 0.16 + 0.05 * Math.sin(t * 13.7) + 0.03 * Math.sin(t * 29.1) + 0.14 * out.glowK;
+  glow.setAttribute("opacity", flick.toFixed(3));
+  seatG.setAttribute("transform", `translate(0,1507) scale(1,${out.seatSy.toFixed(4)}) translate(0,-1507)`);
+  /* box */
+  const b = out.box;
+  boxG.setAttribute("transform", `translate(${b.x.toFixed(1)},${b.y.toFixed(1)}) rotate(${b.rot.toFixed(1)}) scale(1,${(b.sy || 1).toFixed(3)})`);
+  /* tissue in hand */
+  if (out.tissue) { tisG.setAttribute("display", ""); tisG.setAttribute("transform", `translate(${out.tissue.x.toFixed(1)},${out.tissue.y.toFixed(1)}) rotate(${out.tissue.rot.toFixed(1)}) scale(1,${out.tissue.sy.toFixed(3)})`); }
+  else tisG.setAttribute("display", "none");
+  /* flying tissues */
+  flyT.forEach((g, i) => { const f = out.fly[i]; if (!f) { g.setAttribute("display", "none"); return; }
+    g.setAttribute("display", ""); g.setAttribute("transform", `translate(${f.x.toFixed(1)},${f.y.toFixed(1)}) rotate(${f.rot.toFixed(1)}) scale(1,${f.sy.toFixed(3)})`); });
+  /* tears */
+  tearEls.forEach(e => e.setAttribute("display", "none"));
+  out.tearsOn.forEach(tr => { const e = tearEls[tr.i]; e.setAttribute("display", ""); e.setAttribute("cx", tr.x.toFixed(1)); e.setAttribute("cy", tr.y.toFixed(1)); e.setAttribute("opacity", tr.op.toFixed(2)); });
+}
+
+window.seek = async function (t) {
+  t = clamp(t, 0, 21.0);
+  stalePaintGuard(t, bgflip, document.getElementById("stagewrap"), "rgba(19,16,34,0.004)");
+  const covered = t >= B.payoff + 0.4;
+  sceneG.style.visibility = covered ? "hidden" : "visible";
+  if (!covered) apply(t, layout(t));
+
+  const h = $('hook');
+  if (t < B.hookOut + 0.3) {
+    const p = PP(t, B.hookIn, 0.3, back);
+    h.style.opacity = String(Math.min(PP(t, B.hookIn, 0.12), 1 - PP(t, B.hookOut - 0.25, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - p) * 40}px)`;
+  } else h.style.opacity = '0';
+
+  /* episode chip */
+  const chip = $('chip');
+  let cur = null;
+  for (const c of B.chips) if (t >= c[0]) cur = c;
+  if (cur && !covered) {
+    chip.textContent = cur[1]; chip.className = cur[2] ? "finale" : "";
+    const k = ramp(t, cur[0], cur[0] + 0.3), s = lerp(1.6, 1, easeOutBackBig(k));
+    chip.style.visibility = "visible"; chip.style.transform = `scale(${s.toFixed(3)})`;
+  } else chip.style.visibility = "hidden";
+
+  const bub = $('bubble');
+  if (t >= B.bubble[0] && t < B.bubble[1] + 0.3) {
+    bub.style.opacity = String(Math.min(PP(t, B.bubble[0], 0.15), 1 - PP(t, B.bubble[1], 0.25)));
+    bub.style.transform = `scale(${0.85 + 0.15 * PP(t, B.bubble[0], 0.35, back)})`;
+  } else bub.style.opacity = '0';
+
+  const po = $('payoff');
+  if (t >= B.payoff && t < B.payoffOut) {
+    po.style.opacity = String(Math.min(PP(t, B.payoff, 0.3), 1 - PP(t, B.payoffOut - 0.25, 0.25)));
+    [['p1', B.rows[0]], ['p2', B.rows[1]], ['p3', B.rows[2]]].forEach(([id, t0]) => {
+      const e = $(id);
+      const pp = PP(t, t0, 0.4, back);
+      e.style.opacity = String(PP(t, t0, 0.15));
+      e.style.transform = `translateY(${(1 - pp) * 60}px)`;
+    });
+    $('savecta').style.opacity = String(PP(t, B.cta, 0.3));
+  } else po.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= B.payoffOut) {
+    end.style.opacity = String(PP(t, B.payoffOut, 0.25));
+    $('endword').style.transform = `scale(${0.88 + 0.12 * PP(t, B.payoffOut + 0.1, 0.4, back)})`;
+    $('endsub').style.opacity = String(PP(t, B.payoffOut + 0.7, 0.3));
+  } else end.style.opacity = '0';
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>

@@ -1,0 +1,30 @@
+{
+  "_license": "All files Mixkit Free License, vendored + logged in assets/audio/ATTRIBUTION.md. Beats match reel.html (cry on purpose, 21.0s). BGM differs from the same day's other Reel (show-converter uses g-eazy-nba-type).",
+  "tracks": [
+    {"file": "assets/audio/bgm/piano-reflections.mp3", "at": 0.0, "gain_db": -15, "trim": [0, 21.0], "fade_in": 0.5, "fade_out": 1.5},
+    {"file": "assets/audio/sfx/vinyl-needle-drop.mp3", "at": 0.05, "gain_db": -10},
+
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 0.60, "gain_db": -9},
+    {"file": "assets/audio/sfx/paper-move-quick.mp3", "at": 3.57, "gain_db": -10},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 4.90, "gain_db": -9},
+    {"file": "assets/audio/sfx/paper-move-quick.mp3", "at": 5.30, "gain_db": -10},
+    {"file": "assets/audio/sfx/ui-message-pop.mp3", "at": 8.20, "gain_db": -9},
+
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 8.55, "gain_db": -13, "trim": [0, 1.2], "fade_out": 0.4},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 9.12, "gain_db": -17, "trim": [0, 1.6], "fade_out": 0.5},
+    {"file": "assets/audio/sfx/paper-page-turn.mp3", "at": 9.15, "gain_db": -10},
+    {"file": "assets/audio/sfx/paper-page-turn.mp3", "at": 9.30, "gain_db": -10},
+    {"file": "assets/audio/sfx/paper-page-turn.mp3", "at": 9.45, "gain_db": -10},
+    {"file": "assets/audio/sfx/paper-slide.mp3", "at": 9.62, "gain_db": -12},
+
+    {"file": "assets/audio/sfx/sparkle-touch.mp3", "at": 10.75, "gain_db": -10},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 11.00, "gain_db": -9},
+
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 12.70, "gain_db": -10, "trim": [0, 1.5], "fade_out": 0.5},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 13.20, "gain_db": -6},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 13.70, "gain_db": -6},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.20, "gain_db": -6},
+    {"file": "assets/audio/sfx/sparkle-touch.mp3", "at": 15.20, "gain_db": -8},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 19.00, "gain_db": -8}
+  ]
+}
