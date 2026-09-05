@@ -280,24 +280,46 @@ Two Objects, and Palette Study especially:
   light to expose a printed grain repeat, a cushion pressed and timed as
   it recovers, a corner lifted to feel hardwood vs. ply. Anchors: hands
   always enter from lower right, never centred; one plain dark unbranded
-  cuff at the wrist, always (a shape/tone anchor a generator can hold
-  consistent — not a ring or watch, which will drift across posts and a
-  drifting signature is worse than none); one action, one take, no cuts;
-  **never a face, never past the cuff, never two hands doing different
-  things.** Applies inside The Evidence, Two Objects, and Insider
-  Knowledge (esp. The 60-Second Inspection, Care Secrets, Ages Well/
-  Ages Badly) on the carousel side, and Satisfying Process/Quick Games/
-  Reveal on the Reel side. **Never** on a carousel's frame 1 (the hook
-  stays the object alone), never on The Room That Proves It, Palette
-  Study, Mood, or Trend-Jack (whose whole mechanic is "applied to an
-  object instead of a person" — reintroducing hands voids it). Cap: no
-  more than ~1 post in 3. **Gated on a hands-specific feasibility spike
-  before any real production** — hands are harder to generate cleanly
-  than objects (the photoreal spike already logged a ~1/3 artifact rate
-  on objects alone), and a Group Legal/Compliance read on whether an
-  AI-generated disembodied hand falls inside Instagram's 2026-08-31
-  AI-people reach-limit policy (which targets generated *people*, not
-  products/backgrounds — likely clear, not yet confirmed).
+  cuff at the wrist, always; one action, one take, no cuts; **never a
+  face, never past the cuff, never two hands doing different things.**
+  Applies inside The Evidence, Two Objects, and Insider Knowledge (esp.
+  The 60-Second Inspection, Care Secrets, Ages Well/Ages Badly) on the
+  carousel side, and Satisfying Process/Quick Games/Reveal on the Reel
+  side. **Never** on a carousel's frame 1 (the hook stays the object
+  alone), never on The Room That Proves It, Palette Study, Mood, or
+  Trend-Jack (whose whole mechanic is "applied to an object instead of a
+  person" — reintroducing hands voids it). Cap: no more than ~1 post in 3.
+
+  **Resolved 2026-09-05 (founder decision): the hand is REAL, not
+  AI-generated.** A feasibility spike found AI-generated hands
+  technically workable but fragile (~1-in-5 usable clips, ~1-in-2.5
+  usable stills, mandatory eyes-on pick each time) and the originally-
+  proposed gesture ("thumb along a seam") doesn't render reliably at
+  all. Separately, Group Legal/Compliance found the AI-generated-hand
+  question genuinely unresolved against Instagram's AI-persona policy
+  (no primary source covers this exact edge case) — a real signature
+  cuff repeated across posts is exactly the kind of consistent-identity
+  marker that policy targets, and the penalty is account-wide reach
+  ineligibility, not a single post. **A real filmed hand resolves both
+  problems at once**: no AI-persona policy exposure, no mandatory
+  AI-content video disclosure (that requirement applies to AI-generated
+  photorealistic video specifically — real footage is exempt by
+  definition), and no fight with an unreliable generation pipeline.
+  It's also arguably a *better* fit for this account's actual promise
+  ("the proof, not the claim") — genuine hands-on demonstration is more
+  credible than a simulation of one, and every real luxury-craft
+  comparable (watch/leather/joinery content) uses real hands, never
+  illustrated or generated ones.
+  **Practical next step, not yet done:** someone needs to actually film
+  this — a phone camera in good raking light is enough quality-wise
+  given the account's existing warm/low-angle lighting discipline (§8).
+  Doesn't need to be the founder's own hand specifically, just a real
+  one, filmed once per needed gesture and reused/re-cropped where
+  sensible. No AI generation dependency for this device anymore; the
+  earlier hands-generation spike's findings (gesture vocabulary, entry
+  side, pick rates) are now moot for The Inspection specifically, though
+  the same spike's *general* AI-hands findings may still matter if any
+  other device ever needs a generated hand.
 
 ### Anti-repetition (revised for 2/day)
 
