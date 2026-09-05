@@ -56,9 +56,18 @@ expensive one is always worth it smells like a vendor. Drop `#quietluxury`
 entirely (the label is in backlash; the materials are not).
 
 **Hard visual constraints (strategy §8 + platform):** no people, no hands,
-no faces, no silhouettes that read as a posed human — Instagram limits reach
-on undisclosed AI-generated people; the object is the subject. Every
-photoreal piece is published with Meta's AI self-disclosure (Step 7).
+no faces, no silhouettes that read as a posed human — the object is the
+subject, and this is a brand/creative rule, not merely a compliance one
+(Legal-confirmed 2026-09-05: Instagram's 2026-08-31 policy is a
+profile-level toggle for accounts whose profile *features an AI-generated
+person* — narrower than this rule, and unrelated to the per-post
+disclosure flag below; do NOT enable that profile toggle for this
+account, since nuvarel's profile does not feature an AI person). Every
+photoreal piece is published with Meta's `is_ai_generated` container
+disclosure (Step 7) — that flag satisfies a separate obligation (the
+Misinformation standard's AI self-disclosure duty), not the no-people
+rule above; the two are unrelated mechanisms and neither substitutes for
+the other.
 
 ## Your job today (one run)
 
@@ -280,11 +289,33 @@ One JSON per post in `accounts/nuvarel/content/queue/`, id format
 
 `"ai_generated": true` is **mandatory on every piece containing generated
 imagery** — the publisher turns it into Meta's `is_ai_generated=true`
-self-disclosure on the container (Group Legal, 2026-09-05: disclosure on
-AI photoreal video is a platform duty; on stills it is the honest default
-for an account whose whole claim is "the proof"). Reels use
+self-disclosure on the container. Legal-confirmed 2026-09-05
+(income-engine `docs/consults/2026-09-05-group-legal-nuvarel-ai-disclosure-read.md`;
+an earlier version of this line cited that read before it had actually
+run — corrected, the conclusion itself held up): disclosure on AI
+photoreal video is required by Meta's Misinformation standard, and the
+same flag on stills is a deliberate closed decision, not mere caution —
+this pipeline's generated images carry zero embedded provenance
+metadata (measured), so this flag is the only disclosure channel that
+exists for them at all. Reels use
 `"video": "accounts/nuvarel/content/queue/video/<id>.mp4"` instead of
 `"slides"`.
+
+**`photo_reel` gating, once Step 0's gate opens (not yet — Legal flag,
+2026-09-05):** disclosure alone does not clear this lane. A Reel that
+*demonstrates a physical property or outcome* (a cushion recovering
+under a press, a board revealing grain under sanding) is a materially
+different risk than a static object study — India's synthetic-media
+rules treat a depicted "event" differently from a depicted object
+(portfolio standing-note P26), and more importantly, generated footage
+of a physical event happening is a fabricated evidentiary claim on an
+account whose entire positioning is "the proof, not the claim." Before
+`photo_reel` opens for a demonstration-type Reel, either (a) film it for
+real, or (b) reframe the caption/premise so the generated imagery
+illustrates rather than claims to record an event (e.g. "here's what
+real grain looks like," not "watch this board get sanded"). This applies
+to both "recommended first" concepts in strategy §3 pillars 7-8 — treat
+them as needing this reframe before building, not as ready-to-shoot.
 
 **Standing slots (IST), strategy §6/§7, 2/day from 2026-09-06:**
 - **10:00** — **carousel** (decor-specific morning-at-home window).

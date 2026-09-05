@@ -207,17 +207,27 @@ Reel pillar gets production time.
      #furnitureshopping #expensivelooking #homestyling".
      **Correction (income-engine-d1, 2026-09-05, same day):** originally
      written as an Inspection-device (hands-only) shot — that's premature.
-     Inspection is NOT settled: a feasibility spike found the originally
-     -proposed gesture ("thumb along a seam") doesn't render reliably, and
-     there's an open founder decision between a real photographed hand vs.
-     an AI-generated hand without the stated signature cuff. Don't build
-     this with a hand until Inspection resolves. **Hands-free fallback,
-     buildable once stills-only photoreal is validated (it is — see the
-     revision note above; only Reels/video generation is unproven):** a
-     fixed two-shot of two cushions with a small weight dropped/removed to
-     trigger the press instead of a hand — keeps the genre-match and the
-     curiosity-gap hook, no Inspection dependency. Topic is clear against
-     the 60-day ledger either way.
+     Inspection was NOT settled when this was written: a feasibility
+     spike found the originally-proposed gesture ("thumb along a seam")
+     doesn't render reliably. **Superseded same day:** the founder has
+     since decided Inspection uses a real filmed hand, not AI-generated
+     (resolves the render-reliability and disclosure questions in one
+     move — see the top revision note). Filming hasn't happened yet, so
+     this still isn't shoot-ready with a hand. **Hands-free fallback (two
+     cushions, a small weight dropped/removed to trigger the press
+     instead of a hand) remains available but does NOT skip the gate
+     below** — it's still generated footage of a physical event either
+     way. **Second, more fundamental gate (Group Legal, 2026-09-05 —
+     standing-note P26): this is a Reel, so it needs `photo_reel` open
+     regardless of hands** (video generation is the unproven half of the
+     pipeline, not stills) **AND, once that lane opens, a generated
+     demonstration of a physical outcome is a fabricated evidentiary
+     claim on an account whose whole positioning is "the proof, not the
+     claim."** Before shooting this with generated footage: either film
+     it for real, or reframe the caption/premise so it illustrates rather
+     than claims to record an event (e.g. "here's what real recovery
+     looks like," not "watch this cushion recover"). Topic is clear
+     against the 60-day ledger either way.
 8. **Reveal / Transformation** (`reel-reveal`) — a dust sheet pulled off
    a covered piece, a plain box unwrapped to reveal something beautiful,
    a raw-material-to-finished-object fast-forward (thread to fabric, clay
@@ -236,8 +246,12 @@ Reel pillar gets production time.
      pattern no matter how far you sand. Ten seconds with sandpaper tells
      you what the price tag will not. Save this for the next furniture
      aisle. #interiordesigntips #homedecortips #furnitureshopping
-     #expensivelooking #homestyling". Not yet queued — same gate as
-     above; topic is clear against the 60-day ledger.
+     #expensivelooking #homestyling". Not yet queued — needs `photo_reel`
+     open (video generation unproven), and per the same Legal flag as
+     above (standing-note P26): reframe as illustrating what real grain
+     looks like, not as claiming to record two specific boards actually
+     being sanded, unless filmed for real. Topic is clear against the
+     60-day ledger.
 9. **Quick Games** (`reel-game`) — comment-bait, genuinely fun: "which
    one's real" (two near-identical objects, guess before reveal), "guess
    the price," quick material-vs-material showdowns (sunlight test, water

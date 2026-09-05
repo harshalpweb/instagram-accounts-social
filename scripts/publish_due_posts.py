@@ -24,9 +24,17 @@ AI-content self-disclosure (Group CTO, 2026-09-05): a queue JSON carrying
 `"ai_generated": true` publishes with Meta's `is_ai_generated=true` container
 parameter — on the REELS container, and on the CAROUSEL parent container only
 (Meta's content-publishing reference: setting it on carousel children errors).
-Meta's Misinformation standard requires disclosure on AI-generated photoreal
-video unconditionally (Group Legal read, 2026-09-05); this flag is how the
-pipeline satisfies it. Absent/false = unchanged behaviour.
+Legal-confirmed 2026-09-05 (income-engine
+`docs/consults/2026-09-05-group-legal-nuvarel-ai-disclosure-read.md` -- filed
+AFTER this code first shipped; an earlier version of this docstring cited that
+read before it had actually run, which was wrong regardless of the conclusion
+landing close to correct -- correcting the record, not just the citation): the
+parameter discharges Meta's Misinformation standard's self-disclosure duty for
+AI-generated photoreal video. Also applying it to stills is a deliberate,
+closed strategy decision, not mere caution — this pipeline's generated images
+carry zero embedded provenance metadata (measured), so self-disclosure is the
+only disclosure channel that exists for them at all. Absent/false = unchanged
+behaviour.
 """
 import argparse
 import json
