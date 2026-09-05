@@ -21,9 +21,13 @@ accounts/
     content/queue/               posts waiting to publish (one JSON + slides per post)
     content/posted/              published posts move here
     content/failed/              posts that failed 3 attempts move here
+analytics/
+  insights.csv                   latest Insights snapshot, one row per published post
+  insights-history.csv           append-only: one row per post per collection run
 .github/workflows/
   publish-hype_tingles.yml       hourly: publishes hype_tingles's due posts
   refresh-hype_tingles.yml       monthly: refreshes hype_tingles's token
+  collect-insights.yml           daily: pulls real Insights for every posted piece, all accounts
 ```
 
 ## How it works (per account)
@@ -34,6 +38,17 @@ accounts/
 2. **Token refresh** (monthly): renews that account's long-lived token
    before its ~60-day expiry, writes it back to that account's own GitHub
    secret.
+3. **Insights collection** (daily, all accounts in one run, read-only):
+   `scripts/collect_insights.py` walks every `content/posted/*/*.json`,
+   calls `/insights` on each stored `ig_post_id` (reach, views, likes,
+   comments, saved, shares, total_interactions, plus Reel watch-time /
+   feed follows+profile_visits extras) and writes `analytics/insights.csv`
+   (latest) + `analytics/insights-history.csv` (append-only). Failures are
+   per post — a deleted post, a throttle, or an expired token never aborts
+   the whole run. `python scripts/collect_insights.py --rollup-only` prints
+   the mean-per-account/format/family table from the CSV with no token and
+   no API call. Column meanings and caveats (48 h insights lag, reach is an
+   estimate, posted time vs. scheduled slot) are in the script's docstring.
 
 Content generation (what actually goes into `content/queue/`) is not yet
 built for any account — this repo currently only has the publish/refresh
@@ -63,7 +78,11 @@ once its niche/purpose is defined.
 4. Add that account's `IG_ACCESS_TOKEN_<NAME>` / `IG_USER_ID_<NAME>`
    repository secrets. `REPO_ADMIN_TOKEN` is already shared, no change
    needed.
-5. Design and build that account's content-generation pipeline separately.
+5. Add `IG_ACCESS_TOKEN_<NAME>: ${{ secrets.IG_ACCESS_TOKEN_<NAME> }}` to
+   the env block of `collect-insights.yml` so the daily Insights run covers
+   the new account too (the script discovers the account folder by itself;
+   only the token line is needed).
+6. Design and build that account's content-generation pipeline separately.
 
 ## Manual test run
 

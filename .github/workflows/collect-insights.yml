@@ -1,0 +1,52 @@
+name: Collect Instagram insights (all accounts)
+
+# Read-only against Instagram: GETs media metadata + /insights for every
+# published post and commits the resulting CSVs under analytics/. Never
+# publishes, never touches content/queue/. One job for all accounts so a
+# single run yields one comparable snapshot (each account still uses its
+# own token). Daily at 03:30 UTC = 09:00 IST, after Meta's overnight
+# insights processing; also runnable by hand.
+
+on:
+  schedule:
+    - cron: "30 3 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r scripts/requirements.txt
+
+      - name: Collect insights
+        run: python scripts/collect_insights.py
+        env:
+          IG_ACCESS_TOKEN_HYPE_TINGLES: ${{ secrets.IG_ACCESS_TOKEN_HYPE_TINGLES }}
+          IG_ACCESS_TOKEN_ANIME_EKAYA: ${{ secrets.IG_ACCESS_TOKEN_ANIME_EKAYA }}
+          IG_ACCESS_TOKEN_NUVAREL: ${{ secrets.IG_ACCESS_TOKEN_NUVAREL }}
+          IG_AUTH_MODE: ${{ vars.IG_AUTH_MODE || 'instagram_login' }}
+
+      - name: Commit analytics snapshot
+        if: always()
+        run: |
+          git config user.name "ig-accounts-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A analytics/
+          git diff --cached --quiet || git commit -m "chore: insights snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          # Same retry loop as the publish workflows: sibling workflows push
+          # to this shared branch around the same time.
+          for i in 1 2 3 4 5; do
+            git push && break
+            echo "push rejected, retrying ($i/5)..."
+            git pull --rebase
+            sleep $((RANDOM % 5 + 1))
+          done
