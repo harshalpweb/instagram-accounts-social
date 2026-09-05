@@ -13,6 +13,7 @@
   ],
   "scheduled_time_ist": "2026-09-05T11:30:00+05:30",
   "status": "pending",
-  "attempts": 0,
-  "needs_review": false
+  "attempts": 1,
+  "needs_review": false,
+  "last_error": "OAuthException code=9007 subcode=2207027: Media ID is not available"
 }
