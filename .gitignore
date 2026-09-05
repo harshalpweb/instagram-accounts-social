@@ -14,3 +14,8 @@ assets/audio/**/*.mp3
 *.silent.mp4
 # Blender character-frame intermediates (regenerable from income-engine/blender_studio/scenes/reels/)
 **/frames/
+
+# Licensed stock video (Pexels): usable inside rendered posts, not
+# redistributable standalone -- public repo, so raw clips stay local-only
+# (see assets/video/ATTRIBUTION.md). Same pattern as assets/audio.
+assets/video/**/*.mp4
