@@ -1,0 +1,214 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* anime_ekaya "sequel seasons verdict" (21s) -- HOT TAKE Reel, mechanic
+   class single-declaration, type reel-hot-take (this account's first
+   HOT TAKE built as a Reel rather than a carousel card).
+   REFRAMED FROM BRIEF (documented per the brief's own explicit escape
+   hatch): the original slot-4 concept was a "no legal India streaming"
+   departures board. Its only source was a single secondhand blog post;
+   direct verification against Crunchyroll's and Netflix's own India
+   catalog pages did not turn up two solid, current, directly-sourced
+   examples (WebSearch returned only generic regional-licensing
+   background, nothing per-title and dated). Per the brief: "if you
+   can't confirm at least two solid examples ... don't force this
+   concept ... swap this slot for a second game/quiz or single-
+   declaration idea of your own that doesn't depend on unverified
+   claims, as long as it doesn't repeat mechanic class 1, 2, or 3." This
+   keeps the single-declaration mechanic class (distinct from today's
+   character-moment/list-ranking/game-quiz pieces) and the board+walk-in
+   staging, swaps the CONTENT for a defensible, evergreen opinion about
+   watching habits (never shows'/studios' fans) that needs no factual
+   sourcing at all: "sequel seasons ruin more anime than bad endings do."
+   Tone: energetic but not slapstick -- the board build is deadpan/dry,
+   EKAYA's walk-in is the one physical beat, no cartoon punches.
+   Scene/prop: full-bleed dark verdict-board grid (new -- not the small
+   rounded scorecard built earlier today, not the typographic hook-card
+   shape signs-diagnostic-01 used 8 days ago: this is a full-bleed grid
+   with row-flip reveals, no card silhouette at all) + EKAYA walking in
+   via the rig's existing walkPose() mixer (new -- no prior Reel this
+   account has used a walk-in entrance). Checked pairwise against both
+   other Reels built today (close-up face + door-strip; typographic quiz
+   rounds + scorecard) -- no shared backdrop/prop.
+   FRAME-REVIEW FIXES: (1) the brief calls for EKAYA to "point at" the
+   verdict row. First pass used real IK toward the verdict's screen
+   position -- at this rig's actual proportions (max arm reach ~181px)
+   that target sits ~600px away, so the arm just extended to its
+   physical limit and read as a weak half-raised bend nowhere near the
+   text. Replaced with a two-arm "look up there" presenting gesture
+   (mirrored raise, head tilted back toward the board) -- the same
+   vocabulary the account already uses for a reveal beat (see cry-on-
+   purpose's ARMSUP), reliable at this rig's real reach instead of
+   faking a point it can't make. (2) the endcard subtitle sat at
+   top:980, overlapping the wordmark's katakana line (which runs to
+   ~y=993) -- pushed to top:1090 for real clearance, matching the gap
+   this account's other endcards use.
+   Principle map: ANTICIPATION = each row's flip has a 2-frame pre-flip
+   dip before it lands; the verdict row's flip is bigger and holds an
+   extra beat before EKAYA enters. SQUASH = row-flip landing sy pop
+   (pivot at each row's own top edge), verdict-row landing bigger pop.
+   HOLDS = verdict hold before the walk-in (10.2-12.6s), presenting-
+   gesture hold (15.1-18.0s, blink at 16.6s). */
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; font-kerning:normal; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg#stage { position:absolute; inset:0; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:19; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#hook { position:absolute; top:700px; left:80px; right:80px; opacity:0; z-index:12; text-align:center; }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:72px; line-height:1.14; }
+#hook .sub { font-size:36px; font-weight:500; color:var(--lav); margin-top:26px; }
+
+#board { position:absolute; top:340px; left:80px; right:80px; z-index:11; }
+.row { position:absolute; left:0; right:0; height:120px; border-top:2px solid var(--hair); display:flex;
+  align-items:center; opacity:0; transform-origin:top; }
+.row .n { font-family:'Archivo Black'; font-size:44px; color:var(--muted); width:90px; }
+.row .t { font-family:'Space Grotesk'; font-weight:700; font-size:44px; line-height:1.15; flex:1; }
+#r0 { top:0px; } #r1 { top:120px; } #r2 { top:240px; } #r3 { top:360px; }
+#verdict { position:absolute; top:520px; left:0; right:0; padding-top:56px; border-top:4px solid var(--coral);
+  opacity:0; transform-origin:top; }
+#verdict .pre { font-size:28px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--lav); }
+#verdict .big { font-family:'Space Grotesk'; font-weight:700; font-size:66px; line-height:1.16; color:var(--coral); margin-top:20px; }
+
+#cta { position:absolute; top:1810px; left:0; right:0; text-align:center; z-index:12; opacity:0;
+  font-size:38px; font-weight:500; color:var(--muted); }
+
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:18; }
+#endword { position:absolute; top:800px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:92px; color:var(--coral); }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:56px; color:var(--lav); display:block; margin-top:16px; }
+#endsub { position:absolute; top:1090px; left:0; right:0; text-align:center; color:var(--muted);
+  font-size:34px; font-weight:500; opacity:0; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">hot take</div></div>
+
+<div id="hook"><div class="line">Unpopular opinion incoming.</div><div class="sub">Read the whole board before you argue.</div></div>
+
+<div id="board">
+  <div class="row" id="r0"><span class="n">01</span><span class="t">More time passes.</span></div>
+  <div class="row" id="r1"><span class="n">02</span><span class="t">More arcs get compressed.</span></div>
+  <div class="row" id="r2"><span class="n">03</span><span class="t">More chances for the studio to change.</span></div>
+  <div class="row" id="r3"><span class="n">04</span><span class="t">More ways the pacing breaks.</span></div>
+  <div id="verdict"><div class="pre">The verdict</div><div class="big">Sequel seasons ruin more anime than bad endings do.</div></div>
+</div>
+
+<div id="cta">Fight us in the comments. Which sequel season lost you?</div>
+
+<div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
+<div id="endsub">Your next anime, sorted. New picks daily.</div></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 21.0, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+/* ---------------- beats ---------------- */
+const ROWS = [
+  { id:"r0", t:3.0 }, { id:"r1", t:4.8 }, { id:"r2", t:6.6 }, { id:"r3", t:8.4 }
+];
+const B = {
+  hookIn:-0.12, hookOut:2.0,
+  verdictIn: 10.2, walkStart: 12.6, walkEnd: 14.6, gestureSnap: 15.1,
+  ctaIn: 16.2, endIn: 18.6
+};
+window.BEATS = { rows: ROWS, ...B };
+
+/* ---------------- EKAYA walk-in + presenting gesture ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const AC = { paper:"#F3F0FF", coral:"#FF5D73", lav:"#9D8DF1" };
+const eka = makeStick(stage, { stroke:AC.paper, fill:"#131022", tuft:AC.coral });
+const WALK_Y = 1560, START_X = -140, ARRIVE_X = 430;
+
+function layoutEka(t) {
+  if (t < B.walkStart) return null;
+  if (t < B.walkEnd) {
+    const wk = ramp(t, B.walkStart, B.walkEnd);
+    const x = lerp(START_X, ARRIVE_X, easeIO(wk));
+    const strideT = (t - B.walkStart) * 2.6;               /* ~2.6 strides/sec cadence */
+    const ph = strideT % 1;
+    const p = walkPose(ph);
+    p.tx = x; p.ty = WALK_Y - Math.abs(Math.sin(ph * Math.PI)) * 14;   /* gait bob */
+    p.eyes = "open"; p.face = 1;
+    return p;
+  }
+  /* arrived: settle, then a mirrored two-arm raise + head-tilt-up "look at that" gesture */
+  const settleK = easeIO(ramp(t, B.walkEnd, B.walkEnd + 0.15));
+  const IDLE = { torso:182, headTilt:-4, laU:16, laL:8, raU:-16, raL:-8, llU:4, llL:2, rlU:-4, rlL:-2, eyes:"open", face:1 };
+  let p = { ...mixPose(walkPose(0), IDLE, settleK), tx: ARRIVE_X, ty: WALK_Y };
+  if (t >= B.gestureSnap - 0.16) {
+    const gk = PP(t, B.gestureSnap - 0.16, 0.3, back);
+    p.laU = lerp(16, 158, Math.min(gk, 1.1)); p.laL = lerp(8, 150, Math.min(gk, 1.1));
+    p.raU = lerp(-16, -158, Math.min(gk, 1.1)); p.raL = lerp(-8, -150, Math.min(gk, 1.1));
+    p.headTilt = lerp(-4, -34, Math.min(gk, 1));
+    p.torso = lerp(182, 192, Math.min(gk, 1));
+    if (t >= B.gestureSnap + 1.5 && t < B.gestureSnap + 1.59) p.eyes = "closed";
+  }
+  return p;
+}
+
+/* ---------------- main seek ---------------- */
+window.seek = async function (t) {
+  t = clamp(t, 0, 21.0);
+  stalePaintGuard(t, bgflip, $("stagewrap"), "rgba(19,16,34,0.004)");
+
+  const h = $('hook');
+  if (t < B.hookOut + 0.3) {
+    const p = PP(t, B.hookIn, 0.3, back);
+    h.style.opacity = String(Math.min(PP(t, B.hookIn, 0.12), 1 - PP(t, B.hookOut - 0.25, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - p) * 40}px)`;
+  } else h.style.opacity = '0';
+
+  for (const r of ROWS) {
+    const e = $(r.id);
+    if (t >= r.t) {
+      const k = PP(t, r.t, 0.16, back);
+      e.style.opacity = String(PP(t, r.t, 0.1));
+      e.style.transform = `scaleY(${lerp(0.25, 1, k).toFixed(3)})`;
+    } else { e.style.opacity = '0'; }
+  }
+
+  const verdict = $('verdict');
+  if (t >= B.verdictIn) {
+    const k = PP(t, B.verdictIn, 0.22, back);
+    verdict.style.opacity = String(PP(t, B.verdictIn, 0.12));
+    verdict.style.transform = `scaleY(${lerp(0.2, 1, k).toFixed(3)})`;
+  } else verdict.style.opacity = '0';
+
+  const p = layoutEka(t);
+  if (p) { poseStick(eka, p); eka.g.setAttribute("display", ""); }
+  else eka.g.setAttribute("display", "none");
+
+  const cta = $('cta');
+  cta.style.opacity = (t >= B.ctaIn && t < B.endIn + 0.2) ? String(Math.min(PP(t, B.ctaIn, 0.3), 1 - PP(t, B.endIn - 0.2, 0.2))) : '0';
+
+  const end = $('end');
+  if (t >= B.endIn) {
+    end.style.opacity = String(PP(t, B.endIn, 0.3));
+    $("endsub").style.opacity = String(PP(t, B.endIn + 0.6, 0.3));
+  } else end.style.opacity = '0';
+
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>

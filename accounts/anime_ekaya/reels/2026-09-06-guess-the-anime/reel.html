@@ -1,0 +1,251 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* anime_ekaya "guess the anime" (22s) -- DIAGNOSTIC quiz Reel, mechanic
+   class game/quiz. Premise: five rounds, each a flat deadpan one-line
+   description of a currently-airing show's real premise (verified against
+   WebSearch synopsis pulls 2026-09-06, not invented), a coral countdown
+   ring drains for 1.5s, then the real title slams in. Round 5 is the
+   punchline: the deadpan line IS the title's literal meaning.
+   Tone: energetic but not slapstick (per-account ruling) -- comedic
+   HOLDS after each slam (viewer needs the beat to register/laugh), no
+   mascot until the final scorecard beat (per brief: "pure typography, no
+   mascot for the first four rounds").
+   Scene/prop (final beat only): EKAYA + floating scorecard card. New --
+   nothing in the last 14 days used a scorecard prop (machine/lever, slab
+   tower, doors, lane pillars, phone panel, typographic card, couch/rain/
+   tissue). The rest of the Reel is pure typography (no rig stage), so it
+   does not collide with any prior Reel's staged scene.
+   Quality ratchet (2026-09-06): TIMING & SPACING for a non-EKAYA format --
+   this account's first Reel where the joke lives entirely in a HARD PAUSE
+   after each title-slam (0.55s held read, per animation-principles.md's
+   comedic-timing rule) rather than in rig acting; the ring-drain is the
+   authored anticipation beat standing in for a physical windup.
+   Principle map: ANTICIPATION = ring drains 1.5s before every slam (5x);
+   SQUASH = title-slam scale overshoot 1.55 ->1.0 easeOutBack (5x), ring
+   glyph pulse-pop at empty; HOLDS = post-slam read hold 0.55s each round
+   (5x), final scorecard hold 2.6s. */
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; font-kerning:normal; }
+#stagewrap { position:absolute; inset:0; z-index:17; }
+svg#stage { position:absolute; inset:0; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:19; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#hook { position:absolute; top:640px; left:80px; right:80px; opacity:0; z-index:12; text-align:center; }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:70px; line-height:1.15; }
+#hook .line mark { background:none; color:var(--coral); }
+#hook .sub { font-size:36px; font-weight:500; color:var(--lav); margin-top:26px; }
+
+#roundlabel { position:absolute; top:280px; left:0; right:0; text-align:center; z-index:11; opacity:0;
+  font-size:28px; font-weight:500; letter-spacing:.26em; text-transform:uppercase; color:var(--lav); }
+
+#descwrap { position:absolute; top:420px; left:110px; right:110px; z-index:11; text-align:center; }
+#desc { font-family:'Inter'; font-weight:500; font-size:52px; line-height:1.4; opacity:0; }
+
+#ringwrap { position:absolute; top:900px; left:0; right:0; text-align:center; z-index:11; }
+#ringmark { position:absolute; top:958px; left:0; right:0; text-align:center; z-index:12;
+  font-family:'Archivo Black'; font-size:64px; color:var(--paper); opacity:0; }
+
+#titlewrap { position:absolute; top:1180px; left:90px; right:90px; z-index:13; text-align:center; visibility:hidden; }
+#titlewrap .title { font-family:'Space Grotesk'; font-weight:700; font-size:66px; line-height:1.14; color:var(--coral); }
+#titlewrap .tag { font-size:32px; font-weight:500; color:var(--lav); margin-top:18px; opacity:0; }
+
+#scoretag { position:absolute; top:100px; left:0; right:0; text-align:center; z-index:11; opacity:0;
+  font-size:26px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#score { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
+#score .pre { position:absolute; top:400px; left:0; right:0; text-align:center; font-size:30px; font-weight:500;
+  letter-spacing:.24em; text-transform:uppercase; color:var(--lav); }
+#score .big { position:absolute; top:456px; left:0; right:0; text-align:center; font-family:'Archivo Black';
+  font-size:190px; color:var(--coral); }
+#score .prompt { position:absolute; top:730px; left:90px; right:90px; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:56px; line-height:1.2; }
+#score .cta { position:absolute; top:832px; left:0; right:0; text-align:center; font-size:36px; font-weight:500; color:var(--muted); }
+#scorecard { position:absolute; top:1080px; left:330px; width:480px; height:210px; border-radius:22px;
+  background:var(--panel); border:3px solid var(--hair); opacity:0; z-index:17; }
+#scorecard .row { position:absolute; top:32px; left:36px; right:36px; display:flex; justify-content:space-between;
+  font-family:'Space Grotesk'; font-weight:700; font-size:32px; color:var(--muted); }
+#scorecard .boxes { position:absolute; top:106px; left:36px; right:36px; display:flex; justify-content:space-between; }
+#scorecard .box { width:66px; height:66px; border-radius:10px; border:3px solid var(--hair); }
+
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:18; }
+#endword { position:absolute; top:1620px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:74px; color:var(--coral); }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:44px; color:var(--lav); display:block; margin-top:12px; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">guess the anime</div></div>
+
+<div id="hook"><div class="line">I'll describe an anime <mark>as boringly as possible.</mark></div><div class="sub">Name it. 5 rounds.</div></div>
+
+<div id="roundlabel"></div>
+<div id="descwrap"><div id="desc"></div></div>
+<div id="ringwrap">
+  <svg width="220" height="220" viewBox="0 0 220 220">
+    <circle cx="110" cy="110" r="92" fill="none" stroke="#37315A" stroke-width="14"/>
+    <circle id="ringfg" cx="110" cy="110" r="92" fill="none" stroke="#FF5D73" stroke-width="14"
+      stroke-linecap="round" transform="rotate(-90 110 110)"/>
+  </svg>
+</div>
+<div id="ringmark">?</div>
+<div id="titlewrap"><div class="title"></div><div class="tag"></div></div>
+<div id="scoretag">5 rounds. how many did you get?</div>
+
+<div id="score">
+  <div class="pre">Final score</div>
+  <div class="big">?/5</div>
+  <div class="prompt">Comment your real score below.</div>
+  <div class="cta">Save this. Send it to the friend who always knows.</div>
+</div>
+<div id="scorecard">
+  <div class="row"><span>SCORECARD</span><span>EKAYA</span></div>
+  <div class="boxes"><div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div></div>
+</div>
+
+<div id="end"><div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 22.0, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+/* ---------------- rounds ---------------- */
+const ROUND_DUR = 3.3, RING_DUR = 1.5;
+const R = [
+  { desc: "A man makes a new smoking buddy behind a supermarket. He has no idea she's already his coworker.",
+    title: "SMOKING BEHIND THE SUPERMARKET WITH YOU", start: 1.9 },
+  { desc: "A girl turns into a giant kaiju every time she catches feelings for her crush.",
+    title: "KAIJU GIRL CARAMELISE", start: 5.2 },
+  { desc: "A demon school's newest student isn't a demon. Nobody's caught on yet.",
+    title: "WELCOME TO DEMON SCHOOL! IRUMA-KUN", start: 8.5 },
+  { desc: "Two students have nothing in common. They start dating anyway.",
+    title: "YOU AND I ARE POLAR OPPOSITES", start: 11.8 },
+  { desc: "“I was wrong about her.”",
+    title: "OH BOY, WAS I WRONG ABOUT HER", start: 15.1, tag: "(that's the actual title.)" }
+];
+const B = { hookIn:-0.12, hookOut:1.8, roundsEnd: R[4].start + ROUND_DUR, scoreIn: 18.5, cardIn: 19.3, endIn: 21.3 };
+window.BEATS = { rounds: R, ...B };
+
+/* ---------------- ring geometry ---------------- */
+const RING_R = 92, RING_C = 2 * Math.PI * RING_R;
+const ringfg = $("ringfg");
+ringfg.setAttribute("stroke-dasharray", RING_C.toFixed(2));
+
+function roundAt(t) {
+  for (let i = R.length - 1; i >= 0; i--) if (t >= R[i].start) return i;
+  return -1;
+}
+
+window.seek = async function (t) {
+  t = Math.max(0, Math.min(22.0, t));
+
+  /* hook */
+  const h = $('hook');
+  if (t < B.hookOut + 0.3) {
+    const p = PP(t, B.hookIn, 0.3, back);
+    h.style.opacity = String(Math.min(PP(t, B.hookIn, 0.12), 1 - PP(t, B.hookOut - 0.25, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - p) * 40}px)`;
+  } else h.style.opacity = '0';
+
+  /* rounds */
+  const ri = roundAt(t);
+  const roundlabel = $('roundlabel'), descwrap = $('descwrap'), desc = $('desc'),
+        ringwrap = $('ringwrap'), ringmark = $('ringmark'), titlewrap = $('titlewrap'),
+        titleEl = titlewrap.querySelector('.title'), tagEl = titlewrap.querySelector('.tag');
+
+  if (ri >= 0 && t < B.roundsEnd + 0.25) {
+    const r = R[ri], rt = t - r.start;
+    roundlabel.textContent = `Round ${ri + 1} / 5`;
+    roundlabel.style.opacity = String(PP(t, r.start, 0.12));
+    desc.textContent = r.desc;
+    const dIn = PP(t, r.start, 0.15, back);
+    descwrap.style.transform = `scale(${lerp(1.3, 1, dIn).toFixed(3)})`;
+    desc.style.opacity = String(PP(t, r.start, 0.12));
+
+    const ringK = c01(rt / RING_DUR);
+    ringfg.setAttribute("stroke-dashoffset", (RING_C * ringK).toFixed(2));
+    ringwrap.style.opacity = rt < RING_DUR + 0.05 ? '1' : '0';
+    ringmark.style.opacity = rt < RING_DUR + 0.05 ? String(PP(t, r.start, 0.12)) : '0';
+    /* ring glyph pulse-pop right as it empties -- SQUASH substitute on a UI element */
+    if (rt >= RING_DUR - 0.06 && rt < RING_DUR + 0.14) {
+      const pk = PP(t, r.start + RING_DUR - 0.06, 0.2, back);
+      ringmark.style.transform = `scale(${lerp(1, 1.35, Math.sin(pk * Math.PI)).toFixed(3)})`;
+    } else ringmark.style.transform = 'scale(1)';
+
+    if (rt >= RING_DUR) {
+      titlewrap.style.visibility = 'visible';
+      titleEl.textContent = r.title;
+      const sk = PP(t, r.start + RING_DUR, 0.22, back);
+      titlewrap.style.transform = `scale(${lerp(1.55, 1, sk).toFixed(3)})`;
+      titlewrap.style.opacity = String(PP(t, r.start + RING_DUR, 0.1));
+      /* dim the description once the answer lands -- keeps focus on the slam */
+      desc.style.opacity = String(0.35 + 0.65 * (1 - PP(t, r.start + RING_DUR, 0.3)));
+      if (r.tag) { tagEl.textContent = r.tag; tagEl.style.opacity = String(PP(t, r.start + RING_DUR + 0.18, 0.2)); }
+      else tagEl.style.opacity = '0';
+    } else {
+      titlewrap.style.visibility = 'hidden';
+    }
+  } else {
+    roundlabel.style.opacity = '0'; desc.style.opacity = '0'; ringwrap.style.opacity = '0';
+    ringmark.style.opacity = '0'; titlewrap.style.visibility = 'hidden';
+  }
+
+  const scoretag = $('scoretag');
+  if (t >= B.roundsEnd && t < B.scoreIn + 0.3) {
+    scoretag.style.opacity = String(Math.min(PP(t, B.roundsEnd, 0.15), 1 - PP(t, B.scoreIn, 0.2)));
+  } else scoretag.style.opacity = '0';
+
+  /* score / EKAYA scorecard beat */
+  const score = $('score'), scorecard = $('scorecard');
+  if (t >= B.scoreIn) {
+    score.style.opacity = String(PP(t, B.scoreIn, 0.3));
+  } else score.style.opacity = '0';
+  if (t >= B.cardIn) {
+    const k = PP(t, B.cardIn, 0.3, back);
+    scorecard.style.opacity = String(PP(t, B.cardIn, 0.15));
+    scorecard.style.transform = `scale(${lerp(0.8, 1, k).toFixed(3)})`;
+  } else scorecard.style.opacity = '0';
+
+  /* EKAYA: small arms-up cheer to the left of the scorecard, clear of every text band */
+  const eka = window.__eka || (window.__eka = makeStick($('stage'), { stroke:"#F3F0FF", fill:"#131022", tuft:"#FF5D73" }));
+  if (t >= B.cardIn - 0.2) {
+    const k = PP(t, B.cardIn - 0.2, 0.35, back);
+    const bob = Math.sin((t - (B.cardIn - 0.2)) * 2.2) * 6;
+    const p = { rot:0, torso: 178, headTilt: -6, laU: lerp(14, 128, k), laL: lerp(8, 118, k),
+                raU: lerp(-14, -128, k), raL: lerp(-8, -118, k), llU:6, llL:2, rlU:-6, rlL:-2,
+                eyes: (t * 10 | 0) % 24 === 0 ? "closed" : "open", face: 1,
+                tx: 190, ty: 1320 + bob, sx: 1, sy: 1 };
+    poseStick(eka, p);
+    eka.g.setAttribute("display", "");
+  } else {
+    eka.g.setAttribute("display", "none");
+  }
+
+  /* end card */
+  const end = $('end');
+  if (t >= B.endIn) end.style.opacity = String(PP(t, B.endIn, 0.35));
+  else end.style.opacity = '0';
+
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>
