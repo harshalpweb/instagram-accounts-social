@@ -1,0 +1,17 @@
+{
+  "_license": "All files Mixkit Free License, vendored + logged in assets/audio/ATTRIBUTION.md. Beats match reel.html (pause-it, 19.8s). Track (cat-walk) differs from the other two Reels in this batch. 'Rising pitch, hard cut to total silence on the laptop-close beat, track resumes on the last beat' per the brief: bgm trimmed hard at the cut (no fade_out -- an actual hard stop), silent through the wide-shot hold, a second bgm segment re-enters exactly at the cut back to close-up (beat 4).",
+  "tracks": [
+    {"file": "assets/audio/bgm/cat-walk.mp3", "at": 0.0, "gain_db": -16, "trim": [0, 5.15], "fade_in": 0.3},
+    {"file": "assets/audio/sfx/light-sweep-magic.mp3", "at": 3.3, "gain_db": -11, "trim": [0, 1.9]},
+    {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 4.55, "gain_db": -9, "trim": [0, 0.7]},
+    {"file": "assets/audio/sfx/pop-electric.mp3", "at": 5.0, "gain_db": -6, "trim": [0, 0.2]},
+    {"file": "assets/audio/sfx/impact-cine-big.mp3", "at": 5.15, "gain_db": -3, "trim": [0, 1.0], "fade_out": 0.3},
+
+    {"file": "assets/audio/sfx/light-sweep-magic.mp3", "at": 9.0, "gain_db": -12, "trim": [0, 1.1]},
+
+    {"file": "assets/audio/bgm/cat-walk.mp3", "at": 10.1, "gain_db": -16, "trim": [5.15, 19.8], "fade_out": 1.2},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 10.35, "gain_db": -10, "trim": [0, 0.9]},
+    {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 10.65, "gain_db": -9, "trim": [0, 0.9]},
+    {"file": "assets/audio/sfx/ui-popup-dry.mp3", "at": 14.9, "gain_db": -7}
+  ]
+}

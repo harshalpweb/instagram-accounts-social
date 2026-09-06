@@ -1,0 +1,326 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+/* anime_ekaya "pause it" (19.8s) -- CHARACTER MOMENT (reel-relatable-action).
+   The account's first true close-up shot and its first hard cut -- built
+   per the explicit feasibility note that rig2d's pose already supports
+   arbitrary sx/sy scale for a push-in; the close-up here is a CAMERA
+   transform (outer #camG group scale+translate) wrapped around the SAME
+   stick-figure world position used for the wide shot, not a rebuilt rig.
+   Premise: EKAYA drowsy-watching with headphones on. A door-shaped strip
+   of warm light widens at frame-left (someone's coming) -> eyes snap wide
+   -> HARD 3-frame smash-cut to a wide shot: laptop slammed shut, EKAYA
+   sitting bolt upright staring at nothing -> the light strip narrows and
+   vanishes (false alarm) -> hard cut back to the close-up, one eye opens
+   before the other, screen-glow returns.
+   Principle map: ANTICIPATION = the held eyes-closed brace 10.1-10.3s
+   right after the cut back, before either eye opens; a small head-tilt
+   toward the door during widen (4.6-5.0s). SQUASH = laptop lid sy pop at
+   the impact instant (5.15s, pivot at its hinge/back edge), 2-frame peak
+   fast recovery. HOLDS = wide-shot stare 5.45-9.0s (blink at 7.0s), final
+   settle 11.6-13.0s (blink at 13.0s).
+   Eye channel: this reel overrides rig2d's binary open/wide/closed state
+   with a continuous per-eye openness value (custom setEyes() below,
+   reusing the rig's own eye element refs) specifically because the brief
+   calls for half-lidded drowsiness, a snap-to-full-circle scare, and an
+   ASYMMETRIC one-eye-first reopen -- none of which the shared discrete
+   state machine expresses; nothing in rig2d.js itself was changed.
+   Scene/prop: EKAYA + headphones (new) + door-light strip (new) + a
+   desk/laptop wide-shot prop (new). Nothing in the last 14 days used a
+   close-up push-in, a door strip or a laptop -- no scene/prop repeat.
+   FRAME-REVIEW FIXES (four rounds, every one caught only by looking at
+   rendered frames, never by the ffmpeg pass):
+   (1) the pose objects never set tx/ty, so poseStick() got translate(
+   undefined,undefined) and the rig rendered off-canvas -- only the
+   headphones/eyes (positioned independently) landed in the right spot.
+   Every pose now carries tx:STAND_X, ty:STAND_Y explicitly.
+   (2) at the originally-scoped 55% frame fill (camera scale 5.3), idle
+   arms hung near-vertical and read as broken lines through the face and
+   off the bottom of frame. Pulled back to camera scale 3.6 (~37% frame
+   fill, inside the brief's own sanctioned 35-40% fallback).
+   (3) after fixing (1), the eyes still didn't render: setEyes() computed
+   the head center with headCenterOf() (a WORLD-space helper, correct for
+   the headphones/glow which are siblings of the rig group) but applied it
+   to eyeL/eyeR, which are CHILDREN of the rig's own group that already
+   carries translate(tx,ty) -- a doubled offset that pushed the eyes off
+   whatever was visible. A second helper, headCenterLocal() (hip at
+   [0,0]), is used for the eyes specifically. Same fix also revealed the
+   headphone band was colliding with the rig's default coral hair-tuft
+   (both drawn near top-of-head, same color) -- the tuft is omitted for
+   this reel since headphones replace it as the head accent. Idle arm
+   angles were also toned down from a stiff scarecrow "T" to a relaxed
+   drop-and-out.
+   (4) the hook text (top:1500px, same pale color as the rig) sat directly
+   over the close-up torso line, cutting through the letters. Gave #hook
+   its own dark scrim panel so legibility never depends on what the scene
+   happens to be doing underneath it. */
+@font-face { font-family:'Space Grotesk'; src:url('../../tools/fonts/SpaceGrotesk-Bold.ttf'); font-weight:700; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Regular.ttf'); font-weight:400; }
+@font-face { font-family:'Inter'; src:url('../../tools/fonts/Inter-Medium.ttf'); font-weight:500; }
+@font-face { font-family:'Archivo Black'; src:url('../../tools/fonts/ArchivoBlack-Regular.ttf'); font-weight:400; }
+
+:root { --bg:#131022; --panel:#1C1834; --paper:#F3F0FF; --coral:#FF5D73; --lav:#9D8DF1; --muted:#A9A3C2; --hair:#37315A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--bg); color:var(--paper); font-family:'Inter',sans-serif; position:relative; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+
+#band { position:absolute; left:0; right:0; top:0; height:10px; z-index:20;
+  background:linear-gradient(90deg, var(--coral) 0 38%, var(--lav) 38% 62%, var(--hair) 62% 100%); }
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Space Grotesk'; font-weight:700; font-size:38px; letter-spacing:.08em; color:var(--coral); }
+.wordmark .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:28px; color:var(--lav); letter-spacing:.18em; margin-left:14px; }
+.kicker { font-size:25px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--muted); }
+
+#hook { position:absolute; top:1460px; left:80px; right:80px; opacity:0; z-index:12;
+  background:rgba(19,16,34,0.78); border-radius:24px; padding:32px 36px; }
+#hook .line { font-family:'Space Grotesk'; font-weight:700; font-size:70px; line-height:1.1; }
+#hook .sub { font-family:'Space Grotesk'; font-weight:700; font-size:70px; line-height:1.1; color:var(--coral); margin-top:4px; }
+
+#end { position:absolute; inset:0; background:var(--bg); opacity:0; z-index:15; }
+#endcard { position:absolute; top:760px; left:80px; right:80px; text-align:center; }
+#endcard .line { font-family:'Space Grotesk'; font-weight:700; font-size:74px; line-height:1.14; }
+#endcard .line mark { background:none; color:var(--coral); }
+#endword { position:absolute; top:1120px; left:0; right:0; text-align:center; font-family:'Space Grotesk';
+  font-weight:700; font-size:76px; color:var(--coral); opacity:0; }
+#endword .jp { font-family:'Yu Gothic','Meiryo',sans-serif; font-size:44px; color:var(--lav); display:block; margin-top:12px; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <linearGradient id="doorGrad" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#FFAE6B" stop-opacity="0.62"/>
+      <stop offset="100%" stop-color="#FFAE6B" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF5D73" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#9D8DF1" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#9D8DF1" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft1" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="26"/></filter>
+  </defs>
+</svg></div>
+<div id="band"></div>
+<div id="brandrow"><div class="wordmark">EKAYA <span class="jp">&#12456;&#12459;&#12516;</span></div><div class="kicker">character moment</div></div>
+
+<div id="hook"><div class="line">Someone walked in.</div><div class="sub">PAUSE IT.</div></div>
+
+<div id="end">
+  <div id="endcard"><div class="line">THE FASTEST <mark>REFLEX</mark></div><div class="line">AN INDIAN ANIME FAN HAS.</div></div>
+  <div id="endword">EKAYA<span class="jp">&#12456;&#12459;&#12516;</span></div>
+</div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 19.8, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const back = p => { const c=1.70158, c3=c+1; return 1 + c3*Math.pow(p-1,3) + c*Math.pow(p-1,2); };
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+/* ---------------- beat table ---------------- */
+const B = {
+  hookIn: 0.0, hookHoldEnd: 2.6, hookOut: 3.0,
+  doorStart: 3.3, doorEnd: 5.0,
+  snapStart: 5.0, snapHoldEnd: 5.15,
+  cut1: 5.15, impactEnd: 5.45, blinkWide: 7.0,
+  stripNarrowStart: 9.0, stripNarrowEnd: 10.1,
+  cut2: 10.1, braceEnd: 10.3, rEyeOpenEnd: 10.6, lEyeOpenEnd: 10.9, glowReturnEnd: 11.6,
+  blinkFinal: 13.0,
+  cardStart: 14.5, cardTextIn: 14.9
+};
+window.BEATS = B;
+
+/* ---------------- stage ---------------- */
+const stage = $("stage");
+const bgflip = makeFlipRect(stage);
+const AC = { paper:"#F3F0FF", coral:"#FF5D73", lav:"#9D8DF1", panel:"#1C1834", hair:"#37315A", bg:"#131022", muted:"#A9A3C2", floor:"#0E0C1B" };
+
+const bgRect = el(stage, "rect", { x:0, y:0, width:1080, height:1920, fill:AC.bg });
+const doorRect = el(stage, "rect", { x:0, y:0, width:0, height:1920, fill:"url(#doorGrad)" });
+
+const camG = el(stage, "g", {});
+const sceneG = el(camG, "g", {});
+el(sceneG, "rect", { x:0, y:1620, width:1080, height:300, fill:AC.floor });
+el(sceneG, "line", { x1:0, y1:1620, x2:1080, y2:1620, stroke:AC.hair, "stroke-width":5 });
+
+/* desk + shut laptop -- wide-shot prop, drawn at world scale so it frames
+   out of view when the camera is pushed in close */
+const DESK_X0 = 300, DESK_X1 = 780, DESK_Y = 1560;
+el(sceneG, "rect", { x:DESK_X0, y:DESK_Y, width:DESK_X1-DESK_X0, height:26, rx:6, fill:AC.panel, stroke:AC.hair, "stroke-width":4 });
+el(sceneG, "rect", { x:DESK_X0+30, y:DESK_Y+26, width:24, height:60, fill:AC.panel });
+el(sceneG, "rect", { x:DESK_X1-54, y:DESK_Y+26, width:24, height:60, fill:AC.panel });
+const laptopG = el(sceneG, "g", {});
+const LX0 = 460, LX1 = 660, LY = DESK_Y - 16;
+el(laptopG, "rect", { x:LX0, y:LY, width:LX1-LX0, height:16, rx:4, fill:AC.lav, stroke:AC.paper, "stroke-width":3 });
+
+/* EKAYA -- no tuft: the headphone band is this reel's head accent instead
+   (a coral tuft in the same spot visually collided with it, see fix (3)) */
+const STAND_X = 540, STAND_Y = 1352;
+const eka = makeStick(sceneG, { stroke:AC.paper, fill:AC.bg });
+
+/* headphones -- attached to the head every frame via headCenterOf() */
+const hpG = el(sceneG, "g", {});
+const hpBand = el(hpG, "path", { fill:"none", stroke:AC.coral, "stroke-width":11, "stroke-linecap":"round" });
+const hpCupL = el(hpG, "circle", { r:34, fill:AC.panel, stroke:AC.coral, "stroke-width":8 });
+const hpCupR = el(hpG, "circle", { r:34, fill:AC.panel, stroke:AC.coral, "stroke-width":8 });
+
+/* screen-glow wash, close-up only (opacity-driven, always present in DOM) */
+const glow = el(sceneG, "ellipse", { rx:58, ry:44, fill:"url(#glowGrad)", filter:"url(#soft1)" });
+
+/* ---------------- helpers ---------------- */
+/* WORLD-space head center -- for elements that are siblings of the rig
+   group (headphones, glow), which need STAND_X/STAND_Y baked in */
+function headCenterOf(p) {
+  const hip = [STAND_X, STAND_Y];
+  const tTop = [hip[0] + dir(p.torso)[0] * L.torso, hip[1] + dir(p.torso)[1] * L.torso];
+  const a = p.torso + (p.headTilt || 0);
+  return [tTop[0] + dir(a)[0] * (L.neck + L.head * 0.9), tTop[1] + dir(a)[1] * (L.neck + L.head * 0.9)];
+}
+/* LOCAL (hip-at-origin) head center -- for elements that are CHILDREN of
+   the rig group itself (the eyes), which already sits under a
+   translate(tx,ty) and would double-offset if given world coordinates */
+function headCenterLocal(p) {
+  const tTop = [dir(p.torso)[0] * L.torso, dir(p.torso)[1] * L.torso];
+  const a = p.torso + (p.headTilt || 0);
+  return [tTop[0] + dir(a)[0] * (L.neck + L.head * 0.9), tTop[1] + dir(a)[1] * (L.neck + L.head * 0.9)];
+}
+/* continuous per-eye openness (0 closed .. 1 open .. 1.55 wide/snap), bypassing
+   rig2d's discrete eyes state -- see file-header note on why this reel owns it */
+function setEyes(stick, hcLocal, face, lAmt, rAmt) {
+  const ex = hcLocal[0] + face * 16, ey = hcLocal[1] - 6, gap = 21;
+  const draw = (eye, lid, x, amt) => {
+    if (amt <= 0.04) {
+      eye.setAttribute("display", "none");
+      lid.setAttribute("display", "");
+      lid.setAttribute("x1", x - 11); lid.setAttribute("x2", x + 11);
+      lid.setAttribute("y1", ey + 3); lid.setAttribute("y2", ey + 3);
+    } else {
+      lid.setAttribute("display", "none");
+      eye.setAttribute("display", "");
+      eye.setAttribute("cx", x); eye.setAttribute("cy", ey);
+      eye.setAttribute("rx", (7 + 5 * Math.max(0, amt - 1)).toFixed(2));
+      eye.setAttribute("ry", (Math.min(amt, 1) * 9 + Math.max(0, amt - 1) * 5).toFixed(2));
+    }
+  };
+  draw(stick.eyeL, stick.lidL, ex - gap, lAmt);
+  draw(stick.eyeR, stick.lidR, ex + gap, rAmt);
+}
+
+/* idle arms rest down-and-slightly-out -- toned down from an earlier,
+   too-wide "T" spread (see fix note (2)/(3) history above) */
+const IDLE = { torso:182, headTilt:6, laU:32, laL:14, raU:-32, raL:-14, llU:6, llL:2, rlU:-6, rlL:-2, eyes:"open", face:1 };
+/* bolt-upright variant of rig2d's own P.sitUp silhouette (legs/arms kept
+   close to that known-good seated shape; only torso/head pushed more
+   vertical + tipped back for the startled read) -- distinct from
+   sitUp/sitSlouch/sitFlop as used elsewhere on this account since the
+   torso/head delta alone reads very differently at full-frame scale */
+const SIT_BOLT = { torso:188, headTilt:-8, laU:70, laL:100, raU:60, raL:105, llU:75, llL:6, rlU:68, rlL:2, eyes:"wide", face:1 };
+
+function layout(t) {
+  const wide = t >= B.cut1 && t < B.cut2;
+  const sway = Math.sin(t * 1.6) * (wide ? 0 : 1.4);
+
+  let p, camScale, camTx, camTy, face = 1;
+  if (!wide) {
+    p = { ...IDLE, tx: STAND_X, ty: STAND_Y, torso: IDLE.torso + sway * 0.6 };
+    if (t >= B.doorStart) {
+      const k = ramp(t, B.doorStart + 1.3, B.doorEnd); /* small anticipation tilt in the last third of the widen */
+      p.headTilt = IDLE.headTilt - 10 * easeIO(k);
+      p.torso = IDLE.torso + sway * 0.6 - 3 * easeIO(k);
+    }
+    /* close-up push-in: ~37% frame fill (camera scale 3.6), inside the
+       brief's own sanctioned 35-40% fallback range -- see fix note (2) */
+    const S = 3.6, hcWorld = headCenterOf({ torso:182, headTilt:6 }); /* fixed reference so the push-in doesn't drift with the sway */
+    camScale = S; camTx = 540 - S * hcWorld[0]; camTy = 640 - S * hcWorld[1];
+  } else {
+    p = { ...SIT_BOLT, tx: STAND_X, ty: STAND_Y };
+    camScale = 1; camTx = 0; camTy = 0;
+  }
+
+  /* eyes */
+  let lAmt = 0.30, rAmt = 0.30; /* half-lidded idle */
+  if (!wide) {
+    if (t >= B.snapStart) { const k = ramp(t, B.snapStart, B.snapStart + 0.08); lAmt = rAmt = lerp(0.30, 1.55, k); }
+    if (t >= B.cut2) {
+      if (t < B.braceEnd) { lAmt = 0; rAmt = 0; }
+      else if (t < B.rEyeOpenEnd) { rAmt = ramp(t, B.braceEnd, B.rEyeOpenEnd); lAmt = 0; }
+      else if (t < B.lEyeOpenEnd) { rAmt = 1; lAmt = ramp(t, B.rEyeOpenEnd, B.lEyeOpenEnd); }
+      else { rAmt = 1; lAmt = 1; }
+      if (t >= B.blinkFinal && t < B.blinkFinal + 0.09) { lAmt = 0.06; rAmt = 0.06; }
+    }
+  } else {
+    lAmt = rAmt = 1.35;
+    if (t >= B.blinkWide && t < B.blinkWide + 0.09) { lAmt = 0.06; rAmt = 0.06; }
+  }
+
+  /* laptop impact squash, pivot at the back hinge edge */
+  let laptopSy = 1;
+  if (wide) laptopSy = 1 - punch(t, B.cut1, 0.20, 15);
+
+  /* door strip width */
+  let doorW = 0;
+  if (t >= B.doorStart && t < B.doorEnd) doorW = 140 * easeIO(ramp(t, B.doorStart, B.doorEnd));
+  else if (t >= B.doorEnd && t < B.stripNarrowStart) doorW = 140;
+  else if (t >= B.stripNarrowStart && t < B.stripNarrowEnd) doorW = 140 * (1 - easeIO(ramp(t, B.stripNarrowStart, B.stripNarrowEnd)));
+
+  /* glow opacity */
+  let glowOp = wide ? 0 : 0.34;
+  if (!wide) {
+    if (t >= B.doorStart && t < B.doorEnd) glowOp = lerp(0.34, 0.5, ramp(t, B.doorStart, B.doorEnd));
+    if (t >= B.snapStart && t <= B.snapHoldEnd) glowOp = 0.5;
+    if (t >= B.cut2) glowOp = t < B.glowReturnEnd ? lerp(0, 0.42, ramp(t, B.cut2, B.glowReturnEnd)) : 0.42;
+  }
+  if (t >= B.snapHoldEnd && t < B.cut2 && wide) glowOp = 0;
+
+  return { p, camScale, camTx, camTy, face, lAmt, rAmt, laptopSy, doorW, glowOp, wide };
+}
+
+function apply(t, s) {
+  poseStick(eka, s.p);
+  const hc = headCenterOf(s.p);
+  const hcLocal = headCenterLocal(s.p);
+  setEyes(eka, hcLocal, s.face, s.lAmt, s.rAmt);
+
+  hpCupL.setAttribute("cx", hc[0] - 50); hpCupL.setAttribute("cy", hc[1] - 2);
+  hpCupR.setAttribute("cx", hc[0] + 50); hpCupR.setAttribute("cy", hc[1] - 2);
+  hpBand.setAttribute("d", `M ${hc[0]-50} ${hc[1]-44} Q ${hc[0]} ${hc[1]-116} ${hc[0]+50} ${hc[1]-44}`);
+  hpG.setAttribute("display", s.wide ? "none" : "");
+
+  glow.setAttribute("cx", hc[0] - 60); glow.setAttribute("cy", hc[1] + 14);
+  glow.setAttribute("opacity", s.glowOp.toFixed(3));
+
+  laptopG.setAttribute("transform", `translate(${(LX0+LX1)/2},${LY+8}) scale(1,${s.laptopSy.toFixed(3)}) translate(${-(LX0+LX1)/2},${-(LY+8)})`);
+
+  camG.setAttribute("transform", `translate(${s.camTx.toFixed(1)},${s.camTy.toFixed(1)}) scale(${s.camScale.toFixed(3)})`);
+
+  doorRect.setAttribute("width", s.doorW.toFixed(1));
+}
+
+window.seek = async function (t) {
+  t = clamp(t, 0, 19.8);
+  stalePaintGuard(t, bgflip, document.getElementById("stagewrap"), "rgba(19,16,34,0.004)");
+  const covered = t >= B.cardStart + 0.4;
+  stage.style.visibility = covered ? "hidden" : "visible";
+  if (!covered) apply(t, layout(t));
+
+  const h = $('hook');
+  if (t < B.hookOut + 0.3) {
+    const pIn = PP(t, B.hookIn, 0.3, back);
+    h.style.opacity = String(Math.min(PP(t, B.hookIn, 0.12), 1 - PP(t, B.hookOut - 0.25, 0.25, easeIO)));
+    h.style.transform = `translateY(${(1 - pIn) * 30}px)`;
+  } else h.style.opacity = '0';
+
+  const end = $('end');
+  if (t >= B.cardStart) {
+    end.style.opacity = String(PP(t, B.cardStart, 0.3));
+    $('endcard').style.opacity = String(PP(t, B.cardTextIn, 0.25));
+    $('endcard').style.transform = `scale(${0.9 + 0.1 * PP(t, B.cardTextIn, 0.35, back)})`;
+    $('endword').style.opacity = String(PP(t, B.cardTextIn + 0.6, 0.3));
+  } else end.style.opacity = '0';
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>
