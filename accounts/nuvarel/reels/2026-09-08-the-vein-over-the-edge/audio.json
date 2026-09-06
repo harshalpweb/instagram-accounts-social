@@ -1,0 +1,12 @@
+{
+ "_license": "All files Mixkit Free License, already vendored + logged in assets/audio/ATTRIBUTION.md (no new files). Beats match reel.html CARD_T (The Evidence No. 01 animated carousel, 18.0 s). paper-slide on each card change; chime-crystal on the evidence card (5.6 s) is the account's signature reveal cue.",
+ "tracks": [
+  {"file": "assets/audio/bgm/piano-reflections.mp3", "at": 0.0, "gain_db": -17, "trim": [0, 18.0], "fade_in": 0.4, "fade_out": 1.6},
+  {"file": "assets/audio/sfx/paper-slide.mp3", "at": 2.8, "gain_db": -13},
+  {"file": "assets/audio/sfx/paper-slide.mp3", "at": 5.6, "gain_db": -13},
+  {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 5.75, "gain_db": -10},
+  {"file": "assets/audio/sfx/paper-slide.mp3", "at": 8.7, "gain_db": -13},
+  {"file": "assets/audio/sfx/paper-slide.mp3", "at": 11.7, "gain_db": -13},
+  {"file": "assets/audio/sfx/paper-slide.mp3", "at": 15.4, "gain_db": -13}
+ ]
+}

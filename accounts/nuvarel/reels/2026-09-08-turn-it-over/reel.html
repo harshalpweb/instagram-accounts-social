@@ -1,0 +1,91 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+/* nuvarel "The Reveal - No. 01" -- reel-reveal, 14.6 s, photoreal STILLS only.
+   Two AI photographs from one generation batch (seed 1788721877): the same
+   glazed stoneware pot upright, then tipped so its unglazed foot ring faces
+   the camera. Cut as hook -> hairline wipe reveal -> slow push toward the
+   foot ring -> the tell (text) -> save. No character, no rig2d.js, no video
+   generation. Illustrates what an unglazed foot looks like; the copy never
+   claims to record this pot being turned (build-gates.json condition 3).
+   Photo sources (gitignored candidates; gen-1788721877.json is committed):
+     upright = render/photos/2026-09-08-turn-the-bowl-over/foot/photo-1788721877-1.png
+     tipped  = render/photos/2026-09-08-turn-the-bowl-over/foot/photo-1788721877-2.png */
+:root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; --bronzeD:#B08D5F; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--esp); color:var(--alab); font-family:'Archivo',Arial,sans-serif; position:relative; }
+#guard { position:absolute; inset:0; pointer-events:none; z-index:50; }
+.brandrow { position:absolute; top:120px; left:84px; right:84px; display:flex; justify-content:space-between; align-items:baseline; z-index:10; }
+.eyebrow { font-size:27px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--bronzeD); }
+.wordmark { font-size:27px; font-weight:600; letter-spacing:.34em; text-transform:uppercase; color:var(--alab); }
+#stage { position:absolute; left:0; top:230px; width:1080px; height:1350px; overflow:hidden; background:#1d1813; }
+#stage .ph { position:absolute; inset:0; background-size:cover; background-position:center center; }
+#p2 { transform-origin:51% 61%; }
+#wipe { position:absolute; top:0; bottom:0; width:4px; background:var(--bronze); opacity:0; }
+#scrim { position:absolute; left:0; right:0; bottom:0; height:46%; background:linear-gradient(to bottom, rgba(42,36,30,0) 0%, rgba(42,36,30,0.55) 100%); }
+#cap { position:absolute; left:92px; right:92px; bottom:88px; }
+#cap .rule { width:132px; height:3px; background:var(--bronze); margin-bottom:28px; }
+#h { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:92px; line-height:1.06; color:var(--alab); max-width:800px; }
+.card { position:absolute; inset:0; background:var(--esp); opacity:0; z-index:20; }
+.card .inner { position:absolute; top:500px; left:92px; right:92px; }
+.klabel { display:block; font-size:28px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--bronzeD); margin-bottom:34px; }
+.card h2 { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:88px; line-height:1.08; color:var(--alab); margin-bottom:44px; }
+.card .rule { width:132px; height:3px; background:var(--bronze); margin:0 0 40px; }
+.card p { font-size:40px; line-height:1.5; color:var(--alab); max-width:860px; }
+.card p + p { margin-top:28px; }
+#end .inner { top:760px; }
+#end .handle { font-size:34px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--bronzeD); margin-top:44px; }
+</style></head><body>
+<div class="brandrow"><span class="eyebrow">The Reveal · No. 01</span><span class="wordmark">Nuvarel</span></div>
+<div id="stage">
+  <div class="ph" id="p1" style="background-image:url('../../render/photos/2026-09-08-turn-the-bowl-over/foot/photo-1788721877-1.png')"></div>
+  <div class="ph" id="p2" style="background-image:url('../../render/photos/2026-09-08-turn-the-bowl-over/foot/photo-1788721877-2.png')"></div>
+  <div id="wipe"></div>
+  <div id="scrim"></div>
+  <div id="cap"><div class="rule"></div><h1 id="h">Turn it over before you buy.</h1></div>
+</div>
+<div class="card" id="tellcard"><div class="inner"><span class="klabel">The tell</span><h2>Dense and grey or buff: stoneware. Chalky, pale or orange: earthenware.</h2><div class="rule"></div><p>The unglazed foot is the only place the clay itself shows. Stoneware is fired hot enough to seal itself. Earthenware is sealed only by its glaze, so a chip at the rim drinks.</p><p>For a vase, either. For what you eat from every day, stoneware.</p></div></div>
+<div class="card" id="end"><div class="inner"><h2>Save this for the ceramics aisle.</h2><div class="rule"></div><div class="handle">@nuvarel_</div></div></div>
+<div id="guard"></div>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const lerp = (a, b, k) => a + (b - a) * k;
+const eo = p => 1 - Math.pow(1 - p, 3);
+const eio = p => p < .5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3) / 2;
+const ramp = (t, a, b) => c01((t - a) / (b - a));
+const B = { hookIn:-0.3, wipe:[2.6, 3.4], h2:3.4, zoom:[3.5, 8.2], tell:8.4, end:12.2, out:14.6 };
+window.BEATS = B;
+window.REEL = { duration: B.out, fps: 30 };
+const compositorCommit = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+function guard(t) { const odd = Math.round(t * 30) % 2; $("guard").style.backgroundColor = odd ? "rgba(42,36,30,0.004)" : "transparent"; }
+function fadeIn(el, t, t0, d = 0.35, dy = 16) { const k = eo(ramp(t, t0, t0 + d)); el.style.opacity = k.toFixed(3); el.style.transform = `translateY(${lerp(dy, 0, k).toFixed(1)}px)`; }
+window.seek = async (t) => {
+  t = c01(t / B.out) * B.out;
+  guard(t);
+  /* hairline wipe, left to right: the tipped pot replaces the upright one under the line */
+  const w = eio(ramp(t, B.wipe[0], B.wipe[1]));
+  $("p2").style.clipPath = `inset(0 ${(100 * (1 - w)).toFixed(2)}% 0 0)`;
+  const wipeOn = t >= B.wipe[0] && t < B.wipe[1] + 0.15;
+  $("wipe").style.opacity = wipeOn ? (1 - ramp(t, B.wipe[1], B.wipe[1] + 0.15)).toFixed(3) : "0";
+  $("wipe").style.left = `${(1080 * w - 2).toFixed(1)}px`;
+  /* slow push toward the foot ring */
+  const z = 1 + 0.45 * eio(ramp(t, B.zoom[0], B.zoom[1]));
+  $("p2").style.transform = `scale(${z.toFixed(4)})`;
+  /* headline: hook, then the second line after the reveal */
+  const second = t >= B.h2;
+  $("h").textContent = second ? "Where the glaze stops, the clay shows." : "Turn it over before you buy.";
+  fadeIn($("h"), t, second ? B.h2 : B.hookIn, 0.35, 14);
+  $("tellcard").style.opacity = eo(ramp(t, B.tell, B.tell + 0.45)).toFixed(3);
+  fadeIn($("tellcard").firstElementChild, t, B.tell, 0.5, 24);
+  /* the tell copy leaves before the end card arrives, so two text layers never overlap */
+  $("tellcard").firstElementChild.style.opacity = (parseFloat($("tellcard").firstElementChild.style.opacity) * (1 - ramp(t, B.end - 0.25, B.end))).toFixed(3);
+  $("end").style.opacity = eo(ramp(t, B.end, B.end + 0.45)).toFixed(3);
+  fadeIn($("end").firstElementChild, t, B.end, 0.5, 24);
+  await compositorCommit();
+};
+window.seek(0);
+</script></body></html>
