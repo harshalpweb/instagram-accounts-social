@@ -1,0 +1,9 @@
+{
+  "_doc": "Production gates for anime_ekaya's daily build (CoS, 2026-09-06). The daily-build prompt reads this file FIRST and builds only what is open. Flip a gate only with the named evidence; record who/when/why in `note`. Same mechanism as nuvarel's build-gates.json.",
+  "carousel_video_slides": {
+    "state": "closed",
+    "since": "2026-09-06",
+    "by": "CoS",
+    "note": "Instagram's Graph API supports mixing VIDEO and IMAGE children inside one CAROUSEL_ALBUM container, but scripts/publish_due_posts.py's create_item_container() only ever sends image_url -- it has no video-child path today. Opening this gate requires: (1) Group CTO extends create_item_container to accept a video child (media_type: VIDEO + is_carousel_item: true, with the same wait_until_finished poll REELS uses, since video containers process server-side), (2) a short-loop-clip generation step for whichever slide(s) in a deck are marked video, (3) at least one test carousel with a mixed video+image child set publishes successfully end to end. Until then, every anime_ekaya (and any other account's) carousel must be all-image children -- do not hand-construct a video child, it will fail against the live API."
+  }
+}
