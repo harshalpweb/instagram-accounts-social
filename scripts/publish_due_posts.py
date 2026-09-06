@@ -20,6 +20,21 @@ it must stay side-effect-free and must use exactly the same due logic as a real
 run — otherwise the throttle would be deciding on a different reality than the
 publisher acts on.
 
+Mixed video+image carousels (Group CTO, 2026-09-06): a `slides` entry is
+either a bare string (legacy, always an image path -- every pre-existing
+queue JSON keeps working unchanged) or `{"type": "image"|"video", "src":
+"<path>"}`. A `"type": "video"` entry sends `media_type: VIDEO` +
+`video_url` + `is_carousel_item: true` on that one child container, same
+as a standalone Reel's video container, and is polled with the longer
+REEL_POLL_TIMEOUT_S bound (video containers process slower server-side
+than image containers, same reasoning as the REELS path) instead of the
+tighter carousel POLL_TIMEOUT_S. `is_ai_generated` still never goes on any
+carousel child, video or image -- Meta rejects it there regardless of
+media type; the parent-only rule from the AI-disclosure paragraph below
+applies unchanged. Gated behind anime_ekaya's `build-gates.json`
+`carousel_video_slides` key until verified end-to-end against the live
+API.
+
 AI-content self-disclosure (Group CTO, 2026-09-05): a queue JSON carrying
 `"ai_generated": true` publishes with Meta's `is_ai_generated=true` container
 parameter — on the REELS container, and on the CAROUSEL parent container only
@@ -68,8 +83,9 @@ POLL_TIMEOUT_S = 60
 # Video containers process server-side far longer than image containers —
 # 30-90s observed for short Reels (trend-signals-social
 # docs/2026-08-18-reels-handoff.md), and a 2-minute video can exceed the
-# image timeout several times over. Applies to the REELS path only; the
-# carousel path keeps the tighter 60s bound.
+# image timeout several times over. Applies to the REELS path, and to any
+# VIDEO carousel child (see module docstring) — the image-only carousel
+# path keeps the tighter 60s bound.
 REEL_POLL_TIMEOUT_S = 300
 
 # ACCOUNT_DIR selects which account's content/ tree this run publishes from,
@@ -174,8 +190,42 @@ def ai_disclosure(post: dict) -> dict:
     return {"is_ai_generated": "true"} if post.get("ai_generated") is True else {}
 
 
-def create_item_container(slide_path: str) -> str:
-    # Never carries is_ai_generated: Meta rejects it on carousel children.
+def _slide_type_and_path(slide) -> tuple[str, str]:
+    """Normalize one `slides[]` entry to (type, path).
+
+    A bare string is an image slide -- this is the entire legacy shape, so
+    every queue JSON written before 2026-09-06 keeps working unchanged. A
+    dict `{"type": "image"|"video", "src": "..."}` is the new mixed-carousel
+    shape (see module docstring). `type` defaults to "image" if a dict omits
+    it, matching the bare-string default.
+    """
+    if isinstance(slide, dict):
+        return slide.get("type", "image"), slide["src"]
+    return "image", slide
+
+
+def create_item_container(slide) -> str:
+    """Create one CAROUSEL_ALBUM child container.
+
+    `slide` is either a bare string (legacy image path) or
+    `{"type": "image"|"video", "src": "<path>"}` (see module docstring).
+    Never carries is_ai_generated on either media type: Meta rejects it on
+    carousel children regardless of whether the child is an image or video.
+    """
+    slide_type, slide_path = _slide_type_and_path(slide)
+    if slide_type == "video":
+        video_url = f"{RAW_BASE}/{slide_path}"
+        payload = api_post(
+            f"{IG_USER_ID}/media",
+            ACCESS_TOKEN,
+            data={
+                "media_type": "VIDEO",
+                "video_url": video_url,
+                "is_carousel_item": "true",
+            },
+            base=BASE,
+        )
+        return payload["id"]
     image_url = f"{RAW_BASE}/{slide_path}"
     payload = api_post(
         f"{IG_USER_ID}/media",
@@ -246,10 +296,18 @@ def publish_post(post: dict) -> str:
         return publish_reel(post["video"], post["caption"], extra)
     if not post.get("slides"):
         raise PostError("no slides listed")
-    item_ids = [create_item_container(slide) for slide in post["slides"]]
-    for item_id in item_ids:
-        wait_until_finished(item_id)
-    carousel_id = create_carousel_container(item_ids, post["caption"], extra)
+    # Each carousel child is created then polled with a timeout that matches
+    # ITS OWN media type -- a video child uses the longer REEL_POLL_TIMEOUT_S
+    # (see module docstring), an image child keeps the tighter POLL_TIMEOUT_S,
+    # exactly as if it were the only slide in an all-image carousel.
+    items = [
+        (create_item_container(slide), _slide_type_and_path(slide)[0])
+        for slide in post["slides"]
+    ]
+    for item_id, slide_type in items:
+        timeout = REEL_POLL_TIMEOUT_S if slide_type == "video" else POLL_TIMEOUT_S
+        wait_until_finished(item_id, timeout_s=timeout)
+    carousel_id = create_carousel_container([item_id for item_id, _ in items], post["caption"], extra)
     wait_until_finished(carousel_id)
     return publish_container(carousel_id)
 
@@ -264,11 +322,16 @@ def move_post(path: Path, post: dict, dest_dir: Path) -> None:
     # commit f85e4cb: only the JSON moved). ROOT kept as a fallback for any
     # legacy account-relative path.
     for slide in post.get("slides", []):
-        slide_path = _REPO_ROOT / slide
+        # slide is a bare string (legacy image path) or a
+        # {"type": ..., "src": ...} dict (mixed carousel, see module
+        # docstring) -- _slide_type_and_path normalizes either shape to the
+        # actual repo-relative path before moving the file.
+        _, slide_rel_path = _slide_type_and_path(slide)
+        slide_path = _REPO_ROOT / slide_rel_path
         if not slide_path.exists():
-            slide_path = ROOT / slide
+            slide_path = ROOT / slide_rel_path
         if slide_path.exists():
-            shutil.move(str(slide_path), str(post_dir / Path(slide).name))
+            shutil.move(str(slide_path), str(post_dir / Path(slide_rel_path).name))
     video_path = post.get("video")
     if video_path:
         source = _REPO_ROOT / video_path

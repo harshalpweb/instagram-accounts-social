@@ -38,15 +38,22 @@ This rule stays in force regardless of format cadence.)
 
 ## Step 0 — read the gates before anything else
 
-Read `accounts/anime_ekaya/docs/build-gates.json`. As written
-2026-09-06:
-- `carousel_video_slides` **closed** — Instagram's Graph API can mix
-  video and image children in one carousel, but this repo's publisher
-  (`scripts/publish_due_posts.py`, `create_item_container`) only sends
-  `image_url` today; sending a video child will fail against the live
-  API, not just render wrong locally. Until Group CTO ships that support
-  and flips this gate, **every carousel is a static-image carousel** —
-  do not attempt a mixed/video carousel manually.
+Read `accounts/anime_ekaya/docs/build-gates.json`. As of 2026-09-06 (Group
+CTO update):
+
+- `carousel_video_slides` **closed** — the code side is done: the shared
+  publisher (`scripts/publish_due_posts.py`) now accepts a mixed
+  `slides` array (`{"type": "image"|"video", "src": "..."}` entries
+  alongside plain image-path strings) and sends the right Graph API
+  params for each child, unit-tested (`tests/test_publish_mixed_carousel.py`).
+  It is still closed because nobody has actually published one live
+  end-to-end yet — that verification needs real credentials and a real
+  (public, irreversible) post, so it's a CoS/founder-gated step, not
+  something the daily build does on its own. **Until this gate flips to
+  open, every carousel you build is still a static-image carousel** — do
+  not hand-construct a `"type": "video"` slide entry in a real queued
+  post; the gate's own `note` field has the exact reopening procedure if
+  you want to check status.
 
 ## Your job today (one run)
 
@@ -64,8 +71,11 @@ image carousel** (2-3 slides: one bold statement slide, one full-bleed
 mood/visual slide, one save-CTA slide — closer to a single-image post
 than a list). Don't run the same carousel shape two days running; check
 `used-topics.md`'s format cell before picking. Once `carousel_video_slides`
-opens, a third option (a short video-loop slide mixed with image slides)
-becomes available — don't build it before then.
+opens, a third option (a short video-loop slide mixed with image slides,
+built the same way a Reel's video is — via `scripts/render_reel.py`'s
+HTML/Playwright frame-capture path, just shorter and without needing the
+full Reel skill's beat structure) becomes available — don't build it
+before then.
 
 ### Step 1 — trend search (2-3 queries)
 
@@ -196,6 +206,15 @@ One JSON per post in `accounts/anime_ekaya/content/queue/`, id format
 
 Reels use `"video": "accounts/anime_ekaya/content/queue/video/<id>.mp4"`
 instead of `"slides"`.
+
+**Mixed video+image carousel schema (added 2026-09-06, DO NOT USE until
+`carousel_video_slides` flips to open — see Step 0):** once open, a
+`slides` entry may be `{"type": "image", "src": "<path>"}` or
+`{"type": "video", "src": "<path>"}` instead of a bare string; the two
+forms may mix freely in one array. Build the video slide's clip with
+`py -3 scripts/render_reel.py <loop.html> --out <out.mp4>` (a short 3-5s
+seek(t) loop, no `--audio` needed for a silent background loop) — reuse
+this renderer, do not write a second one.
 
 **Type whitelist (added 2026-09-01, Group CTO — three undocumented
 pillar values had slipped into the queue by then):** `type` MUST be one
