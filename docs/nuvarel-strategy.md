@@ -335,6 +335,33 @@ Two Objects, and Palette Study especially:
   the same spike's *general* AI-hands findings may still matter if any
   other device ever needs a generated hand.
 
+  **Interim path, approved 2026-09-06: "The State" — hands-free
+  before/after object comparison, buildable today.** Real-hand filming
+  hasn't happened yet and stock footage was tried and exhausted (search
+  logged in the registry) — two search passes, 4 sites, 22 clips, zero
+  footage showing an actual test outcome, only people touching things.
+  Rather than wait, ship the proof a different way: **two clean
+  AI-generated OBJECT-ONLY stills, no hand at all, showing a state
+  contrast instead of a live action** — a cushion holding a visible
+  lasting dent next to one sitting smooth and recovered; a scratched
+  finish next to an unmarked one; a warped board edge next to a true
+  one. This is the already-validated *still* pipeline (not the fragile,
+  legally-uncertain hand-generation path), so it sidesteps both open
+  problems at once: no AI-people policy question (no person, generated
+  or otherwise, in frame) and no fight with unreliable hand geometry.
+  It still delivers the account's actual promise ("the proof, not the
+  claim") as a **comparison**, not a **demonstration** — the two states
+  do the proving, same underlying mechanic as Two Objects but framed as
+  one object's before/after rather than two competing items. Not a
+  replacement for real hands-on footage long-term (a live test is more
+  credible than a static comparison), but a real, shippable device
+  today rather than a blocked one. Anchors: no hand/person in frame
+  ever (this variant's whole point); side-by-side or a simple wipe/
+  reveal transition between the two states; verdict stated plainly, not
+  left ambiguous. Once real hand footage exists, The State and the
+  hands-on version can run side by side as two different Inspection
+  registers rather than one replacing the other.
+
 ### Anti-repetition (revised for 2/day)
 
 - No carousel pillar repeats two days running.
