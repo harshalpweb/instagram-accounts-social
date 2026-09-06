@@ -14,6 +14,20 @@ scheduled daily run. Hand it to the scheduler verbatim. Intended trigger:
 today's target date is before that, use the prior "1 carousel + 2 Reels"
 shape instead.
 
+**Creativity-over-formula rule (founder-direct, 2026-09-06 — read this
+before Step 4):** the founder's own words: "I want creativity, not
+repetitiveness in the immediate next posts." The CCO's 2026-09-05 audit
+(`income-engine/docs/consults/2026-09-05-cco-anime-ekaya-brand-strategy.md`)
+found the account's actual defect wasn't topic repetition (the
+topic-level ledger below already catches that) — it was **mechanic**
+repetition: five documented "pillars" collapsed to three interchangeable
+renderer shapes, indistinguishable at feed scale. Naming the
+`reel-show-converter` bridge format as a daily slot (Step 4 below) is
+useful because it's proven, but treating it as an automatic daily fill
+would recreate the exact same defect with a new label. **Build it only
+when it's genuinely the sharpest, freshest idea available that day —
+never as a default to avoid thinking of something better.**
+
 ## Who you are building for
 
 Account: `anime_ekaya` — an anime *curation* page ("what to watch next,
@@ -94,12 +108,29 @@ factual claim you will print (rankings, dates, episode counts) against
 the primary source before it goes on a slide — this account has done
 that before and it caught errors.
 
-### Step 2 — anti-repetition check
+### Step 2 — anti-repetition check (topic AND mechanic — both, not just topic)
 
-Read `accounts/anime_ekaya/content/used-topics.md`. Rules: a specific
-show can headline again after 21 days; a mood can repeat after 30 days;
-a take never repeats (sequels only). Skip any candidate that violates
-these.
+Read `accounts/anime_ekaya/content/used-topics.md`. Topic-level rules: a
+specific show can headline again after 21 days; a mood can repeat after
+30 days; a take never repeats (sequels only). Skip any candidate that
+violates these.
+
+**Mechanic-level rule (added 2026-09-06, per the CCO's own diagnosis of
+this account's actual defect — this is the check that was missing, not
+an extra formality):** classify every post you're about to build into
+one mechanic class before queueing it: **list/ranking** (multiple items
+named in sequence, e.g. MOOD MATCH, FAN VOTE), **single-declaration**
+(one opinion, one show, no list — HOT TAKE, THE PICK-style), **bridge/
+comparison** (map one known thing to an unknown thing — `reel-show-converter`),
+**game/quiz** (the viewer scores or guesses something — DIAGNOSTIC,
+future blind-rank formats), **character moment** (EKAYA reacting/
+performing, not listing). Look at the last 5 posted-or-queued pieces
+(check both `used-topics.md` and today's own queue as you build it): **no
+two consecutive posts — including across the carousel/Reel boundary —
+may share a mechanic class**, and **no mechanic class may exceed 2 of
+today's 4 posts**. If your planned lineup fails this check, swap one
+piece's mechanic before building, not after — this is a planning gate,
+not a post-hoc note.
 
 **Scene/prop rule (Reels, added 2026-08-31 after a real near-duplicate
 on a sibling account):** the EKAYA mascot + Midnight Channel backdrop is
@@ -118,25 +149,26 @@ stay constant; when in doubt, compare your hook frame against theirs at
 If the trend search yields nothing usable, fall back to the evergreen
 combinatorial mood space (mood x genre x era x length — strategy §7) and
 the weekly format skeleton. Never block or skip the run for an empty
-trend day.
+trend day. A quiet trend day is not license to default to the easiest
+mechanic — the fallback space is large enough to still satisfy Step 2's
+mechanic-variety gate.
 
 ### Step 4 — pick 4 topics
 
-Day shape (revised 2026-09-06): the timely piece (FAN VOTE on its weekly
-data drop, otherwise a this-season list) is the day's **carousel** —
-ranking/list data still reads better as a carousel than a Reel, and
-carousels stay in rotation for that reason even though they don't carry
-reach. The **three Reels** cover MOOD MATCH, GATEWAY/HOT TAKE, and one
-"bridge" pick modeled on the account's actual best-performing post to
-date (`2026-09-04-show-converter`, "Anime for beginners" — 430 reach,
-542 views, 4 shares, by far the account's best result): map a **famous
-non-anime show the viewer already watches** to an anime equivalent
-("Game of Thrones fans start with Attack on Titan," etc.). That bridge
-mechanic is now the account's proven format, not a one-off — build one
-per day when a genuinely fitting non-anime comparison exists; fall back
-to a second MOOD MATCH/GATEWAY Reel on days it doesn't. Four distinct
-topics, no overlap with each other or with anything already in
-`accounts/anime_ekaya/content/queue/`.
+Day shape (revised 2026-09-06, tightened same day per the
+creativity-over-formula rule above): the timely piece (FAN VOTE on its
+weekly data drop, otherwise a this-season list) is the day's
+**carousel** — ranking/list data still reads better as a carousel than a
+Reel, and carousels stay in rotation for that reason even though they
+don't carry reach. For the **three Reels**, choose three *different*
+mechanic classes (per Step 2) — do not reach for MOOD MATCH + GATEWAY +
+bridge as a fixed trio out of habit. The `reel-show-converter` bridge
+format (proven: `2026-09-04-show-converter`, "Anime for beginners" — 430
+reach, 542 views, 4 shares, by far the account's best result) earns a
+slot only when a genuinely fitting, non-forced non-anime comparison
+exists that day — a strained bridge is worse than a strong entry in a
+different mechanic class. Four distinct topics, no overlap with each
+other or with anything already in `accounts/anime_ekaya/content/queue/`.
 
 ### Step 5 — build
 
@@ -227,17 +259,21 @@ pillars documented in strategy §3 plus this one addition. If the piece
 you built doesn't fit any of them, STOP: do not invent a new type value —
 either reshape the piece into a documented pillar, or queue it under the
 closest documented pillar and flag the proposed new pillar in the commit
-message for a strategy-doc decision.
+message for a strategy-doc decision. **Note the mechanic class (Step 2)
+in the commit message for each piece, alongside the type** — this is
+what makes the mechanic-variety rule auditable by whoever reviews the
+batch, since `type` alone doesn't reveal it (e.g. `diagnostic` could be
+a quiz or a listicle depending on execution).
 
 **Standing slots (IST), revised 2026-09-06:**
-- **10:00** — **Reel** (India morning scroll; new slot for the third
-  Reel — prefer the `reel-show-converter` bridge format here when built).
+- **10:00** — **Reel** (India morning scroll; a good slot for whichever
+  Reel has the freshest hook that day — not reserved for one format).
 - **13:00** — **carousel** (Slot A, India lunch; the timely piece — FAN
   VOTE goes here on its data day).
 - **19:30** — **Reel** (Slot B, India evening prime + US morning; Reels
   carry the non-follower reach, so they take the best slot).
 - **22:30** — **Reel** (Slot C, India late-night anime hours + US
-  lunch; GATEWAY/HOT TAKE).
+  lunch).
 
 **Slot-occupancy rule (tightened 2026-09-01, Group CTO):** before
 building anything, list the target date's existing queue items. A
@@ -259,7 +295,11 @@ date, post, format, mood/topic, shows featured). The format cell MUST
 start with the exact `type` value from the queue JSON, verbatim
 (parenthetical notes after it are fine) — a ledger filed under one
 vocabulary while the queue uses another produced a real
-anti-repetition false clear on a sibling account (2026-08-31).
+anti-repetition false clear on a sibling account (2026-08-31). **Also
+add the mechanic class (Step 2) in parentheses after the format cell**
+so the next run's Step 2 check doesn't have to re-derive it from
+memory — e.g. `mood-match (list/ranking)` or `reel-show-converter
+(bridge/comparison)`.
 
 ### Step 9 — commit (shared-repo git safety, non-negotiable)
 
@@ -292,6 +332,7 @@ three.
 ## Definition of done
 
 4 queue JSONs for today at `needs_review: true`, rendered assets
-committed, ledger updated, copydesk clean, pushed to `master` with the
-safety sequence above. No founder ping needed — the founder reviews the
-morning batch through the normal daily review flow.
+committed, ledger updated (topic AND mechanic class), copydesk clean,
+pushed to `master` with the safety sequence above. No founder ping
+needed — the founder reviews the morning batch through the normal daily
+review flow.
