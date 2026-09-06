@@ -1,0 +1,19 @@
+{
+  "seed": 90809,
+  "key": "dark",
+  "experimental": false,
+  "subject": "a hand-thrown stoneware bowl with a matte speckled oatmeal glaze, turned upside down and resting on its rim, seen from slightly above and to one side; on the underside, a narrow circular unglazed foot ring of raw grey-buff clay, thrown as part of the bowl, rises a few millimetres from the glazed curve of the bowl's outside; the glaze ends in a clean line where the bare clay ring begins",
+  "positive": "Editorial still-life photograph, a hand-thrown stoneware bowl with a matte speckled oatmeal glaze, turned upside down and resting on its rim, seen from slightly above and to one side; on the underside, a narrow circular unglazed foot ring of raw grey-buff clay, thrown as part of the bowl, rises a few millimetres from the glazed curve of the bowl's outside; the glaze ends in a clean line where the bare clay ring begins. One single warm tungsten light source from the low left, about 3200K, casting one long soft shadow with gentle falloff across a deep espresso-brown matte ground, low-key exposure, most of the frame in soft shadow. Muted desaturated colour grade, matte surfaces, no gloss, no reflections. Shallow depth of field, 85mm macro lens, fine film grain, quiet luxury interior magazine photography. Empty frame, only the object. No people, no hands, no text.",
+  "negative": "色调艳丽，过曝，细节模糊不清，字幕，风格，作品，画作，画面，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，杂乱的背景, glossy, shiny, oversaturated, cartoon, illustration, anime, painting, 3d render, cgi, people, person, hand, face, text, watermark, logo, chrome, mirror",
+  "width": 1088,
+  "height": 1360,
+  "n": 3,
+  "steps": 30,
+  "wall_clock_s": 104.1,
+  "prompt_id": "9d61bcf3-019a-451e-8351-ca923580d854",
+  "files": [
+    "accounts\\nuvarel\\render\\photos\\2026-09-08-turn-the-bowl-over\\inverted-seed90809\\photo-90809-1.png",
+    "accounts\\nuvarel\\render\\photos\\2026-09-08-turn-the-bowl-over\\inverted-seed90809\\photo-90809-2.png",
+    "accounts\\nuvarel\\render\\photos\\2026-09-08-turn-the-bowl-over\\inverted-seed90809\\photo-90809-3.png"
+  ]
+}
