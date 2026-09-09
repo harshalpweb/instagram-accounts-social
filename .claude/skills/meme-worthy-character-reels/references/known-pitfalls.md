@@ -35,6 +35,24 @@ distinction (different fill, no border, a clearly different shape) rather
 than defending the intent. This is exactly the kind of thing frame-level
 review catches and code review does not.
 
+## Lerping a mirrored pose wraps the torso through "pointing down"
+
+`rig2d.js` angles are degrees with 0 = down, 180 = up, and `mixPose`
+lerps them numerically. Mirroring a pose for a character facing the other
+way (negate every angle) turns a torso of 192 into -192 -- the same
+direction, but `mixPose(stand, mirrored, k)` then interpolates 180 -> -192
+the long way round, passing through ~0 (straight down) mid-blend. On the
+2026-09-10 elevator Reel this made the second stickman fold in half onto
+the floor for ~6 frames of a windup; every probe frame happened to miss
+that window and it was only caught on the full render's QA dump.
+
+**Rule:** any pose that is *lerped into* (not just set) must keep its
+angles on the same side of the wrap as the pose it is lerped from --
+after mirroring, re-express the torso (and anything else near 180) as
+its 360-equivalent (e.g. -192 -> 168) before handing it to `mixPose`.
+Poses that are assigned directly are unaffected. Probe the whole blend
+window at 1-2 frame spacing, not just its endpoints.
+
 ## Automated QA passing is not the same signal as "looks good"
 
 Worth restating here because it's the whole reason this skill exists: a
