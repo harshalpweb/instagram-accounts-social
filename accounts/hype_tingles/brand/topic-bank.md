@@ -42,6 +42,7 @@ resolutions, "seen" messages, salary day
 | 2026-09-04 | 2026-09-04-pre-coffee-alert | pov-morning (REEL, 2D stickman) | talking before coffee (trend: Eeffoc) | dog, owl, cat |
 | 2026-09-05 | 2026-09-05-hold-and-judge-left-on-seen | NEW: reel-hold-and-judge (REEL, 2D cat rig, auto-play card carousel; moved 17:00 -> 16:30 standing Reel slot 2026-09-04 so the day stays 1 carousel + 2 Reels, new-format debut) | left on seen / texting habits | cat |
 | 2026-09-04 | 2026-09-04-salary-day-breaking | F5 reel-breaking-news (REEL, 2D stickman; 16:00 fill slot for the 2-Reel ratio) | salary day / rich for 48 hours (topic wheel) | dog, raccoon, cat |
+| 2026-09-10 | 2026-09-10-elevator-small-talk | pov-elevator (REEL, 2D stickman x2; emergency same-day build, founder-direct live publish ~02:05 IST, not a standing slot; scene set: elevator car + floor indicator, doorway collision gag; ratchet: lanyard follow-through) | small talk / 12 floors with a coworker (topic wheel; trend search unavailable this session) | dog, owl, cat |
 
 ## Queued promises to keep
 - EP 01's "EP 02 drops tomorrow" promise: fulfilled by
