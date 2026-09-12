@@ -77,7 +77,14 @@ ledger row.
   `accounts/anime_ekaya/reels/2026-09-04-show-converter/reel.html`, reused
   verbatim per build and reskinned per theme -- colour palette + a
   hero-prop deco on the machine top -- so repeat builds don't share a
-  backdrop/prop combination inside the 14-day scene/prop window).
+  backdrop/prop combination inside the 14-day scene/prop window;
+  `content-reviewer`'s external-facts check caught an overstated real-world
+  purpose-claim in the first `2026-09-12-gamer-converter` build -- "built
+  as a tribute to" read as settled authorial intent where the primary
+  source only supported "widely credited as an influence." Any card
+  naming a real creator's intent behind a real work needs the creator's
+  own words checked, not just enthusiast-press consensus, which tends to
+  run hotter than the source).
 
 ## Acceptance criteria
 
