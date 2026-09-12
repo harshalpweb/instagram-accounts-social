@@ -35,20 +35,32 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_FFMPEG = (
-    REPO_ROOT.parent
-    / "income-engine" / "video_lab" / "samples" / "hyperframes" / ".bin" / "ffmpeg.exe"
+_FFMPEG_REL = ("video_lab", "samples", "hyperframes", ".bin", "ffmpeg.exe")
+# This repo lives nested inside income-engine/ (since 2026-09-12), so the
+# vendored ffmpeg is one level up. The older sibling-checkout layout
+# (income-engine/ next to this repo) is kept as a fallback so a checkout at
+# either depth still renders.
+DEFAULT_FFMPEG_CANDIDATES = (
+    REPO_ROOT.parent.joinpath(*_FFMPEG_REL),
+    REPO_ROOT.parent.joinpath("income-engine", *_FFMPEG_REL),
 )
 W, H = 1080, 1920
 
 
 def ffmpeg_bin() -> str:
-    cand = os.environ.get("FFMPEG_BIN") or str(DEFAULT_FFMPEG)
-    if not Path(cand).exists():
-        raise SystemExit(
-            f"FATAL: ffmpeg not found at {cand} — set FFMPEG_BIN to a real binary"
-        )
-    return cand
+    env = os.environ.get("FFMPEG_BIN")
+    if env:
+        if not Path(env).exists():
+            raise SystemExit(f"FATAL: FFMPEG_BIN={env} does not exist")
+        return env
+    for cand in DEFAULT_FFMPEG_CANDIDATES:
+        if cand.exists():
+            return str(cand)
+    raise SystemExit(
+        "FATAL: ffmpeg not found at any of "
+        + ", ".join(str(c) for c in DEFAULT_FFMPEG_CANDIDATES)
+        + " — set FFMPEG_BIN to a real binary"
+    )
 
 
 def render_frames(html_path: Path, out_silent: Path, qa_dir: Path | None, qa_every: int) -> float:

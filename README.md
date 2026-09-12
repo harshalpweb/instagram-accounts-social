@@ -4,6 +4,15 @@ Automated Instagram publishing for the founder's revived personal/business
 accounts (separate from `trend-signals-social`, which is TrendGiri only).
 One shared repo, one subfolder per account, one workflow pair per account.
 
+**Location (since 2026-09-12):** this repo is checked out nested inside
+`income-engine/` (`income-engine/instagram-accounts-social/`), as its own
+git repo, gitignored by the parent — the same pattern as
+`income-engine/trend_predictor/`. Rendering depends on the parent's vendored
+ffmpeg (`../video_lab/samples/hyperframes/.bin/ffmpeg.exe`, or set
+`FFMPEG_BIN`); the parent's `video_lab`/`blender_studio` scenes read this
+repo's `assets/audio/` and `assets/rig2d.js` by relative path. Session
+instructions: `CLAUDE.md`; local roles: `docs/ROSTER.md`.
+
 Publishing plumbing (`scripts/`) is copied from `trend-signals-social` (the
 working TrendGiri pipeline) — same Graph API client, same queue format, same
 token-refresh mechanics — parameterized to run against any account's own
@@ -50,10 +59,11 @@ analytics/
    no API call. Column meanings and caveats (48 h insights lag, reach is an
    estimate, posted time vs. scheduled slot) are in the script's docstring.
 
-Content generation (what actually goes into `content/queue/`) is not yet
-built for any account — this repo currently only has the publish/refresh
-rails. Each account's content strategy gets designed and built separately
-once its niche/purpose is defined.
+Content generation (what goes into `content/queue/`) runs per account from
+`accounts/<name>/docs/daily-build-agent-prompt.md`, handed verbatim to a
+build agent once a day; each account's strategy doc (see `CLAUDE.md`)
+defines what it builds. Everything lands at `needs_review: true` and only
+publishes after the founder clears it.
 
 ## Required GitHub Secrets (per account, e.g. `hype_tingles`)
 
