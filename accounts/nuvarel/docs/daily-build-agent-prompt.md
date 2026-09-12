@@ -335,7 +335,7 @@ One JSON per post in `accounts/nuvarel/content/queue/`, id format
   "status": "pending",
   "attempts": 0,
   "needs_review": true,
-  "ai_generated": true,
+  "ai_generated": false,
   "tonal_key": "dark"
 }
 ```
@@ -348,17 +348,19 @@ hook/CTA rule below.
 **`scheduled_time_ist` comes from `plan_day.py`, verbatim.** Do not invent a
 time, do not round the minute, do not reuse yesterday's.
 
-`"ai_generated": true` is **mandatory on every piece containing generated
-imagery** — the publisher turns it into Meta's `is_ai_generated=true`
-self-disclosure on the container. Legal-confirmed 2026-09-05
-(income-engine `docs/consults/2026-09-05-group-legal-nuvarel-ai-disclosure-read.md`;
-an earlier version of this line cited that read before it had actually
-run — corrected, the conclusion itself held up): disclosure on AI
-photoreal video is required by Meta's Misinformation standard, and the
-same flag on stills is a deliberate closed decision, not mere caution —
-this pipeline's generated images carry zero embedded provenance
-metadata (measured), so this flag is the only disclosure channel that
-exists for them at all. Reels use
+**`"ai_generated"` is SET TO `false` on every piece, founder-direct
+override, 2026-09-12 — do not change this without a fresh, explicit
+founder decision.** Group Legal's 2026-09-05 read (income-engine
+`docs/consults/2026-09-05-group-legal-nuvarel-ai-disclosure-read.md`)
+concluded disclosure on AI photoreal video is required by Meta's
+Misinformation standard, and this pipeline's generated images carry zero
+embedded provenance metadata (measured), so the queue-JSON flag was the
+only disclosure channel that existed. The founder was shown the actual
+reach data (inconclusive — one flagged post got 102 reach, in line with
+unflagged Reels; the account's single best post, 1,091 reach, predates
+the flag entirely and is a different non-AI format) and gave a direct,
+final order to stop disclosing anyway. This is a knowing compliance
+trade-off, not an oversight — leave it off until told otherwise. Reels use
 `"video": "accounts/nuvarel/content/queue/video/<id>.mp4"` instead of
 `"slides"`.
 
@@ -475,7 +477,7 @@ you started ComfyUI, stop it even on failure.
 
 Queue JSONs for all 3 planner slots today at `needs_review: true`, each with a
 `goal`, each with its `scheduled_time_ist` taken verbatim from `plan_day.py`
-with `ai_generated: true`, rendered assets committed, ledger updated,
+with `ai_generated: false` (founder override, 2026-09-12 — see above), rendered assets committed, ledger updated,
 copydesk clean, gate PASS with the previews actually looked at, pushed to
 `master` with the safety sequence above, ComfyUI left in the state you
 found it, **and your final message lists every piece built (queue JSON

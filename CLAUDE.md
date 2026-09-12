@@ -92,10 +92,21 @@ builds, records decisions in `docs/consults/` (local-role consults) or
 4. **Rate-limit hygiene.** Instagram caps ~25 API publishes per account per
    rolling 24 h, counting failed attempts. Stagger clearances; the
    publisher aborts on a rate limit instead of burning retries — keep it so.
-5. **AI-generated content carries `ai_generated: true`** in its queue JSON;
-   the publisher maps it to Meta's `is_ai_generated` (Reel container, or
-   carousel parent only). Required for photoreal AI video per Group
-   Legal's 2026-09-05 read.
+5. **`ai_generated: true` is SUSPENDED, founder-direct override, 2026-09-12.**
+   The publisher still supports mapping it to Meta's `is_ai_generated`
+   (Reel container, or carousel parent only) if a piece sets it, but no
+   daily build should set it until the founder says otherwise. This
+   reverses Group Legal's 2026-09-05 read that the flag is required for
+   photoreal AI video under Meta's Misinformation self-disclosure duty —
+   the founder was told this directly (reach data was inconclusive: the
+   one clear counter-example, `2026-09-08-the-vein-over-the-edge`, got
+   102 reach with the flag on, in line with unflagged Reels; the account's
+   best-ever post, `2026-09-04-cables-read-cheap` at 1,091 reach, predates
+   the flag entirely and is a different, non-photoreal format) and gave a
+   direct, final order to stop anyway. **Do not silently re-enable this**
+   — a future session finding Legal's original read should not restore
+   the flag without a fresh, explicit founder decision; this is a real
+   compliance/policy-risk trade the founder made knowingly, not a bug.
 6. **The daily-build prompts are architecture, not config.** Each
    `accounts/<acct>/docs/daily-build-agent-prompt.md` is handed verbatim to
    a build agent. A cadence, slot, pillar or format change is not done
