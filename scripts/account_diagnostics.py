@@ -69,6 +69,13 @@ REACH_BREAKDOWNS = ("follow_type", "media_product_type")
 # Account-level totals worth having next to the breakdown.
 TOTAL_METRICS = ("reach", "views", "accounts_engaged", "profile_links_taps")
 
+# Meta only returns follower_demographics for accounts with >=100 followers,
+# so this succeeds on hype_tingles (282) and is expected to fail on the two
+# purpose-built accounts (4 and 7). A failure there is information, not a bug.
+DEMOGRAPHIC_BREAKDOWNS = ("country", "city", "age", "gender")
+
+MEDIA_FIELDS = "id,media_type,media_product_type,timestamp,permalink,like_count,comments_count"
+
 
 def discover_accounts(accounts_root: Path) -> list[str]:
     return sorted(
@@ -157,6 +164,41 @@ def fetch_totals(token: str, days: int) -> dict:
     return out
 
 
+def fetch_media_history(token: str, limit: int) -> list[dict]:
+    """Most recent `limit` media, newest first.
+
+    The point is the *timestamps*: a revived account's gap between its last
+    pre-revival post and the first pipeline post says how dormant it was, and
+    how much unrelated history the recommendation system has already modelled.
+    """
+    payload = ig_common.api_get(
+        "me/media", token, params={"fields": MEDIA_FIELDS, "limit": limit}
+    )
+    return payload.get("data", []) or []
+
+
+def fetch_follower_demographics(token: str, breakdown: str) -> dict:
+    payload = ig_common.api_get(
+        "me/insights",
+        token,
+        params={
+            "metric": "follower_demographics",
+            "period": "lifetime",
+            "metric_type": "total_value",
+            "breakdown": breakdown,
+            "timeframe": "this_month",
+        },
+    )
+    out: dict[str, int] = {}
+    for item in payload.get("data", []):
+        total = item.get("total_value") or {}
+        for bd in total.get("breakdowns", []) or []:
+            for res in bd.get("results", []) or []:
+                dims = res.get("dimension_values") or ["?"]
+                out[str(dims[0])] = res.get("value")
+    return out
+
+
 def diagnose(account: str, token: str | None, days: int) -> dict:
     result: dict = {"account": account}
     if token is None:
@@ -177,6 +219,18 @@ def diagnose(account: str, token: str | None, days: int) -> dict:
             result["reach_breakdowns"][bd] = {"_error": redact(e)}
 
     result["totals"] = fetch_totals(token, days)
+
+    try:
+        result["media"] = fetch_media_history(token, 50)
+    except GraphAPIError as e:
+        result["media_error"] = redact(e)
+
+    result["demographics"] = {}
+    for bd in DEMOGRAPHIC_BREAKDOWNS:
+        try:
+            result["demographics"][bd] = fetch_follower_demographics(token, bd)
+        except GraphAPIError as e:
+            result["demographics"][bd] = {"_error": redact(e)}
     return result
 
 
@@ -221,6 +275,38 @@ def render(results: list[dict], days: int) -> str:
         add("  account totals:")
         for k, v in (r.get("totals") or {}).items():
             add(f"    {k:<22} {v}")
+
+        add("  follower demographics (top 6 per breakdown):")
+        for bd, data in (r.get("demographics") or {}).items():
+            if "_error" in data:
+                add(f"    {bd:<10} ERROR: {data['_error'][:90]}")
+                continue
+            top = sorted(data.items(), key=lambda kv: -(kv[1] or 0))[:6]
+            add(f"    {bd:<10} " + ", ".join(f"{k}={v}" for k, v in top) if top else f"    {bd:<10} (empty)")
+
+        media = r.get("media")
+        if r.get("media_error"):
+            add(f"  media history ERROR: {r['media_error']}")
+        elif media:
+            add(f"  media history ({len(media)} most recent, newest first):")
+            stamps = [m.get("timestamp", "") for m in media]
+            add(f"    newest {stamps[0]}   oldest-in-page {stamps[-1]}")
+            # Largest gap between consecutive posts -- the dormancy signature.
+            gaps = []
+            for a, b in zip(stamps, stamps[1:]):
+                try:
+                    da = datetime.fromisoformat(a.replace("+0000", "+00:00"))
+                    db = datetime.fromisoformat(b.replace("+0000", "+00:00"))
+                    gaps.append(((da - db).days, b, a))
+                except ValueError:
+                    continue
+            if gaps:
+                g = max(gaps)
+                add(f"    largest gap in this page: {g[0]} days ({g[1]} -> {g[2]})")
+            kinds: dict[str, int] = {}
+            for m in media:
+                kinds[str(m.get("media_product_type"))] = kinds.get(str(m.get("media_product_type")), 0) + 1
+            add("    product types: " + ", ".join(f"{k}={v}" for k, v in sorted(kinds.items())))
     return "\n".join(lines)
 
 
