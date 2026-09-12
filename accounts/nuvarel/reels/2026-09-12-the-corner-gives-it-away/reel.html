@@ -17,7 +17,19 @@
      hook   = render/photos/2026-09-12-the-corner-gives-it-away/hook2/photo-912401-2.png
      silent = render/photos/2026-09-12-the-corner-gives-it-away/hook2/photo-912401-1.png
      macro  = render/photos/2026-09-12-the-corner-gives-it-away/macro2/photo-912501-1.png
-     edge   = render/photos/2026-09-12-the-corner-gives-it-away/macro2/photo-912501-2.png */
+     edge   = render/photos/2026-09-12-the-corner-gives-it-away/macro2/photo-912501-2.png
+
+   Fix round 1 (content-reviewer FAIL, 2026-09-12): the card-slide
+   transition (inherited unchanged from the-vein-over-the-edge, 2026-09-08)
+   held the outgoing card at opacity 1 for its entire ~0.46s exit slide, so
+   its headline stayed fully legible while the incoming card's headline
+   faded in on top at an overlapping screen position -- confirmed via
+   direct ffmpeg frame extraction as a real ~300ms garbled-text glitch at
+   3 of 5 transitions, not a stopped-frame artifact. Fixed here by fading
+   the outgoing card's opacity to 0 over the first 40% of the transition
+   instead of holding it at 1, so the two headlines are never both near
+   full opacity at once. Flagged to cto/Group CTO as a template-level
+   issue worth the same fix in the already-published source piece. */
 :root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; --bronzeT:#8A6A42; --bronzeD:#B08D5F; --hair:#D8CFC0; }
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1080px; height:1920px; overflow:hidden; }
@@ -92,7 +104,11 @@ window.seek = async (t) => {
     elIn.style.transform = `translateX(${lerp(1100, 0, eo(k)).toFixed(1)}px)`;
     if (cur > 0 && k < 1) {
       const elOut = cards[cur - 1];
-      elOut.style.visibility = "visible"; elOut.style.opacity = "1";
+      elOut.style.visibility = "visible";
+      /* fade the outgoing card's text out fast (first 40% of the slide) so
+         it never sits at full opacity next to the incoming headline --
+         fix round 1, see file-header note */
+      elOut.style.opacity = (1 - ramp(k, 0, 0.4)).toFixed(3);
       elOut.style.transform = `translateX(${lerp(0, -1100, ei(k)).toFixed(1)}px)`;
     }
     /* slow push on every photograph, from its own card time */

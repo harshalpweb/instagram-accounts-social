@@ -12,9 +12,18 @@
    Not a demonstration Reel: both swatches are static object studies,
    disclosed as AI on the container.
    Photo sources (gitignored candidates; gen-<seed>.json beside them is committed):
-     A = render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-1.png
+     A = render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-2.png
      B = render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2.png
-   Layout keeps type inside the Reels safe zone (nothing below y=1640). */
+   Layout keeps type inside the Reels safe zone (nothing below y=1640).
+   Fix round 1 (content-reviewer FAIL, 2026-09-12): panel A originally used
+   candidate -1, whose glass sat too small/low in frame -- after the
+   panel's cover-crop it showed almost no facet/rainbow detail despite the
+   "SHARP FACETS - RAINBOW FLASH" tell beside it. Swapped to candidate -2
+   (same seed 912001), a taller composition where the facets and rainbow
+   caustic are fully visible after the same crop. CTA also changed from
+   save (a 5th "Save this for the..." in the trailing 7 days, over the
+   docs/cadence-and-format-policy.md sec4.3 cap of 3) to a comment CTA
+   matching the Quick Games genre's own "guess before the reveal" mechanic. */
 :root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; --bronzeD:#B08D5F; }
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1080px; height:1920px; overflow:hidden; }
@@ -46,11 +55,11 @@ body { background:var(--esp); color:var(--alab); font-family:'Archivo',Arial,san
 #end .handle { font-size:34px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--bronzeD); margin-top:44px; }
 </style></head><body>
 <div class="brandrow"><span class="eyebrow">The Game · No. 02</span><span class="wordmark">Nuvarel</span></div>
-<div class="panel" id="pa"><div class="ph" id="pha" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-1.png')"></div><div class="dim" id="da"></div><div class="frame" id="fa"></div><div class="chip" id="ca">A</div><div class="tell" id="ta">Sharp facets · rainbow flash</div></div>
+<div class="panel" id="pa"><div class="ph" id="pha" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-2.png')"></div><div class="dim" id="da"></div><div class="frame" id="fa"></div><div class="chip" id="ca">A</div><div class="tell" id="ta">Sharp facets · rainbow flash</div></div>
 <div class="panel" id="pb"><div class="ph" id="phb" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2.png')"></div><div class="dim" id="db"></div><div class="frame" id="fb"></div><div class="chip" id="cb">B</div><div class="tell" id="tb">Smooth panels · faint seam</div></div>
 <div id="capzone"><div id="bar"></div><div class="rule"></div><h1 id="h">One of these isn't crystal.</h1><div id="num">3</div></div>
 <div class="card" id="tellcard"><div class="inner"><span class="klabel">In the shop</span><h2>Run a finger along the rim.</h2><div class="rule"></div><p>Cut crystal has sharp, precise facet edges and throws small rainbows in direct light. Pressed glass has rounder panels and a faint mould seam line down one side.</p><p>The facet edge feels crisp under a finger. A seam feels soft and continuous.</p></div></div>
-<div class="card" id="end"><div class="inner"><h2>Save this for the next glassware aisle.</h2><div class="rule"></div><div class="handle">@nuvarel_</div></div></div>
+<div class="card" id="end"><div class="inner"><h2>Comment your guess before you scroll back up.</h2><div class="rule"></div><div class="handle">@nuvarel_</div></div></div>
 <div id="guard"></div>
 <script>
 "use strict";
