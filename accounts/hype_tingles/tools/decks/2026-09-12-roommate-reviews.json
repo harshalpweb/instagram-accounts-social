@@ -1,0 +1,65 @@
+{
+  "slug": "2026-09-12-roommate-reviews",
+  "episode": "ONE-STAR FILES · 05",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "WELCOME TO HYPE TINGLE",
+      "h": "ANIMALS REVIEWED [[YOUR ROOMMATE]].",
+      "dek": "We gave five animals a review form. Your roommate did not survive.",
+      "tease": "**The cat's review is last.** Brace."
+    },
+    {
+      "role": "review",
+      "animal": "🐕",
+      "name": "The Dog",
+      "meta": "Has never had a bad day",
+      "stars": 5,
+      "title": "Best friend I've ever seen",
+      "body": "They eat cereal for dinner and share the box. Incredible loyalty. Incredible smell. Five stars, would live here forever."
+    },
+    {
+      "role": "review",
+      "animal": "🐦",
+      "name": "The Pigeon",
+      "meta": "Squats on the balcony rail",
+      "stars": 5,
+      "title": "Free real estate energy",
+      "body": "They leave the balcony door open for fresh air. I have never paid rent and never will. Legendary hospitality."
+    },
+    {
+      "role": "review",
+      "animal": "🐠",
+      "name": "The Goldfish",
+      "meta": "Reviewing from memory",
+      "stars": 3,
+      "title": "Wait, do I live here too",
+      "body": "Someone keeps rearranging the furniture. I wake up in a new apartment every day. Confusing. Also possibly exciting."
+    },
+    {
+      "role": "review",
+      "animal": "🦉",
+      "name": "The Owl",
+      "meta": "Nocturnal, judgmental",
+      "stars": 2,
+      "title": "The 2am dishes are unacceptable",
+      "body": "The clattering begins precisely when I am trying to work. I have written a formal complaint. It has three citations. None real."
+    },
+    {
+      "role": "review",
+      "payoff": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "meta": "Owns the apartment, allows tenants",
+      "stars": 1,
+      "title": "The other human is loud",
+      "body": "Footsteps at every hour. Doors that close wrong. One star. I have already started planning my next lease. Theirs."
+    },
+    {
+      "role": "closer",
+      "h": "NEW REVIEWS [[DAILY]].",
+      "body": "Send this to the roommate who never replaces the toilet paper.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}

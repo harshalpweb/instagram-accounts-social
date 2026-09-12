@@ -68,7 +68,9 @@ ledger row.
   prop toward a table edge across escalating text cards; the character
   and prop are chosen per build, engine in
   `accounts/hype_tingles/reels/*/reel.html` reused verbatim per build per
-  the `meme-worthy-character-reels` skill).
+  the `meme-worthy-character-reels` skill; build 02, 2026-09-12, swapped
+  the hero prop phone -> piggy bank so a fresh scene/prop pair satisfies
+  the 7-day no-repeat rule without depending on the 7-day boundary).
 - `anime_ekaya`: `reel-show-converter` (a mainstream, non-anime show/game/
   film "converted" into an anime pick via a shared CONVERTER-machine rig,
   EKAYA pulls a lever, an anime title pops out; engine in

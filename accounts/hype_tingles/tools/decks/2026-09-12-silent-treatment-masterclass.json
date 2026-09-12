@@ -1,0 +1,56 @@
+{
+  "slug": "2026-09-12-silent-treatment-masterclass",
+  "episode": "SOLO PANEL · 01",
+  "slides": [
+    {
+      "role": "hook",
+      "kicker": "HYPE TINGLE MASTERCLASS",
+      "h": "THE SILENT TREATMENT, TAUGHT BY A {{CAT}}.",
+      "dek": "One student. Zero mercy.",
+      "tease": "**Five lessons.** Eye contact optional."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐈",
+      "name": "The Cat",
+      "quote": "Step one: make eye contact.",
+      "sub": "This is the only part that looks friendly."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐈",
+      "name": "The Cat",
+      "quote": "Step two: look away. Slowly.",
+      "sub": "The slowness is the whole lesson."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐈",
+      "name": "The Cat",
+      "quote": "Step three: sit just out of reach.",
+      "sub": "Reaching for me now would be desperate."
+    },
+    {
+      "role": "speaker",
+      "animal": "🐈",
+      "name": "The Cat",
+      "quote": "Step four: leave the room at a walking pace.",
+      "sub": "Running implies I cared enough to hurry."
+    },
+    {
+      "role": "speaker",
+      "payoff": true,
+      "big": true,
+      "animal": "🐈",
+      "name": "The Cat",
+      "quote": "Step five: return tomorrow like nothing happened.",
+      "sub": "You will apologize. I will remember everything."
+    },
+    {
+      "role": "closer",
+      "h": "CLASS DISMISSED.",
+      "body": "No further questions. Ever.",
+      "handle": "@hype_tingles"
+    }
+  ]
+}
