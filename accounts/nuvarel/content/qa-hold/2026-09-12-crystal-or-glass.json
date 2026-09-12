@@ -1,0 +1,14 @@
+{
+  "id": "2026-09-12-crystal-or-glass",
+  "type": "reel-game",
+  "goal": "comment",
+  "caption": "One of these tumblers cost four times the other. Real cut crystal has sharp, precise facets and throws small rainbows in direct light. Pressed glass has smooth, rounded panels with no faceting at all. Run a finger along the rim before you buy. Crystal feels crisp and angular. Glass feels smooth all the way round. Comment if you guessed right before the reveal.\n\n#interiordesigntips #homedecortips #furnitureshopping #expensivelooking #homestyling",
+  "video": "accounts/nuvarel/content/qa-hold/2026-09-12-crystal-or-glass.mp4",
+  "scheduled_time_ist": "2026-09-12T11:12:00+05:30",
+  "status": "pending",
+  "attempts": 0,
+  "needs_review": true,
+  "ai_generated": false,
+  "tonal_key": "dark",
+  "qa_hold_reason": "FAILed art-director 3 rounds running on the A/B panel scale-match fix: round1 cropped-out-facets defect fixed; round2 CTA-sequencing + unproven-tell fixed but scale correction (0.84x transform) under-corrected AND introduced a letterbox; round3 (image padding) closed the scale gap to ~10% but introduced a visible pillarbox seam on panel B that panel A does not share, confirmed visible at 350px feed scale. content-reviewer and creative-director both PASS; art-director alone blocks. Per the fix-round circuit breaker, held rather than attempting a same-tier round 4 -- next attempt should use explicit background-size/position instead of cover+padding (see the round-3 verdict for the aspect-ratio root cause) or a re-tuned transform scale with a background-color exactly matching the panel base color."
+}
