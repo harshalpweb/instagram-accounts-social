@@ -26,14 +26,23 @@ nested inside `income-engine/` and gitignored there — the same pattern as
 
 ## Roster
 
-`docs/ROSTER.md` — four local roles (`cto`, `creative-director`,
-`content-reviewer`, `growth-analyst`) under `.claude/agents/`, plus the
-portfolio roles in `../docs/ROSTER.md`. The local `cto` reports to Group
-CTO on every matter (founder ruling 2026-09-12); the portfolio Chief
-Creative Officer's verdict wins over `creative-director` on cross-account
-brand coherence. The main session here is the Chief of Staff for this
-repo: it convenes roles, dispatches the daily builds, records decisions in
-`docs/consults/`.
+`docs/ROSTER.md` — seven local roles under `.claude/agents/`
+(`cto`, `audience-strategist`, `creative-director`, `art-director`,
+`niche-researcher`, `content-reviewer`, `growth-analyst`), plus the
+portfolio roles in `../docs/ROSTER.md`. Expanded from four 2026-09-12 by
+Group CTO. The local `cto` reports to Group CTO on every matter (founder
+ruling 2026-09-12); the portfolio Chief Creative Officer's verdict wins
+over both `creative-director` and `art-director` on cross-account brand
+coherence. Four roles touch creative work and the split is by discipline,
+not by account — `audience-strategist` owns who and why,
+`creative-director` owns what it says, `art-director` owns how it looks,
+`niche-researcher` owns whether it is true. `docs/ROSTER.md` also records
+the roles deliberately **not** created and the tripwire that reopens each,
+plus the bar a new local role must clear. The main session here is the
+Chief of Staff for this repo: it convenes roles, dispatches the daily
+builds, records decisions in `docs/consults/` (local-role consults) or
+`../docs/consults/` (anything a portfolio role ruled — see
+`docs/ROSTER.md`).
 
 ## Hard rules in this repo
 

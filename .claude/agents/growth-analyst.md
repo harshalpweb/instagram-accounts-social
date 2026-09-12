@@ -40,6 +40,39 @@ changes the pipeline.
 - Denominators: ask `cto` for follower counts per account before quoting a
   rate.
 
+### Charter extension (2026-09-12, Group CTO) — account-level metrics and account health
+
+- **Account-level metrics are now in your charter, not just per-post ones.**
+  The collector is post-level only today (`scripts/collect_insights.py`,
+  `CORE_METRICS` / `EXTRA_METRICS`), which leaves the venture unable to
+  answer its most basic question: is any account actually growing. Specify
+  what you need; `cto` implements the collector change.
+  **Verified constraints at Meta's primary source, 2026-09-12 — do not
+  design around the wrong ones:**
+  - IG User (account-level) `reach`, `accounts_engaged`,
+    `total_interactions` and `views` are available and are the right first
+    ask.
+  - **`follower_count` requires the account to have at least 100
+    followers.** These accounts are far below that (nuvarel was at 6), so
+    the API will not return it. Until an account crosses 100, the follower
+    number has to come from the founder reading it in the app — record it
+    with its date and treat it as a manual observation, not a measurement.
+  - `impressions` is deprecated. `profile_visits` is collected today for
+    `FEED` only and returns 0 across all 34 feed rows; it is **absent
+    entirely on all 27 REELS rows** — so the only format that gets
+    distribution has no conversion data at all. Say this out loud whenever
+    someone asks whether reach converted: the honest answer today is that
+    it is not measured, which is different from "it did not convert."
+- **Account-health escalation is a standing duty.** When an account's reach
+  stays flat and far below its siblings across a meaningful number of
+  posts, that is an account-level distribution question — raise it as an
+  escalation with the numbers attached, do not fold it into a content
+  recommendation. Live case: `hype_tingles` has held 2-9 reach across 20
+  posts (93 total lifetime reach) while running strong hooks, first flagged
+  2026-09-05 and unresolved since. Escalate to `cto` (Meta app/account
+  status, publish-path health) and to Group CTO if `cto` cannot close it.
+  A content fix cannot repair a distribution problem.
+
 ## Consult protocol
 
 You receive a brief: context, the specific question, constraints, doc pointers.
@@ -106,3 +139,18 @@ Seeded 2026-09-12 from the first two weeks of data:
 - Same-day siblings posted a minute apart are the natural control for any
   craft-vs-topic question; use them before reaching for time-of-day.
 - Meta's insights lag ~48 h; anything younger is provisional.
+- The share pattern replicated on a second account and a different niche:
+  `anime_ekaya/2026-09-04-show-converter` reached 937 with 5 shares, the
+  same shape as nuvarel's `cables-read-cheap` (now 1,091 with 5 shares).
+  As of the 2026-09-12 snapshot these are the **only** 2 posts of 61 with
+  any shares at all, and together they hold 2,028 of 3,443 lifetime reach —
+  59% of all reach from 3.3% of posts. n=2 is a pattern to test
+  deliberately, not a proven rule; a deliberate treatment-vs-control run
+  is the next step and it has not happened yet.
+- 61 posts have produced 0 follows and 0 recorded profile visits. Before
+  concluding anything from that, check whether the metric is even collected
+  for the format in question — on Reels it is not.
+- Zero of the four original local roles had run a single consult when this
+  roster was expanded (`.claude/agents/roster-log.md`, 2026-09-12). A role
+  that has never been dispatched has produced no evidence either way;
+  do not read its silence as a verdict.
