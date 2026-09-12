@@ -315,7 +315,8 @@ def main(argv: list[str] | None = None) -> int:
     if args.date:
         day = dt.date.fromisoformat(args.date)
     else:
-        day = (dt.datetime.utcnow() + dt.timedelta(hours=5, minutes=30)).date()
+        ist = dt.timezone(dt.timedelta(hours=5, minutes=30))
+        day = dt.datetime.now(dt.timezone.utc).astimezone(ist).date()
 
     try:
         result = plan(args.account, day, policy)
