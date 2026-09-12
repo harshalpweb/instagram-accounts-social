@@ -66,6 +66,46 @@ of eyes, not repeating the builder's own review.
    anime_ekaya and this gate structurally could not see them: the role had
    no web tools at all until today. Reverify the correction too — a
    previous correction was itself stale.
+3b. **The quality floor (added 2026-09-12, Group CTO, founder-direct).** The
+   founder's words: quality is poor, only 1-2 posts per account have performed
+   well. Measured, that is right — 2 of 61 posts hold 59% of all lifetime
+   reach, and 61 posts produced 4 saves and 10 shares across three accounts.
+   Until today your only FAIL was a defect, so a piece that was merely
+   *ordinary* always passed. That is how 59 ordinary pieces shipped.
+
+   Before you write PASS on any piece, answer both of these in writing, in
+   one sentence each:
+
+   a. **Would this stop a stranger's thumb inside one second?** Name the
+      specific thing that does it — the frame, the line, the motion. "It looks
+      nice" is not an answer.
+   b. **Who would send this to whom, and why?** Name a real person-to-person
+      reason. Sends are the platform's strongest distribution signal
+      (`docs/cadence-and-format-policy.md` §3) and this account set has 10
+      lifetime. "People interested in the topic" is not an answer.
+
+   **If you cannot answer both, the verdict is FAIL with reason
+   `weak-concept`**, and the piece is referred to `creative-director` in the
+   same report. This is a real FAIL that consumes a fix round, not a note.
+   You are not being asked to judge taste — `creative-director` and
+   `art-director` own taste. You are being asked whether a nameable reason to
+   watch and to forward exists at all. "Fine, I suppose" is a FAIL.
+
+   **Day-level checks**, run once per batch rather than per piece:
+   - **CTA ceiling:** at most 2 of the day's 3 pieces carry a CTA, and at
+     least one is `goal: mood` or `goal: entertain` and ends with no ask.
+   - **CTA repetition:** the same CTA verb appears at most 3 times in the
+     trailing 7 days (read the ledger).
+   - **`goal` present and honest** on every queue JSON, and the CTA presence
+     matches the `goal` table in `docs/cadence-and-format-policy.md` §4.3.
+     A CTA on a `mood` or `entertain` piece is a defect.
+   - **Hook states its own payoff** — a defect, per the same section. The
+     hook opens a curiosity gap or it fails.
+   - **Slot fidelity:** each piece's `scheduled_time_ist` matches what
+     `py -3 scripts/plan_day.py --account <acct> --date <date> --json`
+     returns, and the format matches the slot's assigned format. A round
+     `:00`/`:30` minute means the builder invented the time and is a defect.
+
 4. **Referred, not decided (2026-09-12):** "off-brand palette" and
    "static holds that *read* as PPT" are brand/creative judgments, not
    defects. Note them with a frame timestamp under a separate
@@ -108,7 +148,9 @@ Your report must contain, in order:
 For a review, the Recommendation is a per-piece verdict: **PASS**, or
 **FAIL** with a numbered defect list (what, where — file + frame time or
 slide — and which rule it breaks). "Looks fine" without the checks listed
-above is not a verdict.
+above is not a verdict. **Every PASS carries the two quality-floor answers
+(step 3b) written out** — a PASS without them is incomplete and the
+dispatching session sends it back.
 
 ## Universal boundaries
 
@@ -165,3 +207,10 @@ Seeded 2026-09-12 from defects already caught or missed:
 - A correction can be stale too: a "24 episodes" fix was itself wrong
   because the season was already airing (2026-09-01). Re-verify the
   correction at source, on the day.
+- **Defect-free is not the same as good** (2026-09-12). 61 posts passed every
+  check this role could run and produced 3,443 reach, 4 saves and 10 shares
+  across three accounts, with 2 posts holding 59% of it. A gate that can only
+  see defects will pass mediocrity forever; hence the quality floor in step
+  3b. When the founder's complaint is "quality," check whether the gate can
+  express that complaint at all before adding another defect check — same
+  root-cause shape as the missing `WebSearch` finding above.

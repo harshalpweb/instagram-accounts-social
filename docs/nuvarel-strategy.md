@@ -18,6 +18,20 @@ material, light or weight cannot signify wealth, no matter what the caption
 says. Full reasoning, comparable accounts, and the dissent on audience
 targeting: see the CCO consult linked above.
 
+**THIRD REVISION — 2026-09-12, Group CTO, founder-direct (read this first).**
+Sections **§9 to §15 at the end of this file are the current strategy** and
+supersede where they conflict: §7 (cadence) is superseded by §15 and
+`docs/cadence-and-format-policy.md`; §1's audience and §3's pillar scope are
+*widened* by §11; §2 gains the 2026 platform findings in §10; §8's
+all-generated visual pipeline gains a mandatory real-footage lane in §10.3.
+Everything else in §1-§8 stands. New in §9-§15: the long-term vision
+(50k/100k), the two named monetization paths with real numbers and their
+counter-evidence, the niche width ruling, the short-term 4-week plan, and the
+useful-account metric. Reason this revision exists: the founder reviewed the
+account on 2026-09-12 and said the strategy "feels random," carries no evidenced
+confidence of organic growth, and has no stated long-term or short-term vision.
+Full record: `../docs/consults/2026-09-12-group-cto-instagram-strategy-overhaul-and-nuvarel-deep-dive.md`.
+
 **Second revision, same day:** the founder separately noticed real audience
 reaction on the (still-live-at-the-time) stickman Reels and asked whether a
 character could be kept. CCO and Group CTO gave genuinely conflicting
@@ -481,3 +495,273 @@ one bronze hairline, at most seven words of Cormorant in a margin, and
 (once built) the Nuvarel Index numeral in the corner. Renderer path stays
 `accounts/nuvarel/render/` — same deck-JSON → HTML → headless Chromium
 mechanism, new deck content and new photography step, not a new pipeline.
+
+---
+
+# Revision 3 — 2026-09-12 (Group CTO, founder-direct)
+
+Everything from §9 down was written on 2026-09-12 against live performance data
+and fresh primary research. Where it conflicts with §1-§8 above, §9-§14 win.
+
+## 9. Where this account is going — the vision, long and short
+
+The founder's objection was that there is no stated destination. Here is one,
+in two horizons, with the numbers attached.
+
+### 9.1 Long term — what `nuvarel_` is at 50,000 and at 100,000 followers
+
+**The one-line destination:** *the account people check before they spend money
+on anything for their home.* Not a mood board. A second opinion.
+
+At **50,000 followers**, nuvarel is:
+
+- A library of ~150 repeatable, nameable tests ("the fold test", "the seam
+  test", "the tilt test") that a viewer can perform in a shop in under a minute.
+  The library, not any single post, is the asset. It is what makes the account
+  worth *following* rather than worth *watching once*.
+- Monetised on two paths, both named by the founder and both scoped in §12:
+  an **affiliate storefront** of the specific accessible items the tests keep
+  saying yes to, and **one or two paid digital products** that package the
+  library into something a person about to furnish a home will pay for.
+- Earning, on the evidence in §12, a realistic **$300-$1,500 a month**
+  (roughly ₹25,000-₹1,25,000) combined across both paths. That is a bounded
+  estimate from published creator-earnings data, not a projection from our own
+  numbers — we have no revenue history at all. Treat the low end as the planning
+  number.
+
+At **100,000 followers**, the same machine plus two things that only exist at
+scale: inbound brand work from furniture and material manufacturers who want the
+account's verdict, and enough audience to make a higher-priced product
+(a full room-by-room buying system, not a checklist) viable. Neither is planned
+for; both are what the 50k structure is built to be able to accept.
+
+**What this account is deliberately NOT becoming:** a design-inspiration feed, a
+renovation-reel account, or a shopping-haul account. Those are larger niches with
+far more reach available (§10.2 has the evidence), and all three are already
+saturated by accounts with real homes and real cameras. The bet is that "how to
+tell" is a smaller room with a much shorter queue at the door.
+
+### 9.2 Short term — the next four weeks, concretely
+
+Week by week. Every item is a thing someone does, not a thing someone decides.
+
+| Week | Goal | Concrete output |
+|---|---|---|
+| **1** (Sep 13-19) | Stop the bleed on format. Get 3/day actually publishing. | 21 pieces, format mix from `scripts/plan_day.py` (today: Reels-heavy, one carousel explore slot per 7 days). Under-10k auto-clear live, so posts land in their real windows for the first time. First 7-day performance read written into commit messages daily. |
+| **2** (Sep 20-26) | Prove the real-footage lane (§10.3). | At least **4 pieces built from real phone footage** of real objects, against 17 generated. Compare their reach, saves and sends against the generated pieces in the same week. This is the single highest-value experiment on this account. |
+| **3** (Sep 27-Oct 3) | Turn reach into saves. | Every `save`-goal piece ends on a named, repeatable test. Target: **first 25 lifetime saves** (current total: 2). Ship the first keyword-comment lead-magnet post once `digital_products` delivers the checklist (§13). |
+| **4** (Oct 4-10) | Decide the visual pipeline on evidence. | `growth-analyst` reads real-footage vs generated across ~28 paired pieces and `creative-director` rules on the mix. Apply to Amazon Influencer Program India (free, no published follower minimum) if the account clears ~500 followers; if not, record why and hold. |
+
+**The measurable target for the four weeks, stated so it can fail:** 500
+followers, 25 saves, 25 sends. Current: single-digit followers, 2 saves, 5
+sends. If week 4 ends below 100 followers, the problem is not the content
+schedule, and `audience-strategist` plus `cto` take the account-level
+distribution question, the same way `hype_tingles` already has.
+
+## 10. What the evidence actually says (researched 2026-09-12)
+
+### 10.1 The account's own data
+
+From `analytics/insights.csv`, 21 nuvarel posts, 2026-08-30 to 2026-09-10:
+
+- Reels: mean reach **174.9**, n=9. Carousels: mean reach **2.9**, n=12. A
+  **60x** gap. The account has been spending most of its production budget on
+  the format that reaches nobody.
+- Lifetime: 1,609 reach, 22 likes, 5 comments, **2 saves**, 5 shares.
+- Two posts (`cables-read-cheap` at 1,091 reach, then four Reels at ~105-120)
+  hold almost all of it.
+
+**Two saves.** For an account whose entire promise is "useful," that is the
+number that matters most, and it is close to zero. Reach is not this account's
+first problem. Reach that produces nothing is.
+
+### 10.2 The platform, 2026
+
+Verified 2026-09-12. Sources are reputable secondary reporting of Instagram's
+own statements; Mosseri's year-end memo is an Instagram carousel post with no
+citable permalink through the tools available here, so it is flagged as
+secondary throughout.
+
+1. **Ranking signals:** watch time, **sends per reach** (DM shares), likes per
+   reach — in that order. Sends are reported to carry 3-5x the weight of likes
+   for Reels distribution. Nuvarel has 5 sends, lifetime.
+2. **Format benchmarks, 2026:** Reels ~4.7x median reach and ~8x follower
+   acquisition; carousels ~2.3x save rate and ~1.8x comment depth. Our own gap
+   is an order of magnitude wider than the benchmark, which is why
+   `scripts/plan_day.py` computes from our data and not from the benchmark.
+3. **Mosseri's 2025-12-31 memo:** "the polished, perfect aesthetic is dead";
+   Instagram will weight authenticity and provenance signals more heavily
+   through 2026; raw, real, human content over synthetic.
+4. **The narrow AI rule, unchanged:** from 2026-08-31 Instagram limits reach on
+   *profiles featuring AI-generated people* that are unlabelled. It does **not**
+   penalise AI-generated objects, graphics or edits. Group Legal's 2026-09-05
+   read stands; `is_ai_generated` on a container remains a per-post disclosure
+   and is not the profile label. **Do not enable the profile-level toggle.**
+
+### 10.3 The finding that changes this account — and the ruling on it
+
+Three independent pieces of evidence point the same way:
+
+- Mosseri's stated 2026 direction is **away from polish and toward provenance**
+  (10.2.3).
+- This repo's own niche research (`docs/nuvarel-viral-reel-research-2026-09-12.md`)
+  found that the two clips plausibly clearing 10M views in `#interiordesign`
+  were **real renovation footage** on sub-100k accounts, while the CGI-rendered
+  and styled-luxury accounts sat an order of magnitude below on engagement.
+- Our own best post was a Reel matching an **established real-world genre**
+  (cable management), not our prettiest render.
+
+**This does not mean the generated-stills pipeline is wrong.** It is not
+penalised, it works (175 mean reach on Reels), it costs ₹0, and it is the only
+pipeline that can hold a 3-a-day floor. Killing it would be an overreaction to
+directional evidence.
+
+**Ruling (Group CTO, 2026-09-12):** the generated pipeline stays as the base
+load, and a **real-footage lane opens immediately** alongside it.
+
+- A phone camera in raking window light, filming **real objects the founder
+  already owns** — a real drawer, a real fabric, a real cable, a real wood
+  edge — is a ₹0 asset this account has never used. It is also the only thing
+  that can carry the "proof" claim without an asterisk, and it retires a whole
+  category of problem in `build-gates.json`, where a generated demonstration of
+  a physical event is a fabricated evidentiary claim. Filmed, it is simply true.
+- **Target: at least 4 real-footage pieces in week 2**, run as a measured
+  experiment against the generated pieces of the same week (treatment vs.
+  same-account control; `growth-analyst` measures).
+- The **existing open build gates are unchanged** by this. Real footage needs no
+  gate, carries no `ai_generated` flag, and skips the material-fidelity check,
+  because the material is whatever it actually is.
+- This also unblocks **The Inspection** (§3, signature devices), which has been
+  waiting since 2026-09-05 on "someone needs to actually film this." Same phone,
+  same session.
+
+## 11. Niche width — the ruling the founder asked for
+
+The founder asked whether the niche should be broader or narrower than the
+original one-paragraph brief. The answer is **both, on different axes**, and the
+distinction is what makes it work.
+
+**NARROWER on mechanic.** One mechanic, forever: *a named, repeatable test a
+viewer can perform themselves in under a minute.* Not "here is why this is
+beautiful." Not "here are five trends." A test with a name, a verdict, and a
+result the viewer can reproduce. The two best-performing posts on this account
+both did exactly this; the flat ones were taste opinions. Anything that is not a
+test moves to the `mood` goal, capped at roughly one piece in three.
+
+**WIDER on object.** The original scope was luxury objects. That is too narrow
+in exactly the place it costs money:
+
+1. The mechanic works on **anything with a cheap version and an expensive
+   version** — a cable, a zip, a hinge, a towel, a light bulb, a paint finish, a
+   dish rack. Those are not luxury objects, and they produced this account's
+   only real hit.
+2. **This is also the monetization fix** (§12.1). The affiliate money in this
+   niche is not in the expensive object; the research says affluent buyers still
+   overwhelmingly buy the expensive thing in a physical store. It is in the
+   accessible ₹500-₹5,000 item the viewer can buy from the post. An account that
+   only ever shows ₹80,000 sofas has nothing to link.
+3. It costs nothing brand-wise. "The proof, not the claim" does not say
+   "expensive." It says *tell the difference yourself*, which is a more
+   democratic promise and a larger addressable audience.
+
+**Unchanged:** the visual register stays disciplined and premium (§8). Widening
+the object set is not permission to look cheaper. A ₹300 cable photographed like
+a ₹30,000 object is the whole joke, and it is the joke that worked.
+
+**Audience, adjusted:** §1's "28-45, 6-24 months into a home they intend to
+keep" stays as the core, with the floor removed at the bottom. Anyone about to
+spend money on something for a home is in scope. This absorbs the CCO's recorded
+dissent on §1 rather than leaving it open.
+
+## 12. Monetization — the two paths, with real numbers and the counter-evidence
+
+The founder named both paths and gave a reason: affluent audiences buy on
+impulse. **That reason is partly wrong, and the correction improves the plan.**
+
+Research, 2026-09-12: 89% of wealthy consumers still want to walk into a
+physical store, and 51% prefer to browse online but complete a luxury purchase
+in person. Separately, 19% of consumers are more likely to impulse-buy luxury
+items, and 36% made a $250+ impulse purchase in Q1 2025 with a median of $497 —
+so impulse at high value is real, but it is a minority behaviour and it is
+weighted toward in-store. For a creator affiliate link the money is therefore
+**not** in the expensive object. It is in the accessible adjacent object bought
+in the moment the viewer is already convinced, which is exactly what §11's
+widening produces.
+
+### 12.1 Path A — affiliate
+
+**Primary channel: Amazon Influencer Program (India).** Verified at Amazon's own
+India newsroom, 2026-09-12: free to join, India explicitly supported, requires a
+public Instagram/YouTube/Facebook business account, evaluated on "content
+quality, relevance, and audience engagement" rather than follower count alone,
+and it now runs a dedicated **Home Influencer Program** vertical with curated
+storefronts. Amazon publishes **no follower minimum**; secondary reporting puts
+practical approval near ~1,000 followers. Approval is two-stage (storefront
+first, then a separate on-site video approval).
+
+- Why this one first: it is the only channel verified as India-eligible, ₹0 to
+  enter, and carrying a home vertical. It clears `CLAUDE.md`'s
+  marketplace-channel gate on entry cost and India eligibility. Payout terms
+  still need a primary-source read before any revenue is booked — flagged, not
+  assumed.
+- **LTK (RewardStyle)** is the stronger home-goods channel on commission (home
+  goods reported at 8-15%, premium retail up to 25%) but it is **invite-only**,
+  and its India eligibility could not be confirmed at primary source on
+  2026-09-12. Treat it as a later application, not a plan.
+- Reported earnings, secondary and wide: Amazon micro-creators average ~$312/mo
+  in commissions; LTK creators at 10k-50k followers are reported at $500-5,000/mo
+  in lifestyle and home. The $300-1,500/mo planning band in §9.1 is the
+  conservative read of those two.
+- **The demand channel is the platform feed** (Instagram-supplied distribution),
+  not organic search. It therefore passes `CLAUDE.md`'s demand-channel default
+  cleanly — that rule gates the demand channel, not the affiliate mechanism.
+
+### 12.2 Path B — digital products
+
+The Etsy-shaped answer (printable wall art, the highest-volume digital category
+in home decor, $850M+/yr, $35-65 average order value) is **the wrong product for
+this audience**. Wall art sells to people decorating. Nuvarel's audience is
+people *deciding*.
+
+The right product is the library from §9.1, packaged:
+
+- **Free lead magnet, first:** a one-page printable **60-Second Showroom
+  Inspection Checklist** — the tests, in order, for sofa, table, rug, hardware.
+  Delivered through the keyword-comment mechanic ("comment SOFA and I will send
+  it"), which is the standard 2026 growth loop precisely because comments are a
+  ranking signal while links in captions are suppressed. **Built by
+  `digital_products`, not here** — the ask is filed (§13).
+- **Paid, only after 5,000 followers and only if the free one converts:** a
+  materials buying guide priced in `digital_products`' existing ₹299-₹999 band,
+  sold through its already-live Razorpay checkout. No new checkout, no new
+  compliance surface, no new subproject.
+
+**Neither path starts before roughly 1,000 followers**, and neither is a reason
+to change today's content. They are the reason the content is shaped the way
+§11 says.
+
+## 13. The `digital_products` ask
+
+Filed 2026-09-12 as a named cross-subproject request:
+`../docs/pending-tasks/2026-09-12-nuvarel-lead-magnets-ask-to-digital-products.md`,
+indexed under "Cross-subproject asks" in `../docs/pending-tasks/README.md`.
+Two free PDFs (a 60-second showroom inspection checklist, and twelve accessible
+swaps), ₹0, non-blocking, explicitly declinable. **Nothing in that brief is
+built in this repo** — the founder ruled that `digital_products` builds it.
+
+## 14. Trend research — specified, not live
+
+`docs/trend-research-step-spec.md`. **Blocked on Chief Security Officer review**
+of the cookie-based browser session. It is a **soft dependency** by design: when
+it goes live, a failure or an unavailable machine drops the build back to pillar
+rotation and logs the skip. It never blocks a build, and it never becomes the
+reason a slot goes unfilled.
+
+## 15. Operational rules that now live elsewhere
+
+Cadence (3/day until 50k), the data-driven format mix, posting-time windows and
+jitter, the hook and CTA rule, and the quality floor are **cross-account** and
+are canonical in `docs/cadence-and-format-policy.md`. They supersede §7 of this
+document and the standing-slot table in
+`accounts/nuvarel/docs/daily-build-agent-prompt.md`. Do not restate the numbers
+here; they will drift.

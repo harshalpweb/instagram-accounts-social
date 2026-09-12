@@ -48,10 +48,35 @@ builds, records decisions in `docs/consults/` (local-role consults) or
 
 1. **`needs_review` is the publish gate.** Every queued piece is built at
    `needs_review: true`. Flipping it to `false` publishes to the founder's
-   own accounts at the next hourly run. The founder clears it (live, or by
-   editing the JSON); under the 2026-09-12 ruling Group CTO may also,
-   recorded in a consult. No local role and no daily-build agent ever
-   flips it.
+   own accounts at the next hourly run.
+
+   **Founder ruling, 2026-09-12 — auto-clear below 10,000 followers.** The
+   founder decided directly (relayed and confirmed through the CoS) that
+   **no founder review is required before a post goes live on any account
+   under 10,000 followers.** He reviews on Instagram after publish instead.
+   This is a founder decision, not a Group CTO one.
+
+   What this changes: **only the founder-approval step.** Both quality
+   gates stay exactly as they are and now gate harder
+   (`docs/cadence-and-format-policy.md` §5) — `content-reviewer` first on
+   defects, then `creative-director` (with `art-director` on look) on
+   brand fit. A piece that fails either gate still goes to
+   `accounts/<acct>/content/qa-hold/` and never publishes.
+
+   The mechanism: after **both** verdicts are PASS on a piece, **the
+   session that dispatched the build** sets `needs_review: false` on that
+   piece and commits it, naming both verdicts in the commit message. The
+   build agent still never flips it — the builder and the clearer must not
+   be the same actor, which is the whole point of the ladder. No local
+   role flips it either.
+
+   **At 10,000 followers on an account, the auto-clear stops for that
+   account** and founder approval returns, unless the founder rules
+   otherwise. Follower count is checked per account, not portfolio-wide.
+   As of 2026-09-12 all three accounts are far below 100 followers, so
+   this applies to every account in the repo today. Group CTO may still
+   clear a piece directly at any follower count, recorded in a consult
+   (2026-09-12 ruling).
 2. **Licensed media never gets committed.** Mixkit audio (`assets/audio/`)
    and Pexels clips (`assets/video/`) are usable inside a rendered post but
    not redistributable; this repo is public. `.gitignore` enforces it —
@@ -77,6 +102,16 @@ builds, records decisions in `docs/consults/` (local-role consults) or
    until every prompt copy is audited; nuvarel additionally reads
    `accounts/nuvarel/docs/build-gates.json` first and builds only open
    lanes.
+9. **Cadence, format mix and posting times are computed, not written
+   down** (Group CTO, 2026-09-12, founder-direct). Every build runs
+   `py -3 scripts/plan_day.py --account <acct>` before choosing topics and
+   builds exactly the slots it returns: **3 posts a day until the account
+   passes 50,000 followers**, with the FEED/REELS mix recomputed daily from
+   `analytics/insights-history.csv` and each slot's time drawn from inside
+   a window so the schedule never repeats day to day. Numbers live in
+   `docs/slot-policy.json`; the rule, the evidence behind it, and the
+   hook/CTA policy live in `docs/cadence-and-format-policy.md`, which is
+   canonical over any prompt copy.
 7. **Anti-repetition ledgers are checked on the fields the pipeline
    actually writes** (queue JSON `type` + topic keywords + scene/prop
    set), not on a drifted column — a false clear already shipped a
@@ -110,12 +145,21 @@ builds, records decisions in `docs/consults/` (local-role consults) or
 - Publish (CI does this hourly per account; local runs need the token):
   `ACCOUNT_DIR=accounts/<acct> py -3 scripts/publish_due_posts.py`
 - Insights rollup, no token needed: `py -3 scripts/collect_insights.py --rollup-only`
+- Plan a day (cadence, format mix, jittered slot times; no token, no API):
+  `py -3 scripts/plan_day.py --account <acct>` (add `--json` for machine use)
 - Load `.claude/skills/meme-worthy-character-reels/` before any Reel build.
 
 ## Strategy documents
 
-- `docs/nuvarel-strategy.md` — canonical for `nuvarel_` (revised
-  2026-09-05, founder-direct).
+- `docs/cadence-and-format-policy.md` — **canonical for all accounts**:
+  the 3/day-until-50k floor, the data-driven format mix, posting-time
+  windows, the hook/CTA rule, the quality floor. Wins over any prompt copy.
+- `docs/nuvarel-strategy.md` — canonical for `nuvarel_` (**Revision 3,
+  2026-09-12, founder-direct**: §9-§15 carry the long-term vision,
+  monetization paths, niche-width ruling and the real-footage lane, and
+  supersede §7).
+- `docs/trend-research-step-spec.md` — daily niche trend research.
+  **Specified, NOT live — blocked on Chief Security Officer review.**
 - `docs/nuvarel-viral-reel-research-2026-09-12.md` — niche viral-Reel
   research, input to weigh against the strategy above, not a replacement.
 - `../docs/hype_tingles-strategy.md`, `../docs/anime_ekaya-strategy.md` —

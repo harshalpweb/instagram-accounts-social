@@ -1,0 +1,53 @@
+{
+  "_doc": "Posting-slot windows and format-mix policy (Group CTO, 2026-09-12, founder-direct). Read by scripts/plan_day.py, which every daily-build prompt runs at Step 0. Edit this file, not the script, to move a window. Times are IST (+05:30). A window is a RANGE, never a fixed clock time: the planner picks a deterministic-but-varying minute inside it per day, so the account does not post at identical times every day (founder note 2026-09-12: fixed identical slots read as automated).",
+
+  "cadence": {
+    "posts_per_day": 3,
+    "floor_until_followers": 50000,
+    "_note": "Founder ruling 2026-09-12: 3 posts a day, every day, no exceptions, until the account passes 50,000 followers. The COUNT is fixed; only the format mix inside the 3 flexes with performance data. A slot whose lane is closed or whose build fails is a BUILD-INCIDENT, not a silent drop to 2."
+  },
+
+  "format_mix": {
+    "window_days": 21,
+    "prior_weight": 3,
+    "demote_ratio": 0.25,
+    "explore_every_n_days": 7,
+    "min_share_of_top": 1,
+    "_note": "Smoothed mean reach per format over the trailing window; a format scoring below demote_ratio x the top format's score loses its standing share. explore_every_n_days forces one slot back to the demoted format on a fixed cycle so a demotion can never become self-fulfilling (the format is never re-measured if it is never posted)."
+  },
+
+  "accounts": {
+    "nuvarel": {
+      "timezone_note": "US/UK/UAE/Singapore/Australia + metro India. Morning-at-home and evening windows carry this niche; the late window catches US daytime.",
+      "windows": [
+        {"name": "morning", "start": "09:40", "end": "11:20"},
+        {"name": "afternoon", "start": "14:10", "end": "16:00"},
+        {"name": "evening", "start": "19:05", "end": "21:15"}
+      ]
+    },
+    "anime_ekaya": {
+      "timezone_note": "India-weighted, younger audience; late-evening and night windows are where this niche is awake.",
+      "windows": [
+        {"name": "midday", "start": "12:35", "end": "14:20"},
+        {"name": "evening", "start": "18:50", "end": "20:40"},
+        {"name": "night", "start": "22:05", "end": "23:40"}
+      ]
+    },
+    "hype_tingles": {
+      "timezone_note": "Broad entertainment audience; commute and late-evening scroll windows.",
+      "windows": [
+        {"name": "morning", "start": "08:20", "end": "10:10"},
+        {"name": "evening", "start": "17:45", "end": "19:30"},
+        {"name": "night", "start": "21:20", "end": "23:05"}
+      ]
+    }
+  },
+
+  "hook_cta": {
+    "_doc": "When a piece gets an explicit CTA and when it must not (founder correction 2026-09-12: a forced CTA on every post looks bad). The HOOK is always required; the CTA is conditional. Full rule and rationale: docs/cadence-and-format-policy.md section 4.",
+    "cta_required_goals": ["save", "share", "comment", "dm"],
+    "cta_forbidden_goals": ["mood", "entertain"],
+    "max_cta_share_per_day": 2,
+    "max_same_cta_verb_in_7_days": 3
+  }
+}

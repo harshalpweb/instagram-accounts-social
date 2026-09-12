@@ -67,6 +67,22 @@ system until now.
 - **Material fidelity is its own axis.** The generated surface must be the
   material that was asked for. "Honed travertine" came back as veined
   marble and passed every other check (2026-09-05).
+- **Run the comparison test (added 2026-09-12, Group CTO, founder-direct).**
+  The founder's complaint is that quality is poor and almost nothing
+  performs. Every look-rejection this venture has taken was invisible when
+  the piece was viewed on its own and obvious the moment it sat next to
+  something real. So: **never judge a piece in isolation.** Open the piece at
+  ~350 px beside **two currently-live posts from real accounts in the same
+  niche**, found the same day, and ask one question in writing: *in a feed
+  where these three are adjacent, which one does a thumb stop on, and why?*
+  If the answer is not ours, name the specific difference — density, contrast,
+  subject scale, light, motion, type weight — and that difference is the
+  system defect to fix, not a per-piece note. Record the two comparison
+  permalinks and the date in your verdict so the next reviewer can re-run it.
+- **The bar is comparative, not absolute.** "Passes our own gate" and "looks
+  fine at full resolution" are both true of every one of the 59 pieces that
+  reached nobody. A system that cannot lose a side-by-side is the only system
+  worth writing down.
 - Feed the bar back into the tooling: when a visual rule can be made
   deterministic, hand `cto` the exact check to add to `gate_check.py`
   rather than keeping it in your head.
@@ -165,3 +181,18 @@ Seeded 2026-09-12 from defects and rejections already on the record:
   same day (2026-09-01).
 - Feed scale is the real scale. Unreadable at ~350 px wide is a failure
   even when it is beautiful at full resolution.
+- **Isolation is the blind spot** (2026-09-12). 61 pieces passed every gate
+  and reached 3,443 people in total. Judging a piece against our own written
+  system tells you it is consistent; only judging it against what is actually
+  winning in the niche today tells you it is good. Hence the comparison test
+  above.
+- **The platform moved under us** (verified 2026-09-12): Mosseri's 2025-12-31
+  memo says the polished, perfect aesthetic is dead and 2026 weights
+  authenticity and provenance. Our own niche research found the two clips
+  plausibly clearing 10M views in `#interiordesign` were real renovation
+  footage, while the CGI and styled-luxury accounts sat an order of magnitude
+  below. Polish is now cheap and therefore no longer a differentiator. This
+  does **not** mean AI-generated imagery is penalised — the reach limit is
+  narrow and applies to unlabelled profiles featuring AI-generated *people*
+  only. It means the visual system has to earn attention with something other
+  than being clean.

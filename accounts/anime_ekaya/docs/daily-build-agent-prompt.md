@@ -70,13 +70,53 @@ CTO update):
   post; the gate's own `note` field has the exact reopening procedure if
   you want to check status.
 
+## Step 0A — plan the day, and read yesterday, before anything else
+
+**Group CTO, 2026-09-12, founder-direct.** Canonical rule and the evidence
+behind it: `docs/cadence-and-format-policy.md`. Run these two commands before
+you think about topics. Neither needs a token and neither calls the API.
+
+```
+py -3 scripts/collect_insights.py --rollup-only
+py -3 scripts/plan_day.py --account anime_ekaya
+```
+
+1. **`plan_day.py` decides how many pieces, which format each is, and what
+   time each posts.** Build exactly the slots it returns. It enforces the
+   founder's **3 posts a day, every day, until 50,000 followers** floor,
+   recomputes the FEED/REELS mix daily from the trailing 21 days of real
+   performance, and draws each slot's minute from inside a window so the
+   account never posts at identical clock times two days running. You do not
+   choose the count, the mix or the times. If you believe the plan is wrong,
+   build it anyway and say why in your final report and the commit message.
+2. **Read yesterday and the trailing 7 days on this account** from the rollup:
+   which piece reached most and least, which `type` each was, and whether the
+   format the planner assigned agrees with that. **Write two lines into your
+   commit message** naming what you learned and what you changed because of
+   it. "Nothing changed" is fine once; three days running is an escalation to
+   `growth-analyst`.
+
+Measured 2026-09-12 on this account: Reels mean reach **191.3** (n=9),
+carousels **1.7** (n=11). A 110x gap. That is why the mix is computed and no
+longer fixed.
+
+**Strategy content on this account is under active review by the portfolio
+Chief Creative Officer (dispatch 2026-09-12).** This section changes cadence,
+timing, format mix, hooks and CTAs only. Pillars, voice and premise are
+unchanged until CCO's direction lands and `creative-director` applies it.
+
 ## Your job today (one run)
 
-Build and queue **4 posts for today's date** (the date the run starts,
-IST): **1 carousel + 3 Reels**, each on a different topic, trend-sourced
-where possible. Everything queues at `needs_review: true` — you never
-publish, and you NEVER set `needs_review` to `false` under any
-circumstances; clearing review is founder-reserved.
+Build and queue **the 3 slots `plan_day.py` returned in Step 0A** for today's
+date (the date the run starts, IST), each on a different topic, trend-sourced
+where possible. The fixed "1 carousel + 3 Reels" cadence from 2026-09-06 is
+retired — the count is now 3 and the mix is computed.
+
+Everything queues at `needs_review: true` — **you never flip it.** Under the
+founder's 2026-09-12 ruling (`CLAUDE.md` hard rule 1) the founder-approval step
+is replaced below 10,000 followers by an auto-clear, but the clear is applied by
+the **dispatching session** after `content-reviewer` and `creative-director`
+both PASS, never by you. The builder and the clearer are never the same actor.
 
 **Carousel format variety (new 2026-09-06):** while `carousel_video_slides`
 stays closed, vary the carousel's *visual density* instead of pretending
@@ -108,6 +148,15 @@ debate the fandom is having right now (HOT TAKE fuel). Verify any
 factual claim you will print (rankings, dates, episode counts) against
 the primary source before it goes on a slide — this account has done
 that before and it caught errors.
+
+### Step 1b — in-app trend research — NOT LIVE, DO NOT RUN
+
+Specified in `docs/trend-research-step-spec.md` and **blocked on a Chief
+Security Officer review of the cookie-based browser session** (founder: the
+security check is mandatory). Skip this step entirely; do not open a browser
+session, do not look for a cookie file. When it unblocks it is a **soft**
+dependency and its failure will never block a build. Until then Step 1's
+`WebSearch` is the whole trend input.
 
 ### Step 2 — anti-repetition check (topic AND mechanic — both, not just topic)
 
@@ -228,14 +277,21 @@ One JSON per post in `accounts/anime_ekaya/content/queue/`, id format
 {
   "id": "2026-09-07-example-slug",
   "type": "<format-slug>",
+  "goal": "share",
   "caption": "...",
   "slides": ["accounts/anime_ekaya/content/queue/slides/<id>-1.png", "..."],
-  "scheduled_time_ist": "2026-09-07T13:00:00+05:30",
+  "scheduled_time_ist": "<paste from plan_day.py --json>",
   "status": "pending",
   "attempts": 0,
   "needs_review": true
 }
 ```
+
+**`goal` is required on every piece (added 2026-09-12).** One of `save`,
+`share`, `comment`, `dm`, `mood`, `entertain`. Chosen when the topic is chosen,
+never retro-fitted. It decides whether the piece gets a CTA — see the hook/CTA
+rule below. **`scheduled_time_ist` comes from `plan_day.py`, verbatim** — do
+not invent a time, do not round the minute, do not reuse yesterday's.
 
 Reels use `"video": "accounts/anime_ekaya/content/queue/video/<id>.mp4"`
 instead of `"slides"`.
@@ -266,27 +322,48 @@ what makes the mechanic-variety rule auditable by whoever reviews the
 batch, since `type` alone doesn't reveal it (e.g. `diagnostic` could be
 a quiz or a listicle depending on execution).
 
-**Standing slots (IST), revised 2026-09-06:**
-- **10:00** — **Reel** (India morning scroll; a good slot for whichever
-  Reel has the freshest hook that day — not reserved for one format).
-- **13:00** — **carousel** (Slot A, India lunch; the timely piece — FAN
-  VOTE goes here on its data day).
-- **19:30** — **Reel** (Slot B, India evening prime + US morning; Reels
-  carry the non-follower reach, so they take the best slot).
-- **22:30** — **Reel** (Slot C, India late-night anime hours + US
-  lunch).
+**Slots (replaced 2026-09-12 — there is no standing slot table any more).**
+`plan_day.py` (Step 0A) returns today's 3 slots, each with a format and a
+`scheduled_time_ist` drawn from inside a window. The fixed
+10:00/13:00/19:30/22:30 table is retired. Windows live in
+`docs/slot-policy.json`; edit that file, never this prompt, to move a window.
 
-**Slot-occupancy rule (tightened 2026-09-01, Group CTO):** before
-building anything, list the target date's existing queue items. A
-standing slot already occupied by an existing queue item is COVERED —
-do not build a piece for it. Build only for the standing slots that are
-empty on the target date; if all four are occupied, stop and do nothing
-(the day is fully covered by an earlier batch). The old "+30 minutes
-shift" rule applied only to accidental one-off collisions and would
-duplicate a whole pre-built day — never shift-and-double. If a genuine
-timing conflict arises for a slot you ARE building (e.g. a moved Reel),
-shift +30 minutes and note it in the commit message; the publish cron is
-hourly, so the next top-of-hour still lands in the target window.
+**Slot-occupancy rule (tightened 2026-09-01, Group CTO, still binding):**
+before building anything, list the target date's existing queue items. A slot
+already occupied by an existing queue item is COVERED — do not build a piece
+for it. Build only for the planner's slots that are empty on the target date;
+if all three are occupied, stop and do nothing (the day is fully covered by an
+earlier batch). Never shift-and-double. Match an existing item to a planner slot
+by nearest time, not by exact string.
+
+**A closed lane does not reduce the day below 3 posts.** If a slot's assigned
+format cannot be built, build the other open format for that slot; only if no
+lane can fill it does the slot become a `BUILD-INCIDENT` entry naming the slot
+and the reason.
+
+### Hook and CTA rule (Group CTO, 2026-09-12, founder-direct)
+
+Canonical: `docs/cadence-and-format-policy.md` §4. Operative here:
+
+- **The hook is mandatory on every piece.** Frame 1 / second 1 opens a
+  curiosity gap and never states the verdict or names the format. ≤ 7 words.
+- **The CTA is conditional, and forcing one onto every post is now a defect**
+  (founder, 2026-09-12: it looks forced). By the piece's `goal`:
+
+  | `goal` | CTA | Shape |
+  |---|---|---|
+  | `save` | required | future utility, phrased for the viewer |
+  | `share` | required | names the person, not the action |
+  | `comment` | required | one answerable question, never "thoughts?" |
+  | `dm` | required | keyword-comment mechanic only; names the keyword |
+  | `mood` | **forbidden** | ends on the image |
+  | `entertain` | **forbidden** | the punchline is the ending; a CTA kills it |
+
+- **At most 2 of today's 3 pieces carry a CTA.** At least one is `mood` or
+  `entertain` and ends clean. On a comedy account this matters more, not less.
+- **The same CTA verb appears at most 3 times in any 7 days** — check the
+  ledger.
+- A CTA never appears on frame 1, and never twice in one piece.
 
 ### Step 8 — update the ledger
 
@@ -333,7 +410,9 @@ three.
 
 ## Definition of done
 
-4 queue JSONs for today at `needs_review: true`, rendered assets
+Queue JSONs for all 3 planner slots today at `needs_review: true`, each with a
+`goal` and each with its `scheduled_time_ist` taken verbatim from
+`plan_day.py`, rendered assets
 committed, ledger updated (topic AND mechanic class), copydesk clean,
 pushed to `master` with the safety sequence above, **and your final
 message lists every piece built (queue JSON path, rendered asset path,
@@ -348,7 +427,17 @@ that passed. A FAIL comes back to you as a fix round (rounds 1-3 same
 builder, round 4 escalates to `cto`, round 5 is a hard stop). A piece
 still FAILed when the fix rounds run out is moved from `content/queue/`
 to `accounts/anime_ekaya/content/qa-hold/` (outside the publisher's
-scan; never `content/failed/`, which is the publisher's own state). Only
-pieces that cleared both verdicts reach the founder's morning review. No
-founder ping needed — the founder reviews the cleared morning batch
-through the normal daily review flow.
+scan; never `content/failed/`, which is the publisher's own state).
+
+**A defect-free piece can still be killed (2026-09-12).** `content-reviewer`
+now applies a quality floor as well as a defect list: a piece nobody can name a
+reason to forward is a FAIL with reason `weak-concept`. The 3-a-day floor is not
+a licence to ship filler — a killed slot is a `BUILD-INCIDENT`, and three
+incidents in one week escalate to `cto`.
+
+**Clearing for publish (changed 2026-09-12, founder ruling).** Once both
+verdicts are PASS, the **dispatching session** sets `needs_review: false` and
+commits, naming both verdicts in the message. This account is far below 10,000
+followers, so no founder approval step runs (`CLAUDE.md` hard rule 1); the
+founder reviews on Instagram after publish. You still never flip the flag
+yourself.

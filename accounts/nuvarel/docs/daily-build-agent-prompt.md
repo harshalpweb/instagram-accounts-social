@@ -28,6 +28,35 @@ the commit message (e.g. `Reel slot skipped: photo_reel gate closed`). It is
 not a failure and not an incident. If every lane you would build for is
 closed or covered (Step 7), stop: no commit, no incident, print why.
 
+## Step 0A — plan the day, and read yesterday, before anything else
+
+**Group CTO, 2026-09-12, founder-direct.** Canonical rule and the evidence
+behind it: `docs/cadence-and-format-policy.md`. Run these two commands before
+you think about topics. Neither needs a token and neither calls the API.
+
+```
+py -3 scripts/collect_insights.py --rollup-only
+py -3 scripts/plan_day.py --account nuvarel
+```
+
+1. **`plan_day.py` decides how many pieces, which format each is, and what
+   time each posts.** Build exactly the slots it returns. It enforces the
+   founder's **3 posts a day, every day, until 50,000 followers** floor,
+   recomputes the FEED/REELS mix daily from the trailing 21 days of real
+   performance, and draws each slot's minute from inside a window so the
+   account never posts at identical clock times two days running. You do not
+   choose the count, the mix or the times. If you believe the plan is wrong,
+   build it anyway and say why in your final report and the commit message.
+2. **Read yesterday and the trailing 7 days on this account** from the rollup:
+   which piece reached most and least, which `type` each was, and whether the
+   format the planner assigned agrees with that. **Write two lines into your
+   commit message** naming what you learned and what you changed because of
+   it. "Nothing changed" is fine once; three days running is an escalation to
+   `growth-analyst`.
+
+The `--json` form gives you `scheduled_time_ist` ready to paste into the queue
+JSON. Do not round the minute — the round minute is the tell.
+
 ## Who you are building for
 
 Account: `nuvarel_`. Positioning (strategy §1): **"The proof, not the
@@ -72,11 +101,16 @@ the other.
 
 ## Your job today (one run)
 
-Build and queue **up to 2 posts for today's date** (the date the run
-starts, IST): **1 carousel** (10:00 IST) **+ 1 Reel** (19:30 IST), subject
-to the gates in Step 0 and slot occupancy in Step 7. Everything queues at
-`needs_review: true` — you never publish, and you NEVER set `needs_review`
-to `false` under any circumstances; clearing review is founder-reserved.
+Build and queue **the 3 slots `plan_day.py` returned in Step 0A** for today's
+date (the date the run starts, IST), subject to the gates in Step 0 and slot
+occupancy in Step 7. The old "1 carousel at 10:00 + 1 Reel at 19:30" is
+retired; so is the 2/day cadence in `nuvarel-strategy.md` §7.
+
+Everything queues at `needs_review: true` — **you never flip it.** Under the
+founder's 2026-09-12 ruling (`CLAUDE.md` hard rule 1) the founder-approval step
+is replaced below 10,000 followers by an auto-clear, but the clear is applied by
+the **dispatching session** after `content-reviewer` and `creative-director`
+both PASS, never by you. The builder and the clearer are never the same actor.
 
 ### Step 1 — trend search (2-3 queries)
 
@@ -95,6 +129,23 @@ You want: a material, object or comparison you can translate into
 absence. The account's product is the proof, not the trend: "bouclé is
 everywhere" becomes "how to tell a dense bouclé from a loose one before you
 sit on it."
+
+**Object scope widened 2026-09-12 (strategy §11).** The mechanic is narrow —
+one named, repeatable test a viewer can perform in under a minute — but the
+object set is wide: *anything with a cheap version and an expensive version*.
+A cable, a zip, a hinge, a towel, a bulb, a paint finish, a dish rack all
+qualify, and this account's single best post was about cable management, not a
+luxury object. A ₹300 item photographed like a ₹30,000 one is on-brand; a taste
+opinion with no reproducible test is not, whatever it is about.
+
+### Step 1b — in-app trend research — NOT LIVE, DO NOT RUN
+
+Specified in `docs/trend-research-step-spec.md` and **blocked on a Chief
+Security Officer review of the cookie-based browser session** (founder: the
+security check is mandatory). Skip this step entirely; do not open a browser
+session, do not look for a cookie file. When it unblocks it is a **soft**
+dependency and its failure will never block a build. Until then Step 1's
+`WebSearch` is the whole trend input.
 
 ### Step 2 — anti-repetition check
 
@@ -277,9 +328,10 @@ One JSON per post in `accounts/nuvarel/content/queue/`, id format
 {
   "id": "2026-09-06-example-slug",
   "type": "<pillar-slug>",
+  "goal": "save",
   "caption": "...",
   "slides": ["accounts/nuvarel/content/queue/slides/<id>-1.png", "..."],
-  "scheduled_time_ist": "2026-09-06T10:00:00+05:30",
+  "scheduled_time_ist": "<paste from plan_day.py --json>",
   "status": "pending",
   "attempts": 0,
   "needs_review": true,
@@ -287,6 +339,14 @@ One JSON per post in `accounts/nuvarel/content/queue/`, id format
   "tonal_key": "dark"
 }
 ```
+
+**`goal` is required on every piece (added 2026-09-12).** One of `save`,
+`share`, `comment`, `dm`, `mood`, `entertain`. It is chosen when the topic is
+chosen, never retro-fitted. It decides whether the piece gets a CTA — see the
+hook/CTA rule below.
+
+**`scheduled_time_ist` comes from `plan_day.py`, verbatim.** Do not invent a
+time, do not round the minute, do not reuse yesterday's.
 
 `"ai_generated": true` is **mandatory on every piece containing generated
 imagery** — the publisher turns it into Meta's `is_ai_generated=true`
@@ -318,20 +378,52 @@ real grain looks like," not "watch this board get sanded"). This applies
 to both "recommended first" concepts in strategy §3 pillars 7-8 — treat
 them as needing this reframe before building, not as ready-to-shoot.
 
-**Standing slots (IST), strategy §6/§7, 2/day from 2026-09-06:**
-- **10:00** — **carousel** (decor-specific morning-at-home window).
-- **19:30** — **Reel** (all-India evening peak; Reels carry the
-  non-follower reach, so they take the best slot).
-- The old 13:30 slot is retired. Do not build for it.
+**Slots (replaced 2026-09-12 — there is no standing slot table any more).**
+`plan_day.py` (Step 0A) returns today's 3 slots, each with a format and a
+`scheduled_time_ist` drawn from inside a window. The fixed 10:00/13:30/19:30
+table is retired. Windows live in `docs/slot-policy.json`; edit that file, never
+this prompt, to move a window.
 
-**Slot-occupancy rule (Group CTO, 2026-09-01):** before building anything,
-list the target date's existing queue items. A standing slot already
-occupied by an existing queue item is COVERED — do not build a piece for
-it. Build only for the standing slots that are empty on the target date
-*and* whose lane is open; if nothing is both empty and open, stop and do
-nothing. Never shift-and-double. If a genuine timing conflict arises for a
-slot you ARE building, shift +30 minutes and note it in the commit
-message; the publish cron is hourly, so the next top-of-hour still lands.
+**Slot-occupancy rule (Group CTO, 2026-09-01, still binding):** before building
+anything, list the target date's existing queue items. A slot already occupied
+by an existing queue item is COVERED — do not build a piece for it. Build only
+for the planner's slots that are empty on the target date *and* whose lane is
+open. Never shift-and-double. Match an existing item to a planner slot by
+nearest time, not by exact string.
+
+**A lane closed by `build-gates.json` does not reduce the day to 2 posts.** The
+cadence floor is 3. If a slot's assigned format cannot be built, build the other
+open format for that slot rather than dropping it; only if *no* lane can fill it
+does the slot become a `BUILD-INCIDENT` entry naming the slot and the reason.
+
+### Hook and CTA rule (Group CTO, 2026-09-12, founder-direct)
+
+Canonical: `docs/cadence-and-format-policy.md` §4. Operative here:
+
+- **The hook is mandatory on every piece.** Frame 1 / second 1 opens a
+  curiosity gap and never states the verdict or names the format. ≤ 7 words.
+  Evidence: `cables-read-cheap` ("the cheapest thing in an expensive room")
+  reached 1,091 against `bathroom-splurge-skip` ("splurge or skip: the
+  bathroom") at 110 — same day, same slot, same craft.
+- **The CTA is conditional, and forcing one onto every post is now a defect**
+  (founder, 2026-09-12: it looks forced). By `goal`:
+
+  | `goal` | CTA | Shape |
+  |---|---|---|
+  | `save` | required | future utility: "Save this for the next showroom." |
+  | `share` | required | names the person: "Send this to whoever picked the sofa." |
+  | `comment` | required | one answerable question, never "thoughts?" |
+  | `dm` | required | keyword-comment mechanic only; names the keyword and what arrives |
+  | `mood` | **forbidden** | ends on the image. No closer slide, no ask. |
+  | `entertain` | **forbidden** | the ending is the ending. |
+
+- **At most 2 of today's 3 pieces carry a CTA.** At least one is `mood` or
+  `entertain` and ends clean.
+- **The same CTA verb appears at most 3 times in any 7 days.** "Save this"
+  every day is the same robotic tell as a fixed clock time — check the ledger.
+- A CTA never appears on frame 1, and never twice in one piece. The `closer`
+  slide in Step 5d exists only for CTA-carrying goals; a `mood` piece ends on
+  its last photograph.
 
 ### Step 8 — update the ledger
 
@@ -381,7 +473,8 @@ you started ComfyUI, stop it even on failure.
 
 ## Definition of done
 
-Queue JSONs for every open, uncovered slot today at `needs_review: true`
+Queue JSONs for all 3 planner slots today at `needs_review: true`, each with a
+`goal`, each with its `scheduled_time_ist` taken verbatim from `plan_day.py`
 with `ai_generated: true`, rendered assets committed, ledger updated,
 copydesk clean, gate PASS with the previews actually looked at, pushed to
 `master` with the safety sequence above, ComfyUI left in the state you
@@ -401,6 +494,16 @@ the fix rounds run out is moved from `content/queue/` to
 `accounts/nuvarel/content/qa-hold/` (outside the publisher's scan; never
 `content/failed/`, which is the publisher's own state) — the slot then
 reads as empty to the next daily run, which is the intended outcome.
-Only pieces that cleared both verdicts reach the founder's morning
-review. No founder ping needed — the founder reviews the cleared morning
-batch through the normal daily review flow.
+
+**A defect-free piece can still be killed (2026-09-12).** `content-reviewer`
+now applies a quality floor as well as a defect list: a piece nobody can name a
+reason to forward is a FAIL with reason `weak-concept`. The 3-a-day floor is not
+a licence to ship filler — a killed slot is a `BUILD-INCIDENT`, and three
+incidents in one week escalate to `cto`.
+
+**Clearing for publish (changed 2026-09-12, founder ruling).** Once both
+verdicts are PASS, the **dispatching session** sets `needs_review: false` and
+commits, naming both verdicts in the message. This account is far below 10,000
+followers, so no founder approval step runs (`CLAUDE.md` hard rule 1); the
+founder reviews on Instagram after publish. You still never flip the flag
+yourself.
