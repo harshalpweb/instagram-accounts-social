@@ -56,10 +56,10 @@ body { background:var(--esp); color:var(--alab); font-family:'Archivo',Arial,san
 </style></head><body>
 <div class="brandrow"><span class="eyebrow">The Game · No. 02</span><span class="wordmark">Nuvarel</span></div>
 <div class="panel" id="pa"><div class="ph" id="pha" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-2.png')"></div><div class="dim" id="da"></div><div class="frame" id="fa"></div><div class="chip" id="ca">A</div><div class="tell" id="ta">Sharp facets · rainbow flash</div></div>
-<div class="panel" id="pb"><div class="ph" id="phb" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2.png')"></div><div class="dim" id="db"></div><div class="frame" id="fb"></div><div class="chip" id="cb">B</div><div class="tell" id="tb">Smooth panels · faint seam</div></div>
+<div class="panel" id="pb"><div class="ph" id="phb" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2.png')"></div><div class="dim" id="db"></div><div class="frame" id="fb"></div><div class="chip" id="cb">B</div><div class="tell" id="tb">Smooth panels · no facets</div></div>
 <div id="capzone"><div id="bar"></div><div class="rule"></div><h1 id="h">One of these isn't crystal.</h1><div id="num">3</div></div>
-<div class="card" id="tellcard"><div class="inner"><span class="klabel">In the shop</span><h2>Run a finger along the rim.</h2><div class="rule"></div><p>Cut crystal has sharp, precise facet edges and throws small rainbows in direct light. Pressed glass has rounder panels and a faint mould seam line down one side.</p><p>The facet edge feels crisp under a finger. A seam feels soft and continuous.</p></div></div>
-<div class="card" id="end"><div class="inner"><h2>Comment your guess before you scroll back up.</h2><div class="rule"></div><div class="handle">@nuvarel_</div></div></div>
+<div class="card" id="tellcard"><div class="inner"><span class="klabel">In the shop</span><h2>Run a finger along the rim.</h2><div class="rule"></div><p>Cut crystal has sharp, precise facet edges and throws small rainbows in direct light. Pressed glass has smooth, rounded panels with no faceting at all.</p><p>The facet edge feels crisp and angular under a finger. A rounded panel feels smooth and continuous all the way round.</p></div></div>
+<div class="card" id="end"><div class="inner"><h2>Comment if you guessed right before the reveal.</h2><div class="rule"></div><div class="handle">@nuvarel_</div></div></div>
 <div id="guard"></div>
 <script>
 "use strict";
@@ -99,7 +99,15 @@ window.seek = async (t) => {
   $("cb").textContent = t >= B.reveal ? "B · Glass" : "B";
   /* zoom into the surface on both panels; the tells label what is visible */
   const z = 1 + 1.0 * eo(ramp(t, B.zoom[0], B.zoom[1]));
-  $("pha").style.transform = `scale(${z.toFixed(4)})`; $("phb").style.transform = `scale(${z.toFixed(4)})`;
+  /* fix round 2 (art-director FAIL: A/B scale mismatch -- glass B reads
+     taller/wider than crystal A at identical panel geometry because the
+     two source photos were generated in separate batches with no shared
+     scale reference). zB applies a corrective shrink to B throughout
+     (not just during the zoom beat) to bring its apparent size closer to
+     A's. Estimated correction, not pixel-measured -- flagged for a
+     confirming look, not a lab-derived ratio. */
+  const zB = z * 0.84;
+  $("pha").style.transform = `scale(${z.toFixed(4)})`; $("phb").style.transform = `scale(${zB.toFixed(4)})`;
   const dimBack = t >= B.zoom[0] ? 1 - eo(ramp(t, B.zoom[0], B.zoom[0] + 0.4)) : 1;
   $("da").style.opacity = (0.55 * rv * dimBack).toFixed(3);
   const tl = eo(ramp(t, B.zoom[0] + 0.5, B.zoom[0] + 0.9));
