@@ -69,6 +69,13 @@ ledger row.
   and prop are chosen per build, engine in
   `accounts/hype_tingles/reels/*/reel.html` reused verbatim per build per
   the `meme-worthy-character-reels` skill).
+- `anime_ekaya`: `reel-show-converter` (a mainstream, non-anime show/game/
+  film "converted" into an anime pick via a shared CONVERTER-machine rig,
+  EKAYA pulls a lever, an anime title pops out; engine in
+  `accounts/anime_ekaya/reels/2026-09-04-show-converter/reel.html`, reused
+  verbatim per build and reskinned per theme -- colour palette + a
+  hero-prop deco on the machine top -- so repeat builds don't share a
+  backdrop/prop combination inside the 14-day scene/prop window).
 
 ## Acceptance criteria
 
