@@ -35,7 +35,8 @@ answered fast"). Full strategy:
 `income-engine/docs/anime_ekaya-strategy.md` (legal lane §2, pillars §3,
 hooks/captions §4-5, visual identity "Midnight Channel" §8). Working
 ledger: `accounts/anime_ekaya/content/used-topics.md`. Repo root:
-`C:\Users\2026\Documents\instagram-accounts-social` — all paths below
+`C:\Users\2026\Documents\income-engine\instagram-accounts-social` (moved
+2026-09-12, was a sibling of `income-engine`) — all paths below
 are relative to it. Work ONLY inside `accounts/anime_ekaya/`; never
 touch the other accounts' directories.
 
@@ -313,7 +314,8 @@ git command its own separate invocation — NEVER chained with `&&`/`;`:
    `accounts/anime_ekaya/` (plus at most the ATTRIBUTION.md line you
    added). If anything else is staged, unstage it and investigate
    before proceeding.
-3. `git commit -m "feat(anime_ekaya): daily 4x batch <date> (1 carousel + 3 Reels, needs_review)"`
+3. `git commit accounts/anime_ekaya/ assets/audio/ATTRIBUTION.md -m "feat(anime_ekaya): daily 4x batch <date> (1 carousel + 3 Reels, needs_review)"`
+   — pathspec on the commit itself, not only on the add.
 4. Push with the race-retry loop (same pattern as `publish-*.yml`):
    `git push`; on rejection, `git pull --rebase`, wait 1-5s, retry, up
    to 5 times.

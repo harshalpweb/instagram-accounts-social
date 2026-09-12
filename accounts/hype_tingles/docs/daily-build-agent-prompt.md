@@ -17,8 +17,9 @@ Account: `hype_tingles` — a viral animal-comedy entertainment brand.
 Full strategy: `income-engine/docs/hype_tingles-strategy.md` (voice
 bible §4, format menu F1-F5 §5, cast §8, visual identity "Neon Panel"
 §11). Working ledger: `accounts/hype_tingles/brand/topic-bank.md`.
-Repo root: `C:\Users\2026\Documents\instagram-accounts-social` — all
-paths below are relative to it. Work ONLY inside
+Repo root: `C:\Users\2026\Documents\income-engine\instagram-accounts-social`
+(moved 2026-09-12, was a sibling of `income-engine`) — all paths below are
+relative to it. Work ONLY inside
 `accounts/hype_tingles/`; never touch the other accounts' directories.
 
 ## Your job today (one run)
@@ -191,7 +192,8 @@ git command its own separate invocation — NEVER chained with `&&`/`;`:
    `accounts/hype_tingles/` (plus at most the ATTRIBUTION.md line you
    added). If anything else is staged, unstage it and investigate
    before proceeding.
-3. `git commit -m "feat(hype_tingles): daily 3x batch <date> (1 carousel + 2 Reels, needs_review)"`
+3. `git commit accounts/hype_tingles/ assets/audio/ATTRIBUTION.md -m "feat(hype_tingles): daily 3x batch <date> (1 carousel + 2 Reels, needs_review)"`
+   — pathspec on the commit itself, not only on the add.
 4. Push with the race-retry loop (same pattern as `publish-*.yml`):
    `git push`; on rejection, `git pull --rebase`, wait 1-5s, retry, up
    to 5 times.

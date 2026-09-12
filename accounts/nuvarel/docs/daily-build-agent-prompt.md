@@ -42,7 +42,8 @@ worth it," not "what's pretty."
 Full strategy: `docs/nuvarel-strategy.md` (pillars §3, hooks/captions §4,
 hashtags §5, posting times §6, cadence §7, visual identity §8). Working
 ledger: `accounts/nuvarel/content/used-topics.md`. Repo root:
-`C:\Users\2026\Documents\instagram-accounts-social` — all paths below are
+`C:\Users\2026\Documents\income-engine\instagram-accounts-social` (moved
+2026-09-12, was a sibling of `income-engine`) — all paths below are
 relative to it. Work ONLY inside `accounts/nuvarel/`; never touch the other
 accounts' directories.
 
