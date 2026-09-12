@@ -53,11 +53,28 @@ across the account.
 
 Two conclusions the rest of this file is built on:
 
-1. **The format question is settled for nuvarel and anime_ekaya** and open for
+1. **The format question is settled for nuvarel and anime_ekaya** and *moot* for
    hype_tingles, whose two formats are statistically indistinguishable because
    *nothing* on that account reaches anyone. That is an account-level
-   distribution problem, already escalated to `cto` in `docs/ROSTER.md`, and no
-   format rule fixes it.
+   distribution problem and no format rule fixes it.
+
+   **Diagnosed and closed 2026-09-12 (Group CTO).** Measured with
+   `GET /me/insights?metric=reach&breakdown=follow_type` over 29 days:
+   hype_tingles reached **12 non-follower accounts**, against **1641**
+   (anime_ekaya) and **1541** (nuvarel). The difference is the follower graph,
+   not the content: hype_tingles is the only account with a real one (282
+   followers) and it is dead — 9 of 282 reached in a month. The other two have
+   4 and 7 followers, so Instagram routes their Reels straight onto the
+   cold-start exploration path instead of seeding them into a graph that
+   cannot respond. A small dead follower graph is worse than none.
+   Refuted along the way, each with evidence: encoding (ffprobe shows all 27
+   Reels identical at 1080x1920/30fps/AAC), dormancy (nuvarel was dormant
+   *longest* — 283 days — and performs best), the 2026-08-31 AI-profile policy
+   (nuvarel posts `ai_generated: true` and tops the table), and content
+   quality (hype_tingles' watch times *beat* anime_ekaya's).
+   Ruling: the content line moves to a fresh account; hype_tingles keeps
+   publishing meanwhile because a dark slot costs more than it saves. Full
+   record: `../../docs/consults/2026-09-12-group-cto-hype-tingles-distribution-diagnosis.md`.
 2. **The quality problem is real and is not a format problem.** 3,443 lifetime
    reach produced 60 likes, 5 comments, 4 saves and 10 shares across three
    accounts. Section 5 is the response.
