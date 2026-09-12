@@ -1,0 +1,45 @@
+name: Account diagnostics (read-only)
+
+# Strictly read-only against Instagram: GETs profile fields and account-level
+# /insights with the follow_type + media_product_type breakdowns for every
+# account. Publishes nothing, commits nothing, touches no content/queue/.
+#
+# Exists to diagnose the hype_tingles distribution problem: per-media insights
+# cannot separate follower reach from non-follower (recommendation) reach, and
+# that split is the diagnosis. Manual trigger only -- this is an investigation
+# tool, not a scheduled job.
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Trailing window in days (Meta caps account insights at 30)"
+        required: false
+        default: "29"
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r scripts/requirements.txt
+
+      - name: Run account diagnostics
+        # DAYS goes through env, never interpolated into the shell line --
+        # workflow_dispatch input is untrusted (semgrep
+        # yaml.github-actions.security.run-shell-injection).
+        run: python scripts/account_diagnostics.py --days "$DAYS"
+        env:
+          DAYS: ${{ inputs.days || '29' }}
+          IG_ACCESS_TOKEN_HYPE_TINGLES: ${{ secrets.IG_ACCESS_TOKEN_HYPE_TINGLES }}
+          IG_ACCESS_TOKEN_ANIME_EKAYA: ${{ secrets.IG_ACCESS_TOKEN_ANIME_EKAYA }}
+          IG_ACCESS_TOKEN_NUVAREL: ${{ secrets.IG_ACCESS_TOKEN_NUVAREL }}
+          IG_AUTH_MODE: ${{ vars.IG_AUTH_MODE || 'instagram_login' }}
