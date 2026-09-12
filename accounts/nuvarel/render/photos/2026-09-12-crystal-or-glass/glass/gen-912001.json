@@ -1,0 +1,19 @@
+{
+  "seed": 912001,
+  "key": "dark",
+  "experimental": false,
+  "subject": "a plain pressed glass tumbler standing upright, smooth rounded vertical panels, a faint straight mould seam line down one side, soft dull sheen, one glass object alone",
+  "positive": "Editorial still-life photograph, a plain pressed glass tumbler standing upright, smooth rounded vertical panels, a faint straight mould seam line down one side, soft dull sheen, one glass object alone. One single warm tungsten light source from the low left, about 3200K, casting one long soft shadow with gentle falloff across a deep espresso-brown matte ground, low-key exposure, most of the frame in soft shadow. Muted desaturated colour grade, matte surfaces, no gloss, no reflections. Shallow depth of field, 85mm macro lens, fine film grain, quiet luxury interior magazine photography. Empty frame, only the object. No people, no hands, no text.",
+  "negative": "色调艳丽，过曝，细节模糊不清，字幕，风格，作品，画作，画面，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，杂乱的背景, glossy, shiny, oversaturated, cartoon, illustration, anime, painting, 3d render, cgi, people, person, hand, face, text, watermark, logo, chrome, mirror",
+  "width": 1088,
+  "height": 1360,
+  "n": 3,
+  "steps": 30,
+  "wall_clock_s": 100.2,
+  "prompt_id": "fa9a539f-20b1-469d-ae79-a1efbfdf3669",
+  "files": [
+    "accounts\\nuvarel\\render\\photos\\2026-09-12-crystal-or-glass\\glass\\photo-912001-1.png",
+    "accounts\\nuvarel\\render\\photos\\2026-09-12-crystal-or-glass\\glass\\photo-912001-2.png",
+    "accounts\\nuvarel\\render\\photos\\2026-09-12-crystal-or-glass\\glass\\photo-912001-3.png"
+  ]
+}

@@ -1,0 +1,108 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+/* nuvarel "The Game - No. 02" -- reel-game (Quick Games), 15.6 s, photoreal STILLS only.
+   Built 2026-09-12 from the No. 01 template (which-leather-is-real). Two AI
+   photographs of drinkware, DIFFERENT seeds (912001 crystal, 912050 glass) --
+   the crystal candidate at seed 912001 was the strongest facet/refraction
+   read; the first glass attempt at the same seed rendered as an opaque
+   frosted material (material-fidelity fail per daily-build-prompt 5c), so
+   glass was regenerated at seed 912050 emphasising transparency and passed.
+   Not a demonstration Reel: both swatches are static object studies,
+   disclosed as AI on the container.
+   Photo sources (gitignored candidates; gen-<seed>.json beside them is committed):
+     A = render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-1.png
+     B = render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2.png
+   Layout keeps type inside the Reels safe zone (nothing below y=1640). */
+:root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; --bronzeD:#B08D5F; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--esp); color:var(--alab); font-family:'Archivo',Arial,sans-serif; position:relative; }
+#guard { position:absolute; inset:0; pointer-events:none; z-index:50; }
+.brandrow { position:absolute; top:120px; left:84px; right:84px; display:flex; justify-content:space-between; align-items:baseline; z-index:10; }
+.eyebrow { font-size:27px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--bronzeD); }
+.wordmark { font-size:27px; font-weight:600; letter-spacing:.34em; text-transform:uppercase; color:var(--alab); }
+.panel { position:absolute; left:84px; width:912px; height:540px; overflow:hidden; background:#1d1813; }
+.panel .ph { position:absolute; inset:0; background-size:cover; background-position:center 58%; transform-origin:center center; }
+.panel .frame { position:absolute; inset:0; border:5px solid var(--bronze); opacity:0; }
+.panel .dim { position:absolute; inset:0; background:rgba(42,36,30,.45); opacity:0; }
+.chip { position:absolute; left:28px; top:28px; font-size:26px; font-weight:600; letter-spacing:.24em; text-transform:uppercase; color:var(--alab); background:rgba(42,36,30,.80); padding:14px 22px; }
+.tell { position:absolute; right:28px; bottom:28px; font-size:26px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--alab); background:rgba(42,36,30,.80); padding:14px 22px; opacity:0; }
+#pa { top:230px; } #pb { top:796px; }
+#capzone { position:absolute; left:84px; right:84px; top:1380px; height:260px; z-index:10; }
+#capzone .rule { width:132px; height:3px; background:var(--bronze); margin-bottom:26px; }
+#h { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:92px; line-height:1.06; color:var(--alab); max-width:760px; }
+#num { position:absolute; right:0; top:-30px; font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:220px; line-height:1; color:var(--bronzeD); opacity:0; transform-origin:right center; }
+#bar { position:absolute; left:0; top:-22px; height:3px; background:var(--bronze); width:0; }
+.card { position:absolute; inset:0; background:var(--esp); opacity:0; z-index:20; }
+.card .inner { position:absolute; top:520px; left:92px; right:92px; }
+.klabel { display:block; font-size:28px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--bronzeD); margin-bottom:34px; }
+.card h2 { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:92px; line-height:1.08; color:var(--alab); margin-bottom:44px; }
+.card .rule { width:132px; height:3px; background:var(--bronze); margin:0 0 40px; }
+.card p { font-size:40px; line-height:1.5; color:var(--alab); max-width:860px; }
+.card p + p { margin-top:28px; }
+#end .inner { top:760px; }
+#end .handle { font-size:34px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--bronzeD); margin-top:44px; }
+</style></head><body>
+<div class="brandrow"><span class="eyebrow">The Game · No. 02</span><span class="wordmark">Nuvarel</span></div>
+<div class="panel" id="pa"><div class="ph" id="pha" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-1.png')"></div><div class="dim" id="da"></div><div class="frame" id="fa"></div><div class="chip" id="ca">A</div><div class="tell" id="ta">Sharp facets · rainbow flash</div></div>
+<div class="panel" id="pb"><div class="ph" id="phb" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2.png')"></div><div class="dim" id="db"></div><div class="frame" id="fb"></div><div class="chip" id="cb">B</div><div class="tell" id="tb">Smooth panels · faint seam</div></div>
+<div id="capzone"><div id="bar"></div><div class="rule"></div><h1 id="h">One of these isn't crystal.</h1><div id="num">3</div></div>
+<div class="card" id="tellcard"><div class="inner"><span class="klabel">In the shop</span><h2>Run a finger along the rim.</h2><div class="rule"></div><p>Cut crystal has sharp, precise facet edges and throws small rainbows in direct light. Pressed glass has rounder panels and a faint mould seam line down one side.</p><p>The facet edge feels crisp under a finger. A seam feels soft and continuous.</p></div></div>
+<div class="card" id="end"><div class="inner"><h2>Save this for the next glassware aisle.</h2><div class="rule"></div><div class="handle">@nuvarel_</div></div></div>
+<div id="guard"></div>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const lerp = (a, b, k) => a + (b - a) * k;
+const eo = p => 1 - Math.pow(1 - p, 3);
+const ramp = (t, a, b) => c01((t - a) / (b - a));
+/* beat table */
+const B = { hookIn:-0.3, ask:2.4, nums:[2.8, 3.7, 4.6], barEnd:5.6, reveal:5.8, zoom:[7.6, 10.2], tell:10.8, end:13.8, out:15.6 };
+window.BEATS = B;
+window.REEL = { duration: B.out, fps: 30 };
+const compositorCommit = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+function guard(t) { const odd = Math.round(t * 30) % 2; $("guard").style.backgroundColor = odd ? "rgba(42,36,30,0.004)" : "transparent"; }
+function fadeIn(el, t, t0, d = 0.35, dy = 16) { const k = eo(ramp(t, t0, t0 + d)); el.style.opacity = k.toFixed(3); el.style.transform = `translateY(${lerp(dy, 0, k).toFixed(1)}px)`; }
+window.seek = async (t) => {
+  t = c01(t / B.out) * B.out;
+  guard(t);
+  /* headline: three states, each pops in on its change */
+  let text = "One of these isn't crystal.", t0 = B.hookIn;
+  if (t >= B.reveal) { text = "B is the glass one."; t0 = B.reveal; }
+  else if (t >= B.ask) { text = "Which one?"; t0 = B.ask; }
+  $("h").textContent = text; fadeIn($("h"), t, t0, 0.3, 14);
+  /* countdown numerals + draining hairline */
+  const num = $("num"); num.style.opacity = "0";
+  for (let i = 0; i < 3; i++) {
+    const a = B.nums[i], b = i < 2 ? B.nums[i + 1] : B.barEnd;
+    if (t >= a && t < b) { num.textContent = String(3 - i); const k = eo(ramp(t, a, a + 0.28)); num.style.opacity = k.toFixed(3); num.style.transform = `scale(${lerp(1.25, 1, k).toFixed(4)})`; }
+  }
+  const barOn = t >= B.ask && t < B.reveal;
+  $("bar").style.width = barOn ? `${(912 * (1 - ramp(t, B.ask, B.barEnd))).toFixed(1)}px` : "0px";
+  /* reveal: bronze frame on B, A rests under a light dim, chips name the material */
+  const rv = eo(ramp(t, B.reveal, B.reveal + 0.4));
+  $("fb").style.opacity = rv.toFixed(3);
+  $("da").style.opacity = (0.55 * rv).toFixed(3);
+  $("ca").textContent = t >= B.reveal ? "A · Crystal" : "A";
+  $("cb").textContent = t >= B.reveal ? "B · Glass" : "B";
+  /* zoom into the surface on both panels; the tells label what is visible */
+  const z = 1 + 1.0 * eo(ramp(t, B.zoom[0], B.zoom[1]));
+  $("pha").style.transform = `scale(${z.toFixed(4)})`; $("phb").style.transform = `scale(${z.toFixed(4)})`;
+  const dimBack = t >= B.zoom[0] ? 1 - eo(ramp(t, B.zoom[0], B.zoom[0] + 0.4)) : 1;
+  $("da").style.opacity = (0.55 * rv * dimBack).toFixed(3);
+  const tl = eo(ramp(t, B.zoom[0] + 0.5, B.zoom[0] + 0.9));
+  $("ta").style.opacity = tl.toFixed(3); $("tb").style.opacity = tl.toFixed(3);
+  /* text card + end card */
+  $("tellcard").style.opacity = eo(ramp(t, B.tell, B.tell + 0.45)).toFixed(3);
+  fadeIn($("tellcard").firstElementChild, t, B.tell, 0.5, 24);
+  /* the tell copy leaves before the end card arrives, so two text layers never overlap */
+  $("tellcard").firstElementChild.style.opacity = (parseFloat($("tellcard").firstElementChild.style.opacity) * (1 - ramp(t, B.end - 0.25, B.end))).toFixed(3);
+  $("end").style.opacity = eo(ramp(t, B.end, B.end + 0.45)).toFixed(3);
+  fadeIn($("end").firstElementChild, t, B.end, 0.5, 24);
+  await compositorCommit();
+};
+window.seek(0);
+</script></body></html>

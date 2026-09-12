@@ -1,0 +1,19 @@
+{
+  "seed": 912301,
+  "key": "mid",
+  "experimental": false,
+  "subject": "extreme macro close-up of hand-cut dovetail joinery in solid oak, the interlocking pins and tails filling the frame, fine wood grain texture, sharp crisp joint lines",
+  "positive": "Editorial still-life photograph, extreme macro close-up of hand-cut dovetail joinery in solid oak, the interlocking pins and tails filling the frame, fine wood grain texture, sharp crisp joint lines. One single warm tungsten light source from the low left, about 3200K, casting one long soft shadow with gentle falloff across a warm taupe linen surface, balanced mid-key exposure, neutral mid-tones dominant. Muted desaturated colour grade, matte surfaces, no gloss, no reflections. Shallow depth of field, 85mm macro lens, fine film grain, quiet luxury interior magazine photography. Empty frame, only the object. No people, no hands, no text. Deep open three-dimensional wood grain with visible pores, oiled solid timber, not laminate, not printed veneer.",
+  "negative": "色调艳丽，过曝，细节模糊不清，字幕，风格，作品，画作，画面，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，杂乱的背景, glossy, shiny, oversaturated, cartoon, illustration, anime, painting, 3d render, cgi, people, person, hand, face, text, watermark, logo, chrome, mirror",
+  "width": 1088,
+  "height": 1360,
+  "n": 3,
+  "steps": 30,
+  "wall_clock_s": 100.3,
+  "prompt_id": "f69be507-4b04-4723-ac0e-5640c8dcf271",
+  "files": [
+    "accounts\\nuvarel\\render\\photos\\2026-09-12-the-corner-gives-it-away\\macro\\photo-912301-1.png",
+    "accounts\\nuvarel\\render\\photos\\2026-09-12-the-corner-gives-it-away\\macro\\photo-912301-2.png",
+    "accounts\\nuvarel\\render\\photos\\2026-09-12-the-corner-gives-it-away\\macro\\photo-912301-3.png"
+  ]
+}
