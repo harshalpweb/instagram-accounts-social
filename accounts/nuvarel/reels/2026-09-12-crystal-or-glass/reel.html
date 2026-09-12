@@ -12,7 +12,7 @@
    Not a demonstration Reel: both swatches are static object studies,
    disclosed as AI on the container.
    Photo sources (gitignored candidates; gen-<seed>.json beside them is committed):
-     A = render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-2.png
+     A = render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-2-zoomed.png
      B = render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2.png
    Layout keeps type inside the Reels safe zone (nothing below y=1640).
    Fix round 1 (content-reviewer FAIL, 2026-09-12): panel A originally used
@@ -23,7 +23,36 @@
    caustic are fully visible after the same crop. CTA also changed from
    save (a 5th "Save this for the..." in the trailing 7 days, over the
    docs/cadence-and-format-policy.md sec4.3 cap of 3) to a comment CTA
-   matching the Quick Games genre's own "guess before the reveal" mechanic. */
+   matching the Quick Games genre's own "guess before the reveal" mechanic.
+   Fix round 4 (art-director FAILed rounds 2-3 on an A/B scale mismatch;
+   escalated implementer, 2026-09-12): rounds 2-3 tried to shrink B at
+   render time (CSS transform-scale, then a synthetically padded source
+   image) -- both under-corrected and/or exposed a letterbox/pillarbox
+   seam because neither approach is real camera geometry: a whole-div
+   transform scales the crop window along with the subject, and synthetic
+   padding does not share the photo's real background gradient/noise, so
+   the seam where real pixels meet the pad is visible at 350px feed scale.
+   Structural fix instead of another parameter tweak: measured both
+   glasses' actual pixel height in their source photos (crystal ~0.287 of
+   frame height, glass ~0.357) and re-framed the CRYSTAL photo alone --
+   cropped a tighter, centered real-pixel region (crop factor 1/1.2436,
+   exact box left=214 top=266 right=1089 bottom=1360 px on the original
+   1088x1360 photo-912001-2.png, i.e. resize((1088,1360)) of that crop --
+   reproducible from the committed gen-912001.json + this recipe without
+   the gitignored candidate PNG) and resized it back up to the original
+   1088x1360 canvas with LANCZOS.
+   This is optically equivalent to moving the camera closer for panel A's
+   shot: every pixel in photo-912001-2-zoomed.png is real resampled photo
+   data, so there is no synthetic fill and no seam, and the same
+   background-size:cover + position:center 58% crop used for both panels
+   needs no per-panel correction any more (both #pha and #phb keep using
+   the same time-based zoom in the script below). Verified by rendering
+   both panels through the exact cover-crop math offline before touching
+   the Reel: post-crop object heights now match within ~1% instead of the
+   ~23-26% gap art-director measured on rounds 2-3.
+   glass2/photo-912050-2-padded.png is superseded by this fix and no
+   longer referenced -- kept on disk only as fix-round history, do not
+   reintroduce it. */
 :root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; --bronzeD:#B08D5F; }
 * { margin:0; padding:0; box-sizing:border-box; }
 html,body { width:1080px; height:1920px; overflow:hidden; }
@@ -55,8 +84,8 @@ body { background:var(--esp); color:var(--alab); font-family:'Archivo',Arial,san
 #end .handle { font-size:34px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--bronzeD); margin-top:44px; }
 </style></head><body>
 <div class="brandrow"><span class="eyebrow">The Game · No. 02</span><span class="wordmark">Nuvarel</span></div>
-<div class="panel" id="pa"><div class="ph" id="pha" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-2.png')"></div><div class="dim" id="da"></div><div class="frame" id="fa"></div><div class="chip" id="ca">A</div><div class="tell" id="ta">Sharp facets · rainbow flash</div></div>
-<div class="panel" id="pb"><div class="ph" id="phb" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2-padded.png')"></div><div class="dim" id="db"></div><div class="frame" id="fb"></div><div class="chip" id="cb">B</div><div class="tell" id="tb">Smooth panels · no facets</div></div>
+<div class="panel" id="pa"><div class="ph" id="pha" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/crystal/photo-912001-2-zoomed.png')"></div><div class="dim" id="da"></div><div class="frame" id="fa"></div><div class="chip" id="ca">A</div><div class="tell" id="ta">Sharp facets · rainbow flash</div></div>
+<div class="panel" id="pb"><div class="ph" id="phb" style="background-image:url('../../render/photos/2026-09-12-crystal-or-glass/glass2/photo-912050-2.png')"></div><div class="dim" id="db"></div><div class="frame" id="fb"></div><div class="chip" id="cb">B</div><div class="tell" id="tb">Smooth panels · no facets</div></div>
 <div id="capzone"><div id="bar"></div><div class="rule"></div><h1 id="h">One of these isn't crystal.</h1><div id="num">3</div></div>
 <div class="card" id="tellcard"><div class="inner"><span class="klabel">In the shop</span><h2>Run a finger along the rim.</h2><div class="rule"></div><p>Cut crystal has sharp, precise facet edges and throws small rainbows in direct light. Pressed glass has smooth, rounded panels with no faceting at all.</p><p>The facet edge feels crisp and angular under a finger. A rounded panel feels smooth and continuous all the way round.</p></div></div>
 <div class="card" id="end"><div class="inner"><h2>Comment if you guessed right before the reveal.</h2><div class="rule"></div><div class="handle">@nuvarel_</div></div></div>
@@ -99,25 +128,36 @@ window.seek = async (t) => {
   $("cb").textContent = t >= B.reveal ? "B · Glass" : "B";
   /* zoom into the surface on both panels; the tells label what is visible */
   const z = 1 + 1.0 * eo(ramp(t, B.zoom[0], B.zoom[1]));
-  /* fix round 2 (art-director FAIL: A/B scale mismatch -- glass B reads
-     taller/wider than crystal A at identical panel geometry because the
-     two source photos were generated in separate batches with no shared
-     scale reference). zB applies a corrective shrink to B throughout
-     (not just during the zoom beat) to bring its apparent size closer to
-     A's. Estimated correction, not pixel-measured -- flagged for a
-     confirming look, not a lab-derived ratio. */
-  /* fix round 3 (art-director FAIL: the 0.84x transform scale under-corrected
-     AND shrank B's whole div including its own background, exposing a
-     letterboxed edge panel A didn't have. Replaced with a pre-padded
-     source image (photo-912050-2-padded.png, +30% canvas, background-color
-     padded to match) so the cover-crop itself handles the size correction
-     with no transform hack and no letterbox -- both panels use the same z. */
+  /* fix rounds 2-3 (art-director FAIL both times: A/B scale mismatch --
+     tried a runtime CSS transform-scale on B, then a synthetically padded
+     source image; both under-corrected and/or exposed a letterbox/pillarbox
+     seam -- see the round-4 note at the top of <style> for the root cause. */
+  /* fix round 4 (escalated implementer, 2026-09-12): correction baked into
+     the SOURCE IMAGE instead of the render path -- panel A now points at
+     photo-912001-2-zoomed.png, a real-pixel crop+resize of the crystal
+     photo that pre-matches B's apparent object size. No runtime scale
+     correction needed; both panels share the same time-based zoom. */
   $("pha").style.transform = `scale(${z.toFixed(4)})`; $("phb").style.transform = `scale(${z.toFixed(4)})`;
   const dimBack = t >= B.zoom[0] ? 1 - eo(ramp(t, B.zoom[0], B.zoom[0] + 0.4)) : 1;
   $("da").style.opacity = (0.55 * rv * dimBack).toFixed(3);
   const tl = eo(ramp(t, B.zoom[0] + 0.5, B.zoom[0] + 0.9));
   $("ta").style.opacity = tl.toFixed(3); $("tb").style.opacity = tl.toFixed(3);
   /* text card + end card */
+  /* fix (escalated implementer, 2026-09-12, found while re-verifying the
+     scale fix above): the panels/capzone stayed at opacity 1 behind the
+     tellcard's own 0.45s fade-in, so the photos and their tells bled
+     through, badly garbled with the tellcard copy, for the whole
+     transition -- same defect class content-reviewer already caught once
+     on the-corner-gives-it-away's card transitions, just not sampled
+     densely enough here to be caught before. Hard-cut the photo layer to
+     hidden at the exact instant the card starts fading in (not a fade
+     itself) so the card fades in over the plain body background, which
+     is the same --esp colour as the card's own background -- no seam,
+     no bleed, no crossfade to fight. */
+  const tellStarted = t >= B.tell;
+  $("pa").style.visibility = tellStarted ? "hidden" : "visible";
+  $("pb").style.visibility = tellStarted ? "hidden" : "visible";
+  $("capzone").style.visibility = tellStarted ? "hidden" : "visible";
   $("tellcard").style.opacity = eo(ramp(t, B.tell, B.tell + 0.45)).toFixed(3);
   fadeIn($("tellcard").firstElementChild, t, B.tell, 0.5, 24);
   /* the tell copy leaves before the end card arrives, so two text layers never overlap */

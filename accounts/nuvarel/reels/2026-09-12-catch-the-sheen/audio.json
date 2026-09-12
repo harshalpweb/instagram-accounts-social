@@ -1,0 +1,10 @@
+{
+ "_license": "All files Mixkit Free License, already vendored + logged in assets/audio/ATTRIBUTION.md (no new files). Beats match reel.html window.BEATS (The Reveal No. 02, 14.6 s) -- identical beat table to No. 01, same audio cue mapping reused.",
+ "tracks": [
+  {"file": "assets/audio/bgm/serene-view.mp3", "at": 0.0, "gain_db": -17, "trim": [0, 14.6], "fade_in": 0.4, "fade_out": 1.4},
+  {"file": "assets/audio/sfx/swoosh-slow.mp3", "at": 2.55, "gain_db": -14},
+  {"file": "assets/audio/sfx/chime-crystal.mp3", "at": 3.4, "gain_db": -9},
+  {"file": "assets/audio/sfx/paper-slide.mp3", "at": 8.4, "gain_db": -12},
+  {"file": "assets/audio/sfx/paper-slide.mp3", "at": 12.2, "gain_db": -12}
+ ]
+}
