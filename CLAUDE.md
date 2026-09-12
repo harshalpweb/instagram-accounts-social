@@ -79,8 +79,13 @@ repo: it convenes roles, dispatches the daily builds, records decisions in
 
 - **Ladder:** the daily-build prompt is the implementer spec; a piece is
   reviewed by `content-reviewer` (never by the agent that built it), brand
-  fit by `creative-director`, then the founder gate. Judgment calls go
-  `cto` → Group CTO.
+  fit by `creative-director` on the pieces that passed, then the founder
+  gate. The session that dispatched the build convenes both reviews on the
+  pushed commit and logs each verdict in `.claude/agents/roster-log.md`; a
+  piece still FAILed after the fix rounds moves to
+  `accounts/<acct>/content/qa-hold/` (outside the publisher's
+  `content/queue/` scan; never `content/failed/`, which is publisher
+  state). Judgment calls go `cto` → Group CTO.
 - **Fix-round circuit breaker:** rounds 1-3 same implementer; round 4
   escalates one tier; round 5 is a hard stop — report BLOCKED.
 - **Concurrent-dispatch cap:** at most 2-3 parallel agents, with a

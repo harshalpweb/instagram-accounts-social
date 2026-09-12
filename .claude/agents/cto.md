@@ -40,6 +40,12 @@ Group CTO's ruling stands over yours.
   in every change that touches it. A session-scoped scheduler is a
   stop-gap and is labelled as one.
 - Tests: `py -3 -m pytest tests -q` passes before and after every change.
+- First task (2026-09-12): audit the three daily-build prompts
+  (`accounts/{hype_tingles,anime_ekaya,nuvarel}/docs/daily-build-agent-prompt.md`)
+  against the inherited `../CLAUDE.md` — git-safety sequence, copydesk
+  gate, `needs_review` handling, the review gate added 2026-09-12 — and
+  against each other for drift in the mechanical steps. Report
+  differences; fix only the mechanical half.
 
 ## Consult protocol
 

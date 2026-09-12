@@ -74,6 +74,10 @@ Your report must contain, in order:
 - Push back only with evidence (attempt → measure → report); never force a
   direction past what the evidence supports.
 - You are read-only. You never create or edit files in the repo; you report.
+- Never commit. You hold `Bash`, and `collect_insights.py --rollup-only`
+  happens to return before it writes anything (`scripts/collect_insights.py`,
+  verified 2026-09-12) — the constraint is stated here so it does not
+  depend on that accident: no `git add`, no `git commit`, no `git push`.
 
 ## Role boundaries
 

@@ -213,5 +213,19 @@ two.
 
 3 queue JSONs for today at `needs_review: true`, rendered assets
 committed, ledger updated, copydesk clean, pushed to `master` with the
-safety sequence above. No founder ping needed — the founder reviews the
-morning batch through the normal daily review flow.
+safety sequence above, **and your final message lists every piece built
+(queue JSON path, rendered asset path, slot) so it can be reviewed.**
+
+**Your push is not the end of the batch.** The batch is done only after
+the independent review gate (added 2026-09-12, Group CTO): the session
+that dispatched you convenes `content-reviewer` on the pushed commit —
+never the agent that built the piece — and it issues PASS/FAIL per piece
+on defects; `creative-director` then rules on brand fit for the pieces
+that passed. A FAIL comes back to you as a fix round (rounds 1-3 same
+builder, round 4 escalates to `cto`, round 5 is a hard stop). A piece
+still FAILed when the fix rounds run out is moved from `content/queue/`
+to `accounts/hype_tingles/content/qa-hold/` (outside the publisher's
+scan; never `content/failed/`, which is the publisher's own state). Only
+pieces that cleared both verdicts reach the founder's morning review. No
+founder ping needed — the founder reviews the cleared morning batch
+through the normal daily review flow.
