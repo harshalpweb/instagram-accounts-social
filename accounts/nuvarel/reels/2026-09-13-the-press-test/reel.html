@@ -1,0 +1,558 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Archivo:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+/* nuvarel "the press test" -- ROUND 7 of the cushion-press piece, 19.0s.
+   Group CTO build, 2026-09-13, after six founder rejections.
+
+   WHAT CHANGED FROM ROUNDS 5-6 (the 3D Blender attempts), and why:
+
+   1. MEDIUM: back to 2D SVG/Playwright. The founder's round-4 note "give it
+      3D feel" asked for weight and depth, not a different renderer; rounds 5-6
+      read it as "switch to Blender" and shipped a humanoid he called "a
+      machine robot". The only nuvarel post that has ever worked
+      (2026-09-04-cables-read-cheap, 1,091 reach) is this exact 2D stack.
+      Also: a solver-simulated cushion recovering is not evidence that fill
+      recovers. See income-engine/docs/consults/2026-09-05-group-legal-nuvarel-ai-disclosure-read.md
+      section 3. A flat illustrated diagram ILLUSTRATES a claim; a render
+      chasing photorealism purports to EVIDENCE it, on the one account whose
+      promise is "the proof, not the claim".
+
+   2. CHARACTER: accounts/nuvarel/assets/curator.js -- the original 4.58-head
+      stickman with the face restored, which the founder approved in round 2.
+      The character was never what he rejected in rounds 3 and 4; the cushion
+      was. Two deltas here: body stroke overridden to espresso (not the file's
+      default taupe) for the contrast the winning post used, and the new
+      opt-in `shoulderW` so two arms do not leave one point in a head-on shot.
+
+   3. THE CUSHION -- where six rounds actually failed. A uniform squash of a
+      rounded rect reads as "the box got shorter", never "a hand pressed into
+      it". Six things fix it, all in deform()/drawCushion() below:
+        a. A CROWN at rest, so it starts as a stuffed cushion, not a box.
+        b. GLOBAL COMPRESSION plus a LOCAL PALM DISH, flat-bottomed under the
+           hands. Dish alone turns the cushion into a bowl (measured, preview
+           1 of this round); compression alone reads as a shrinking box.
+        c. SIDE BULGE. Compressed fill has to go somewhere.
+        d. A PIPING SEAM on the same deformation field, so a drawn line
+           visibly curves. Strongest single "that is fabric" cue.
+        e. CREASE ARCS at the dish shoulders, opacity tied to depth -- and on
+           the cheap cushion they never fade, which IS the defect.
+        f. OCCLUSION. The cushion is drawn in FRONT of the Curator, and the
+           palms sit on the deformed surface, so wrists and forearms sink out
+           of sight. Pure draw order, no clip paths.
+
+   4. THE MEASUREMENT. Rounds 1-6 asked the viewer to eyeball a difference.
+      This one drops a bronze datum line at the original height and ticks the
+      residual dent against it. nuvarel sells proof, and proof needs a datum.
+
+   5. BOTH CUSHIONS ARE THE SAME COLOUR. That is the argument: you cannot see
+      the difference, you can only press for it. The fill types stay hidden
+      behind "A" and "B" until after the result lands.
+
+   6. TIMING. Press 0.32s, lift 0.22s, with an overshoot-and-settle on
+      arrival. Rounds 3-4 moved a few pixels over two seconds, which reads as
+      nothing at all on a phone.
+
+   Numeric gate: py -3 scripts/frame_gate.py <dir> --profile nuvarel
+   (thresholds calibrated on the winning post, not guessed). Run it on stills
+   BEFORE rendering the sequence. */
+:root { --alab:#F2EEE6; --esp:#2A241E; --taupe:#6E6257; --bronze:#9C7A4F; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1080px; height:1920px; overflow:hidden; }
+body { background:var(--alab); color:var(--esp); font-family:'Archivo',Arial,sans-serif; position:relative; }
+#stagewrap { position:absolute; inset:0; z-index:1; }
+svg { position:absolute; inset:0; }
+
+#brandrow { position:absolute; top:120px; left:80px; right:80px; display:flex; justify-content:space-between;
+  align-items:baseline; z-index:10; }
+.wordmark { font-family:'Cormorant Garamond',Georgia,serif; font-weight:600; font-size:44px; letter-spacing:.30em; color:var(--esp); }
+.kicker { font-size:24px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--taupe); }
+#toprule { position:absolute; top:190px; left:80px; right:80px; height:2px; background:var(--bronze); opacity:.7; z-index:10; }
+
+#hook { position:absolute; top:250px; left:80px; right:80px; opacity:1; z-index:12; }
+#hook .line { font-family:'Cormorant Garamond',Georgia,serif; font-size:88px; line-height:1.14; color:var(--esp); }
+#promise { position:absolute; top:510px; left:80px; opacity:0; z-index:12;
+  font-size:30px; font-weight:500; letter-spacing:.22em; text-transform:uppercase; color:var(--bronze); }
+
+#count { position:absolute; top:280px; left:0; right:0; text-align:center; opacity:0; z-index:12;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:200px; line-height:1; color:var(--bronze); }
+#countcap { position:absolute; top:540px; left:0; right:0; text-align:center; opacity:0; z-index:12;
+  font-size:28px; font-weight:500; letter-spacing:.26em; text-transform:uppercase; color:var(--taupe); }
+
+#verdict { position:absolute; top:620px; left:0; right:0; text-align:center; opacity:0; z-index:12; }
+#verdict .big { font-family:'Cormorant Garamond',Georgia,serif; font-size:86px; line-height:1.16; color:var(--esp); }
+
+#rulecard { position:absolute; inset:0; background:var(--alab); opacity:0; z-index:14; }
+#rulecard .inner { position:absolute; top:560px; left:100px; right:100px; text-align:center; }
+#rulecard .no { font-size:26px; font-weight:500; letter-spacing:.3em; text-transform:uppercase; color:var(--bronze); margin-bottom:40px; }
+#rulecard h2 { font-family:'Cormorant Garamond',Georgia,serif; font-weight:500; font-size:88px; line-height:1.18; color:var(--esp); margin-bottom:52px; }
+#rulecard .sub { font-size:39px; line-height:1.5; color:var(--taupe); padding:0 20px; }
+#savecta { margin-top:80px; opacity:0; }
+#savecta span { display:inline-block; border:2px solid var(--esp); padding:16px 36px; font-size:30px;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--esp); }
+
+#end { position:absolute; inset:0; background:var(--esp); opacity:0; z-index:15; }
+#endword { position:absolute; top:840px; left:0; right:0; text-align:center;
+  font-family:'Cormorant Garamond',Georgia,serif; font-size:96px; letter-spacing:.34em; color:var(--alab); }
+#endsub { position:absolute; top:1010px; left:0; right:0; text-align:center; color:#B8AFA2;
+  font-size:30px; letter-spacing:.2em; text-transform:uppercase; opacity:0; }
+</style></head><body>
+<div id="stagewrap"><svg id="stage" viewBox="0 0 1080 1920" width="1080" height="1920"></svg></div>
+<div id="brandrow"><div class="wordmark">NUVAREL</div><div class="kicker">The press test</div></div>
+<div id="toprule"></div>
+
+<div id="hook"><div class="line">Two seat cushions.<br>One will not last.</div></div>
+<div id="promise">How to tell, in three seconds</div>
+
+<div id="count"></div>
+<div id="countcap">Hold it flat</div>
+
+<div id="verdict"><div class="big">One came back.<br>One stayed down.</div></div>
+
+<div id="rulecard"><div class="inner">
+  <div class="no">The press test</div>
+  <h2>Press it flat.<br>Count to three.<br>Lift.</h2>
+  <div class="sub">Good fill is level again before you look back at it. Soft poly fill keeps the dent, and it keeps it for years. Both cushions look the same in the shop.</div>
+  <div id="savecta"><span>Save this for the showroom</span></div>
+</div></div>
+
+<div id="end"><div id="endword">NUVAREL</div><div id="endsub">The expensive look, explained</div></div>
+
+<script src="../../../../assets/rig2d.js"></script>
+<script src="../../assets/curator.js"></script>
+<script>
+"use strict";
+window.REEL = { duration: 17.5, fps: 30 };
+const $ = id => document.getElementById(id);
+const c01 = p => Math.max(0, Math.min(1, p));
+const easeOutO = p => 1 - Math.pow(1 - p, 3);
+const easeIO = p => p < .5 ? 2*p*p : 1 - Math.pow(-2*p+2, 2)/2;
+const easeInQ = p => p * p;
+const PP = (t, t0, d, e) => { const p = c01((t - t0) / d); return e ? e(p) : p; };
+
+/* ---------------- beat table (all named, all deliberate) ---------------- */
+const B = {
+  /* RETIMED 2026-09-13 after the feed-scale review: the first version held a
+     still frame for 2.2s before anything moved. Instagram's hold is decided in
+     the first ~3s, and at 350px the opening looked like a static carousel
+     slide. Everything now starts a full second earlier and the piece is 17.5s
+     instead of 19.0s. */
+  regard:   0.75,
+  raise:    [1.05, 1.60],        // ANTICIPATION: the body rises, the head lifts
+  press:    [1.60, 1.92],        // fast down
+  settle:   [1.92, 2.32],        // arrival wobble in the fill
+  hold:     [2.32, 4.40],
+  countAt:  [2.52, 3.18, 3.84],
+  lift:     [4.40, 4.62],        // fast up
+  relax:    [4.40, 4.75],        // hands pull straight back to the sides
+  recB:     [4.62, 5.10],        // GOOD fill: full recovery with a small spring
+  recA:     [4.62, 6.30],        // CHEAP fill: partial, then it stops
+  exit:     [6.15, 6.50],        // both figures leave before the measurement lands
+  datum:    6.70,
+  measure:  7.14,
+  reveal:   8.10,
+  verdict:  8.10,
+  card:     10.80,
+  end:      15.00
+};
+window.BEATS = B;
+
+/* ---------------- palette + stage geometry ---------------- */
+const NC = { alab:"#F2EEE6", esp:"#2A241E", taupe:"#6E6257", bronze:"#9C7A4F",
+             floor:"#E5DFD0", cush:"#D3C9B4", cushDark:"#B9AD93", skirt:"#DAD2C2" };
+
+const GROUND   = 1560;
+const REST_TOP = 1215;          // undeformed top edge, before the crown
+const CROWN    = 18;            // the cushion is stuffed, so its top bows up
+const CUSH_H   = 165;
+const CUSH_W   = 360;
+const CUSH_BOT = REST_TOP + CUSH_H;   // 1380, also the sofa-base top
+const PRESS_D  = 72;            // full press: 44% of the cushion's thickness
+const GLOBAL_F = 0.42;          // of that, the share that compresses the WHOLE top
+const RESID_A  = 40;            // cheap fill never comes back past this (21%)
+const HAND_DX  = 52;            // half the distance between the two palms
+const W_DISH   = 125;
+const FLAT_U   = 0.42;          // fraction of the dish that is flat under the palms
+const S        = 1.45;          // Curator scale, set so a full press LOCKS the arm straight
+const SHOULDER = 24;            // half shoulder width, rig-local units
+const HIP_Y    = GROUND - 208 * S;
+
+const PANELS = [
+  { key:"A", cx:280, good:false, label:"CUSHION  A", reveal:"SOFT  POLY  FILL" },
+  { key:"B", cx:800, good:true,  label:"CUSHION  B", reveal:"HIGH-DENSITY  FOAM" }
+];
+
+/* ---------------- stage build ---------------- */
+const stage = $("stage");
+const defs = el(stage, "defs", {});
+const grad = el(defs, "linearGradient", { id:"wall", x1:0, y1:0, x2:0, y2:1 });
+el(grad, "stop", { offset:"0", "stop-color":"#F5F1E9" });
+el(grad, "stop", { offset:"1", "stop-color":"#EBE5DA" });
+const blur = el(defs, "filter", { id:"soft", x:"-40%", y:"-80%", width:"180%", height:"260%" });
+el(blur, "feGaussianBlur", { stdDeviation: 16 });
+const blurS = el(defs, "filter", { id:"softS", x:"-70%", y:"-200%", width:"240%", height:"500%" });
+el(blurS, "feGaussianBlur", { stdDeviation: 8 });
+
+el(stage, "rect", { x:0, y:0, width:1080, height:GROUND, fill:"url(#wall)" });
+const bgflip = makeFlipRect(stage);
+const cam = el(stage, "g", {});
+
+el(cam, "rect", { x:0, y:GROUND, width:1080, height:2200-GROUND, fill:NC.floor });
+el(cam, "rect", { x:0, y:GROUND-18, width:1080, height:18, fill:NC.skirt });
+el(cam, "line", { x1:0, y1:GROUND-18, x2:1080, y2:GROUND-18, stroke:NC.taupe, "stroke-width":2, opacity:.38 });
+
+/* BACK layer: ground shadows, then the two Curators. */
+const backG = el(cam, "g", {});
+PANELS.forEach(p => el(backG, "ellipse", {
+  cx:p.cx, cy:GROUND+10, rx:CUSH_W*0.60, ry:18, fill:NC.esp, opacity:.15, filter:"url(#soft)" }));
+PANELS.forEach(p => { p.fig = makeCurator(backG, { stroke:NC.esp, headFill:NC.alab, eyeColor:NC.esp, belt:false }); });
+
+/* FRONT layer: base + cushion + palms, drawn AFTER the figures so the fill
+   occludes hips, legs, wrists and forearms. */
+const frontG = el(cam, "g", {});
+PANELS.forEach(p => {
+  p.x0 = p.cx - CUSH_W/2; p.x1 = p.cx + CUSH_W/2;
+  p.plinth = el(frontG, "rect", { x:p.x0-32, y:CUSH_BOT, width:CUSH_W+64, height:GROUND+34-CUSH_BOT, rx:6, fill:NC.esp });
+  p.body   = el(frontG, "path", { fill:NC.cush, stroke:NC.esp, "stroke-width":5, "stroke-linejoin":"round" });
+  p.shade  = el(frontG, "path", { fill:NC.cushDark, opacity:0 });
+  p.seam   = el(frontG, "path", { fill:"none", stroke:NC.taupe, "stroke-width":3, opacity:.80 });
+  p.creaseL= el(frontG, "path", { fill:"none", stroke:NC.taupe, "stroke-width":3, "stroke-linecap":"round", opacity:0 });
+  p.creaseR= el(frontG, "path", { fill:"none", stroke:NC.taupe, "stroke-width":3, "stroke-linecap":"round", opacity:0 });
+  p.shadL  = el(frontG, "ellipse", { rx:52, ry:13, fill:NC.esp, opacity:0, filter:"url(#softS)" });
+  p.shadR  = el(frontG, "ellipse", { rx:52, ry:13, fill:NC.esp, opacity:0, filter:"url(#softS)" });
+  /* explicit flat palms. The rig's own hand dot is a circle, which reads as a
+     fingertip poke; a press needs a flat hand, and it needs to sit ON TOP of
+     the cushion so the gesture stays visible while the wrist sinks. */
+  p.palmL  = el(frontG, "rect", { width:84, height:22, rx:11, fill:NC.esp });
+  p.palmR  = el(frontG, "rect", { width:84, height:22, rx:11, fill:NC.esp });
+  p.plate  = el(frontG, "text", { x:p.cx, y:CUSH_BOT+104, "text-anchor":"middle", fill:NC.alab,
+                 "font-family":"Archivo, Arial, sans-serif", "font-size":24, "font-weight":500, "letter-spacing":"0.12em" });
+  p.plate.textContent = p.label;
+});
+el(frontG, "line", { x1:540, y1:1080, x2:540, y2:GROUND-30, stroke:NC.bronze, "stroke-width":2, opacity:.30 });
+
+/* datum + measurement */
+const measG = el(cam, "g", {});
+const datumLine = el(measG, "line", { x1:80, y1:REST_TOP-CROWN, x2:80, y2:REST_TOP-CROWN, stroke:NC.bronze, "stroke-width":3, opacity:0 });
+PANELS.forEach(p => {
+  const y0 = REST_TOP - CROWN;
+  /* the band between the original height and where the fill actually came back
+     to. On the good cushion it has zero height and vanishes; on the cheap one
+     it is the missing material, which is the whole point of the piece. */
+  p.gap  = el(measG, "path", { fill:NC.bronze, opacity:0 });
+  p.tick = el(measG, "line", { x1:p.cx, y1:y0, x2:p.cx, y2:y0, stroke:NC.bronze, "stroke-width":5, "stroke-linecap":"round", opacity:0 });
+  p.capB = el(measG, "line", { x1:p.cx-22, y1:y0, x2:p.cx+22, y2:y0, stroke:NC.bronze, "stroke-width":3, opacity:0 });
+  p.num  = el(measG, "text", { x:p.cx, y:y0-46, "text-anchor":"middle", fill:NC.esp,
+               "font-family":"Archivo, Arial, sans-serif", "font-size":36, "font-weight":600, "letter-spacing":"0.10em", opacity:0 });
+});
+
+/* ---------------- the cushion, as a deformable outline ---------------- */
+function ring(x0, y0, x1, y1, r) {
+  const pts = [], push = (x,y) => pts.push([x,y]);
+  const arc = (cx, cy, a0, a1, n) => { for (let i=0;i<=n;i++){ const a=a0+(a1-a0)*i/n; push(cx+Math.cos(a)*r, cy+Math.sin(a)*r); } };
+  for (let i=0;i<=48;i++) push(x0+r + (x1-x0-2*r)*i/48, y0);
+  arc(x1-r, y0+r, -Math.PI/2, 0, 10);
+  for (let i=1;i<=14;i++) push(x1, y0+r + (y1-y0-2*r)*i/14);
+  arc(x1-r, y1-r, 0, Math.PI/2, 10);
+  for (let i=1;i<=20;i++) push(x1-r - (x1-x0-2*r)*i/20, y1);
+  arc(x0+r, y1-r, Math.PI/2, Math.PI, 10);
+  for (let i=1;i<=14;i++) push(x0, y1-r - (y1-y0-2*r)*i/14);
+  arc(x0+r, y0+r, Math.PI, Math.PI*1.5, 10);
+  return pts;
+}
+
+/* palm dish: flat under the hands, cosine-squared shoulders, zero at |u|=1 */
+function dishBell(u) {
+  const a = Math.abs(clamp(u, -1, 1));
+  if (a <= FLAT_U) return 1;
+  return Math.pow(Math.cos(((a - FLAT_U) / (1 - FLAT_U)) * Math.PI / 2), 2);
+}
+/* the stuffed-cushion crown, full in the middle and gone at the edges */
+function crownAt(x, cx) {
+  return CROWN * Math.pow(Math.cos(clamp((x - cx) / (CUSH_W/2), -1, 1) * Math.PI / 2), 0.9);
+}
+/* the surface height under any x -- drives palms, shadows and the tick */
+function topYAt(x, cx, depth) {
+  return REST_TOP - crownAt(x, cx)
+       + depth * (GLOBAL_F + (1 - GLOBAL_F) * dishBell((x - cx) / W_DISH));
+}
+
+/* ONE deformation field, shared by the outline and the seam */
+function deform(pt, cx, depth) {
+  const [x, y] = pt;
+  const ty = clamp((y - REST_TOP) / CUSH_H, 0, 1);
+  const dyCrown = -crownAt(x, cx) * Math.pow(1 - ty, 1.5);
+  const dyPress = depth * (GLOBAL_F * (1 - ty)
+                + (1 - GLOBAL_F) * dishBell((x - cx) / W_DISH) * Math.pow(1 - ty, 1.6));
+  const side = x >= cx ? 1 : -1;
+  const dx = side * depth * 0.30 * Math.sin(ty * Math.PI);
+  return [x + dx, y + dyCrown + dyPress];
+}
+
+function pathOf(pts, cx, depth) {
+  let d = "";
+  for (let i = 0; i < pts.length; i++) {
+    const q = deform(pts[i], cx, depth);
+    d += (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1);
+  }
+  return d + "Z";
+}
+
+PANELS.forEach(p => {
+  p.ringOuter = ring(p.x0, REST_TOP, p.x1, CUSH_BOT, 30);
+  p.ringSeam  = ring(p.x0+22, REST_TOP+20, p.x1-22, CUSH_BOT-16, 20);
+});
+
+function drawCushion(p, depth) {
+  p.body.setAttribute("d", pathOf(p.ringOuter, p.cx, depth));
+  p.seam.setAttribute("d", pathOf(p.ringSeam, p.cx, depth));
+  const k = clamp(depth / PRESS_D, 0, 1);
+  if (k > 0.03) {
+    const lx0 = p.cx - W_DISH, lx1 = p.cx + W_DISH;
+    let d = "";
+    for (let i = 0; i <= 32; i++) {
+      const x = lx0 + (lx1 - lx0) * i / 32;
+      d += (i ? "L" : "M") + x.toFixed(1) + " " + (topYAt(x, p.cx, depth) + 5).toFixed(1);
+    }
+    for (let i = 32; i >= 0; i--) {
+      const x = lx0 + (lx1 - lx0) * i / 32;
+      d += "L" + x.toFixed(1) + " " + (topYAt(x, p.cx, depth) + 5 + 30 * dishBell((x - p.cx) / W_DISH)).toFixed(1);
+    }
+    p.shade.setAttribute("d", d + "Z");
+    p.shade.setAttribute("opacity", (0.60 * k).toFixed(3));
+  } else { p.shade.setAttribute("opacity", 0); }
+
+  const sx = W_DISH * 0.72;
+  [[p.creaseL, -1], [p.creaseR, 1]].forEach(([e, s]) => {
+    const x = p.cx + s * sx, y0 = topYAt(x, p.cx, depth);
+    e.setAttribute("d", `M ${(x - s*8).toFixed(1)} ${(y0 + 10).toFixed(1)} q ${(s*28).toFixed(1)} 22 ${(s*15).toFixed(1)} 56`);
+    e.setAttribute("opacity", (0.55 * k).toFixed(3));
+  });
+}
+
+/* ---------------- 2-bone IK, rig convention (0=down, 90=screen-right) ---- */
+const MIN_REACH = 177;   // 97% of full extension -- see the note below
+function ik(sx, sy, tx, ty, bend) {
+  const L1 = CURATOR_L.uArm, L2 = CURATOR_L.lArm;
+  let dx = tx - sx, dy = ty - sy, d = Math.hypot(dx, dy);
+  const maxD = L1 + L2 - 3;
+  if (d > maxD) { dx *= maxD / d; dy *= maxD / d; d = maxD; }
+  /* MINIMUM-extension clamp, the fix for every bad frame in this piece.
+     The two bones are 95 and 88 -- near enough to equal that a target at 73%
+     of full reach throws the elbow 90px sideways, and two of those plus a
+     torso close into a diamond that reads as a scarecrow. Every wide frame
+     measured across previews 3, 6 and 7 was a partial-extension frame.
+     Pushing a near target out along the same line keeps the arm 92-100%
+     extended at all times (168 still left a visible hexagon; 177 matches the bend
+     of the frames that already read well). The hand then ends up BEHIND the
+     cushion, which the front-drawn fill hides anyway, while the flat palm stays
+     on the surface where the eye needs it. Structural, not a per-frame tweak. */
+  if (d < MIN_REACH && d > 0.001) { const k = MIN_REACH / d; dx *= k; dy *= k; d = MIN_REACH; }
+  const base = Math.atan2(dx, dy);
+  const alpha = Math.acos(clamp((L1*L1 + d*d - L2*L2) / (2*L1*d), -1, 1));
+  const u = base + bend * alpha;
+  const ex = sx + Math.sin(u) * L1, ey = sy + Math.cos(u) * L1;
+  const l = Math.atan2((sx + dx) - ex, (sy + dy) - ey);
+  return { u: u / D2R, l: l / D2R };
+}
+/* world target -> rig-local, honouring the shoulder offset the pose uses.
+   poseCurator puts lArm at tTop - perp*shoulderW and rArm at tTop + perp*shoulderW
+   (perp = dir(torso+90)), so the IK has to start from the SAME point or the
+   forearm misses the palm by the shoulder width. */
+function reachWorld(p, pose, wx, wy, which, bend) {
+  const lx = (wx - p.cx) / S, ly = (wy - HIP_Y) / S;
+  const tTop = [dir(pose.torso)[0] * CURATOR_L.torso, dir(pose.torso)[1] * CURATOR_L.torso];
+  const perp = dir(pose.torso + 90), sw = pose.shoulderW || 0, sgn = which === "l" ? -1 : 1;
+  return ik(tTop[0] + sgn * perp[0] * sw, tTop[1] + sgn * perp[1] * sw, lx, ly, bend);
+}
+
+/* ---------------- press depth over time, per panel ---------------- */
+function depthOf(p, t) {
+  if (t < B.press[0]) return 0;
+  if (t < B.press[1]) return PRESS_D * easeInQ(PP(t, B.press[0], B.press[1]-B.press[0]));
+  if (t < B.settle[1]) {
+    const k = PP(t, B.settle[0], B.settle[1]-B.settle[0]);
+    return PRESS_D + 6 * Math.sin(k * Math.PI * 2) * (1 - k);
+  }
+  if (t < B.lift[1]) return PRESS_D;           // the palm leaves first; fill has not moved
+  if (p.good) {
+    const k = PP(t, B.recB[0], B.recB[1]-B.recB[0]);
+    return k >= 1 ? 0 : PRESS_D * (1 - easeOutBackBig(k));   // springs past level, settles
+  }
+  const k = PP(t, B.recA[0], B.recA[1]-B.recA[0], easeOutO);
+  return PRESS_D + (RESID_A - PRESS_D) * k;
+}
+
+/* palm height: resting ON the surface (its own half-height above it) */
+const PALM_H = 22;
+/* The palms NEVER travel far from the surface. This rig's arm is 265px in world
+   units; any hand position nearer than about 200px to the shoulder folds the
+   2-bone solve into a wide symmetric diamond that reads as a scarecrow, not a
+   person (measured at the old raise and lift peaks, previews 6-7 of this round).
+   So the anticipation is carried by the BODY -- it rises, then drives down --
+   while the hands stay put, which is also what a real two-hand press looks like.
+   The lift moves them 30px and the palms fade out inside that same 0.22s. */
+function palmY(p, t, x) {
+  const rest = topYAt(x, p.cx, 0) - PALM_H/2;
+  if (t < B.press[0]) return rest;
+  if (t < B.lift[0]) return topYAt(x, p.cx, depthOf(p, t)) - PALM_H/2;
+  if (t < B.lift[1]) return lerp(topYAt(x, p.cx, PRESS_D) - PALM_H/2, rest - 30, easeOutO(PP(t, B.lift[0], B.lift[1]-B.lift[0])));
+  return rest - 30;
+}
+
+/* ---------------- per-frame pose ---------------- */
+function posePanel(p, t) {
+  const inward = p.cx < 540 ? 1 : -1;
+  const breathe = Math.sin(t * 1.4 + (p.good ? 1.1 : 0)) * 1.6;
+  const pressK = clamp(depthOf(p, t) / PRESS_D, 0, 1);
+  const xl = p.cx - HAND_DX, xr = p.cx + HAND_DX;
+  const yl = palmY(p, t, xl), yr = palmY(p, t, xr);
+
+  /* EXIT: once the fill has settled, both figures drop their arms and leave.
+     Two full-size figures cannot share a 1080px frame with a measurement that
+     has to be read at a glance -- stepping them aside instead just moved the
+     collision to the frame edges and put espresso limbs under espresso type
+     (measured, previews 4 and 5 of this round). They have carried the whole
+     action for the first 7.5s; the last beats are the evidence, and evidence
+     reads best on a clean diagram. */
+  const relaxK = easeIO(PP(t, B.relax[0], B.relax[1] - B.relax[0]));
+  const exitK = easeInQ(PP(t, B.exit[0], B.exit[1] - B.exit[0]));   // late, fast fade: a half-transparent character reads as a glitch
+  p.fig.g.setAttribute("opacity", (1 - exitK).toFixed(3));
+  const sNow = S;
+
+  /* anticipation lives in the body: it lifts, then drives down into the press */
+  const antK = Math.sin(PP(t, B.raise[0], B.raise[1] - B.raise[0]) * Math.PI);
+  const pose = { ...P.stand,
+    tx: p.cx,
+    ty: GROUND - 208 * sNow - 12 * antK + 14 * pressK,
+    sx: sNow, sy: sNow,
+    torso: 180 + breathe * 0.4,
+    headTilt: inward * (5 + 8 * pressK) - 7 * antK,
+    face: inward * 0.45,
+    shoulderW: SHOULDER,
+    eyes: "open",
+    rot: 0
+  };
+  if (!p.good && t >= B.verdict) pose.rot = inward * -2.6 * easeIO(PP(t, B.verdict, 0.7));
+
+  /* poseCurator puts lArm at tTop - perp*shoulderW. With the torso pointing up
+     (180) that perpendicular is screen-LEFT-negative, so lArm's pivot lands on
+     the screen-RIGHT. Send it the screen-RIGHT palm; sending it the left one
+     crossed the arms into an X at the neck (measured, preview 2 of this round). */
+  const a1 = reachWorld(p, pose, xr, yr + PALM_H/2, "l",  1);
+  const a2 = reachWorld(p, pose, xl, yl + PALM_H/2, "r", -1);
+  /* Arms START at the neutral stance and only enter IK for the action. Driving
+     IK from frame 0 forced a chicken-wing rest pose, and a 2-bone arm at 88%
+     extension bows so far that two of them plus the torso closed into a beetle
+     shape (measured, preview 3 of this round). Neutral -> reach -> locked press
+     -> neutral also gives the gesture a real anticipation arc. */
+  /* No reach-in blend any more: with the minimum-extension clamp the IK pose is
+     already a near-straight arm at every depth, so it can drive the whole shot
+     and the hands stay locked to the palms from frame 0. */
+  const mix = (ikA, standA) => lerp(ikA, standA, relaxK);
+  pose.laU = mix(a1.u,  14); pose.laL = mix(a1.l,   8);
+  pose.raU = mix(a2.u, -14); pose.raL = mix(a2.l,  -8);
+
+  if ((t >= B.regard && t < B.regard + 0.10) || (t >= 5.35 && t < 5.45)) pose.eyes = "closed";
+  if (p.good && t >= B.lift[1] && t < B.lift[1] + 0.8) pose.eyes = "wide";
+  poseCurator(p.fig, pose);
+
+  const d = depthOf(p, t);
+  drawCushion(p, d);
+
+  const palmVis = 1 - PP(t, B.lift[0], 0.25);   // flat palms belong to the press, and only to it
+  [[p.palmL, p.shadL, xl, yl], [p.palmR, p.shadR, xr, yr]].forEach(([pl, sh, x, y]) => {
+    pl.setAttribute("x", (x - 42).toFixed(1));
+    pl.setAttribute("y", y.toFixed(1));
+    pl.setAttribute("opacity", palmVis.toFixed(3));
+    const gap = topYAt(x, p.cx, d) - (y + PALM_H/2);       // 0 when the palm is down
+    const near = clamp(1 - gap / 70, 0, 1);
+    sh.setAttribute("cx", x); sh.setAttribute("cy", (topYAt(x, p.cx, d) + 10).toFixed(1));
+    sh.setAttribute("opacity", (palmVis * (0.07 + 0.22 * pressK * near)).toFixed(3));
+  });
+}
+
+/* ---------------- measurement overlay ---------------- */
+function drawMeasure(t) {
+  const dk = PP(t, B.datum, 0.55, easeIO);
+  datumLine.setAttribute("x2", (80 + 920 * dk).toFixed(1));
+  datumLine.setAttribute("opacity", dk ? "0.95" : "0");
+
+  const mk = PP(t, B.measure, 0.45, easeIO);
+  PANELS.forEach(p => {
+    const d = depthOf(p, t);
+    const y0 = REST_TOP - CROWN, yb = topYAt(p.cx, p.cx, d);
+    p.tick.setAttribute("y2", lerp(y0, yb, mk).toFixed(1));
+    p.tick.setAttribute("opacity", (d > 3 ? mk : 0).toFixed(3));
+    if (d > 3) {
+      let g = `M ${(p.cx - W_DISH).toFixed(1)} ${y0}L ${(p.cx + W_DISH).toFixed(1)} ${y0}`;
+      for (let i = 24; i >= 0; i--) {
+        const x = p.cx + W_DISH - (2 * W_DISH) * i / 24;
+        g += `L ${x.toFixed(1)} ${lerp(y0, topYAt(x, p.cx, d), mk).toFixed(1)}`;
+      }
+      p.gap.setAttribute("d", g + "Z");
+      p.gap.setAttribute("opacity", (0.34 * mk).toFixed(3));
+    } else { p.gap.setAttribute("opacity", 0); }
+    p.capB.setAttribute("y1", yb.toFixed(1)); p.capB.setAttribute("y2", yb.toFixed(1));
+    p.capB.setAttribute("opacity", (d > 3 ? mk : 0).toFixed(3));
+    p.num.setAttribute("opacity", mk.toFixed(3));
+    p.num.textContent = d > 3 ? Math.round(d / CUSH_H * 100) + "% STILL DOWN" : "BACK TO LEVEL";
+    p.num.setAttribute("fill", d > 3 ? NC.esp : NC.bronze);
+    p.plate.textContent = t >= B.reveal ? p.reveal : p.label;
+  });
+}
+
+/* ---------------- overlays ---------------- */
+window.seek = async function (t) {
+  t = clamp(t, 0, 17.5);
+  stalePaintGuard(t, bgflip, $("stagewrap"), "rgba(242,238,230,0.004)");
+
+  const z = 1 + 0.045 * easeIO(c01(t / B.card));
+  cam.setAttribute("transform", `translate(540,1250) scale(${z.toFixed(4)}) translate(-540,-1300)`);
+
+  const covered = t >= B.card;
+  if (!covered) { PANELS.forEach(p => posePanel(p, t)); drawMeasure(t); }
+  cam.style.visibility = covered && t >= B.card + 0.45 ? "hidden" : "visible";
+
+  const h = $('hook');
+  h.style.opacity = t < 2.35 ? String(1 - PP(t, 1.95, 0.4, easeIO)) : '0';
+  const pr = $('promise');
+  pr.style.opacity = (t >= 0.55 && t < 2.35) ? String(Math.min(PP(t, 0.55, 0.35), 1 - PP(t, 1.95, 0.4))) : '0';
+
+  const ct = $('count'), cc = $('countcap');
+  let n = 0;
+  B.countAt.forEach((ts, i) => { if (t >= ts) n = i + 1; });
+  if (t >= B.countAt[0] && t < B.lift[0] + 0.10) {
+    ct.textContent = String(n);
+    const inK = PP(t, B.countAt[n-1], 0.16, easeOutO);
+    ct.style.opacity = String(Math.min(1, inK) * (1 - PP(t, B.lift[0] - 0.15, 0.25)));
+    ct.style.transform = `scale(${lerp(1.22, 1, inK).toFixed(3)})`;
+    cc.style.opacity = String(Math.min(PP(t, B.countAt[0], 0.3), 1 - PP(t, B.lift[0] - 0.15, 0.25)));
+  } else { ct.style.opacity = '0'; cc.style.opacity = '0'; }
+
+  const vd = $('verdict');
+  vd.style.opacity = (t >= B.verdict && t < B.card) ?
+    String(Math.min(PP(t, B.verdict, 0.5, easeIO), 1 - PP(t, B.card - 0.4, 0.4))) : '0';
+
+  /* The rule card arrives as a hard-edged WIPE, not a dissolve. A 0.4s opacity
+     crossfade put a half-transparent detailed scene under a flat card, and the
+     still-frame gate correctly failed the midpoint (t=11.00: range 101, zero
+     dark pixels). A wipe keeps every single frame fully opaque on both sides of
+     a crisp edge, and reads more architectural, which suits this account. */
+  const rc_ = $('rulecard');
+  if (t >= B.card) {
+    rc_.style.opacity = '1';
+    rc_.style.clipPath = `inset(0 0 ${((1 - PP(t, B.card, 0.42, easeIO)) * 100).toFixed(2)}% 0)`;
+    $('savecta').style.opacity = String(PP(t, B.card + 1.2, 0.4));
+  } else { rc_.style.opacity = '0'; rc_.style.clipPath = 'inset(0 0 100% 0)'; }
+
+  const end = $('end');
+  if (t >= B.end) {
+    end.style.opacity = String(PP(t, B.end, 0.35));
+    $('endsub').style.opacity = String(PP(t, B.end + 0.7, 0.4));
+  } else end.style.opacity = '0';
+  await compositorCommit();
+};
+window.seek(0);
+</script>
+</body></html>

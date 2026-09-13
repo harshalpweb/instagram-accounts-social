@@ -1,0 +1,61 @@
+{
+  "_license": "All files Mixkit Free License, vendored local-only (assets/audio/ is gitignored -- this repo is public); attribution logged in assets/audio/ATTRIBUTION.md. Cue times match reel.html window.BEATS. Bed track and level follow 2026-09-04-cables-read-cheap, the account's best-performing Reel, which measured about -19 LUFS integrated at these gains.",
+  "tracks": [
+    {
+      "file": "assets/audio/bgm/piano-reflections.mp3",
+      "at": 0.0,
+      "trim": [
+        0,
+        17.5
+      ],
+      "gain_db": -9,
+      "fade_in": 0.5,
+      "fade_out": 1.6
+    },
+    {
+      "file": "assets/audio/sfx/chime-crystal.mp3",
+      "at": 0.3,
+      "gain_db": -7
+    },
+    {
+      "file": "assets/audio/sfx/switch-tap.mp3",
+      "at": 1.9,
+      "gain_db": -4
+    },
+    {
+      "file": "assets/audio/sfx/clock-tick-single.mp3",
+      "at": 2.52,
+      "gain_db": -11
+    },
+    {
+      "file": "assets/audio/sfx/clock-tick-single.mp3",
+      "at": 3.18,
+      "gain_db": -11
+    },
+    {
+      "file": "assets/audio/sfx/clock-tick-single.mp3",
+      "at": 3.84,
+      "gain_db": -11
+    },
+    {
+      "file": "assets/audio/sfx/paper-move-quick.mp3",
+      "at": 4.4,
+      "gain_db": -9
+    },
+    {
+      "file": "assets/audio/sfx/marker-pen-line.mp3",
+      "at": 6.72,
+      "gain_db": -6
+    },
+    {
+      "file": "assets/audio/sfx/switch-tap.mp3",
+      "at": 10.85,
+      "gain_db": -5
+    },
+    {
+      "file": "assets/audio/sfx/chime-crystal.mp3",
+      "at": 15.1,
+      "gain_db": -6
+    }
+  ]
+}

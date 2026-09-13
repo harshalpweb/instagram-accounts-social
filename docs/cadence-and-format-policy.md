@@ -259,7 +259,20 @@ Three changes, all live as of this commit:
    test"): the piece is looked at at ~350 px **beside a real, currently-live
    competitor post in the same niche**, not in isolation. Every look-rejection
    this venture has taken was invisible in isolation and obvious in comparison.
-3. **A piece may be killed for being ordinary.** Previously the only exits were
+3. **The still-frame gate runs BEFORE the sequence render** (added
+   2026-09-13, Group CTO). `py -3 scripts/frame_gate.py <png-or-dir>
+   --profile nuvarel` measures dynamic range, contrast, dark-point presence
+   and saturation, and exits non-zero below the bar. Thresholds are
+   calibrated on this venture's best-performing post, not guessed — see that
+   file's header for the measured numbers on both sides. It exists because
+   six consecutive nuvarel cushion-press previews reached the founder with
+   nobody checking, and the sixth was rejected for being washed out, which is
+   measurable in one still: dynamic range 39 of 255 against a winning-post
+   median of 203. Run it on stills first (seconds), then on the `--qa-dir`
+   output after rendering (the whole duration, sampled). It is a floor, not a
+   verdict: passing it says nothing about whether the piece is good, and
+   `art-director`'s eyes-on comparison at ~350 px still decides that.
+4. **A piece may be killed for being ordinary.** Previously the only exits were
    PASS and defect-FAIL, so "fine, I suppose" always shipped. `qa-hold` is now
    an acceptable destination for a defect-free piece that no one can name a
    reason to forward. The cadence floor in section 1 is **not** a licence to

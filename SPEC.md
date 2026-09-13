@@ -74,11 +74,33 @@ founder-executed manual step, not something this pipeline automates.
   failure was exactly a rig reused across accounts (hype_tingles' meme
   stickman) standing in for a bespoke wealth-signalling figure; a future
   account-specific character gets its own file the same way, not a fold
-  into the shared one. Preview-only as of this writing (the refined-
-  character sample Reel rendered to the session scratchpad, not committed
-  and not queued to `content/`) — does not reverse the no-mascot ruling in
-  `docs/nuvarel-strategy.md` §"Second revision" until a reviewer explicitly
-  says otherwise.
+  into the shared one. **Reinstated for production use 2026-09-13**
+  (Group CTO, founder-direct): the no-mascot ruling in
+  `docs/nuvarel-strategy.md` §"Second revision" is superseded for the
+  **illustrated** lane, and §8's claim that the rule was "a hard platform
+  constraint" is struck as factually wrong — Instagram's 2026-08-31 rule is a
+  profile-level toggle for profiles featuring an AI-generated *person*, and
+  this file is hand-written deterministic SVG geometry, not generated output.
+  The photoreal lane's no-people rule is unchanged. Ruling:
+  `../docs/consults/2026-09-13-group-cto-nuvarel-press-test-character-and-medium.md`.
+
+  Two optional fields added 2026-09-13, both **default-off so every existing
+  pose renders byte-identically**: `shoulderW` (pose field — arms originate at
+  ±shoulderW perpendicular to the torso instead of both leaving the single
+  neck point, plus a drawn clavicle; the shared rig has no shoulder width
+  because it was built for SIDE views, and head-on two arms from one point
+  read as a tripod) and `belt: false` (opts — hides the bronze waist accent,
+  needed when a shot puts the hip at a prop's surface line and the accent
+  reads as a stray mark on the prop).
+
+  **Binding IK note for any two-handed action with this rig.** The arm bones
+  are 95 and 88 — near enough to equal that a hand target at about 73% of full
+  reach throws the elbow ~90px sideways, and two of those plus a torso close
+  into a diamond that reads as a scarecrow rather than a person. Any reel
+  driving this rig with 2-bone IK must apply a **minimum-extension clamp**
+  (push a near target out along the same shoulder-to-target line, at about 97%
+  of full reach), not per-frame pose corrections. Reference implementation:
+  `accounts/nuvarel/reels/2026-09-13-the-press-test/reel.html`, `MIN_REACH`.
 
 ## Content format vocabulary (queue JSON `type`)
 
@@ -99,6 +121,19 @@ ledger row.
   the `meme-worthy-character-reels` skill; build 02, 2026-09-12, swapped
   the hero prop phone -> piggy bank so a fresh scene/prop pair satisfies
   the 7-day no-repeat rule without depending on the 7-day boundary).
+- `nuvarel`: `reel-reads-expensive` (the account's best-performing format —
+  `2026-09-04-cables-read-cheap`, 1,091 reach — a 2D Curator working on a room
+  prop while overlay cards name why it reads cheap or expensive),
+  `reel-press-test` (added 2026-09-13: two identical Curators perform an
+  identical named test on two visually identical objects whose only difference
+  is hidden, and a bronze datum line plus a measured residual give the verdict,
+  so the viewer reads a measurement instead of eyeballing a difference. Engine
+  in `accounts/nuvarel/reels/2026-09-13-the-press-test/reel.html`; the
+  deformable-object model there — rest crown, global compression plus a
+  flat-bottomed palm dish, side bulge, a piping seam through the same
+  deformation field, depth-tracked creases, and occlusion by draw order — is
+  the reusable part and generalises to any A/B physical test on this account.
+  PREVIEW as of this commit: not queued, `content/queue/` untouched).
 - `anime_ekaya`: `reel-show-converter` (a mainstream, non-anime show/game/
   film "converted" into an anime pick via a shared CONVERTER-machine rig,
   EKAYA pulls a lever, an anime title pops out; engine in
@@ -113,6 +148,29 @@ ledger row.
   naming a real creator's intent behind a real work needs the creator's
   own words checked, not just enthusiast-press consensus, which tends to
   run hotter than the source).
+
+## Visual quality gate (binding, added 2026-09-13)
+
+`scripts/frame_gate.py` is a deterministic still-frame floor: p99-p1 luminance
+range, contrast (stddev), dark-pixel fraction and mean saturation, with
+deliberate solid title/end cards auto-detected and skipped so the gate cannot be
+argued past. It exits non-zero below the bar.
+
+- **Thresholds are calibrated on a measured known-good artifact**, never
+  guessed. The `nuvarel` profile is measured on the 41 committed QA frames of
+  `2026-09-04-cables-read-cheap`. A guessed saturation floor of 0.15 was
+  proposed and would have failed that very post (measured median 0.081); the
+  calibrated floor is 0.04, with a ceiling of 0.35 because
+  `docs/nuvarel-strategy.md` §8 makes over-saturation a brand failure too. Any
+  new profile must cite the artifact it was measured on.
+- **Run it on stills BEFORE rendering a sequence**, then again on the
+  `--qa-dir` output afterwards. Wired into `docs/cadence-and-format-policy.md`
+  §5 as item 3.
+- **It is a floor, not a verdict.** Passing says nothing about whether a piece
+  is good. `art-director`'s eyes-on comparison at about 350px feed scale still
+  decides that, and on the build that introduced this gate the eyes-on pass is
+  what caught a dead first 2.2 seconds and sub-copy too small to read — both
+  invisible at full resolution, both passing the gate.
 
 ## Acceptance criteria
 

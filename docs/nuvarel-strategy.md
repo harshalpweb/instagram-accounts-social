@@ -45,6 +45,30 @@ algorithm to seed the account to the wrong audience while it's still small.
 redesigned or otherwise. See §3's Reel pillars and "The Inspection" device
 below for what replaces it.
 
+> **SUPERSEDED 2026-09-13, founder-direct, ruled by Group CTO.** The founder
+> asked for the Curator back, refined, and after six rejected previews of a
+> cushion-press piece the ruling is: **the illustrated 2D Curator is
+> reinstated for demonstration Reels on this account.** Two independent
+> reasons, neither of them taste:
+>
+> 1. **The reach theory behind the retirement is not supported.** The
+>    "cartoon face trains the algorithm to the wrong audience" argument was
+>    never measured. What *was* measured points the other way: this account's
+>    best post by a factor of six, `2026-09-04-cables-read-cheap` (1,091
+>    reach, 5 shares, 4x the next-best Reel), stars this exact character.
+>    That is the only evidence this account has on the question.
+> 2. **The platform-policy half of the case is wrong on the primary text.**
+>    See the corrected §8 rule below, and §10.2.4, which already says the
+>    same thing.
+>
+> Scope of the reinstatement: the **illustrated** Curator, in illustrated
+> Reels. It does **not** reopen people, hands or human figures inside the
+> **photoreal** generated-stills lane, where the no-people rule stands
+> unchanged and on stronger ground (see §8). Two registers, one account:
+> photoreal stills show objects, illustrated Reels show a stick figure
+> performing a test. Full ruling:
+> `../docs/consults/2026-09-13-group-cto-nuvarel-press-test-character-and-medium.md`.
+
 ---
 
 ## 1. The chosen angle (revised 2026-09-05)
@@ -428,9 +452,15 @@ founder clearance — unchanged from before.
 
 ## 8. Visual identity (revised 2026-09-05 — the pivot)
 
-**Retired:** the Curator character and the illustrated room-set renderer.
-`assets/rig2d.js` (the shared stickman) is no longer used on this account
-under any pose.
+**Retired:** the illustrated room-set renderer as the account's *primary*
+visual. **The Curator is NOT retired — reinstated 2026-09-13, founder-direct
+(see the superseding note at the top of this document).** The account now
+runs two registers on purpose: photoreal generated stills for object/material
+posts, and the illustrated 2D Curator for demonstration Reels, where a drawn
+diagram *illustrates* a physical claim instead of purporting to *evidence*
+it. nuvarel's own rig is `accounts/nuvarel/assets/curator.js` (original
+4.58-head proportions, face restored); the shared `assets/rig2d.js` supplies
+only its maths and DOM helpers.
 
 **New primary visual: photoreal object/material imagery**, generated
 locally at ₹0 via the `video_lab` ComfyUI pipeline. **Reconciled
@@ -456,11 +486,40 @@ written to the eventual Reel/video pipeline):**
 - Matte surfaces only — gloss reads cheap in stills.
 - Real shadow with soft falloff.
 - **No people, no hands with visible faces, no silhouettes that read as a
-  posed human.** This is a hard platform constraint, not a style choice:
-  Instagram (as of 2026-08-31) limits reach on undisclosed AI-generated
-  *people* specifically — it does not restrict AI-generated objects,
-  backgrounds, or products. The Mood pillar's candid gesture shots must
-  stay partial/ambiguous (a hand, never a posed face) for this reason.
+  posed human — in the PHOTOREAL lane.** The Mood pillar's candid gesture
+  shots stay partial/ambiguous (a hand, never a posed face).
+
+  **Corrected 2026-09-13 (Group CTO).** This bullet used to call itself "a
+  hard platform constraint, not a style choice." That was wrong, and it cost
+  six rejected previews by ruling out the one character format this account
+  has evidence for. Instagram's 2026-08-31 rule, read at primary source
+  (`creators.instagram.com/blog/ai-generated-profile-label`), is a
+  **profile-level self-declared toggle** for profiles that "feature an
+  AI-generated person," aimed at the case where a profile "seems human, only
+  to find out later that the person featured is AI-generated." It says
+  plainly: "Creators who simply use AI tools as part of their creative
+  process don't need to add the label." Group Legal reached the same reading
+  on 2026-09-05 and wrote it down: the account's own no-people rule "is
+  stricter than the policy requires... keep the rule on brand/creative
+  grounds if wanted, stop defending it on a legal ground it doesn't have"
+  (`../docs/consults/2026-09-05-group-legal-nuvarel-ai-disclosure-read.md`).
+  §10.2.4 of this document already says the same. Three things follow:
+
+  1. **Keep this rule for the photoreal lane**, on the creative and
+     evidentiary grounds it actually has: a photoreal generated human is the
+     one subject where "the proof, not the claim" and the medium contradict
+     each other, and India's SGI definition (Rule 2(1)(wa)) bites hardest on
+     a photoreal depiction of a person.
+  2. **It never reached the illustrated lane.** A flat SVG stick figure is
+     not an AI-generated person; it is not AI-generated at all
+     (`accounts/nuvarel/assets/curator.js` is hand-written deterministic
+     geometry), and it cannot "seem human" to anybody. The 2026-09-05
+     portfolio-wide sweep recorded exactly this: a rendered flat 2D stick
+     figure fails the "appears to be real, authentic or true" limb
+     "regardless of what it depicts."
+  3. **Do not re-derive this rule from the platform policy again.** If a
+     future session wants the no-people rule widened, widen it on brand
+     grounds and say so.
 
 **Palette — tokens kept, roles changed:**
 - Alabaster `#F2EEE6` — now the mat/frame/negative-space around

@@ -70,10 +70,16 @@ function makeCurator(parent, opts) {
   const c = {
     g, stroke, headFill, eyeColor,
     torso: el(g, "polyline", capU),
+    /* clavicle: only drawn when a pose sets shoulderW (see poseCurator) */
+    clav: el(g, "line", { stroke, "stroke-width": wU, "stroke-linecap": "round", display: "none" }),
     lArm: limb(), rArm: limb(), lLeg: limb(), rLeg: limb(),
     /* one small bronze accent -- a belt line at the waist, never on a
        limb -- the one nuvarel-specific color touch beyond the taupe body. */
-    belt: el(g, "line", { stroke: CURATOR_COLORS.bronze, "stroke-width": 6, "stroke-linecap": "round" }),
+    /* opts.belt === false hides it. Needed when a shot puts the hip right at a
+       prop's surface line: the accent then reads as a stray bronze mark on the
+       prop rather than as clothing (measured, press-test preview 4, 2026-09-13). */
+    belt: el(g, "line", { stroke: CURATOR_COLORS.bronze, "stroke-width": 6, "stroke-linecap": "round",
+                          display: o.belt === false ? "none" : "" }),
     head: el(g, "circle", { fill: headFill, stroke, "stroke-width": hw }),
     eyeL: el(g, "ellipse", { fill: eyeColor }), eyeR: el(g, "ellipse", { fill: eyeColor }),
     lidL: el(g, "line", { stroke, "stroke-width": ew, "stroke-linecap": "round" }),
@@ -84,7 +90,19 @@ function makeCurator(parent, opts) {
 
 /* poseCurator: same pose dict shape as rig2d.js's poseStick (tx,ty,rot,
    torso,headTilt,laU/laL/raU/raL,llU/llL/rlU/rlL,eyes,face,sx,sy,px,py)
-   -- any existing P.* pose or mixPose/walkPose result works unmodified. */
+   -- any existing P.* pose or mixPose/walkPose result works unmodified.
+
+   ONE optional extra field, added 2026-09-13: `shoulderW` (default 0, so
+   every existing pose renders exactly as it did before). When set, the two
+   arms originate at +/- shoulderW perpendicular to the torso instead of both
+   starting at the single neck point, and a short clavicle is drawn between
+   them. The shared rig has no shoulder width because it was built for SIDE
+   views, where one shoulder hides the other. Head-on, two arms leaving one
+   point read as a tripod rather than a person -- measured on the first
+   press-test preview, 2026-09-13. Leave it at 0 for any profile shot; set it
+   to about 24 for a front-facing two-hand action.
+   `p.laPivot` / `p.raPivot` (world-space, optional) are written back by this
+   function so a caller doing IK knows where each arm actually starts. */
 function poseCurator(s, p) {
   const hip = [0, 0];
   const tTop = [hip[0] + dir(p.torso)[0] * CURATOR_L.torso, hip[1] + dir(p.torso)[1] * CURATOR_L.torso];
@@ -103,11 +121,26 @@ function poseCurator(s, p) {
     limb.end.setAttribute("cx", e[0].toFixed(1));
     limb.end.setAttribute("cy", e[1].toFixed(1));
   };
+
+  /* shoulder pivots: both at the neck point unless shoulderW is set */
+  const sw = p.shoulderW || 0;
+  const sperp = dir(p.torso + 90);
+  const lSh = [tTop[0] - sperp[0] * sw, tTop[1] - sperp[1] * sw];
+  const rSh = [tTop[0] + sperp[0] * sw, tTop[1] + sperp[1] * sw];
+  if (sw > 0) {
+    s.clav.setAttribute("display", "");
+    s.clav.setAttribute("x1", lSh[0].toFixed(1)); s.clav.setAttribute("y1", lSh[1].toFixed(1));
+    s.clav.setAttribute("x2", rSh[0].toFixed(1)); s.clav.setAttribute("y2", rSh[1].toFixed(1));
+  } else {
+    s.clav.setAttribute("display", "none");
+  }
+
   s.torso.setAttribute("points", pts([hip, tTop]));
-  setLimb(s.lArm, tTop, p.laU, CURATOR_L.uArm, p.laL, CURATOR_L.lArm);
-  setLimb(s.rArm, tTop, p.raU, CURATOR_L.uArm, p.raL, CURATOR_L.lArm);
+  setLimb(s.lArm, lSh, p.laU, CURATOR_L.uArm, p.laL, CURATOR_L.lArm);
+  setLimb(s.rArm, rSh, p.raU, CURATOR_L.uArm, p.raL, CURATOR_L.lArm);
   setLimb(s.lLeg, hip, p.llU, CURATOR_L.uLeg, p.llL, CURATOR_L.lLeg);
   setLimb(s.rLeg, hip, p.rlU, CURATOR_L.uLeg, p.rlL, CURATOR_L.lLeg);
+  p.laPivot = lSh; p.raPivot = rSh;
 
   const beltHalf = 13;
   const perp = dir(p.torso + 90);
