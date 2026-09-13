@@ -52,6 +52,24 @@ founder-executed manual step, not something this pipeline automates.
 - Follow root portfolio governance and the subproject's local instructions.
 - Treat existing tests and documented contracts as binding until this specification deliberately changes them.
 
+## Character rig files (binding)
+
+- `assets/rig2d.js` — the shared, multi-account 2D stickman rig (math/DOM
+  helpers plus the `makeStick`/`poseStick`/`P` pose vocabulary), used
+  across `hype_tingles`/`anime_ekaya`-style builds.
+- `accounts/nuvarel/assets/curator.js` (added 2026-09-13) — a **dedicated,
+  account-local** rig for nuvarel's "Curator Mk II" character: tapered
+  filled limbs, no face, ovoid head with a single hair mass, an overcoat
+  garment silhouette. Full spec: `docs/visual/nuvarel-curator-mk2.md`.
+  **Must not be merged into `assets/rig2d.js`** — the original Curator's
+  failure was exactly a rig reused across accounts (hype_tingles' meme
+  stickman) standing in for a bespoke wealth-signalling figure; a future
+  account-specific character gets its own file the same way, not a fold
+  into the shared one. Preview-only as of this writing (one sample Reel
+  rendered to the session scratchpad, not queued to `content/`) — does
+  not reverse the no-mascot ruling in `docs/nuvarel-strategy.md` §"Second
+  revision" until a reviewer explicitly says otherwise.
+
 ## Content format vocabulary (queue JSON `type`)
 
 Each account's queue JSON `type` is free text, `carousel-*` or `reel-*`
