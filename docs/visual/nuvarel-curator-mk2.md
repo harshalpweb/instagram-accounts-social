@@ -1,14 +1,32 @@
 # Nuvarel — "The Curator Mk II" character spec
 
-**Status:** PREVIEW SPEC, not yet cleared for production. Written
-2026-09-13 to capture a design brief that existed only in chat before this
-point (a real gap — nothing about "Curator Mk II" existed as a file
-anywhere in this repo or `income-engine/docs/` until this document).
-Companion rig implementation: `accounts/nuvarel/assets/curator.js`
-(account-local, deliberately NOT part of the shared `assets/rig2d.js` —
-see "Why a dedicated file" below). First sample Reel built against this
-spec: "The Foil Hat" (candle wax test), rendered as a one-off preview, not
-queued to `content/`.
+**SUPERSEDED 2026-09-13 — REJECTED BY THE FOUNDER.** The founder watched
+the sample built against this spec and rejected the redesign outright:
+"really bad," and directly, "the earlier stickman was better than this,
+it just needed some refinement." The structural changes below (8.5-head
+proportions, faceless ovoid head, the flat/pinch/grip hand system) are
+NOT going into production and this document is kept only as history --
+do not build against it again. `accounts/nuvarel/assets/curator.js` has
+been REWRITTEN to go back to the original `assets/rig2d.js` proportions
+(4.58 heads tall) with the face restored, plus only light, targeted
+refinements (small taper, small rounded hand/foot dots, nuvarel's own
+taupe/bronze palette). See that file's own header comment for the exact
+diff from this spec. A same-day founder note also flagged that the
+sample Reel's STORY did not read clearly, independent of the character
+look -- the refined-character preview replaced the single-track "Foil
+Hat" candle concept with a clearer side-by-side A/B comparison format,
+since a multi-beat montage was judged too easy to lose track of at a
+glance.
+
+**Status (as originally written, kept for history):** PREVIEW SPEC, not
+yet cleared for production. Written 2026-09-13 to capture a design brief
+that existed only in chat before this point (a real gap — nothing about
+"Curator Mk II" existed as a file anywhere in this repo or
+`income-engine/docs/` until this document). Companion rig implementation:
+`accounts/nuvarel/assets/curator.js` (account-local, deliberately NOT
+part of the shared `assets/rig2d.js` — see "Why a dedicated file"
+below). First sample Reel built against this spec: "The Foil Hat" (candle
+wax test), rendered as a one-off preview, not queued to `content/`.
 
 **Relationship to the standing no-mascot ruling.** `docs/nuvarel-strategy.md`
 (2026-09-12, founder-direct, via Group CTO) currently reads: *"No

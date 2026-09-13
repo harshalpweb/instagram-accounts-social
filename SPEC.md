@@ -57,18 +57,28 @@ founder-executed manual step, not something this pipeline automates.
 - `assets/rig2d.js` — the shared, multi-account 2D stickman rig (math/DOM
   helpers plus the `makeStick`/`poseStick`/`P` pose vocabulary), used
   across `hype_tingles`/`anime_ekaya`-style builds.
-- `accounts/nuvarel/assets/curator.js` (added 2026-09-13) — a **dedicated,
-  account-local** rig for nuvarel's "Curator Mk II" character: tapered
-  filled limbs, no face, ovoid head with a single hair mass, an overcoat
-  garment silhouette. Full spec: `docs/visual/nuvarel-curator-mk2.md`.
+- `accounts/nuvarel/assets/curator.js` (added 2026-09-13, **rewritten same
+  day**) — a **dedicated, account-local** rig for nuvarel's Curator
+  character. The first version ("Curator Mk II": 8.5-head proportions, no
+  face, tapered filled limbs, an overcoat garment silhouette) was rejected
+  by the founder outright ("the earlier stickman was better than this, it
+  just needed some refinement") and is superseded —
+  `docs/visual/nuvarel-curator-mk2.md` records that spec as history only,
+  marked SUPERSEDED/REJECTED at the top. The current file goes back to the
+  original `assets/rig2d.js` skeleton (4.58 heads tall, same `L` values)
+  with only light, targeted changes on top: face restored (dot eyes), a
+  small amount of limb taper, small rounded hand/foot dots instead of bare
+  line-ends, and nuvarel's own taupe/bronze palette
+  (`docs/nuvarel-strategy.md` §8) plus a small bronze belt accent.
   **Must not be merged into `assets/rig2d.js`** — the original Curator's
   failure was exactly a rig reused across accounts (hype_tingles' meme
   stickman) standing in for a bespoke wealth-signalling figure; a future
   account-specific character gets its own file the same way, not a fold
-  into the shared one. Preview-only as of this writing (one sample Reel
-  rendered to the session scratchpad, not queued to `content/`) — does
-  not reverse the no-mascot ruling in `docs/nuvarel-strategy.md` §"Second
-  revision" until a reviewer explicitly says otherwise.
+  into the shared one. Preview-only as of this writing (the refined-
+  character sample Reel rendered to the session scratchpad, not committed
+  and not queued to `content/`) — does not reverse the no-mascot ruling in
+  `docs/nuvarel-strategy.md` §"Second revision" until a reviewer explicitly
+  says otherwise.
 
 ## Content format vocabulary (queue JSON `type`)
 
