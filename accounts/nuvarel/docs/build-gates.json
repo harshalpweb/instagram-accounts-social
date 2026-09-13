@@ -34,15 +34,29 @@
     "note": "All-text hook cards and CSS-only carousels/Reels are retired as a DEFAULT format (founder: 'just mentioning rich in text doesn't make it look rich'; measured 0-8 reach on 31 carousels, 88% skip on the one typography Reel). Do not fall back to them when a photo build fails -- skip the slot and log a BUILD-INCIDENT instead."
   },
   "character_rig": {
-    "state": "retired",
-    "since": "2026-09-05",
-    "by": "founder decision",
-    "note": "assets/rig2d.js and any character/mascot are permanently retired on this account. Not a gate that reopens."
+    "state": "open",
+    "scope": "The ILLUSTRATED 2D Curator (accounts/nuvarel/assets/curator.js) in illustrated Reels only. It does NOT reopen people, hands or human figures inside the photoreal generated-stills lane, where the no-people rule of docs/nuvarel-strategy.md section 8 stands unchanged and on stronger ground. Two registers, one account: photoreal stills show objects, illustrated Reels show a drawn figure performing a test.",
+    "since": "2026-09-13",
+    "by": "Group CTO (founder-direct)",
+    "supersedes": "The 2026-09-05 'retired / not a gate that reopens' state, set on the founder's 2026-09-05 no-character decision. That decision was superseded by the founder's own 2026-09-13 instruction asking for the Curator back.",
+    "note": "Un-retired 2026-09-13 to match the ruling that was already made that day. docs/consults/2026-09-13-group-cto-nuvarel-press-test-character-and-medium.md section 2.1 reinstated the illustrated Curator and struck the false 'hard platform constraint' framing in strategy section 8, but this file was never updated, so the lane the ruling opened was still mechanically closed here -- and CLAUDE.md hard rule 6 says the daily build reads THIS file first and builds only open lanes. Two independent grounds, neither of them taste: (1) the reach theory behind the retirement was never measured, and the only measurement that exists runs the other way -- 2026-09-04-cables-read-cheap (1,091 reach, 5 shares) is this account's best post by 6x and stars this exact character, against a Reel mean of 174.9; (2) the platform-policy half of the retirement case is wrong on the primary text -- Instagram's 2026-08-31 rule is a profile-level self-declared toggle for profiles featuring an AI-generated PERSON, and curator.js is hand-written deterministic SVG geometry, not AI-generated at all (Group Legal 2026-09-05; strategy section 10.2.4). Closing condition: if this account ever wants the no-character rule back, close it on brand grounds and say so -- do not re-derive it from the platform policy again.",
+    "rig_path": "accounts/nuvarel/assets/curator.js",
+    "history": {
+      "retired_2026-09-05_note": "assets/rig2d.js and any character/mascot are permanently retired on this account. Not a gate that reopens. [SUPERSEDED 2026-09-13 -- see note above. Kept verbatim so the reversal is auditable.]"
+    }
   },
   "animated_carousel": {
     "state": "open",
     "since": "2026-09-07",
     "by": "Group CTO",
     "note": "Founder ask 2026-09-06 ('one animated carousel' for Sep 8). Delivered as one auto-playing video (Reels container, is_ai_generated on the container) built from the same photo stills: cards slide in from the right while the previous exits left, dot row, silent card 2, principle card, closer -- mechanism ported from hype_tingles' HOLD & JUDGE carousel-Reel, re-skinned to nuvarel's deck grammar with no character. First piece: `2026-09-08-the-vein-over-the-edge` (the-evidence, mid key, 18 s). Queue JSON carries `format: animated-carousel` beside the pillar `type` so the ledger vocabulary stays one list. Tonal key rotation applies to these exactly as to static decks."
+  },
+  "illustrated_reel": {
+    "state": "open",
+    "scope": "Reels whose visuals are hand-written deterministic SVG/CSS drawing (accounts/nuvarel/assets/curator.js plus assets/rig2d.js maths, composed in accounts/nuvarel/reels/<id>/reel.html and rendered by scripts/render_reel.py). NOT photoreal, NOT AI-generated, NOT Blender. Photoreal stills-cut Reels remain governed separately by photo_reel; photoreal VIDEO generation stays closed.",
+    "since": "2026-09-13",
+    "by": "Group CTO (founder-direct)",
+    "note": "This lane did not exist in this file before today, which is the real mechanical gap the 2026-09-13 ruling left open: photo_reel covers only the photoreal register, so an illustrated Reel had no open lane to be built under even after the ruling reinstated the character. Demonstration-type pieces ('watch X happen') ARE permitted in this lane, which is the one substantive difference from photo_reel. Reason, and it is the same escape hatch Group Legal named on 2026-09-05 (portfolio standing-note P26): the objection to a generated demonstration is that it PURPORTS TO EVIDENCE a physical outcome on an account whose promise is 'the proof, not the claim'. A flat drawn diagram cannot purport to evidence anything -- it manifestly ILLUSTRATES the claim, and no viewer mistakes it for footage. Per-piece requirement kept anyway, because the caption can still overreach where the picture does not: caption and on-screen copy must be written as illustration and instruction ('illustrated here so you know what to look for', 'press it yourself'), never as a report of a specific event that occurred ('watch this cushion recover'). First piece: 2026-09-13-the-press-test (reel-satisfying, 17.5s, two Curators, cushion A/B press with a bronze datum line and a measured residual). ai_generated stays false on this lane by construction -- nothing in it is AI-generated -- which is independent of the founder's 2026-09-12 blanket suspension of that flag (CLAUDE.md hard rule 5). Quality floor: scripts/frame_gate.py --profile nuvarel runs on the --qa-dir output, same as every other lane.",
+    "first_piece": "2026-09-13-the-press-test"
   }
 }

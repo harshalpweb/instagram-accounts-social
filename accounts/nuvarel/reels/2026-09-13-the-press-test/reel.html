@@ -113,7 +113,7 @@ svg { position:absolute; inset:0; }
   <div class="no">The press test</div>
   <h2>Press it flat.<br>Count to three.<br>Lift.</h2>
   <div class="sub">Good fill is level again before you look back at it. Soft poly fill keeps the dent, and it keeps it for years. Both cushions look the same in the shop.</div>
-  <div id="savecta"><span>Save this for the showroom</span></div>
+  <div id="savecta"><span>Keep this for the sofa aisle</span></div>
 </div></div>
 
 <div id="end"><div id="endword">NUVAREL</div><div id="endsub">The expensive look, explained</div></div>
@@ -546,11 +546,25 @@ window.seek = async function (t) {
     $('savecta').style.opacity = String(PP(t, B.card + 1.2, 0.4));
   } else { rc_.style.opacity = '0'; rc_.style.clipPath = 'inset(0 0 100% 0)'; }
 
+  /* END CARD: a wipe, for exactly the same reason as the rule card above.
+     Round 7 shipped this one as an opacity crossfade and it reproduced the
+     defect the rule-card wipe had just fixed, one beat later: at t=15.20 the
+     half-transparent espresso card let the rule card show through, so the word
+     NUVAREL rendered straight across the word "Lift." A partial-opacity layer
+     never occludes what is under it, whatever its z-index -- the same finding
+     already logged twice on this account (crystal-or-glass tellcard bleed,
+     the-corner-gives-it-away transitions). frame_gate.py passed the frame:
+     it measures luminance, contrast, dark point and saturation, none of which
+     move when two legible words overlap. The gate is a floor, not a verdict.
+     endsub still fades, which is safe -- it starts at B.end + 0.7, after the
+     0.35s wipe has finished, and it fades in over the end card's own opaque
+     espresso ground rather than over live content. */
   const end = $('end');
   if (t >= B.end) {
-    end.style.opacity = String(PP(t, B.end, 0.35));
+    end.style.opacity = '1';
+    end.style.clipPath = `inset(0 0 ${((1 - PP(t, B.end, 0.35, easeIO)) * 100).toFixed(2)}% 0)`;
     $('endsub').style.opacity = String(PP(t, B.end + 0.7, 0.4));
-  } else end.style.opacity = '0';
+  } else { end.style.opacity = '0'; end.style.clipPath = 'inset(0 0 100% 0)'; }
   await compositorCommit();
 };
 window.seek(0);

@@ -55,6 +55,28 @@ record in the scene cell: `photo: <subject/surface> · key=<dark|mid|light>
 | 2026-09-12 | crystal-or-glass (REEL, photoreal stills cut) | reel-game | The Game No. 02: crystal, glass, drinkware; cut lead crystal vs pressed glass; facet edges, mould seam line, prismatic refraction, rim-feel test; glassware/tableware buying | photo: two tumblers, A=faceted cut crystal (crystal/photo-912001-2-zoomed.png, a real-pixel crop+resize of candidate -2 for A/B scale match, round 4) · key=dark · seed=912001; B=plain pressed glass (glass2/photo-912050-2.png) · key=dark · seed=912050 (different seed from A -- first glass attempt at seed 912001 rendered opaque/frosted, a material-fidelity fail per daily-build-prompt 5c, regenerated at a new seed emphasising transparency and passed) |
 | 2026-09-12 | the-corner-gives-it-away (ANIMATED CAROUSEL, one auto-play video via render_reel.py) | the-evidence | The Evidence No. 02: solid wood vs veneer/laminate, wood grain continuity over a cut edge, table edge / drawer side inspection; furniture buying. Original subject for this slot was hand-cut dovetail joinery (seeds 912201/912301) — rejected at the Step 5c eyes-on pick, the model rendered a generic drawer front with no visible interlocking pins/tails, so the named evidence was not visibly what was in frame; subject swapped to wood-grain-over-the-edge, same mechanic family as the-vein-over-the-edge (marble) | photo: solid oak tabletop corner, grain flowing from top surface over the cut edge, tan/espresso ground · key=mid · seed=912401 (hook, hook2/photo-912401-2.png + silent hook2/photo-912401-1.png) / seed=912501 (macro, macro2/photo-912501-1.png + macro2/photo-912501-2.png) |
 | 2026-09-12 | catch-the-sheen (REEL, photoreal stills cut) | reel-reveal | The Reveal No. 02: paint sheen, flat vs eggshell vs matte finish, brush-stroke concealment, raking-light test; paint/finish buying. First topic attempt for this slot (brass cabinet hardware) was caught pre-render as a ledger conflict with 2026-09-02's hardware-reads-expensive (60-day window) and discarded before any build cost beyond photo generation; this topic has no prior ledger entry. | photo: painted white skirting-board corner, raking diagonal light, smooth eggshell/matte finish, no wood grain (first attempt at seed 1789238077 rendered as stained wood grain, material-fidelity reject) · key=dark · seed=1789238204 (front2/2 hook, reveal/2 macro, same seed both frames) |
+| 2026-09-13 | the-press-test (REEL, 2D illustrated, two Curators) | reel-satisfying | The Recovery Test (strategy section 3, Reel pillar 7's own named recommended-first piece): seat cushion press test, press and count to three, cushion fill, soft poly fill vs high-density foam, compression set, dent/hollow retention, feather-and-down exception, sofa buying. **60-DAY LEDGER OVERRIDE, Group CTO 2026-09-13 -- read this before citing this row as precedent.** This topic collides head-on with 2026-09-07's `the-state-foam-seat-cushion` (6 days, not 60): same object, same test, same verdict. Released early under the reach-floor override recorded below the tables. Measured, from analytics/insights.csv (collected 2026-09-13T08:27:58Z): that post reached **2 accounts**, 5 views, 0 likes, 0 comments, 0 saves, 0 shares. Different lane (FEED carousel vs REELS), different medium (photoreal stills vs hand-drawn illustration), different pillar, and a caption with no shared sentence. Both the 09-07 CTA ('Save this for the showroom') and the on-screen CTA drafted for this piece were changed to 'Keep this for the sofa aisle' / 'Keep this for the next sofa you sit on' -- 'Save this for the X' was already at 3 uses in 7 days (09-07, 09-08 x2), at the section 4.3 ceiling. The foam topic is now spent again for 60 days from 2026-09-13 and the override is NOT available a second time on it. | n/a (illustrated, no photo seed). Scene-set: BENCH PAIR (new set) -- two plinths, two identical cushions in the same colour, bronze datum line + measured residual; hero prop: the cushion fill itself. No prior Reel used this set. |
+
+**Reach-floor override to the 60-day topic lock (Group CTO, 2026-09-13).**
+The 60-day lock exists so the same audience is not shown the same thing
+twice. When the prior piece did not reach an audience, the rule's purpose
+is not engaged and the letter of it sterilises this account's best topics
+against a lane (FEED) whose smoothed mean reach is 17.37 against REELS'
+132.97. A locked topic may be released early ONLY when ALL FOUR hold, and
+only with every number written into the new row:
+
+1. the prior piece's measured reach is **under 25** (insights.csv, cite the
+   `collected_at_utc`), AND
+2. it recorded **0 saves and 0 shares**, AND
+3. the new piece is in a **different format lane** (FEED vs REELS), AND
+4. the new piece shares **no sentence** with the prior caption, and does
+   not reuse its CTA line.
+
+Releasing a topic **re-locks it for a fresh 60 days** from the new piece's
+date, and the override may not be applied to the same topic twice. This is
+a rebuttable default with a named path, not a licence: a topic that reached
+a real audience stays locked for the full 60 days regardless of how good
+the new piece is. First and so far only use: `2026-09-13-the-press-test`.
 
 Withdrawn (kept for the 60-day check — the topic still counts as spent):
 
