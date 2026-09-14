@@ -1,0 +1,20 @@
+{
+  "id": "2026-09-14-anime-night-picker",
+  "type": "gateway-guide",
+  "goal": "share",
+  "caption": "The anime-night picker ends group-chat indecision. Give everyone one veto, keep three lanes, spin once, and press play. Send this to the friend who still objects after the choice.\n\n#anime #animerecommendations #whattowatch #animecommunity",
+  "slides": [
+    "accounts/anime_ekaya/content/queue/slides/2026-09-14-anime-night-picker-1.png",
+    "accounts/anime_ekaya/content/queue/slides/2026-09-14-anime-night-picker-2.png",
+    "accounts/anime_ekaya/content/queue/slides/2026-09-14-anime-night-picker-3.png",
+    "accounts/anime_ekaya/content/queue/slides/2026-09-14-anime-night-picker-4.png",
+    "accounts/anime_ekaya/content/queue/slides/2026-09-14-anime-night-picker-5.png",
+    "accounts/anime_ekaya/content/queue/slides/2026-09-14-anime-night-picker-6.png"
+  ],
+  "scheduled_time_ist": "2026-09-14T22:39:00+05:30",
+  "status": "pending",
+  "attempts": 0,
+  "needs_review": false,
+  "ai_generated": false,
+  "format": "animated-carousel"
+}

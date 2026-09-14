@@ -1,0 +1,20 @@
+{
+  "id": "2026-09-14-door-swing-test",
+  "type": "the-rule",
+  "goal": "mood",
+  "caption": "The door swing is part of the room, not empty floor. Draw each opening arc before you place a console, chair, or storage piece. The expensive feeling is often simple ease.\n\n#interiordesigntips #spaceplanning #homestyling #expensivelooking",
+  "slides": [
+    "accounts/nuvarel/content/queue/slides/2026-09-14-door-swing-test-1.png",
+    "accounts/nuvarel/content/queue/slides/2026-09-14-door-swing-test-2.png",
+    "accounts/nuvarel/content/queue/slides/2026-09-14-door-swing-test-3.png",
+    "accounts/nuvarel/content/queue/slides/2026-09-14-door-swing-test-4.png",
+    "accounts/nuvarel/content/queue/slides/2026-09-14-door-swing-test-5.png",
+    "accounts/nuvarel/content/queue/slides/2026-09-14-door-swing-test-6.png"
+  ],
+  "scheduled_time_ist": "2026-09-14T19:14:00+05:30",
+  "status": "pending",
+  "attempts": 0,
+  "needs_review": false,
+  "ai_generated": false,
+  "format": "animated-carousel"
+}
