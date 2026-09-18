@@ -1,0 +1,13 @@
+{
+  "id": "2026-09-19-three-retries",
+  "type": "reel-ai-at-work",
+  "goal": "save",
+  "caption": "A retry loop needs a visible exit.\n\nIn this illustrated example, the chosen limit is three. At zero: stop, log the failure, and hand the unresolved task to a human. Three is an example—not a universal rule.\n\n#AIAgents #Automation #AITips",
+  "video": "accounts/hype_tingles/content/queue/video/2026-09-19-three-retries.mp4",
+  "scheduled_time_ist": "2026-09-19T22:53:00+05:30",
+  "status": "pending",
+  "attempts": 0,
+  "needs_review": false,
+  "ai_generated": false,
+  "format": "REELS"
+}

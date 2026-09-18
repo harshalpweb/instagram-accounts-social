@@ -1,0 +1,20 @@
+{
+  "id": "2026-09-19-bottle-fit",
+  "type": "animated-carousel-object-test",
+  "goal": "save",
+  "caption": "An empty shelf can look usable. Your tallest bottle is the real test.\n\nKeep the bottle unchanged. Check its height, insertion, and the upward lift needed to remove it. Adjust the shelf—not the evidence.\n\nSave this fit check. Illustrative example; no universal clearance is claimed.\n\n#Nuvarel #StorageIdeas #HomePlanning",
+  "slides": [
+    "accounts/nuvarel/content/queue/slides/nuvarel-01.png",
+    "accounts/nuvarel/content/queue/slides/nuvarel-02.png",
+    "accounts/nuvarel/content/queue/slides/nuvarel-03.png",
+    "accounts/nuvarel/content/queue/slides/nuvarel-04.png",
+    "accounts/nuvarel/content/queue/slides/nuvarel-05.png",
+    "accounts/nuvarel/content/queue/slides/nuvarel-06.png"
+  ],
+  "scheduled_time_ist": "2026-09-19T14:48:00+05:30",
+  "status": "pending",
+  "attempts": 0,
+  "needs_review": false,
+  "ai_generated": false,
+  "format": "animated-carousel"
+}
