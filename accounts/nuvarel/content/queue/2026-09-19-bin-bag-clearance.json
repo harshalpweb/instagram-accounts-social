@@ -1,13 +1,13 @@
 {
-  "id": "2026-09-19-bin-bag-clearance",
-  "type": "reel-object-test",
-  "goal": "share",
-  "caption": "The lid can open while the full liner still cannot come out.\n\nThey are different motions. Test the lid, then lift the unchanged liner through its complete exit path. This is an illustrative clearance check, not a measured product test.\n\n#Nuvarel #SmallSpaceDesign #HomeDetails",
-  "video": "accounts/nuvarel/content/queue/video/2026-09-19-bin-bag-clearance.mp4",
-  "scheduled_time_ist": "2026-09-19T19:59:00+05:30",
-  "status": "pending",
-  "attempts": 0,
-  "needs_review": false,
-  "ai_generated": false,
-  "format": "REELS"
+    "id":  "2026-09-19-bin-bag-clearance",
+    "type":  "reel-object-test",
+    "goal":  "share",
+    "caption":  "The lid can open while the full liner still cannot come out.\n\nThey are different motions. Test the lid, then lift the unchanged liner through its complete exit path. This is an illustrative clearance check, not a measured product test.\n\n#Nuvarel #SmallSpaceDesign #HomeDetails",
+    "video":  "accounts/nuvarel/content/queue/video/2026-09-19-bin-bag-clearance.mp4",
+    "scheduled_time_ist":  "2026-09-19T05:35:00+05:30",
+    "status":  "pending",
+    "attempts":  0,
+    "needs_review":  false,
+    "ai_generated":  false,
+    "format":  "REELS"
 }

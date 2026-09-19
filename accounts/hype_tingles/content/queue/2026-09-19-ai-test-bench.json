@@ -1,20 +1,20 @@
 {
-  "id": "2026-09-19-ai-test-bench",
-  "type": "animated-carousel-ai-testing",
-  "goal": "save",
-  "caption": "One green result is a happy path—not a test suite. Run the workflow with a normal input, an empty input, and malformed input. Write the expected outcome before comparing the actual result.\n\nSave this three-case test card. Examples shown are fictional.\n\n#AIQuality #AITesting #BuildInPublic",
-  "slides": [
-    "accounts/hype_tingles/content/queue/slides/harshal-01.png",
-    "accounts/hype_tingles/content/queue/slides/harshal-02.png",
-    "accounts/hype_tingles/content/queue/slides/harshal-03.png",
-    "accounts/hype_tingles/content/queue/slides/harshal-04.png",
-    "accounts/hype_tingles/content/queue/slides/harshal-05.png",
-    "accounts/hype_tingles/content/queue/slides/harshal-06.png"
-  ],
-  "scheduled_time_ist": "2026-09-19T17:45:00+05:30",
-  "status": "pending",
-  "attempts": 0,
-  "needs_review": false,
-  "ai_generated": false,
-  "format": "animated-carousel"
+    "id":  "2026-09-19-ai-test-bench",
+    "type":  "animated-carousel-ai-testing",
+    "goal":  "save",
+    "caption":  "One green result is a happy pathâ€”not a test suite. Run the workflow with a normal input, an empty input, and malformed input. Write the expected outcome before comparing the actual result.\n\nSave this three-case test card. Examples shown are fictional.\n\n#AIQuality #AITesting #BuildInPublic",
+    "slides":  [
+                   "accounts/hype_tingles/content/queue/slides/harshal-01.png",
+                   "accounts/hype_tingles/content/queue/slides/harshal-02.png",
+                   "accounts/hype_tingles/content/queue/slides/harshal-03.png",
+                   "accounts/hype_tingles/content/queue/slides/harshal-04.png",
+                   "accounts/hype_tingles/content/queue/slides/harshal-05.png",
+                   "accounts/hype_tingles/content/queue/slides/harshal-06.png"
+               ],
+    "scheduled_time_ist":  "2026-09-19T05:35:00+05:30",
+    "status":  "pending",
+    "attempts":  0,
+    "needs_review":  false,
+    "ai_generated":  false,
+    "format":  "animated-carousel"
 }
