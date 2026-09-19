@@ -1,20 +1,21 @@
 {
-    "id":  "2026-09-19-spoiler-light-ticket",
-    "type":  "animated-carousel-curation",
-    "goal":  "save",
-    "caption":  "A recommendation is not a recap.\n\nUse three spoiler-light lines: the premise without the reveal, the mood, and one reason it fits this friend. The moon-city ticket is a fictional example.\n\nSave the format for the next â€œwhat should I watch?â€ message.\n\n#AnimeEkaya #AnimeRecommendations #NoSpoilers",
-    "slides":  [
-                   "accounts/anime_ekaya/content/queue/slides/anime-01.png",
-                   "accounts/anime_ekaya/content/queue/slides/anime-02.png",
-                   "accounts/anime_ekaya/content/queue/slides/anime-03.png",
-                   "accounts/anime_ekaya/content/queue/slides/anime-04.png",
-                   "accounts/anime_ekaya/content/queue/slides/anime-05.png",
-                   "accounts/anime_ekaya/content/queue/slides/anime-06.png"
-               ],
-    "scheduled_time_ist":  "2026-09-19T05:35:00+05:30",
-    "status":  "pending",
-    "attempts":  0,
-    "needs_review":  false,
-    "ai_generated":  false,
-    "format":  "animated-carousel"
+  "id": "2026-09-19-spoiler-light-ticket",
+  "type": "animated-carousel-curation",
+  "goal": "save",
+  "caption": "A recommendation is not a recap.\n\nUse three spoiler-light lines: the premise without the reveal, the mood, and one reason it fits this friend. The moon-city ticket is a fictional example.\n\nSave the format for the next \u00e2\u20ac\u0153what should I watch?\u00e2\u20ac\u009d message.\n\n#AnimeEkaya #AnimeRecommendations #NoSpoilers",
+  "slides": [
+    "accounts/anime_ekaya/content/queue/slides/anime-01.png",
+    "accounts/anime_ekaya/content/queue/slides/anime-02.png",
+    "accounts/anime_ekaya/content/queue/slides/anime-03.png",
+    "accounts/anime_ekaya/content/queue/slides/anime-04.png",
+    "accounts/anime_ekaya/content/queue/slides/anime-05.png",
+    "accounts/anime_ekaya/content/queue/slides/anime-06.png"
+  ],
+  "scheduled_time_ist": "2026-09-19T05:35:00+05:30",
+  "status": "pending",
+  "attempts": 1,
+  "needs_review": false,
+  "ai_generated": false,
+  "format": "animated-carousel",
+  "last_error": "OAuthException code=9004 subcode=2207052: Only photo or video can be accepted as media type."
 }
