@@ -12,10 +12,12 @@
     "accounts/nuvarel/content/queue/slides/nuvarel-06.png"
   ],
   "scheduled_time_ist": "2026-09-19T05:35:00+05:30",
-  "status": "pending",
+  "status": "posted",
   "attempts": 1,
   "needs_review": false,
   "ai_generated": false,
   "format": "animated-carousel",
-  "last_error": "OAuthException code=9004 subcode=2207052: Only photo or video can be accepted as media type."
+  "last_error": "OAuthException code=9004 subcode=2207052: Only photo or video can be accepted as media type.",
+  "ig_post_id": "18052354622604210",
+  "posted_at": "2026-09-19T00:11:14.648257+00:00"
 }
