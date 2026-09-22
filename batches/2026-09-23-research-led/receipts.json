@@ -3,9 +3,12 @@
   "posts": {
     "2026-09-23-missing-attachment": {
       "account": "harshal",
-      "status": "publishing",
+      "status": "published",
       "container_id": "17917742415445243",
-      "publish_intent_at": "2026-09-22T19:50:21+00:00"
+      "publish_intent_at": "2026-09-22T19:50:21+00:00",
+      "media_id": "18110891252144652",
+      "acknowledged_at": "2026-09-22T19:50:30+00:00",
+      "acknowledged_epoch": 1790106630.0905502
     }
   }
 }
