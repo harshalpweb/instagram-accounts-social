@@ -1,0 +1,27 @@
+{
+  "id": "anime-costume-no-pockets",
+  "format": "REELS",
+  "type": "reel-object-story",
+  "caption": "The costume took three weeks. The bag saved the day. Every anime convention group has a friend carrying the phone, the keys and everyone else's essentials.\n\nAn original little story for the convention inventory friend.\n\n#AnimeCommunity #ConventionLife #AnimeFriends",
+  "status": "posted",
+  "needs_review": false,
+  "attempts": 1,
+  "ai_generated": true,
+  "ig_post_id": "17965860615159572",
+  "posted_at": "2026-09-22T19:51:01+0000",
+  "permalink": "https://www.instagram.com/reel/DdmhroXlnx3/",
+  "publication_batch": "2026-09-23-research-led",
+  "asset_commit": "8c02f07aff61b4377a2b59f2bb04d4c8c055e38f",
+  "assets": [
+    {
+      "path": "batches/2026-09-23-research-led/media/anime/reel-01.mp4",
+      "sha256": "aafa9d0f4dfb9bbe72b00c591e8240ea0f710b4efafa1c1b831da7ff542c3854",
+      "source_clip": "reel-01"
+    }
+  ],
+  "review_limitations": {
+    "human_audio_audition": "NOT PERFORMED; scoped CTO exception",
+    "same_day_live_comparison": "NOT PERFORMED; September 19 account study used under scoped CTO exception"
+  },
+  "video_url": "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/anime/reel-01.mp4"
+}

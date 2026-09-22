@@ -88,3 +88,12 @@ Withdrawn (kept for the 60-day check — the topic still counts as spent):
 | 2026-09-04 | lamps-over-chandeliers (REEL, pulled pre-publish) | reel-splurge-skip | lighting: lamps at eye level over a single overhead source (lamps, chandelier, pendant) | CCO 2026-08-31: same room set + lamp-pair advice as 09-02 rich-rooms-buy-two — visual near-duplicate 2 days apart. Replaced by curtains-hang-higher. Lamps/lighting stays spent for 60 days from 2026-09-02. |
 | 2026-09-04 | curtains-hang-higher (REEL, pulled pre-publish) | reel-splurge-skip | curtain height and length; mount rod near ceiling, panels high wide floor-length; skip designer fabric | CCO 2026-09-01: near-verbatim repeat of published splurge-skip-01's full-height-curtains verdict (Aug 30) — the title-only ledger cell for splurge-skip-01 false-cleared it (schema backfilled same day). Curtains stay spent for 60 days from 2026-08-30. Sep 4 19:30 Reel slot left open for the Sep-4 daily run to fill with a clean topic. |
 | 2026-09-01 | rugs-splurge-skip (carousel, pulled pre-publish) | splurge-skip | rugs; rug size over designer label; front-legs-on rule; seating-zone measuring | CCO 2026-09-01: near-verbatim repeat of published reads-cheap-01 principle No. 03 (floating rug / front legs / size up, Aug 30) — same title-only ledger false-clear as above. Rug topic stays spent for 60 days from 2026-08-30. Replaced by dining-splurge-skip same slot. |
+
+
+## September 23 research-led batch ? published
+
+| Date | Post | Format | Topic and public link |
+|---|---|---|---|
+| 2026-09-23 | 2026-09-23-one-lid | REELS | You reach for one lid. The whole stack comes with it. [Live](https://www.instagram.com/reel/Ddmhyn8iAOD/) |
+| 2026-09-23 | 2026-09-23-whole-wall | CAROUSEL | The sample is only the beginning. [Live](https://www.instagram.com/p/DdmiRciCWIJ/) |
+| 2026-09-23 | 2026-09-23-one-chapter | REELS | A place for one chapter does not need a whole room makeover. [Live](https://www.instagram.com/reel/Ddmijcjk0Xr/) |

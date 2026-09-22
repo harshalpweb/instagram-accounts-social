@@ -1,0 +1,27 @@
+{
+  "id": "2026-09-23-missing-attachment",
+  "format": "REELS",
+  "type": "reel-object-story",
+  "caption": "Before changing the prompt, check the supplied files. This illustrated workflow starts with a brief and an empty attachment slot. The source file is added, then its three dates can be read and checked. Scripted teaching example, not a live model run.\n\n#HarshalBuilds #AIWorkflows #BuildInPublic",
+  "status": "posted",
+  "needs_review": false,
+  "attempts": 1,
+  "ai_generated": true,
+  "ig_post_id": "18110891252144652",
+  "posted_at": "2026-09-22T19:50:24+0000",
+  "permalink": "https://www.instagram.com/reel/DdmhofqEaqY/",
+  "publication_batch": "2026-09-23-research-led",
+  "asset_commit": "8c02f07aff61b4377a2b59f2bb04d4c8c055e38f",
+  "assets": [
+    {
+      "path": "batches/2026-09-23-research-led/media/harshal/reel-missing-attachment.mp4",
+      "sha256": "f2dfa54017de43d91337db697c0e936cc74db3a169e6f3a11a673d7675d30125",
+      "source_clip": "reel-missing-attachment"
+    }
+  ],
+  "review_limitations": {
+    "human_audio_audition": "NOT PERFORMED; scoped CTO exception",
+    "same_day_live_comparison": "NOT PERFORMED; September 19 account study used under scoped CTO exception"
+  },
+  "video_url": "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/harshal/reel-missing-attachment.mp4"
+}
