@@ -27,9 +27,12 @@
     },
     "2026-09-23-one-lid": {
       "account": "nuvarel",
-      "status": "publishing",
+      "status": "published",
       "container_id": "17893099794611262",
-      "publish_intent_at": "2026-09-22T19:51:54+00:00"
+      "publish_intent_at": "2026-09-22T19:51:54+00:00",
+      "media_id": "17987469804115908",
+      "acknowledged_at": "2026-09-22T19:52:02+00:00",
+      "acknowledged_epoch": 1790106722.330053
     }
   }
 }
