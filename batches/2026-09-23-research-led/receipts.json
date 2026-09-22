@@ -128,7 +128,10 @@
       "publish_intent_at": "2026-09-22T19:58:29+00:00",
       "media_id": "18098861582070577",
       "acknowledged_at": "2026-09-22T19:58:37+00:00",
-      "acknowledged_epoch": 1790107117.545979
+      "acknowledged_epoch": 1790107117.545979,
+      "permalink": "https://www.instagram.com/reel/Ddmijcjk0Xr/",
+      "posted_at": "2026-09-22T19:58:31+0000",
+      "verified": true
     }
   }
 }
