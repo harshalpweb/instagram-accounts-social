@@ -1,0 +1,59 @@
+{
+  "id": "2026-09-23-claim-source-home",
+  "format": "CAROUSEL",
+  "type": "animated-carousel",
+  "caption": "A citation is a place to check, not a reason to stop checking. In this scripted example, three statements have matching source passages. The extra dinner claim was deliberately added for teaching and has none. Keep the statements you can support; investigate or remove the rest.\n\nKeep this three-step check: check the claim, open the source, match the passage.\n\n#HarshalBuilds #AIVerification #CriticalThinking",
+  "status": "posted",
+  "needs_review": false,
+  "attempts": 1,
+  "ai_generated": true,
+  "ig_post_id": "17908565946551714",
+  "posted_at": "2026-09-22T19:53:13+0000",
+  "permalink": "https://www.instagram.com/p/Ddmh-JiGMON/",
+  "publication_batch": "2026-09-23-research-led",
+  "asset_commit": "8c02f07aff61b4377a2b59f2bb04d4c8c055e38f",
+  "assets": [
+    {
+      "path": "batches/2026-09-23-research-led/media/harshal/carousel-01.mp4",
+      "sha256": "ef2f94b88eb43b931c0c56f3a7ecf19c51445badf453006e01268e122ae3157f",
+      "source_clip": "carousel-01"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/harshal/carousel-02.mp4",
+      "sha256": "091ef8af54eb852a2cdde20b740141822155b855d36e416cb83bd9f0bb30cc72",
+      "source_clip": "carousel-02"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/harshal/carousel-03.mp4",
+      "sha256": "3f611324037e7d1f13610001cd008ecf480eb7288abaa903e7faaf20cd67e27d",
+      "source_clip": "carousel-03"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/harshal/carousel-04.mp4",
+      "sha256": "1fbba93b3747fb2222a6223b7ea2b258c429f22b82c5b971c9e12f9c6f9cff5c",
+      "source_clip": "carousel-04"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/harshal/carousel-05.mp4",
+      "sha256": "2b29a739d055e55d6ede8d6ee54ca8de0c96e0c60ecfca71ae9bdbcea984393b",
+      "source_clip": "carousel-05"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/harshal/carousel-06.mp4",
+      "sha256": "7ca660a1c5ca65046050d21bd8f9d0510135124c89461abffa7fe7c075efc444",
+      "source_clip": "carousel-06"
+    }
+  ],
+  "review_limitations": {
+    "human_audio_audition": "NOT PERFORMED; scoped CTO exception",
+    "same_day_live_comparison": "NOT PERFORMED; September 19 account study used under scoped CTO exception"
+  },
+  "video_urls": [
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/harshal/carousel-01.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/harshal/carousel-02.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/harshal/carousel-03.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/harshal/carousel-04.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/harshal/carousel-05.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/harshal/carousel-06.mp4"
+  ]
+}

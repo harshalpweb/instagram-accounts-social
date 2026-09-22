@@ -34,3 +34,12 @@ repeat. Append one line per queued post.
 | 2026-09-14 | subtitle-speedrun (REEL, original 2D EKAYA) | reel-relatable-action (character moment) | subtitle speed shift; pause-read-rewind viewing humor | none (no shows or copyrighted characters named) |
 | 2026-09-14 | group-chat-veto (REEL, original 2D EKAYA) | reel-relatable-action (character moment) | group-chat genre veto; anime-night indecision | none (no shows or copyrighted characters named) |
 | 2026-09-14 | anime-night-picker (ANIMATED CAROUSEL, sequential still frames) | gateway-guide | one-veto, three-lane, spin-once decision system for choosing anime night | none (no shows or copyrighted characters named) |
+
+
+## September 23 research-led batch ? published
+
+| Date | Post | Format | Topic and public link |
+|---|---|---|---|
+| 2026-09-23 | anime-costume-no-pockets | REELS | The costume took three weeks. The bag saved the day. Every anime convention group has a friend carrying the phone, the keys and everyone else's essentials. [Live](https://www.instagram.com/reel/DdmhroXlnx3/) |
+| 2026-09-23 | anime-cheapest-shelf | CAROUSEL | The cheapest thing on the shelf has the longest story. A folded ticket from your first convention together deserves the middle spot. [Live](https://www.instagram.com/p/DdmiIMiisLb/) |
+| 2026-09-23 | anime-stays-for-credits | REELS | The screening ended. You stayed for the credits. They came back with your jacket and a drink for the walk home. [Live](https://www.instagram.com/reel/DdmifD_kcfv/) |

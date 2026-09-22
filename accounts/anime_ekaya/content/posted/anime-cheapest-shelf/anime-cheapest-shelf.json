@@ -1,0 +1,59 @@
+{
+  "id": "anime-cheapest-shelf",
+  "format": "CAROUSEL",
+  "type": "animated-carousel",
+  "caption": "The cheapest thing on the shelf has the longest story. A folded ticket from your first convention together deserves the middle spot.\n\nSix animated moments about the things we keep. What tiny keepsake would you never throw away?\n\nOriginal objects and animation; no franchise artwork.\n\n#AnimeCommunity #ConventionMemories #LittleKeepsakes",
+  "status": "posted",
+  "needs_review": false,
+  "attempts": 1,
+  "ai_generated": true,
+  "ig_post_id": "18160197481492636",
+  "posted_at": "2026-09-22T19:54:37+0000",
+  "permalink": "https://www.instagram.com/p/DdmiIMiisLb/",
+  "publication_batch": "2026-09-23-research-led",
+  "asset_commit": "8c02f07aff61b4377a2b59f2bb04d4c8c055e38f",
+  "assets": [
+    {
+      "path": "batches/2026-09-23-research-led/media/anime/carousel-01.mp4",
+      "sha256": "878fc0a510227bed52b2f02fe51c0534d9c9d62011015c527655ee8b0a58c688",
+      "source_clip": "carousel-01"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/anime/carousel-02.mp4",
+      "sha256": "c42074c1024bddbab88b3d6d4eaca3fed10c745ca200b90fd06c6d1a3f5fd7ac",
+      "source_clip": "carousel-02"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/anime/carousel-03.mp4",
+      "sha256": "e01c911fe79d62c29510e904d4556e1a56be5ae0a53b090a15a578c429f65c47",
+      "source_clip": "carousel-03"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/anime/carousel-04.mp4",
+      "sha256": "3d1b901cf34758e52000c22d96bba7e7afd0948b7771c4a4d6b6c0862450ad3e",
+      "source_clip": "carousel-04"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/anime/carousel-05.mp4",
+      "sha256": "c532430c4a8af218544b0df7cb63dfc5806d2edfc9a51617cd5dd2706e28ec31",
+      "source_clip": "carousel-05"
+    },
+    {
+      "path": "batches/2026-09-23-research-led/media/anime/carousel-06.mp4",
+      "sha256": "d3de3e0f4c99e279d3bfce6519bcde5d59d341eac7ea7d766f88c094fafab65b",
+      "source_clip": "carousel-06"
+    }
+  ],
+  "review_limitations": {
+    "human_audio_audition": "NOT PERFORMED; scoped CTO exception",
+    "same_day_live_comparison": "NOT PERFORMED; September 19 account study used under scoped CTO exception"
+  },
+  "video_urls": [
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/anime/carousel-01.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/anime/carousel-02.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/anime/carousel-03.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/anime/carousel-04.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/anime/carousel-05.mp4",
+    "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/anime/carousel-06.mp4"
+  ]
+}

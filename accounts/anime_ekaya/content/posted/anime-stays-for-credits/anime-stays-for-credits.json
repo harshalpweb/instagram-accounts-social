@@ -1,0 +1,27 @@
+{
+  "id": "anime-stays-for-credits",
+  "format": "REELS",
+  "type": "reel-object-story",
+  "caption": "The screening ended. You stayed for the credits. They came back with your jacket and a drink for the walk home.\n\nFor the anime friend who understands the quiet part, too. Original animation.\n\n#AnimeFriends #AnimeCommunity #MovieNight",
+  "status": "posted",
+  "needs_review": false,
+  "attempts": 1,
+  "ai_generated": true,
+  "ig_post_id": "18110610287165261",
+  "posted_at": "2026-09-22T19:58:02+0000",
+  "permalink": "https://www.instagram.com/reel/DdmifD_kcfv/",
+  "publication_batch": "2026-09-23-research-led",
+  "asset_commit": "8c02f07aff61b4377a2b59f2bb04d4c8c055e38f",
+  "assets": [
+    {
+      "path": "batches/2026-09-23-research-led/media/anime/reel-02.mp4",
+      "sha256": "9499338af96c1c672903c5b27cbc49ebaf949ea0c95ee44b1e8cffe8f4d1308c",
+      "source_clip": "reel-02"
+    }
+  ],
+  "review_limitations": {
+    "human_audio_audition": "NOT PERFORMED; scoped CTO exception",
+    "same_day_live_comparison": "NOT PERFORMED; September 19 account study used under scoped CTO exception"
+  },
+  "video_url": "https://raw.githubusercontent.com/harshalpweb/instagram-accounts-social/8c02f07aff61b4377a2b59f2bb04d4c8c055e38f/batches/2026-09-23-research-led/media/anime/reel-02.mp4"
+}
