@@ -59,7 +59,7 @@
     },
     "anime-cheapest-shelf": {
       "account": "anime",
-      "status": "publishing",
+      "status": "published",
       "children": [
         "17903084775662607",
         "17903084778662607",
@@ -69,7 +69,10 @@
         "17903084793662607"
       ],
       "container_id": "17903085567662607",
-      "publish_intent_at": "2026-09-22T19:54:35+00:00"
+      "publish_intent_at": "2026-09-22T19:54:35+00:00",
+      "media_id": "18160197481492636",
+      "acknowledged_at": "2026-09-22T19:54:41+00:00",
+      "acknowledged_epoch": 1790106881.333595
     }
   }
 }
