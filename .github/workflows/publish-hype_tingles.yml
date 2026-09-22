@@ -1,63 +1,42 @@
-name: Publish due posts (hype_tingles)
-
+﻿name: Publish approved September 23 batch
 on:
-  schedule:
-    - cron: "0 * * * *"
   workflow_dispatch: {}
-
 permissions:
   contents: write
-
-env:
-  ACCOUNT_DIR: accounts/hype_tingles
-
+concurrency:
+  group: research-led-sep23-publish
+  cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-
+        with:
+          ref: batch/2026-09-23-research-led
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-
+          python-version: '3.12'
       - run: pip install -r scripts/requirements.txt
-
-      # See trend-signals-social's publish.yml for the full reasoning behind
-      # this pre-flight health check + incident throttle — copied verbatim,
-      # only the secret names and ACCOUNT_DIR differ per account.
-      - name: Check Instagram token health
+      - name: Set receipt author
         run: |
-          DUE=$(python scripts/publish_due_posts.py --count-due)
-          echo "Due posts right now: $DUE"
-          python scripts/check_token.py \
-            --incident-file "$ACCOUNT_DIR/content/INCIDENT.json" \
-            --due-count "$DUE"
+          git config user.name ig-accounts-bot
+          git config user.email actions@users.noreply.github.com
+      - name: Validate approved assets
+        run: python batches/2026-09-23-research-led/publish_batch.py --dry-run
+      - name: Publish exact nine-post batch
+        run: python batches/2026-09-23-research-led/publish_batch.py
         env:
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN_HYPE_TINGLES }}
-          IG_USER_ID: ${{ secrets.IG_USER_ID_HYPE_TINGLES }}
+          IG_ACCESS_TOKEN_HYPE_TINGLES: ${{ secrets.IG_ACCESS_TOKEN_HYPE_TINGLES }}
+          IG_USER_ID_HYPE_TINGLES: ${{ secrets.IG_USER_ID_HYPE_TINGLES }}
+          IG_ACCESS_TOKEN_ANIME_EKAYA: ${{ secrets.IG_ACCESS_TOKEN_ANIME_EKAYA }}
+          IG_USER_ID_ANIME_EKAYA: ${{ secrets.IG_USER_ID_ANIME_EKAYA }}
+          IG_ACCESS_TOKEN_NUVAREL: ${{ secrets.IG_ACCESS_TOKEN_NUVAREL }}
+          IG_USER_ID_NUVAREL: ${{ secrets.IG_USER_ID_NUVAREL }}
           IG_AUTH_MODE: ${{ vars.IG_AUTH_MODE || 'instagram_login' }}
-
-      - name: Publish due posts
-        run: python scripts/publish_due_posts.py
-        env:
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN_HYPE_TINGLES }}
-          IG_USER_ID: ${{ secrets.IG_USER_ID_HYPE_TINGLES }}
-          IG_AUTH_MODE: ${{ vars.IG_AUTH_MODE || 'instagram_login' }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-
-      - name: Commit queue/status changes
+      - uses: actions/upload-artifact@v4
         if: always()
-        run: |
-          git config user.name "ig-accounts-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add -A "$ACCOUNT_DIR/content/"
-          git diff --cached --quiet || git commit -m "chore: publish run (hype_tingles) $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          # Retry on race with a sibling account's workflow pushing to the
-          # same branch around the same time (all accounts share this repo).
-          for i in 1 2 3 4 5; do
-            git push && break
-            echo "push rejected, retrying ($i/5)..."
-            git pull --rebase
-            sleep $((RANDOM % 5 + 1))
-          done
+        with:
+          name: september23-publication-receipts
+          path: batches/2026-09-23-research-led/receipts.json
+          if-no-files-found: ignore
