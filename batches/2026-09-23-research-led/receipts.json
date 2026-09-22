@@ -56,6 +56,20 @@
       "permalink": "https://www.instagram.com/p/Ddmh-JiGMON/",
       "posted_at": "2026-09-22T19:53:13+0000",
       "verified": true
+    },
+    "anime-cheapest-shelf": {
+      "account": "anime",
+      "status": "publishing",
+      "children": [
+        "17903084775662607",
+        "17903084778662607",
+        "17903084781662607",
+        "17903084784662607",
+        "17903084787662607",
+        "17903084793662607"
+      ],
+      "container_id": "17903085567662607",
+      "publish_intent_at": "2026-09-22T19:54:35+00:00"
     }
   }
 }
