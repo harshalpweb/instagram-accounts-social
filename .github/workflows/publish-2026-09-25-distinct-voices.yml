@@ -1,0 +1,40 @@
+﻿name: Publish September 25 distinct voices
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-distinct-voices-20260925
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r scripts/requirements.txt
+      - run: git config user.name "ig-accounts-bot" && git config user.email "actions@users.noreply.github.com"
+      - name: Validate exact release media
+        run: python batches/2026-09-25-distinct-voices/publish_batch.py --dry-run
+      - name: Publish and verify nine posts
+        run: python batches/2026-09-25-distinct-voices/publish_batch.py
+        env:
+          IG_AUTH_MODE: ${{ vars.IG_AUTH_MODE || 'instagram_login' }}
+          IG_ACCESS_TOKEN_HYPE_TINGLES: ${{ secrets.IG_ACCESS_TOKEN_HYPE_TINGLES }}
+          IG_USER_ID_HYPE_TINGLES: ${{ secrets.IG_USER_ID_HYPE_TINGLES }}
+          IG_ACCESS_TOKEN_ANIME_EKAYA: ${{ secrets.IG_ACCESS_TOKEN_ANIME_EKAYA }}
+          IG_USER_ID_ANIME_EKAYA: ${{ secrets.IG_USER_ID_ANIME_EKAYA }}
+          IG_ACCESS_TOKEN_NUVAREL: ${{ secrets.IG_ACCESS_TOKEN_NUVAREL }}
+          IG_USER_ID_NUVAREL: ${{ secrets.IG_USER_ID_NUVAREL }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+

@@ -1,0 +1,178 @@
+{
+  "batch": "2026-09-25-distinct-voices",
+  "approved": false,
+  "minimum_account_gap_seconds": 120,
+  "accounts": {
+    "harshal": [
+      {
+        "id": "2026-09-25-send-boundary",
+        "type": "REELS",
+        "title": "The send button is a boundary",
+        "caption": "A draft can turn into a send too quickly. In this original build story, the human stops the robot at the button and narrows the task to one draft for review. The recipient and final text still need approval.\n\n#HarshalBuilds #AIWorkflow",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/harshal/harshal-send.mp4",
+            "sha256": "0d742b8f4ac815e36ef2b4fd131751f22aea357422769c65c9e6e67e165ae0ef"
+          }
+        ]
+      },
+      {
+        "id": "2026-09-25-task-contract",
+        "type": "CAROUSEL",
+        "title": "A three-line task contract",
+        "caption": "Before an AI task, write three lines: what it may read, what it may change, and when it must ask.\n\nExample: use only the attached brief. Draft one reply. Do not send. If facts are missing, ask me.\n\n#HarshalBuilds #Automation",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/harshal/harshal-contract-01.jpg",
+            "sha256": "8cf78bc8826ff1f398b3f48c992f234568101d4f5ddc37fda340ae85f82469d6"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/harshal/harshal-contract-02.jpg",
+            "sha256": "2f4831e516c398e960a039d241ae6201908d42a076a38861f182941d10939b03"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/harshal/harshal-contract-03.jpg",
+            "sha256": "d3b7959c801fcea9737df94af25e8303c251b6129732a4e176056e2299f182bd"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/harshal/harshal-contract-04.jpg",
+            "sha256": "bd571de4e2b8f1317481cb6abed8092929ede7205032da65c62d5dfd1c4db569"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/harshal/harshal-contract-05.jpg",
+            "sha256": "1494d6242c5d41f434031be6e89c4dda69853d8ee71918d1a738974ac670a951"
+          }
+        ]
+      },
+      {
+        "id": "2026-09-25-check-negation",
+        "type": "REELS",
+        "title": "One word reversed the decision",
+        "caption": "A scripted five-word failure: 'Do NOT send Friday' becomes 'Send Friday.' Compare the source with the draft, check negation and dates, then approve the exact action. This is an illustration, not a real model incident.\n\n#HarshalBuilds #AIVerification",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/harshal/harshal-negation.mp4",
+            "sha256": "7463bc8f4a3442c2d9f0cd5402143906fb4357f45659283262910a61851254fc"
+          }
+        ]
+      }
+    ],
+    "anime": [
+      {
+        "id": "2026-09-25-saved-place-rain",
+        "type": "REELS",
+        "title": "The saved place in the rain",
+        "caption": "She saved a place outside the cinema. The rain came first. Her friend arrived anyway, carrying enough snacks for two. An original little story about showing up.\n\n#AnimeFriends #WatchNight",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/anime/anime-rain.mp4",
+            "sha256": "8578d8c8c1ffaf57de27370f2f9fe731925b9d2c474aa761bac152bcaeb3a25b"
+          }
+        ]
+      },
+      {
+        "id": "2026-09-25-watch-night-friends",
+        "type": "CAROUSEL",
+        "title": "Four watch-night reactions",
+        "caption": "Every watch night seems to have a theorist, a soundtrack hunter, a snack quartermaster and the quiet friend who notices what everyone missed. The snack quartermaster deserves more credit.\n\nOriginal characters and illustrations.\n\n#AnimeCommunity #WatchNight",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/anime/anime-watch-night-01.jpg",
+            "sha256": "143a4e595101ef0c1f85c75e5c669902c4d164a135dfc0c1de6360d97f23e999"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/anime/anime-watch-night-02.jpg",
+            "sha256": "a7e591072223453d750b126388f068aeff4a8f1d9164c49ecfc3cb504e18acb7"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/anime/anime-watch-night-03.jpg",
+            "sha256": "cc2b71eb14142548d9aff30c84124a22c0e5b0667096607e82a105940b4eec1b"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/anime/anime-watch-night-04.jpg",
+            "sha256": "81bbdf3be52ab26c1d90be9f64bca9cc9e225b4b0fcf285bcf882fa10ede9233"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/anime/anime-watch-night-05.jpg",
+            "sha256": "1dd809cd71c08e2ef6d4fd12bc98e2d59691848338de29a3ea4cd93d308b242a"
+          }
+        ]
+      },
+      {
+        "id": "2026-09-25-one-more-episode",
+        "type": "REELS",
+        "title": "Just one episode",
+        "caption": "9:03: one episode. 12:48: one more. 5:47: the birds have joined the review thread. An original watch-night clock for anyone who knows this feeling.\n\n#AnimeFriends #WatchNight",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/anime/anime-one-episode.mp4",
+            "sha256": "a708bfc1bf575a6dcfecc18b60a37b79c538afc16cede15e554d309fa47fc101"
+          }
+        ]
+      }
+    ],
+    "nuvarel": [
+      {
+        "id": "2026-09-25-edge-silhouette",
+        "type": "REELS",
+        "title": "The edge changes the silhouette",
+        "caption": "In this editorial room study, the edge of an oak side table changes how light catches its silhouette. When you shop, view the actual piece from chair height and check the finish in person.\n\n#RoomDetails #SideTable",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/nuvarel/nuvarel-edge.mp4",
+            "sha256": "d219f814ff76aaae420deaf764b78aebbe7b821d13941cefed004027f935b8bf"
+          }
+        ]
+      },
+      {
+        "id": "2026-09-25-side-table-check",
+        "type": "CAROUSEL",
+        "title": "Before you choose a side table",
+        "caption": "Try a paper outline beside the chair you own. Sit and reach. Set down your book and cup. Then walk past the footprint. Four simple checks before choosing a side table.\n\nEditorial illustration, not a product test.\n\n#RoomDetails #SmallSpaces",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/nuvarel/nuvarel-side-table-01.jpg",
+            "sha256": "2a648be945f6ebff5503821ef3c9e53da10ce8662ba0889b2b530931d1a3dc63"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/nuvarel/nuvarel-side-table-02.jpg",
+            "sha256": "ca391fb6bf7bc49fdfe319d910b7b79e3333ee31544a473421a5c16ead9f80ba"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/nuvarel/nuvarel-side-table-03.jpg",
+            "sha256": "e1835000813dcdd0d6cb2f8ce60014e258baaa07db328ed7dc7d5bb3d77180b6"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/nuvarel/nuvarel-side-table-04.jpg",
+            "sha256": "0072bea9972ed8977de69ac828a85fac5587ea5e4ff1c140459aa7972e7955e0"
+          },
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/nuvarel/nuvarel-side-table-05.jpg",
+            "sha256": "6116453bc690311de8f894db3ff9ae0c797acc8c108690b99742a5746175a176"
+          }
+        ]
+      },
+      {
+        "id": "2026-09-25-paper-handle",
+        "type": "REELS",
+        "title": "Tape the handle first",
+        "caption": "Before drilling for a new cabinet handle, tape a paper mockup at the planned size. Step back, check placement, and make sure the door has clearance. An editorial concept, not a product test.\n\n#FurnitureDetails #RoomPlanning",
+        "qa_verdict": "PASS",
+        "assets": [
+          {
+            "path": "batches/2026-09-25-distinct-voices/media/nuvarel/nuvarel-handle.mp4",
+            "sha256": "f9e1efb06ff417db8688aaf75d6b25c12cb983bdf75dac3f6e4c08abe6595a5a"
+          }
+        ]
+      }
+    ]
+  }
+}
