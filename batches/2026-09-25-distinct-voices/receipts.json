@@ -15,9 +15,12 @@
     },
     "2026-09-25-saved-place-rain": {
       "account": "anime",
-      "status": "publishing",
+      "status": "published",
       "container_id": "17903521215662607",
-      "publish_intent_at": "2026-09-25T04:32:15+00:00"
+      "publish_intent_at": "2026-09-25T04:32:15+00:00",
+      "media_id": "18056323835797934",
+      "acknowledged_at": "2026-09-25T04:32:25+00:00",
+      "acknowledged_epoch": 1790310745.8164227
     }
   }
 }
