@@ -77,7 +77,7 @@
     },
     "2026-09-25-side-table-check": {
       "account": "nuvarel",
-      "status": "publishing",
+      "status": "published",
       "children": [
         "17893422036611262",
         "17893422054611262",
@@ -86,7 +86,10 @@
         "17893422108611262"
       ],
       "container_id": "17893422132611262",
-      "publish_intent_at": "2026-09-25T04:35:04+00:00"
+      "publish_intent_at": "2026-09-25T04:35:04+00:00",
+      "media_id": "17959830504000158",
+      "acknowledged_at": "2026-09-25T04:35:10+00:00",
+      "acknowledged_epoch": 1790310910.451819
     }
   }
 }
