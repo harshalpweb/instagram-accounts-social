@@ -39,7 +39,7 @@
     },
     "2026-09-25-task-contract": {
       "account": "harshal",
-      "status": "publishing",
+      "status": "published",
       "children": [
         "17918041929445243",
         "17918041947445243",
@@ -48,7 +48,10 @@
         "17918042016445243"
       ],
       "container_id": "17918042043445243",
-      "publish_intent_at": "2026-09-25T04:33:45+00:00"
+      "publish_intent_at": "2026-09-25T04:33:45+00:00",
+      "media_id": "18018980654948383",
+      "acknowledged_at": "2026-09-25T04:33:51+00:00",
+      "acknowledged_epoch": 1790310831.6461449
     }
   }
 }
