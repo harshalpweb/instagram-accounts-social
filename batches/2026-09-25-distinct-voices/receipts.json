@@ -125,7 +125,10 @@
       "publish_intent_at": "2026-09-25T04:37:10+00:00",
       "media_id": "17880454686534937",
       "acknowledged_at": "2026-09-25T04:37:19+00:00",
-      "acknowledged_epoch": 1790311039.0432708
+      "acknowledged_epoch": 1790311039.0432708,
+      "permalink": "https://www.instagram.com/reel/DdsnfHdjCJ3/",
+      "posted_at": "2026-09-25T04:37:13+0000",
+      "verified": true
     }
   }
 }
