@@ -1,6 +1,6 @@
-﻿# September 25 Instagram release review
+# September 25 Instagram release review
 
-Status: media prepared and checked; `approved: false` prevents publishing. The workflow is manual dispatch only.
+Status: media prepared and checked; founder explicitly approved GitHub export and all nine Instagram posts in chat on 2026-09-25.
 
 ## Live account identities
 
@@ -26,5 +26,5 @@ Production files and QA are in `content_studio/jobs/2026-09-25-distinct-voices/`
 
 ## Publication gate
 
-Root `AGENTS.md` requires confirmation immediately before Instagram posts. After that confirmation, set `approved: true`, place this release on `master`, manually dispatch `publish-2026-09-25-distinct-voices.yml`, and monitor the receipts and nine live permalinks.
+Root `AGENTS.md` requires confirmation immediately before Instagram posts. Approval is recorded in `release.json`. Push this exact release to `master`; the workflow runs on that push. Monitor receipts and all nine live permalinks.
 

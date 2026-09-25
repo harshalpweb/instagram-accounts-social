@@ -1,6 +1,6 @@
 {
   "batch": "2026-09-25-distinct-voices",
-  "approved": false,
+  "approved": true,
   "minimum_account_gap_seconds": 120,
   "accounts": {
     "harshal": [
@@ -174,5 +174,6 @@
         ]
       }
     ]
-  }
+  },
+  "approval_note": "Founder explicitly approved GitHub release push and publication of all nine posts in chat on 2026-09-25."
 }

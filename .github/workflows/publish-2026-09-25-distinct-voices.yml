@@ -1,6 +1,10 @@
-﻿name: Publish September 25 distinct voices
+name: Publish September 25 distinct voices
 
 on:
+  push:
+    branches: [master]
+    paths:
+      - "batches/2026-09-25-distinct-voices/release.json"
   workflow_dispatch: {}
 
 permissions:
