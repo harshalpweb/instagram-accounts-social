@@ -96,9 +96,12 @@
     },
     "2026-09-25-check-negation": {
       "account": "harshal",
-      "status": "publishing",
+      "status": "published",
       "container_id": "17918042403445243",
-      "publish_intent_at": "2026-09-25T04:35:51+00:00"
+      "publish_intent_at": "2026-09-25T04:35:51+00:00",
+      "media_id": "18409634239082634",
+      "acknowledged_at": "2026-09-25T04:36:02+00:00",
+      "acknowledged_epoch": 1790310962.8422277
     }
   }
 }
