@@ -3,9 +3,12 @@
   "posts": {
     "2026-09-25-send-boundary": {
       "account": "harshal",
-      "status": "publishing",
+      "status": "published",
       "container_id": "17918041485445243",
-      "publish_intent_at": "2026-09-25T04:31:32+00:00"
+      "publish_intent_at": "2026-09-25T04:31:32+00:00",
+      "media_id": "18128682166820965",
+      "acknowledged_at": "2026-09-25T04:31:45+00:00",
+      "acknowledged_epoch": 1790310705.261555
     }
   }
 }
