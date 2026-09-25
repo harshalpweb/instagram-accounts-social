@@ -55,6 +55,19 @@
       "permalink": "https://www.instagram.com/p/DdsnGu3kRTr/",
       "posted_at": "2026-09-25T04:33:47+0000",
       "verified": true
+    },
+    "2026-09-25-watch-night-friends": {
+      "account": "anime",
+      "status": "publishing",
+      "children": [
+        "17903521677662607",
+        "17903521695662607",
+        "17903521716662607",
+        "17903521737662607",
+        "17903521758662607"
+      ],
+      "container_id": "17903521776662607",
+      "publish_intent_at": "2026-09-25T04:34:25+00:00"
     }
   }
 }
