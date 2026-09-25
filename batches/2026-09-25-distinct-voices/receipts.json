@@ -113,7 +113,10 @@
       "publish_intent_at": "2026-09-25T04:36:31+00:00",
       "media_id": "17968244517160234",
       "acknowledged_at": "2026-09-25T04:36:39+00:00",
-      "acknowledged_epoch": 1790310999.444812
+      "acknowledged_epoch": 1790310999.444812,
+      "permalink": "https://www.instagram.com/reel/DdsnayVjK9m/",
+      "posted_at": "2026-09-25T04:36:34+0000",
+      "verified": true
     }
   }
 }
